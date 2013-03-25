@@ -21,4 +21,8 @@
     return nil;
 }
 
+- (NSArray*) songs {
+    return @[];
+}
+
 @end

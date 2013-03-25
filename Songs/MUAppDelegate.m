@@ -8,8 +8,7 @@
 
 #import "MUAppDelegate.h"
 
-#import "SOSongManager.h"
-
+#import "MUMusicManager.h"
 #import "MUPlayerWindowController.h"
 
 @interface MUAppDelegate ()
@@ -21,7 +20,7 @@
 @implementation MUAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-//    [[SOSongManager sharedSongManager] loadData];
+    [[MUMusicManager sharedMusicManager] loadUserData];
     
     [[NSImage imageNamed:@"playlist"] setTemplate:YES];
     
@@ -50,7 +49,7 @@
     
     [openPanel beginWithCompletionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
-            [[SOSongManager sharedSongManager] importSongsUnderURLs:[openPanel URLs]];
+            [[MUMusicManager sharedMusicManager] importSongsUnderURLs:[openPanel URLs]];
         }
     }];
 }

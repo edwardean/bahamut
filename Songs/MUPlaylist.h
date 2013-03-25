@@ -12,4 +12,6 @@
 
 @property (readonly) BOOL isMaster;
 
+- (NSArray*) songs;
+
 @end

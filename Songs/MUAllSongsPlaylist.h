@@ -10,4 +10,8 @@
 
 @interface MUAllSongsPlaylist : MUPlaylist
 
+- (void) addSongsWithURLs:(NSArray*)urls;
+
+- (NSArray*) songs;
+
 @end
