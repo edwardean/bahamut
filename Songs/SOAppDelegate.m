@@ -8,9 +8,36 @@
 
 #import "SOAppDelegate.h"
 
+#import "SOPlayerWindowController.h"
+#import "SOSongManager.h"
+
+@interface SOAppDelegate ()
+
+@property SOPlayerWindowController* playerWindowController;
+
+@end
+
 @implementation SOAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [[SOSongManager sharedSongManager] loadSongs];
+    
+    self.playerWindowController = [[SOPlayerWindowController alloc] init];
+    [self.playerWindowController showWindow:self];
+}
+
+- (IBAction) importSongs:(id)sender {
+    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+    
+    [openPanel setCanChooseDirectories:YES];
+    [openPanel setCanChooseFiles:YES];
+    [openPanel setAllowsMultipleSelection:YES];
+    
+    [openPanel beginWithCompletionHandler:^(NSInteger result) {
+        if (result == NSFileHandlingPanelOKButton) {
+            [[SOSongManager sharedSongManager] importSongsUnderURLs:[openPanel URLs]];
+        }
+    }];
 }
 
 @end

@@ -14,6 +14,12 @@
 		9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2EF16FF781100DB85C4 /* MainMenu.xib */; };
 		9460F2FD16FF788700DB85C4 /* SOPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2FB16FF788700DB85C4 /* SOPlayerWindowController.m */; };
 		9460F2FE16FF788700DB85C4 /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2FC16FF788700DB85C4 /* PlayerWindow.xib */; };
+		9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F30316FFA23100DB85C4 /* AVFoundation.framework */; };
+		9460F30716FFA85B00DB85C4 /* SOSongManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30616FFA85B00DB85C4 /* SOSongManager.m */; };
+		9460F30A16FFE9BF00DB85C4 /* SOSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30916FFE9BF00DB85C4 /* SOSong.m */; };
+		9460F30D16FFF56E00DB85C4 /* SOSongsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30C16FFF56E00DB85C4 /* SOSongsTableController.m */; };
+		9460F31016FFF72700DB85C4 /* SOPlaylistsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30F16FFF72700DB85C4 /* SOPlaylistsTableController.m */; };
+		9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F31216FFFB6300DB85C4 /* SOPlaylist.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -33,6 +39,17 @@
 		9460F2FA16FF788700DB85C4 /* SOPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlayerWindowController.h; sourceTree = "<group>"; };
 		9460F2FB16FF788700DB85C4 /* SOPlayerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlayerWindowController.m; sourceTree = "<group>"; };
 		9460F2FC16FF788700DB85C4 /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
+		9460F30316FFA23100DB85C4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9460F30516FFA85B00DB85C4 /* SOSongManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSongManager.h; sourceTree = "<group>"; };
+		9460F30616FFA85B00DB85C4 /* SOSongManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSongManager.m; sourceTree = "<group>"; };
+		9460F30816FFE9BF00DB85C4 /* SOSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSong.h; sourceTree = "<group>"; };
+		9460F30916FFE9BF00DB85C4 /* SOSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSong.m; sourceTree = "<group>"; };
+		9460F30B16FFF56E00DB85C4 /* SOSongsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSongsTableController.h; sourceTree = "<group>"; };
+		9460F30C16FFF56E00DB85C4 /* SOSongsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSongsTableController.m; sourceTree = "<group>"; };
+		9460F30E16FFF72700DB85C4 /* SOPlaylistsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlaylistsTableController.h; sourceTree = "<group>"; };
+		9460F30F16FFF72700DB85C4 /* SOPlaylistsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylistsTableController.m; sourceTree = "<group>"; };
+		9460F31116FFFB6300DB85C4 /* SOPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlaylist.h; sourceTree = "<group>"; };
+		9460F31216FFFB6300DB85C4 /* SOPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylist.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,6 +57,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */,
 				9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -67,6 +85,7 @@
 		9460F2D916FF781100DB85C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				9460F30316FFA23100DB85C4 /* AVFoundation.framework */,
 				9460F2DA16FF781100DB85C4 /* Cocoa.framework */,
 				9460F2DC16FF781100DB85C4 /* Other Frameworks */,
 			);
@@ -88,6 +107,7 @@
 			children = (
 				9460F2E216FF781100DB85C4 /* Songs-Info.plist */,
 				9460F2F716FF782400DB85C4 /* Songs.entitlements */,
+				9460F2FF16FFA19B00DB85C4 /* Models */,
 				9460F2F916FF783100DB85C4 /* XIBs */,
 				9460F2F816FF782C00DB85C4 /* Controllers */,
 				9460F2E116FF781100DB85C4 /* Supporting Files */,
@@ -112,6 +132,10 @@
 				9460F2ED16FF781100DB85C4 /* SOAppDelegate.m */,
 				9460F2FA16FF788700DB85C4 /* SOPlayerWindowController.h */,
 				9460F2FB16FF788700DB85C4 /* SOPlayerWindowController.m */,
+				9460F30E16FFF72700DB85C4 /* SOPlaylistsTableController.h */,
+				9460F30F16FFF72700DB85C4 /* SOPlaylistsTableController.m */,
+				9460F30B16FFF56E00DB85C4 /* SOSongsTableController.h */,
+				9460F30C16FFF56E00DB85C4 /* SOSongsTableController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -123,6 +147,19 @@
 				9460F2FC16FF788700DB85C4 /* PlayerWindow.xib */,
 			);
 			name = XIBs;
+			sourceTree = "<group>";
+		};
+		9460F2FF16FFA19B00DB85C4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				9460F30516FFA85B00DB85C4 /* SOSongManager.h */,
+				9460F30616FFA85B00DB85C4 /* SOSongManager.m */,
+				9460F30816FFE9BF00DB85C4 /* SOSong.h */,
+				9460F30916FFE9BF00DB85C4 /* SOSong.m */,
+				9460F31116FFFB6300DB85C4 /* SOPlaylist.h */,
+				9460F31216FFFB6300DB85C4 /* SOPlaylist.m */,
+			);
+			name = Models;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -193,6 +230,11 @@
 				9460F2E716FF781100DB85C4 /* main.m in Sources */,
 				9460F2EE16FF781100DB85C4 /* SOAppDelegate.m in Sources */,
 				9460F2FD16FF788700DB85C4 /* SOPlayerWindowController.m in Sources */,
+				9460F30716FFA85B00DB85C4 /* SOSongManager.m in Sources */,
+				9460F30A16FFE9BF00DB85C4 /* SOSong.m in Sources */,
+				9460F30D16FFF56E00DB85C4 /* SOSongsTableController.m in Sources */,
+				9460F31016FFF72700DB85C4 /* SOPlaylistsTableController.m in Sources */,
+				9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

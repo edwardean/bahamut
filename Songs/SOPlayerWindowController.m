@@ -8,7 +8,13 @@
 
 #import "SOPlayerWindowController.h"
 
+#import "SOSongsTableController.h"
+#import "SOPlaylistsTableController.h"
+
 @interface SOPlayerWindowController ()
+
+@property (weak) IBOutlet SOSongsTableController* songsTableController;
+@property (weak) IBOutlet SOPlaylistsTableController* playlistsTableController;
 
 @end
 
