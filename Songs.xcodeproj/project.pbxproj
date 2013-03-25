@@ -7,28 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB3A1700F3CD00E0D3AF /* playlist.png */; };
+		9404AB3E1700F4A000E0D3AF /* MUPlaylistNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB3D1700F4A000E0D3AF /* MUPlaylistNode.m */; };
+		9404AB411700F4A900E0D3AF /* MUPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB401700F4A900E0D3AF /* MUPlaylist.m */; };
+		9404AB441700F4EF00E0D3AF /* MUMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB431700F4EF00E0D3AF /* MUMusicManager.m */; };
+		9404AB481700F5AC00E0D3AF /* MUPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB461700F5AC00E0D3AF /* MUPlayerWindowController.m */; };
+		9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */; };
+		9404AB4C1700F9C000E0D3AF /* MUAllSongsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB4B1700F9C000E0D3AF /* MUAllSongsPlaylist.m */; };
 		9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F2DA16FF781100DB85C4 /* Cocoa.framework */; };
 		9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2E316FF781100DB85C4 /* InfoPlist.strings */; };
 		9460F2E716FF781100DB85C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2E616FF781100DB85C4 /* main.m */; };
-		9460F2EE16FF781100DB85C4 /* SOAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2ED16FF781100DB85C4 /* SOAppDelegate.m */; };
+		9460F2EE16FF781100DB85C4 /* MUAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2ED16FF781100DB85C4 /* MUAppDelegate.m */; };
 		9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2EF16FF781100DB85C4 /* MainMenu.xib */; };
-		9460F2FD16FF788700DB85C4 /* SOPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2FB16FF788700DB85C4 /* SOPlayerWindowController.m */; };
-		9460F2FE16FF788700DB85C4 /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2FC16FF788700DB85C4 /* PlayerWindow.xib */; };
 		9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F30316FFA23100DB85C4 /* AVFoundation.framework */; };
 		9460F30716FFA85B00DB85C4 /* SOSongManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30616FFA85B00DB85C4 /* SOSongManager.m */; };
 		9460F30A16FFE9BF00DB85C4 /* SOSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30916FFE9BF00DB85C4 /* SOSong.m */; };
-		9460F30D16FFF56E00DB85C4 /* SOSongsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30C16FFF56E00DB85C4 /* SOSongsTableController.m */; };
-		9460F31016FFF72700DB85C4 /* SOPlaylistsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30F16FFF72700DB85C4 /* SOPlaylistsTableController.m */; };
 		9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F31216FFFB6300DB85C4 /* SOPlaylist.m */; };
-		948D91CA17000D4F00436B79 /* playrecent-playlist-dark.icns in Resources */ = {isa = PBXBuildFile; fileRef = 948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */; };
-		948D91CB17000D4F00436B79 /* playrecent-playlist.icns in Resources */ = {isa = PBXBuildFile; fileRef = 948D91C917000D4F00436B79 /* playrecent-playlist.icns */; };
 		94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */; };
 		94AFAD6E17008988007F10B1 /* MAKVONotificationCenter-LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */; };
 		94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */; };
-		94AFAD7217009F32007F10B1 /* SOPlaylistsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD7117009F32007F10B1 /* SOPlaylistsArray.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9404AB3A1700F3CD00E0D3AF /* playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlist.png; sourceTree = "<group>"; };
+		9404AB3C1700F4A000E0D3AF /* MUPlaylistNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPlaylistNode.h; sourceTree = "<group>"; };
+		9404AB3D1700F4A000E0D3AF /* MUPlaylistNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPlaylistNode.m; sourceTree = "<group>"; };
+		9404AB3F1700F4A900E0D3AF /* MUPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPlaylist.h; sourceTree = "<group>"; };
+		9404AB401700F4A900E0D3AF /* MUPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPlaylist.m; sourceTree = "<group>"; };
+		9404AB421700F4EF00E0D3AF /* MUMusicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUMusicManager.h; sourceTree = "<group>"; };
+		9404AB431700F4EF00E0D3AF /* MUMusicManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUMusicManager.m; sourceTree = "<group>"; };
+		9404AB451700F5AC00E0D3AF /* MUPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPlayerWindowController.h; sourceTree = "<group>"; };
+		9404AB461700F5AC00E0D3AF /* MUPlayerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPlayerWindowController.m; sourceTree = "<group>"; };
+		9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
+		9404AB4A1700F9C000E0D3AF /* MUAllSongsPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUAllSongsPlaylist.h; sourceTree = "<group>"; };
+		9404AB4B1700F9C000E0D3AF /* MUAllSongsPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUAllSongsPlaylist.m; sourceTree = "<group>"; };
 		9460F2D716FF781100DB85C4 /* Songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9460F2DA16FF781100DB85C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9460F2DD16FF781100DB85C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -38,33 +50,22 @@
 		9460F2E416FF781100DB85C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9460F2E616FF781100DB85C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		9460F2E816FF781100DB85C4 /* Songs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Songs-Prefix.pch"; sourceTree = "<group>"; };
-		9460F2EC16FF781100DB85C4 /* SOAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SOAppDelegate.h; sourceTree = "<group>"; };
-		9460F2ED16FF781100DB85C4 /* SOAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SOAppDelegate.m; sourceTree = "<group>"; };
+		9460F2EC16FF781100DB85C4 /* MUAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUAppDelegate.h; sourceTree = "<group>"; };
+		9460F2ED16FF781100DB85C4 /* MUAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = MUAppDelegate.m; sourceTree = "<group>"; };
 		9460F2F016FF781100DB85C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9460F2F716FF782400DB85C4 /* Songs.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.xml; path = Songs.entitlements; sourceTree = "<group>"; };
-		9460F2FA16FF788700DB85C4 /* SOPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlayerWindowController.h; sourceTree = "<group>"; };
-		9460F2FB16FF788700DB85C4 /* SOPlayerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlayerWindowController.m; sourceTree = "<group>"; };
-		9460F2FC16FF788700DB85C4 /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
 		9460F30316FFA23100DB85C4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9460F30516FFA85B00DB85C4 /* SOSongManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSongManager.h; sourceTree = "<group>"; };
 		9460F30616FFA85B00DB85C4 /* SOSongManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSongManager.m; sourceTree = "<group>"; };
 		9460F30816FFE9BF00DB85C4 /* SOSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSong.h; sourceTree = "<group>"; };
 		9460F30916FFE9BF00DB85C4 /* SOSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSong.m; sourceTree = "<group>"; };
-		9460F30B16FFF56E00DB85C4 /* SOSongsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOSongsTableController.h; sourceTree = "<group>"; };
-		9460F30C16FFF56E00DB85C4 /* SOSongsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOSongsTableController.m; sourceTree = "<group>"; };
-		9460F30E16FFF72700DB85C4 /* SOPlaylistsTableController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlaylistsTableController.h; sourceTree = "<group>"; };
-		9460F30F16FFF72700DB85C4 /* SOPlaylistsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylistsTableController.m; sourceTree = "<group>"; };
 		9460F31116FFFB6300DB85C4 /* SOPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlaylist.h; sourceTree = "<group>"; };
 		9460F31216FFFB6300DB85C4 /* SOPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylist.m; sourceTree = "<group>"; };
-		948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist-dark.icns"; sourceTree = "<group>"; };
-		948D91C917000D4F00436B79 /* playrecent-playlist.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist.icns"; sourceTree = "<group>"; };
 		94AFAD6717008324007F10B1 /* SOAllSongsPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAllSongsPlaylist.h; sourceTree = "<group>"; };
 		94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAllSongsPlaylist.m; sourceTree = "<group>"; };
 		94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MAKVONotificationCenter-LICENSE"; sourceTree = "<group>"; };
 		94AFAD6C17008988007F10B1 /* MAKVONotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAKVONotificationCenter.h; sourceTree = "<group>"; };
 		94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAKVONotificationCenter.m; sourceTree = "<group>"; };
-		94AFAD7017009F32007F10B1 /* SOPlaylistsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlaylistsArray.h; sourceTree = "<group>"; };
-		94AFAD7117009F32007F10B1 /* SOPlaylistsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylistsArray.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -146,14 +147,10 @@
 		9460F2F816FF782C00DB85C4 /* Controllers */ = {
 			isa = PBXGroup;
 			children = (
-				9460F2EC16FF781100DB85C4 /* SOAppDelegate.h */,
-				9460F2ED16FF781100DB85C4 /* SOAppDelegate.m */,
-				9460F2FA16FF788700DB85C4 /* SOPlayerWindowController.h */,
-				9460F2FB16FF788700DB85C4 /* SOPlayerWindowController.m */,
-				9460F30E16FFF72700DB85C4 /* SOPlaylistsTableController.h */,
-				9460F30F16FFF72700DB85C4 /* SOPlaylistsTableController.m */,
-				9460F30B16FFF56E00DB85C4 /* SOSongsTableController.h */,
-				9460F30C16FFF56E00DB85C4 /* SOSongsTableController.m */,
+				9460F2EC16FF781100DB85C4 /* MUAppDelegate.h */,
+				9460F2ED16FF781100DB85C4 /* MUAppDelegate.m */,
+				9404AB451700F5AC00E0D3AF /* MUPlayerWindowController.h */,
+				9404AB461700F5AC00E0D3AF /* MUPlayerWindowController.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -162,7 +159,7 @@
 			isa = PBXGroup;
 			children = (
 				9460F2EF16FF781100DB85C4 /* MainMenu.xib */,
-				9460F2FC16FF788700DB85C4 /* PlayerWindow.xib */,
+				9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */,
 			);
 			name = XIBs;
 			sourceTree = "<group>";
@@ -172,14 +169,20 @@
 			children = (
 				9460F30516FFA85B00DB85C4 /* SOSongManager.h */,
 				9460F30616FFA85B00DB85C4 /* SOSongManager.m */,
-				94AFAD7017009F32007F10B1 /* SOPlaylistsArray.h */,
-				94AFAD7117009F32007F10B1 /* SOPlaylistsArray.m */,
 				9460F30816FFE9BF00DB85C4 /* SOSong.h */,
 				9460F30916FFE9BF00DB85C4 /* SOSong.m */,
 				9460F31116FFFB6300DB85C4 /* SOPlaylist.h */,
 				9460F31216FFFB6300DB85C4 /* SOPlaylist.m */,
 				94AFAD6717008324007F10B1 /* SOAllSongsPlaylist.h */,
 				94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */,
+				9404AB421700F4EF00E0D3AF /* MUMusicManager.h */,
+				9404AB431700F4EF00E0D3AF /* MUMusicManager.m */,
+				9404AB3C1700F4A000E0D3AF /* MUPlaylistNode.h */,
+				9404AB3D1700F4A000E0D3AF /* MUPlaylistNode.m */,
+				9404AB3F1700F4A900E0D3AF /* MUPlaylist.h */,
+				9404AB401700F4A900E0D3AF /* MUPlaylist.m */,
+				9404AB4A1700F9C000E0D3AF /* MUAllSongsPlaylist.h */,
+				9404AB4B1700F9C000E0D3AF /* MUAllSongsPlaylist.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -194,8 +197,7 @@
 		94AFAD661700823C007F10B1 /* Graphics */ = {
 			isa = PBXGroup;
 			children = (
-				948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */,
-				948D91C917000D4F00436B79 /* playrecent-playlist.icns */,
+				9404AB3A1700F3CD00E0D3AF /* playlist.png */,
 			);
 			name = Graphics;
 			sourceTree = "<group>";
@@ -236,7 +238,7 @@
 		9460F2CF16FF781100DB85C4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = SO;
+				CLASSPREFIX = MU;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Steven Degutis";
 			};
@@ -264,10 +266,9 @@
 			files = (
 				9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */,
 				9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */,
-				9460F2FE16FF788700DB85C4 /* PlayerWindow.xib in Resources */,
-				948D91CA17000D4F00436B79 /* playrecent-playlist-dark.icns in Resources */,
-				948D91CB17000D4F00436B79 /* playrecent-playlist.icns in Resources */,
 				94AFAD6E17008988007F10B1 /* MAKVONotificationCenter-LICENSE in Resources */,
+				9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */,
+				9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -279,16 +280,17 @@
 			buildActionMask = 2147483647;
 			files = (
 				9460F2E716FF781100DB85C4 /* main.m in Sources */,
-				9460F2EE16FF781100DB85C4 /* SOAppDelegate.m in Sources */,
-				9460F2FD16FF788700DB85C4 /* SOPlayerWindowController.m in Sources */,
+				9460F2EE16FF781100DB85C4 /* MUAppDelegate.m in Sources */,
 				9460F30716FFA85B00DB85C4 /* SOSongManager.m in Sources */,
 				9460F30A16FFE9BF00DB85C4 /* SOSong.m in Sources */,
-				9460F30D16FFF56E00DB85C4 /* SOSongsTableController.m in Sources */,
-				9460F31016FFF72700DB85C4 /* SOPlaylistsTableController.m in Sources */,
 				9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */,
 				94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */,
 				94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */,
-				94AFAD7217009F32007F10B1 /* SOPlaylistsArray.m in Sources */,
+				9404AB3E1700F4A000E0D3AF /* MUPlaylistNode.m in Sources */,
+				9404AB411700F4A900E0D3AF /* MUPlaylist.m in Sources */,
+				9404AB441700F4EF00E0D3AF /* MUMusicManager.m in Sources */,
+				9404AB481700F5AC00E0D3AF /* MUPlayerWindowController.m in Sources */,
+				9404AB4C1700F9C000E0D3AF /* MUAllSongsPlaylist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
