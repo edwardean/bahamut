@@ -12,34 +12,62 @@
 
 @interface SOPlaylistsTableController ()
 
+@property (weak) IBOutlet NSOutlineView* playlistsView;
+
 @end
 
 @implementation SOPlaylistsTableController
 
+- (void) awakeFromNib {
+    [self.playlistsView expandItem:@"Playlists"];
+    [self.playlistsView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.playlistsView rowForItem:@"All Songs"]] byExtendingSelection:NO];
+    
+    [self redrawPlaylistIcons];
+}
+
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
-    return (item == nil ? [[[SOSongManager sharedSongManager] playlists] count] : 0);
+    if (item == nil)
+        return 2;
+    else if ([item isEqual: @"Playlists"])
+        return [[[SOSongManager sharedSongManager] playlists] count];
+    else
+        return 0;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-    return (item == nil ? [[[SOSongManager sharedSongManager] playlists] objectAtIndex:index] : nil);
+    if (item == nil)
+        return [@[@"All Songs", @"Playlists"] objectAtIndex:index];
+    else if ([item isEqual: @"Playlists"])
+        return [[[SOSongManager sharedSongManager] playlists] objectAtIndex:index];
+    else
+        return nil;
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-    return (item == nil ? YES : NO);
+    return [item isEqual: @"Playlists"];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
-    return (item == nil ? YES : NO);
+    return [item isEqual: @"Playlists"];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
-    return YES;
+    return ![item isEqual: @"Playlists"];
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item {
+    return NO;
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
-    if (item == nil) {
+    if ([item isEqual: @"Playlists"]) {
         NSTableCellView *cellView = [outlineView makeViewWithIdentifier:@"HeaderCell" owner:self];
-        cellView.textField.stringValue = @"Playlists";
+        cellView.textField.stringValue = item;
+        return cellView;
+    }
+    else if ([item isEqual: @"All Songs"]) {
+        NSTableCellView *cellView = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
+        cellView.textField.stringValue = item;
         return cellView;
     }
     else {
@@ -47,6 +75,30 @@
         cellView.textField.stringValue = [item title];
         return cellView;
     }
+}
+
+- (void) redrawPlaylistIcons {
+    id selectedItem = [self.playlistsView itemAtRow:[self.playlistsView selectedRow]];
+    
+    for (NSInteger i = 0; i < [self.playlistsView numberOfRows]; i++) {
+        id itemAtRow = [self.playlistsView itemAtRow:i];
+        
+        NSTableCellView* cellView = [self.playlistsView viewAtColumn:0 row:i makeIfNecessary:NO];
+        
+        if (selectedItem == itemAtRow)
+            cellView.imageView.image = [NSImage imageNamed:@"playrecent-playlist"];
+        else
+            cellView.imageView.image = [NSImage imageNamed:@"playrecent-playlist-dark"];
+    }
+}
+
+- (void)outlineViewSelectionDidChange:(NSNotification *)note {
+    [self redrawPlaylistIcons];
+    NSLog(@"done");
+}
+
+- (void) outlineViewSelectionIsChanging:(NSNotification*)note {
+    [self redrawPlaylistIcons];
 }
 
 @end

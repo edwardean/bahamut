@@ -20,6 +20,8 @@
 		9460F30D16FFF56E00DB85C4 /* SOSongsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30C16FFF56E00DB85C4 /* SOSongsTableController.m */; };
 		9460F31016FFF72700DB85C4 /* SOPlaylistsTableController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30F16FFF72700DB85C4 /* SOPlaylistsTableController.m */; };
 		9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F31216FFFB6300DB85C4 /* SOPlaylist.m */; };
+		948D91CA17000D4F00436B79 /* playrecent-playlist-dark.icns in Resources */ = {isa = PBXBuildFile; fileRef = 948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */; };
+		948D91CB17000D4F00436B79 /* playrecent-playlist.icns in Resources */ = {isa = PBXBuildFile; fileRef = 948D91C917000D4F00436B79 /* playrecent-playlist.icns */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +52,8 @@
 		9460F30F16FFF72700DB85C4 /* SOPlaylistsTableController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylistsTableController.m; sourceTree = "<group>"; };
 		9460F31116FFFB6300DB85C4 /* SOPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlaylist.h; sourceTree = "<group>"; };
 		9460F31216FFFB6300DB85C4 /* SOPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylist.m; sourceTree = "<group>"; };
+		948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist-dark.icns"; sourceTree = "<group>"; };
+		948D91C917000D4F00436B79 /* playrecent-playlist.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist.icns"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -107,6 +111,8 @@
 			children = (
 				9460F2E216FF781100DB85C4 /* Songs-Info.plist */,
 				9460F2F716FF782400DB85C4 /* Songs.entitlements */,
+				948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */,
+				948D91C917000D4F00436B79 /* playrecent-playlist.icns */,
 				9460F2FF16FFA19B00DB85C4 /* Models */,
 				9460F2F916FF783100DB85C4 /* XIBs */,
 				9460F2F816FF782C00DB85C4 /* Controllers */,
@@ -217,6 +223,8 @@
 				9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */,
 				9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */,
 				9460F2FE16FF788700DB85C4 /* PlayerWindow.xib in Resources */,
+				948D91CA17000D4F00436B79 /* playrecent-playlist-dark.icns in Resources */,
+				948D91CB17000D4F00436B79 /* playrecent-playlist.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,6 +374,7 @@
 				9460F2F616FF781100DB85C4 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
