@@ -10,4 +10,6 @@
 
 @interface SOPlaylistsTableController : NSObject <NSOutlineViewDataSource, NSOutlineViewDelegate>
 
+- (void) makeNewPlaylist;
+
 @end

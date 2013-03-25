@@ -10,4 +10,8 @@
 
 @interface SOAllSongsPlaylist : SOPlaylist
 
+@property (readonly) NSArray* songs;
+
+- (void) addSongsWithURLs:(NSArray*)urls;
+
 @end

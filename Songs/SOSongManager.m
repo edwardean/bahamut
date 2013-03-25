@@ -28,12 +28,24 @@
         sharedSongManager.cachedUserPlaylists = [NSMutableArray array];
         
         sharedSongManager.selectedPlaylist = sharedSongManager.allSongsPlaylist;
+        
+        [[NSNotificationCenter defaultCenter] addObserverForName:SOMusicUserDataChangedNotification
+                                                          object:nil
+                                                           queue:nil
+                                                      usingBlock:^(NSNotification *note) {
+                                                          NSLog(@"user did change data");
+                                                      }];
     });
     return sharedSongManager;
 }
 
 - (NSArray*) userPlaylists {
     return [self.cachedUserPlaylists copy];
+}
+
++ (void) userDataDidChange {
+    [[NSNotificationQueue defaultQueue] enqueueNotification:[NSNotification notificationWithName:SOMusicUserDataChangedNotification object:nil]
+                                               postingStyle:NSPostNow];
 }
 
 - (void) loadData {
@@ -44,25 +56,27 @@
     NSData* userPlaylistsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"userPlaylists"];
     if (userPlaylistsData)
         self.cachedUserPlaylists = [NSKeyedUnarchiver unarchiveObjectWithData:userPlaylistsData];
+    
+    NSLog(@"%@", self.allSongsPlaylist.songs);
 }
 
 - (void) saveSongs {
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.userPlaylists] forKey:@"userPlaylists"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.cachedUserPlaylists] forKey:@"userPlaylists"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.allSongsPlaylist] forKey:@"allSongsPlaylist"];
+}
+
+- (SOPlaylist*) makeNewPlaylist {
+    SOPlaylist* playlist = [[SOPlaylist alloc] init];
+    [self.cachedUserPlaylists addObject:playlist];
+    [SOSongManager userDataDidChange];
+    return playlist;
 }
 
 - (void) importSongsUnderURLs:(NSArray*)urls {
     [[NSNotificationCenter defaultCenter] postNotificationName:SOMusicImportBeginNotification object:nil];
     
     [SOSongManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
-        for (NSURL* url in urls) {
-            SOSong* song = [[SOSong alloc] init];
-            song.url = url;
-            
-            [self.allSongsPlaylist addSong:song];
-        }
-        
-        [self saveSongs];
+        [self.allSongsPlaylist addSongsWithURLs:urls];
         
         [[NSNotificationCenter defaultCenter] postNotificationName:SOMusicImportEndNotification object:nil];
     }];

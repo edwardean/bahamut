@@ -10,4 +10,6 @@
 
 @interface SOPlayerWindowController : NSWindowController
 
+- (void) makeNewPlaylist;
+
 @end

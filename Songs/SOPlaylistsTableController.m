@@ -9,6 +9,7 @@
 #import "SOPlaylistsTableController.h"
 
 #import "SOSongManager.h"
+#import "SOPlaylist.h"
 
 @interface SOPlaylistsTableController ()
 
@@ -21,7 +22,7 @@
 
 - (void) awakeFromNib {
     [self.playlistsView expandItem:@"Playlists"];
-    [self.playlistsView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.playlistsView rowForItem:@"All Songs"]] byExtendingSelection:NO];
+    [self.playlistsView selectRowIndexes:[NSIndexSet indexSetWithIndex:[self.playlistsView rowForItem:[SOSongManager sharedSongManager].allSongsPlaylist]] byExtendingSelection:NO];
     
     [self redrawPlaylistIcons];
 }
@@ -30,16 +31,16 @@
     if (item == nil)
         return 2;
     else if ([item isEqual: @"Playlists"])
-        return [[[SOSongManager sharedSongManager] userPlaylists] count];
+        return [[SOSongManager sharedSongManager].userPlaylists count];
     else
         return 0;
 }
 
 - (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
     if (item == nil)
-        return [@[@"All Songs", @"Playlists"] objectAtIndex:index];
+        return [@[[SOSongManager sharedSongManager].allSongsPlaylist, @"Playlists"] objectAtIndex:index];
     else if ([item isEqual: @"Playlists"])
-        return [[[SOSongManager sharedSongManager] userPlaylists] objectAtIndex:index];
+        return [[SOSongManager sharedSongManager].userPlaylists objectAtIndex:index];
     else
         return nil;
 }
@@ -66,14 +67,15 @@
         cellView.textField.stringValue = item;
         return cellView;
     }
-    else if ([item isEqual: @"All Songs"]) {
-        NSTableCellView *cellView = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
-        cellView.textField.stringValue = item;
-        return cellView;
-    }
     else {
         NSTableCellView *cellView = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
         cellView.textField.stringValue = [item title];
+        
+        BOOL editable = ![item isEqual: [SOSongManager sharedSongManager].allSongsPlaylist];
+        
+        [cellView.textField setEditable: editable];
+        [cellView.textField setSelectable: editable];
+        
         return cellView;
     }
 }
@@ -96,8 +98,10 @@
 - (void)outlineViewSelectionDidChange:(NSNotification *)note {
     [self redrawPlaylistIcons];
     
-    id selectedItem = [self.playlistsView itemAtRow:[self.playlistsView selectedRow]];
-    NSLog(@"selected playlist changed: %@", selectedItem);
+    SOPlaylist* selectedItem = [self.playlistsView itemAtRow:[self.playlistsView selectedRow]];
+    [SOSongManager sharedSongManager].selectedPlaylist = selectedItem;
+    
+    NSLog(@"selected playlist changed to: %@", selectedItem);
 }
 
 - (void) outlineViewSelectionIsChanging:(NSNotification*)note {
@@ -109,9 +113,12 @@
 
 - (IBAction) editPlaylistTitle:(NSTextField*)sender {
     NSString* newName = [sender stringValue];
-    id selectedItem = [self.playlistsView itemAtRow:[self.playlistsView selectedRow]];
+    SOPlaylist* selectedPlaylist = [self.playlistsView itemAtRow:[self.playlistsView selectedRow]];
     
-    NSLog(@"did edit! %@ for %@", newName, selectedItem);
+    selectedPlaylist.title = newName;
+    sender.stringValue = selectedPlaylist.title;
+    
+    NSLog(@"did edit! %@ for %@", newName, [selectedPlaylist title]);
 }
 
 - (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor {
@@ -131,6 +138,25 @@
     }
     
     return NO;
+}
+
+
+
+
+- (void) makeNewPlaylist {
+    SOPlaylist* playlist = [[SOSongManager sharedSongManager] makeNewPlaylist];
+    
+    NSLog(@"%@", self.playlistsView);
+    
+    [self.playlistsView reloadItem:nil];
+    
+    NSInteger row = [self.playlistsView rowForItem:playlist];
+    [self.playlistsView scrollRowToVisible:row];
+    
+    dispatch_async(dispatch_get_main_queue(), ^{
+        [self.playlistsView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+        [self.playlistsView editColumn:0 row:row withEvent:nil select:YES];
+    });
 }
 
 @end

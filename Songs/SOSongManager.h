@@ -11,6 +11,8 @@
 #import "SOAllSongsPlaylist.h"
 #import "SOPlaylist.h"
 
+#define SOMusicUserDataChangedNotification @"SOMusicUserDataChangedNotification"
+
 #define SOMusicImportBeginNotification @"SOMusicImportBeginNotification"
 #define SOMusicImportEndNotification @"SOMusicImportEndNotification"
 
@@ -25,6 +27,10 @@
 
 - (void) loadData;
 
+- (SOPlaylist*) makeNewPlaylist;
+
 - (void) importSongsUnderURLs:(NSArray*)urls;
+
++ (void) userDataDidChange;
 
 @end

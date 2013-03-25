@@ -23,6 +23,8 @@
 		948D91CA17000D4F00436B79 /* playrecent-playlist-dark.icns in Resources */ = {isa = PBXBuildFile; fileRef = 948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */; };
 		948D91CB17000D4F00436B79 /* playrecent-playlist.icns in Resources */ = {isa = PBXBuildFile; fileRef = 948D91C917000D4F00436B79 /* playrecent-playlist.icns */; };
 		94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */; };
+		94AFAD6E17008988007F10B1 /* MAKVONotificationCenter-LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */; };
+		94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -57,6 +59,9 @@
 		948D91C917000D4F00436B79 /* playrecent-playlist.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist.icns"; sourceTree = "<group>"; };
 		94AFAD6717008324007F10B1 /* SOAllSongsPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAllSongsPlaylist.h; sourceTree = "<group>"; };
 		94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAllSongsPlaylist.m; sourceTree = "<group>"; };
+		94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MAKVONotificationCenter-LICENSE"; sourceTree = "<group>"; };
+		94AFAD6C17008988007F10B1 /* MAKVONotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAKVONotificationCenter.h; sourceTree = "<group>"; };
+		94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAKVONotificationCenter.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -114,6 +119,7 @@
 			children = (
 				9460F2E216FF781100DB85C4 /* Songs-Info.plist */,
 				9460F2F716FF782400DB85C4 /* Songs.entitlements */,
+				94AFAD6A1700897D007F10B1 /* Third Party */,
 				9460F2FF16FFA19B00DB85C4 /* Models */,
 				9460F2F916FF783100DB85C4 /* XIBs */,
 				9460F2F816FF782C00DB85C4 /* Controllers */,
@@ -189,6 +195,16 @@
 			name = Graphics;
 			sourceTree = "<group>";
 		};
+		94AFAD6A1700897D007F10B1 /* Third Party */ = {
+			isa = PBXGroup;
+			children = (
+				94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */,
+				94AFAD6C17008988007F10B1 /* MAKVONotificationCenter.h */,
+				94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */,
+			);
+			name = "Third Party";
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -246,6 +262,7 @@
 				9460F2FE16FF788700DB85C4 /* PlayerWindow.xib in Resources */,
 				948D91CA17000D4F00436B79 /* playrecent-playlist-dark.icns in Resources */,
 				948D91CB17000D4F00436B79 /* playrecent-playlist.icns in Resources */,
+				94AFAD6E17008988007F10B1 /* MAKVONotificationCenter-LICENSE in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -265,6 +282,7 @@
 				9460F31016FFF72700DB85C4 /* SOPlaylistsTableController.m in Sources */,
 				9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */,
 				94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */,
+				94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

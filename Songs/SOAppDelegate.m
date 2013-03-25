@@ -26,8 +26,8 @@
     [self.playerWindowController showWindow:self];
 }
 
-- (IBAction) newPlaylist:(id)sender {
-    
+- (IBAction) makeNewPlaylist:(id)sender {
+    [self.playerWindowController makeNewPlaylist];
 }
 
 - (IBAction) importSongs:(id)sender {
