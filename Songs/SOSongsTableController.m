@@ -14,11 +14,11 @@
 @implementation SOSongsTableController
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-    return [[[SOSongManager sharedSongManager] allSongs] count];
+    return [[SOSongManager sharedSongManager].allSongsPlaylist.songs count];
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-    SOSong* song = [[[SOSongManager sharedSongManager] allSongs] objectAtIndex:rowIndex];
+    SOSong* song = [[SOSongManager sharedSongManager].allSongsPlaylist.songs objectAtIndex:rowIndex];
     
     if ([[aTableColumn identifier] isEqualToString:@"title"]) {
         return [song title];

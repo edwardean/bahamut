@@ -8,10 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SOSong.h"
+
 @interface SOPlaylist : NSObject
 
 @property NSString* title;
 
 @property (readonly) NSArray* songs;
+
+- (void) addSong:(SOSong*)song;
 
 @end

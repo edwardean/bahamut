@@ -22,6 +22,7 @@
 		9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F31216FFFB6300DB85C4 /* SOPlaylist.m */; };
 		948D91CA17000D4F00436B79 /* playrecent-playlist-dark.icns in Resources */ = {isa = PBXBuildFile; fileRef = 948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */; };
 		948D91CB17000D4F00436B79 /* playrecent-playlist.icns in Resources */ = {isa = PBXBuildFile; fileRef = 948D91C917000D4F00436B79 /* playrecent-playlist.icns */; };
+		94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,8 +55,8 @@
 		9460F31216FFFB6300DB85C4 /* SOPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylist.m; sourceTree = "<group>"; };
 		948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist-dark.icns"; sourceTree = "<group>"; };
 		948D91C917000D4F00436B79 /* playrecent-playlist.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist.icns"; sourceTree = "<group>"; };
-		948D91D417001B8600436B79 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/SOAllSongsPlaylist.h; sourceTree = "<group>"; };
-		948D91D617001B8600436B79 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = en; path = en.lproj/SOAllSongsPlaylist.m; sourceTree = "<group>"; };
+		94AFAD6717008324007F10B1 /* SOAllSongsPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOAllSongsPlaylist.h; sourceTree = "<group>"; };
+		94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOAllSongsPlaylist.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,12 +114,11 @@
 			children = (
 				9460F2E216FF781100DB85C4 /* Songs-Info.plist */,
 				9460F2F716FF782400DB85C4 /* Songs.entitlements */,
-				948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */,
-				948D91C917000D4F00436B79 /* playrecent-playlist.icns */,
-				948D91CC170017EB00436B79 /* Views */,
 				9460F2FF16FFA19B00DB85C4 /* Models */,
 				9460F2F916FF783100DB85C4 /* XIBs */,
 				9460F2F816FF782C00DB85C4 /* Controllers */,
+				948D91CC170017EB00436B79 /* Views */,
+				94AFAD661700823C007F10B1 /* Graphics */,
 				9460F2E116FF781100DB85C4 /* Supporting Files */,
 			);
 			path = Songs;
@@ -167,8 +167,8 @@
 				9460F30916FFE9BF00DB85C4 /* SOSong.m */,
 				9460F31116FFFB6300DB85C4 /* SOPlaylist.h */,
 				9460F31216FFFB6300DB85C4 /* SOPlaylist.m */,
-				948D91D317001B8600436B79 /* SOAllSongsPlaylist.h */,
-				948D91D517001B8600436B79 /* SOAllSongsPlaylist.m */,
+				94AFAD6717008324007F10B1 /* SOAllSongsPlaylist.h */,
+				94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -178,6 +178,15 @@
 			children = (
 			);
 			name = Views;
+			sourceTree = "<group>";
+		};
+		94AFAD661700823C007F10B1 /* Graphics */ = {
+			isa = PBXGroup;
+			children = (
+				948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */,
+				948D91C917000D4F00436B79 /* playrecent-playlist.icns */,
+			);
+			name = Graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,6 +264,7 @@
 				9460F30D16FFF56E00DB85C4 /* SOSongsTableController.m in Sources */,
 				9460F31016FFF72700DB85C4 /* SOPlaylistsTableController.m in Sources */,
 				9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */,
+				94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -275,22 +285,6 @@
 				9460F2F016FF781100DB85C4 /* en */,
 			);
 			name = MainMenu.xib;
-			sourceTree = "<group>";
-		};
-		948D91D317001B8600436B79 /* SOAllSongsPlaylist.h */ = {
-			isa = PBXVariantGroup;
-			children = (
-				948D91D417001B8600436B79 /* en */,
-			);
-			name = SOAllSongsPlaylist.h;
-			sourceTree = "<group>";
-		};
-		948D91D517001B8600436B79 /* SOAllSongsPlaylist.m */ = {
-			isa = PBXVariantGroup;
-			children = (
-				948D91D617001B8600436B79 /* en */,
-			);
-			name = SOAllSongsPlaylist.m;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

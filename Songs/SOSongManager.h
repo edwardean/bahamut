@@ -8,6 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SOAllSongsPlaylist.h"
+#import "SOPlaylist.h"
+
 #define SOMusicImportBeginNotification @"SOMusicImportBeginNotification"
 #define SOMusicImportEndNotification @"SOMusicImportEndNotification"
 
@@ -15,11 +18,12 @@
 
 + (SOSongManager*) sharedSongManager;
 
-- (NSArray*) allSongs;
+@property (readonly) SOAllSongsPlaylist* allSongsPlaylist;
+@property (readonly) NSArray* userPlaylists;
 
-- (NSArray*) playlists;
+@property (weak) SOPlaylist* selectedPlaylist;
 
-- (void) loadSongs;
+- (void) loadData;
 
 - (void) importSongsUnderURLs:(NSArray*)urls;
 

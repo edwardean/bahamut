@@ -20,7 +20,7 @@
 @implementation SOAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [[SOSongManager sharedSongManager] loadSongs];
+    [[SOSongManager sharedSongManager] loadData];
     
     self.playerWindowController = [[SOPlayerWindowController alloc] init];
     [self.playerWindowController showWindow:self];

@@ -30,7 +30,7 @@
     if (item == nil)
         return 2;
     else if ([item isEqual: @"Playlists"])
-        return [[[SOSongManager sharedSongManager] playlists] count];
+        return [[[SOSongManager sharedSongManager] userPlaylists] count];
     else
         return 0;
 }
@@ -39,7 +39,7 @@
     if (item == nil)
         return [@[@"All Songs", @"Playlists"] objectAtIndex:index];
     else if ([item isEqual: @"Playlists"])
-        return [[[SOSongManager sharedSongManager] playlists] objectAtIndex:index];
+        return [[[SOSongManager sharedSongManager] userPlaylists] objectAtIndex:index];
     else
         return nil;
 }
