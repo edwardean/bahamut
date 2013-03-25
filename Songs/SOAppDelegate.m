@@ -26,6 +26,10 @@
     [self.playerWindowController showWindow:self];
 }
 
+- (IBAction) newPlaylist:(id)sender {
+    
+}
+
 - (IBAction) importSongs:(id)sender {
     NSOpenPanel* openPanel = [NSOpenPanel openPanel];
     

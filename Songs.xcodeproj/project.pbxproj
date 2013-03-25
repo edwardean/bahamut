@@ -54,6 +54,8 @@
 		9460F31216FFFB6300DB85C4 /* SOPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylist.m; sourceTree = "<group>"; };
 		948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist-dark.icns"; sourceTree = "<group>"; };
 		948D91C917000D4F00436B79 /* playrecent-playlist.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = "playrecent-playlist.icns"; sourceTree = "<group>"; };
+		948D91D417001B8600436B79 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = en; path = en.lproj/SOAllSongsPlaylist.h; sourceTree = "<group>"; };
+		948D91D617001B8600436B79 /* en */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = en; path = en.lproj/SOAllSongsPlaylist.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -113,6 +115,7 @@
 				9460F2F716FF782400DB85C4 /* Songs.entitlements */,
 				948D91C817000D4F00436B79 /* playrecent-playlist-dark.icns */,
 				948D91C917000D4F00436B79 /* playrecent-playlist.icns */,
+				948D91CC170017EB00436B79 /* Views */,
 				9460F2FF16FFA19B00DB85C4 /* Models */,
 				9460F2F916FF783100DB85C4 /* XIBs */,
 				9460F2F816FF782C00DB85C4 /* Controllers */,
@@ -164,8 +167,17 @@
 				9460F30916FFE9BF00DB85C4 /* SOSong.m */,
 				9460F31116FFFB6300DB85C4 /* SOPlaylist.h */,
 				9460F31216FFFB6300DB85C4 /* SOPlaylist.m */,
+				948D91D317001B8600436B79 /* SOAllSongsPlaylist.h */,
+				948D91D517001B8600436B79 /* SOAllSongsPlaylist.m */,
 			);
 			name = Models;
+			sourceTree = "<group>";
+		};
+		948D91CC170017EB00436B79 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Views;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -263,6 +275,22 @@
 				9460F2F016FF781100DB85C4 /* en */,
 			);
 			name = MainMenu.xib;
+			sourceTree = "<group>";
+		};
+		948D91D317001B8600436B79 /* SOAllSongsPlaylist.h */ = {
+			isa = PBXVariantGroup;
+			children = (
+				948D91D417001B8600436B79 /* en */,
+			);
+			name = SOAllSongsPlaylist.h;
+			sourceTree = "<group>";
+		};
+		948D91D517001B8600436B79 /* SOAllSongsPlaylist.m */ = {
+			isa = PBXVariantGroup;
+			children = (
+				948D91D617001B8600436B79 /* en */,
+			);
+			name = SOAllSongsPlaylist.m;
 			sourceTree = "<group>";
 		};
 /* End PBXVariantGroup section */

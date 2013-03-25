@@ -12,4 +12,6 @@
 
 @property NSString* title;
 
+@property (readonly) NSArray* songs;
+
 @end

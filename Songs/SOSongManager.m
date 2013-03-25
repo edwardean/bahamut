@@ -13,7 +13,7 @@
 
 @interface SOSongManager ()
 
-@property NSMutableArray* songs;
+@property NSMutableArray* cachedSongs;
 @property NSMutableArray* cachedPlaylists;
 
 @end
@@ -25,15 +25,15 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedSongManager = [[SOSongManager alloc] init];
-        sharedSongManager.songs = [NSMutableArray array];
+        sharedSongManager.cachedSongs = [NSMutableArray array];
         sharedSongManager.cachedPlaylists = [NSMutableArray array];
         
-        // TEMP:
-        for (NSString* n in @[@1, @2, @3]) {
-            SOPlaylist* playlist = [[SOPlaylist alloc] init];
-            playlist.title = [NSString stringWithFormat:@"my playlist %@", n];
-            [sharedSongManager.cachedPlaylists addObject:playlist];
-        }
+//        // TEMP:
+//        for (NSString* n in @[@1, @2, @3]) {
+//            SOPlaylist* playlist = [[SOPlaylist alloc] init];
+//            playlist.title = [NSString stringWithFormat:@"my playlist %@", n];
+//            [sharedSongManager.cachedPlaylists addObject:playlist];
+//        }
     });
     return sharedSongManager;
 }
@@ -43,18 +43,18 @@
 }
 
 - (NSArray*) allSongs {
-    return [self.songs copy];
+    return [self.cachedSongs copy];
 }
 
 - (void) loadSongs {
     NSData* songsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"songs"];
     if (songsData) {
-        self.songs = [NSKeyedUnarchiver unarchiveObjectWithData:songsData];
+        self.cachedSongs = [NSKeyedUnarchiver unarchiveObjectWithData:songsData];
     }
 }
 
 - (void) saveSongs {
-    NSData* songsData = [NSKeyedArchiver archivedDataWithRootObject:self.songs];
+    NSData* songsData = [NSKeyedArchiver archivedDataWithRootObject:self.cachedSongs];
     [[NSUserDefaults standardUserDefaults] setObject:songsData forKey:@"songs"];
 }
 
@@ -63,13 +63,13 @@
     
     [SOSongManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
         for (NSURL* url in urls) {
-            if ([[self.songs valueForKeyPath:@"url"] containsObject: url])
+            if ([[self.cachedSongs valueForKeyPath:@"url"] containsObject: url])
                 continue;
             
             SOSong* song = [[SOSong alloc] init];
             song.url = url;
             
-            [self.songs addObject:song];
+            [self.cachedSongs addObject:song];
         }
         
         [self saveSongs];

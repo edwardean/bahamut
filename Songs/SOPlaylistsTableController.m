@@ -13,6 +13,7 @@
 @interface SOPlaylistsTableController ()
 
 @property (weak) IBOutlet NSOutlineView* playlistsView;
+@property NSString* tempNewPlaylistName;
 
 @end
 
@@ -94,11 +95,42 @@
 
 - (void)outlineViewSelectionDidChange:(NSNotification *)note {
     [self redrawPlaylistIcons];
-    NSLog(@"done");
+    
+    id selectedItem = [self.playlistsView itemAtRow:[self.playlistsView selectedRow]];
+    NSLog(@"selected playlist changed: %@", selectedItem);
 }
 
 - (void) outlineViewSelectionIsChanging:(NSNotification*)note {
     [self redrawPlaylistIcons];
+}
+
+
+// editing
+
+- (IBAction) editPlaylistTitle:(NSTextField*)sender {
+    NSString* newName = [sender stringValue];
+    id selectedItem = [self.playlistsView itemAtRow:[self.playlistsView selectedRow]];
+    
+    NSLog(@"did edit! %@ for %@", newName, selectedItem);
+}
+
+- (BOOL)control:(NSControl *)control textShouldBeginEditing:(NSText *)fieldEditor {
+    self.tempNewPlaylistName = [control stringValue];
+    return YES;
+}
+
+- (BOOL)control:(NSControl *)control textShouldEndEditing:(NSText *)fieldEditor {
+    return [[[control stringValue] stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] > 0;
+}
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
+//    NSLog(@"sel = %@", NSStringFromSelector(command));
+    
+    if (command == @selector(cancelOperation:)) {
+        [control setStringValue:self.tempNewPlaylistName];
+    }
+    
+    return NO;
 }
 
 @end
