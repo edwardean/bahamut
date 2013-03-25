@@ -25,6 +25,7 @@
 		94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */; };
 		94AFAD6E17008988007F10B1 /* MAKVONotificationCenter-LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */; };
 		94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */; };
+		94AFAD7217009F32007F10B1 /* SOPlaylistsArray.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD7117009F32007F10B1 /* SOPlaylistsArray.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +63,8 @@
 		94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MAKVONotificationCenter-LICENSE"; sourceTree = "<group>"; };
 		94AFAD6C17008988007F10B1 /* MAKVONotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAKVONotificationCenter.h; sourceTree = "<group>"; };
 		94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAKVONotificationCenter.m; sourceTree = "<group>"; };
+		94AFAD7017009F32007F10B1 /* SOPlaylistsArray.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SOPlaylistsArray.h; sourceTree = "<group>"; };
+		94AFAD7117009F32007F10B1 /* SOPlaylistsArray.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SOPlaylistsArray.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,6 +172,8 @@
 			children = (
 				9460F30516FFA85B00DB85C4 /* SOSongManager.h */,
 				9460F30616FFA85B00DB85C4 /* SOSongManager.m */,
+				94AFAD7017009F32007F10B1 /* SOPlaylistsArray.h */,
+				94AFAD7117009F32007F10B1 /* SOPlaylistsArray.m */,
 				9460F30816FFE9BF00DB85C4 /* SOSong.h */,
 				9460F30916FFE9BF00DB85C4 /* SOSong.m */,
 				9460F31116FFFB6300DB85C4 /* SOPlaylist.h */,
@@ -283,6 +288,7 @@
 				9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */,
 				94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */,
 				94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */,
+				94AFAD7217009F32007F10B1 /* SOPlaylistsArray.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
