@@ -6,15 +6,29 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUPlaylistNode.h"
+#import "MUPlaylistCollection.h"
 
-@implementation MUPlaylistNode
+@implementation MUPlaylistCollection
+
+//@synthesize title;
 
 - (id) init {
     if (self = [super init]) {
         self.playlists = [NSMutableArray array];
     }
     return self;
+}
+
+- (BOOL) isMaster {
+    return NO;
+}
+
+- (BOOL) isLeaf {
+    return NO;
+}
+
+- (NSString*) title {
+    return @"not used...";
 }
 
 @end

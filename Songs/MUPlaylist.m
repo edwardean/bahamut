@@ -8,21 +8,42 @@
 
 #import "MUPlaylist.h"
 
+#import "MUMusicManager.h"
+
+@interface MUPlaylist ()
+
+@property NSString* realTitle;
+
+@end
+
 @implementation MUPlaylist
 
 - (id) init {
     if (self = [super init]) {
-        self.title = @"New Playlist";
+        self.realTitle = @"New Playlist";
     }
     return self;
 }
 
-- (NSArray*) playlists {
-    return nil;
+- (BOOL) isMaster {
+    return NO;
+}
+
+- (BOOL) isLeaf {
+    return YES;
 }
 
 - (NSArray*) songs {
     return @[];
+}
+
+- (void) setTitle:(NSString *)title {
+    self.realTitle = title;
+    [MUMusicManager userDataChanged];
+}
+
+- (NSString*) title {
+    return self.realTitle;
 }
 
 @end

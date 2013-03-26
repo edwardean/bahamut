@@ -1,5 +1,5 @@
 //
-//  MUPlaylist.h
+//  MUPlaylistNode.h
 //  Songs
 //
 //  Created by Steven Degutis on 3/25/13.
@@ -9,10 +9,9 @@
 #import <Foundation/Foundation.h>
 
 #import "MUPlaylistNode.h"
-#import "MUUserPlaylist.h"
 
-@interface MUPlaylist : NSObject <MUPlaylistNode, MUUserPlaylist>
+@interface MUPlaylistCollection : NSObject <MUPlaylistNode>
 
-- (void) setTitle:(NSString*)title;
+@property NSMutableArray* playlists;
 
 @end

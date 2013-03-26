@@ -1,17 +1,17 @@
 //
-//  MUAllSongsPlaylist.h
+//  MUUserPlaylist.h
 //  Songs
 //
 //  Created by Steven Degutis on 3/25/13.
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUPlaylist.h"
+#import <Foundation/Foundation.h>
 
-@interface MUAllSongsPlaylist : MUPlaylist
+@protocol MUUserPlaylist <NSObject>
 
-- (void) addSongsWithURLs:(NSArray*)urls;
-
+- (NSString*) title;
+- (BOOL) isMaster;
 - (NSArray*) songs;
 
 @end

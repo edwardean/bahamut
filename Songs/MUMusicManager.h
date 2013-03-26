@@ -9,18 +9,20 @@
 #import <Foundation/Foundation.h>
 
 #import "MUPlaylist.h"
-#import "MUPlaylistNode.h"
-#import "MUAllSongsPlaylist.h"
+#import "MUPlaylistCollection.h"
+#import "MUMasterPlaylist.h"
 
 @interface MUMusicManager : NSObject
 
-@property MUAllSongsPlaylist* allSongsPlaylist;
-@property MUPlaylistNode* userPlaylistsNode;
+@property MUMasterPlaylist* masterPlaylist;
+@property MUPlaylistCollection* userPlaylistsNode;
 
 + (MUMusicManager*) sharedMusicManager;
 
 - (void) loadUserData;
 
 - (void) importSongsUnderURLs:(NSArray*)urls;
+
++ (void) userDataChanged;
 
 @end

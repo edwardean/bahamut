@@ -8,12 +8,12 @@
 
 /* Begin PBXBuildFile section */
 		9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB3A1700F3CD00E0D3AF /* playlist.png */; };
-		9404AB3E1700F4A000E0D3AF /* MUPlaylistNode.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB3D1700F4A000E0D3AF /* MUPlaylistNode.m */; };
+		9404AB3E1700F4A000E0D3AF /* MUPlaylistCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB3D1700F4A000E0D3AF /* MUPlaylistCollection.m */; };
 		9404AB411700F4A900E0D3AF /* MUPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB401700F4A900E0D3AF /* MUPlaylist.m */; };
 		9404AB441700F4EF00E0D3AF /* MUMusicManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB431700F4EF00E0D3AF /* MUMusicManager.m */; };
 		9404AB481700F5AC00E0D3AF /* MUPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB461700F5AC00E0D3AF /* MUPlayerWindowController.m */; };
 		9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */; };
-		9404AB4C1700F9C000E0D3AF /* MUAllSongsPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB4B1700F9C000E0D3AF /* MUAllSongsPlaylist.m */; };
+		9404AB4C1700F9C000E0D3AF /* MUMasterPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB4B1700F9C000E0D3AF /* MUMasterPlaylist.m */; };
 		9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F2DA16FF781100DB85C4 /* Cocoa.framework */; };
 		9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2E316FF781100DB85C4 /* InfoPlist.strings */; };
 		9460F2E716FF781100DB85C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2E616FF781100DB85C4 /* main.m */; };
@@ -30,8 +30,8 @@
 
 /* Begin PBXFileReference section */
 		9404AB3A1700F3CD00E0D3AF /* playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlist.png; sourceTree = "<group>"; };
-		9404AB3C1700F4A000E0D3AF /* MUPlaylistNode.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPlaylistNode.h; sourceTree = "<group>"; };
-		9404AB3D1700F4A000E0D3AF /* MUPlaylistNode.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPlaylistNode.m; sourceTree = "<group>"; };
+		9404AB3C1700F4A000E0D3AF /* MUPlaylistCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPlaylistCollection.h; sourceTree = "<group>"; };
+		9404AB3D1700F4A000E0D3AF /* MUPlaylistCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPlaylistCollection.m; sourceTree = "<group>"; };
 		9404AB3F1700F4A900E0D3AF /* MUPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPlaylist.h; sourceTree = "<group>"; };
 		9404AB401700F4A900E0D3AF /* MUPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPlaylist.m; sourceTree = "<group>"; };
 		9404AB421700F4EF00E0D3AF /* MUMusicManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUMusicManager.h; sourceTree = "<group>"; };
@@ -39,8 +39,10 @@
 		9404AB451700F5AC00E0D3AF /* MUPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUPlayerWindowController.h; sourceTree = "<group>"; };
 		9404AB461700F5AC00E0D3AF /* MUPlayerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUPlayerWindowController.m; sourceTree = "<group>"; };
 		9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
-		9404AB4A1700F9C000E0D3AF /* MUAllSongsPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUAllSongsPlaylist.h; sourceTree = "<group>"; };
-		9404AB4B1700F9C000E0D3AF /* MUAllSongsPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUAllSongsPlaylist.m; sourceTree = "<group>"; };
+		9404AB4A1700F9C000E0D3AF /* MUMasterPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MUMasterPlaylist.h; sourceTree = "<group>"; };
+		9404AB4B1700F9C000E0D3AF /* MUMasterPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MUMasterPlaylist.m; sourceTree = "<group>"; };
+		942460B717012FF4009CD8BC /* MUPlaylistNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUPlaylistNode.h; sourceTree = "<group>"; };
+		942460B917013429009CD8BC /* MUUserPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = MUUserPlaylist.h; sourceTree = "<group>"; };
 		9460F2D716FF781100DB85C4 /* Songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9460F2DA16FF781100DB85C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9460F2DD16FF781100DB85C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -81,6 +83,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		942460B617012FE2009CD8BC /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				942460B717012FF4009CD8BC /* MUPlaylistNode.h */,
+				942460B917013429009CD8BC /* MUUserPlaylist.h */,
+			);
+			name = Protocols;
+			sourceTree = "<group>";
+		};
 		9460F2CE16FF781100DB85C4 = {
 			isa = PBXGroup;
 			children = (
@@ -124,6 +135,7 @@
 				9460F2E216FF781100DB85C4 /* Songs-Info.plist */,
 				9460F2F716FF782400DB85C4 /* Songs.entitlements */,
 				94AFAD6A1700897D007F10B1 /* Third Party */,
+				942460B617012FE2009CD8BC /* Protocols */,
 				9460F2FF16FFA19B00DB85C4 /* Models */,
 				9460F2F916FF783100DB85C4 /* XIBs */,
 				9460F2F816FF782C00DB85C4 /* Controllers */,
@@ -177,12 +189,12 @@
 				94AFAD6817008324007F10B1 /* SOAllSongsPlaylist.m */,
 				9404AB421700F4EF00E0D3AF /* MUMusicManager.h */,
 				9404AB431700F4EF00E0D3AF /* MUMusicManager.m */,
-				9404AB3C1700F4A000E0D3AF /* MUPlaylistNode.h */,
-				9404AB3D1700F4A000E0D3AF /* MUPlaylistNode.m */,
+				9404AB3C1700F4A000E0D3AF /* MUPlaylistCollection.h */,
+				9404AB3D1700F4A000E0D3AF /* MUPlaylistCollection.m */,
 				9404AB3F1700F4A900E0D3AF /* MUPlaylist.h */,
 				9404AB401700F4A900E0D3AF /* MUPlaylist.m */,
-				9404AB4A1700F9C000E0D3AF /* MUAllSongsPlaylist.h */,
-				9404AB4B1700F9C000E0D3AF /* MUAllSongsPlaylist.m */,
+				9404AB4A1700F9C000E0D3AF /* MUMasterPlaylist.h */,
+				9404AB4B1700F9C000E0D3AF /* MUMasterPlaylist.m */,
 			);
 			name = Models;
 			sourceTree = "<group>";
@@ -286,11 +298,11 @@
 				9460F31316FFFB6300DB85C4 /* SOPlaylist.m in Sources */,
 				94AFAD6917008324007F10B1 /* SOAllSongsPlaylist.m in Sources */,
 				94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */,
-				9404AB3E1700F4A000E0D3AF /* MUPlaylistNode.m in Sources */,
+				9404AB3E1700F4A000E0D3AF /* MUPlaylistCollection.m in Sources */,
 				9404AB411700F4A900E0D3AF /* MUPlaylist.m in Sources */,
 				9404AB441700F4EF00E0D3AF /* MUMusicManager.m in Sources */,
 				9404AB481700F5AC00E0D3AF /* MUPlayerWindowController.m in Sources */,
-				9404AB4C1700F9C000E0D3AF /* MUAllSongsPlaylist.m in Sources */,
+				9404AB4C1700F9C000E0D3AF /* MUMasterPlaylist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

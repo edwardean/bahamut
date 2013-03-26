@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface MUPlaylistNode : NSObject
+@protocol MUPlaylistNode <NSObject>
 
-@property NSMutableArray* playlists;
-@property NSString* title;
+- (BOOL) isLeaf;
+
+@optional
+
+- (NSArray*) playlists;
 
 @end

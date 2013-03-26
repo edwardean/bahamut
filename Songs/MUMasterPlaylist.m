@@ -6,26 +6,40 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUAllSongsPlaylist.h"
+#import "MUMasterPlaylist.h"
 
 #import "SOSong.h"
 
-@interface MUAllSongsPlaylist ()
+//#import "MAKVONotificationCenter.h"
+
+@interface MUMasterPlaylist ()
 
 @property NSMutableArray* cachedSongs;
 
 @end
 
-@implementation MUAllSongsPlaylist
+@implementation MUMasterPlaylist
 
 - (id) init {
     if (self = [super init]) {
         self.cachedSongs = [NSMutableArray array];
+        
+//        [[MAKVONotificationCenter defaultCenter] observeTarget:self
+//                                                       keyPath:@"allSongsPlaylist.songs"
+//                                                       options:0
+//                                                         block:^(MAKVONotification *notification) {
+//                                                             NSLog(@"songs changed");
+//                                                         }];
+        
     }
     return self;
 }
 
 - (BOOL) isMaster {
+    return YES;
+}
+
+- (BOOL) isLeaf {
     return YES;
 }
 

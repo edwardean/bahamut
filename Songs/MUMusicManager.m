@@ -14,7 +14,7 @@
 
 @interface MUMusicManager ()
 
-@property MUPlaylistNode* rootNode;
+@property MUPlaylistCollection* rootNode;
 
 @end
 
@@ -31,12 +31,12 @@
 
 - (id) init {
     if (self = [super init]) {
-        self.rootNode = [[MUPlaylistNode alloc] init];
+        self.rootNode = [[MUPlaylistCollection alloc] init];
         
-        self.allSongsPlaylist = [[MUAllSongsPlaylist alloc] init];
-        [self.rootNode.playlists addObject:self.allSongsPlaylist];
+        self.masterPlaylist = [[MUMasterPlaylist alloc] init];
+        [self.rootNode.playlists addObject:self.masterPlaylist];
         
-        self.userPlaylistsNode = [[MUPlaylistNode alloc] init];
+        self.userPlaylistsNode = [[MUPlaylistCollection alloc] init];
         [self.rootNode.playlists addObject:self.userPlaylistsNode];
         
 //        [[MAKVONotificationCenter defaultCenter] observeTarget:self
@@ -52,9 +52,9 @@
 //                                                         block:^(MAKVONotification *notification) {
 //                                                             NSLog(@"playlists changed");
 //                                                         }];
-//        
+        
 //        [[MAKVONotificationCenter defaultCenter] observeTarget:self
-//                                                       keyPath:@"userPlaylistsNode.playlists.title"
+//                                                       keyPath:@"userPlaylistsNode.playlists.@unionOfObjects.title"
 //                                                       options:0
 //                                                         block:^(MAKVONotification *notification) {
 //                                                             NSLog(@"playlist title changed");
@@ -73,7 +73,7 @@
 
 - (void) importSongsUnderURLs:(NSArray*)urls {
     [MUMusicManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
-        [self.allSongsPlaylist addSongsWithURLs:urls];
+        [self.masterPlaylist addSongsWithURLs:urls];
     }];
 }
 
@@ -119,6 +119,10 @@
             handler(urls);
         });
     });
+}
+
++ (void) userDataChanged {
+    
 }
 
 @end

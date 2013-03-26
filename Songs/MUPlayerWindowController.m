@@ -10,7 +10,7 @@
 
 #import "MUMusicManager.h"
 #import "MUPlaylist.h"
-#import "MUPlaylistNode.h"
+#import "MUPlaylistCollection.h"
 
 @interface MUPlayerWindowController ()
 
@@ -41,11 +41,11 @@
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
-    return ![[item representedObject] isKindOfClass:[MUPlaylist self]];
+    return [[item representedObject] isKindOfClass:[MUPlaylistCollection self]];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
-    return [[item representedObject] isKindOfClass:[MUPlaylist self]];
+    return ![[item representedObject] isKindOfClass:[MUPlaylistCollection self]];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item {
@@ -53,7 +53,7 @@
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item NS_AVAILABLE_MAC(10_7) {
-    BOOL isPlaylist = [[item representedObject] isKindOfClass:[MUPlaylist self]];
+    BOOL isPlaylist = ![[item representedObject] isKindOfClass:[MUPlaylistCollection self]];
     NSTableCellView* view = [outlineView makeViewWithIdentifier: (isPlaylist? @"DataCell" : @"HeaderCell") owner:self];
     return view;
 }
@@ -65,10 +65,7 @@
     idxs[0] = 1;
     idxs[1] = [[MUMusicManager sharedMusicManager].userPlaylistsNode.playlists count];
     [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
-    
-    dispatch_async(dispatch_get_main_queue(), ^{
-        [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
-    });
+    [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
 }
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {

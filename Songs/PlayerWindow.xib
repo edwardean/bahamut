@@ -498,6 +498,7 @@
 				<bool key="NSPreservesSelection">YES</bool>
 				<bool key="NSSelectsInsertedObjects">YES</bool>
 				<string key="NSTreeContentChildrenKey">playlists</string>
+				<string key="NSTreeContentLeafKey">isLeaf</string>
 			</object>
 			<object class="NSArrayController" id="609610645">
 				<bool key="NSEditable">YES</bool>
