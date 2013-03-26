@@ -90,4 +90,16 @@
     }
 }
 
+- (void) seekToTime:(float)time {
+    [self.player seekToTime:CMTimeMakeWithSeconds(time, 1)];
+}
+
+- (void) prevSong {
+//    [self.player 
+}
+
+- (void) nextSong {
+    [self.player advanceToNextItem];
+}
+
 @end

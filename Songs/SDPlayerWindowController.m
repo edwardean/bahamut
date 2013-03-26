@@ -16,11 +16,17 @@
 
 #import "SDPlaylistNode.h"
 
+#import "MAKVONotificationCenter.h"
+
+#import "SDTrackPositionView.h"
+
 @interface SDPlayerWindowController ()
 
 @property (weak) IBOutlet NSTreeController* treeGuy;
 @property (weak) IBOutlet NSOutlineView* sourceList;
 @property (weak) IBOutlet NSArrayController* songsArrayController;
+
+@property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 
 @end
 
@@ -33,11 +39,40 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
+    [self.songPositionSlider bind:@"currentValue"
+                         toObject:[SDMusicPlayer sharedMusicPlayer]
+                      withKeyPath:@"currentTime"
+                          options:@{ NSValueTransformerNameBindingOption: @"SDTimeAsSeconds" }];
+    
+    [self.songPositionSlider bind:@"maxValue"
+                         toObject:[SDMusicPlayer sharedMusicPlayer]
+                      withKeyPath:@"player.currentItem.duration"
+                          options:@{ NSValueTransformerNameBindingOption: @"SDTimeAsSeconds" }];
+    
+//    [[MAKVONotificationCenter defaultCenter] observeTarget:[SDMusicPlayer sharedMusicPlayer]
+//                                                   keyPath:@"currentTime"
+//                                                   options:NSKeyValueObservingOptionNew
+//                                                     block:^(MAKVONotification *notification) {
+//                                                         CMTime time = [notification.newValue CMTimeValue];
+//                                                         self.songPositionSlider.floatValue = CMTimeGetSeconds(time);
+//                                                     }];
+//    
+//    [[MAKVONotificationCenter defaultCenter] observeTarget:[SDMusicPlayer sharedMusicPlayer]
+//                                                   keyPath:@"player.currentItem.duration"
+//                                                   options:NSKeyValueObservingOptionNew
+//                                                     block:^(MAKVONotification *notification) {
+//                                                         CMTime time = [notification.newValue CMTimeValue];
+//                                                         self.songPositionSlider.maxValue = CMTimeGetSeconds(time);
+//                                                     }];
+    
     [self.sourceList expandItem:nil expandChildren:YES];
     [self.sourceList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
+    [self.songPositionSlider unbind:@"currentValue"];
+    [self.songPositionSlider unbind:@"maxValue"];
+    
     [self.killedDelegate playerWindowKilled:self];
 }
 
@@ -103,17 +138,25 @@
     return [[self.songsArrayController selectedObjects] lastObject];
 }
 
+- (IBAction) nextSong:(id)sender {
+    [[SDMusicPlayer sharedMusicPlayer] nextSong];
+}
+
+- (IBAction) prevSong:(id)sender {
+    [[SDMusicPlayer sharedMusicPlayer] prevSong];
+}
+
 - (IBAction) playPause:(id)sender {
     [[SDMusicPlayer sharedMusicPlayer] playSong:[self selectedSong]
                                      inPlaylist:[self selectedPlaylist]];
 }
 
-- (IBAction) seekTo:(id)sender {
-    
+- (void) trackPositionMovedTo:(CGFloat)newValue {
+    [[SDMusicPlayer sharedMusicPlayer] seekToTime:newValue];
 }
 
-- (SDMusicPlayer*) musicPlayer {
-    return [SDMusicPlayer sharedMusicPlayer];
-}
+//- (SDMusicPlayer*) musicPlayer {
+//    return [SDMusicPlayer sharedMusicPlayer];
+//}
 
 @end

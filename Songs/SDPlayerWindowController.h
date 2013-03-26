@@ -18,4 +18,8 @@
 
 @property (weak) id<MUPlayerWindowKilledDelegate> killedDelegate;
 
+- (IBAction) nextSong:(id)sender;
+- (IBAction) prevSong:(id)sender;
+- (IBAction) playPause:(id)sender;
+
 @end

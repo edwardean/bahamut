@@ -17,4 +17,8 @@
 
 - (void) playSong:(SDSong*)song inPlaylist:(id<SDPlaylist>)playlist;
 
+- (void) seekToTime:(float)time;
+- (void) prevSong;
+- (void) nextSong;
+
 @end
