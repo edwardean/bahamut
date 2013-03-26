@@ -14,4 +14,7 @@
 - (BOOL) isMaster;
 - (NSArray*) songs;
 
+@property BOOL isShuffle;
+@property BOOL isRepeat;
+
 @end

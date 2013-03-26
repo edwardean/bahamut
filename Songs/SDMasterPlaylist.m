@@ -20,6 +20,9 @@
 
 @implementation SDMasterPlaylist
 
+@synthesize isShuffle;
+@synthesize isRepeat;
+
 - (id) init {
     if (self = [super init]) {
         self.cachedSongs = [NSMutableArray array];

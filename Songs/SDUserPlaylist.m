@@ -19,6 +19,9 @@
 
 @implementation SDUserPlaylist
 
+@synthesize isShuffle;
+@synthesize isRepeat;
+
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [self init]) {
         self.realTitle = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"title"];
