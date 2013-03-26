@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SDPlaylist.h"
+#import "SDUserPlaylist.h"
 #import "SDPlaylistCollection.h"
 #import "SDMasterPlaylist.h"
 

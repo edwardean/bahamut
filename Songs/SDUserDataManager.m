@@ -49,7 +49,7 @@
 }
 
 - (void) loadUserData {
-    NSLog(@"loading data");
+//    NSLog(@"loading");
     
     NSData* allSongsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"allSongs"];
     NSData* userPlaylistsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"userPlaylists"];
@@ -62,7 +62,6 @@
     
     if (allSongsData) {
         NSArray* songs = [NSKeyedUnarchiver unarchiveObjectWithData:allSongsData];
-        NSLog(@"loading songs: %@", songs);
         [self.masterPlaylist loadSongs: songs];
     }
     
@@ -78,7 +77,7 @@
     if (!self.canSave)
         return;
     
-    NSLog(@"saving");
+//    NSLog(@"saving");
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self.masterPlaylist songs]] forKey:@"allSongs"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self userPlaylists]] forKey:@"userPlaylists"];

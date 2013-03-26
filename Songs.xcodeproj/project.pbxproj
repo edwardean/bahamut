@@ -9,11 +9,12 @@
 /* Begin PBXBuildFile section */
 		9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB3A1700F3CD00E0D3AF /* playlist.png */; };
 		9404AB3E1700F4A000E0D3AF /* SDPlaylistCollection.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB3D1700F4A000E0D3AF /* SDPlaylistCollection.m */; };
-		9404AB411700F4A900E0D3AF /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB401700F4A900E0D3AF /* SDPlaylist.m */; };
+		9404AB411700F4A900E0D3AF /* SDUserPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB401700F4A900E0D3AF /* SDUserPlaylist.m */; };
 		9404AB441700F4EF00E0D3AF /* SDUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */; };
 		9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */; };
 		9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */; };
 		9404AB4C1700F9C000E0D3AF /* SDMasterPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB4B1700F9C000E0D3AF /* SDMasterPlaylist.m */; };
+		9406AF8817014783004091DD /* SDMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 9406AF8717014783004091DD /* SDMusicPlayer.m */; };
 		9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F2DA16FF781100DB85C4 /* Cocoa.framework */; };
 		9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2E316FF781100DB85C4 /* InfoPlist.strings */; };
 		9460F2E716FF781100DB85C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2E616FF781100DB85C4 /* main.m */; };
@@ -29,8 +30,8 @@
 		9404AB3A1700F3CD00E0D3AF /* playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlist.png; sourceTree = "<group>"; };
 		9404AB3C1700F4A000E0D3AF /* SDPlaylistCollection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylistCollection.h; sourceTree = "<group>"; };
 		9404AB3D1700F4A000E0D3AF /* SDPlaylistCollection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylistCollection.m; sourceTree = "<group>"; };
-		9404AB3F1700F4A900E0D3AF /* SDPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylist.h; sourceTree = "<group>"; };
-		9404AB401700F4A900E0D3AF /* SDPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylist.m; sourceTree = "<group>"; };
+		9404AB3F1700F4A900E0D3AF /* SDUserPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserPlaylist.h; sourceTree = "<group>"; };
+		9404AB401700F4A900E0D3AF /* SDUserPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDUserPlaylist.m; sourceTree = "<group>"; };
 		9404AB421700F4EF00E0D3AF /* SDUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserDataManager.h; sourceTree = "<group>"; };
 		9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDUserDataManager.m; sourceTree = "<group>"; };
 		9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlayerWindowController.h; sourceTree = "<group>"; };
@@ -38,8 +39,10 @@
 		9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
 		9404AB4A1700F9C000E0D3AF /* SDMasterPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMasterPlaylist.h; sourceTree = "<group>"; };
 		9404AB4B1700F9C000E0D3AF /* SDMasterPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMasterPlaylist.m; sourceTree = "<group>"; };
+		9406AF8617014783004091DD /* SDMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMusicPlayer.h; sourceTree = "<group>"; };
+		9406AF8717014783004091DD /* SDMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMusicPlayer.m; sourceTree = "<group>"; };
 		942460B717012FF4009CD8BC /* SDPlaylistNode.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDPlaylistNode.h; sourceTree = "<group>"; };
-		942460B917013429009CD8BC /* SDUserPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDUserPlaylist.h; sourceTree = "<group>"; };
+		942460B917013429009CD8BC /* SDPlaylist.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDPlaylist.h; sourceTree = "<group>"; };
 		9460F2D716FF781100DB85C4 /* Songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9460F2DA16FF781100DB85C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9460F2DD16FF781100DB85C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -78,7 +81,7 @@
 			isa = PBXGroup;
 			children = (
 				942460B717012FF4009CD8BC /* SDPlaylistNode.h */,
-				942460B917013429009CD8BC /* SDUserPlaylist.h */,
+				942460B917013429009CD8BC /* SDPlaylist.h */,
 			);
 			name = Protocols;
 			sourceTree = "<group>";
@@ -154,6 +157,8 @@
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
 				9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */,
 				9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */,
+				9406AF8617014783004091DD /* SDMusicPlayer.h */,
+				9406AF8717014783004091DD /* SDMusicPlayer.m */,
 			);
 			name = Controllers;
 			sourceTree = "<group>";
@@ -176,8 +181,8 @@
 				9460F30916FFE9BF00DB85C4 /* SDSong.m */,
 				9404AB4A1700F9C000E0D3AF /* SDMasterPlaylist.h */,
 				9404AB4B1700F9C000E0D3AF /* SDMasterPlaylist.m */,
-				9404AB3F1700F4A900E0D3AF /* SDPlaylist.h */,
-				9404AB401700F4A900E0D3AF /* SDPlaylist.m */,
+				9404AB3F1700F4A900E0D3AF /* SDUserPlaylist.h */,
+				9404AB401700F4A900E0D3AF /* SDUserPlaylist.m */,
 				9404AB3C1700F4A000E0D3AF /* SDPlaylistCollection.h */,
 				9404AB3D1700F4A000E0D3AF /* SDPlaylistCollection.m */,
 			);
@@ -281,10 +286,11 @@
 				9460F30A16FFE9BF00DB85C4 /* SDSong.m in Sources */,
 				94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */,
 				9404AB3E1700F4A000E0D3AF /* SDPlaylistCollection.m in Sources */,
-				9404AB411700F4A900E0D3AF /* SDPlaylist.m in Sources */,
+				9404AB411700F4A900E0D3AF /* SDUserPlaylist.m in Sources */,
 				9404AB441700F4EF00E0D3AF /* SDUserDataManager.m in Sources */,
 				9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */,
 				9404AB4C1700F9C000E0D3AF /* SDMasterPlaylist.m in Sources */,
+				9406AF8817014783004091DD /* SDMusicPlayer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

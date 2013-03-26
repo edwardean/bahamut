@@ -12,6 +12,8 @@
 		</object>
 		<array key="IBDocument.IntegratedClassDependencies">
 			<string>NSArrayController</string>
+			<string>NSButton</string>
+			<string>NSButtonCell</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
 			<string>NSImageCell</string>
@@ -247,6 +249,35 @@
 									<reference key="NSNextResponder" ref="239354747"/>
 									<int key="NSvFlags">256</int>
 									<array class="NSMutableArray" key="NSSubviews">
+										<object class="NSButton" id="578799980">
+											<reference key="NSNextResponder" ref="671139329"/>
+											<int key="NSvFlags">268</int>
+											<string key="NSFrame">{{161, 388}, {63, 43}}</string>
+											<reference key="NSSuperview" ref="671139329"/>
+											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="512773086"/>
+											<string key="NSReuseIdentifierKey">_NS:9</string>
+											<bool key="NSEnabled">YES</bool>
+											<object class="NSButtonCell" key="NSCell" id="727306733">
+												<int key="NSCellFlags">67108864</int>
+												<int key="NSCellFlags2">134217728</int>
+												<string key="NSContents">Play</string>
+												<object class="NSFont" key="NSSupport">
+													<string key="NSName">LucidaGrande</string>
+													<double key="NSSize">10</double>
+													<int key="NSfFlags">16</int>
+												</object>
+												<string key="NSCellIdentifier">_NS:9</string>
+												<reference key="NSControlView" ref="578799980"/>
+												<int key="NSButtonFlags">-2033434624</int>
+												<int key="NSButtonFlags2">130</int>
+												<string key="NSAlternateContents"/>
+												<string key="NSKeyEquivalent"/>
+												<int key="NSPeriodicDelay">400</int>
+												<int key="NSPeriodicInterval">75</int>
+											</object>
+											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+										</object>
 										<object class="NSScrollView" id="512773086">
 											<reference key="NSNextResponder" ref="671139329"/>
 											<int key="NSvFlags">274</int>
@@ -422,7 +453,6 @@
 													<string key="NSFrame">{{1, 119}, {223, 15}}</string>
 													<reference key="NSSuperview" ref="512773086"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:60</string>
 													<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 													<int key="NSsFlags">1</int>
@@ -467,7 +497,7 @@
 									<string key="NSFrame">{{181, 0}, {454, 445}}</string>
 									<reference key="NSSuperview" ref="239354747"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="512773086"/>
+									<reference key="NSNextKeyView" ref="578799980"/>
 									<string key="NSReuseIdentifierKey">_NS:13</string>
 									<string key="NSClassName">NSView</string>
 								</object>
@@ -539,6 +569,22 @@
 						<reference key="destination" ref="791498854"/>
 					</object>
 					<int key="connectionID">51</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">playPause:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="578799980"/>
+					</object>
+					<int key="connectionID">98</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">songsArrayController</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="609610645"/>
+					</object>
+					<int key="connectionID">100</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -882,6 +928,7 @@
 						<reference key="object" ref="671139329"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="512773086"/>
+							<reference ref="578799980"/>
 						</array>
 						<reference key="parent" ref="239354747"/>
 					</object>
@@ -1064,6 +1111,19 @@
 						<reference key="object" ref="609610645"/>
 						<reference key="parent" ref="0"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">96</int>
+						<reference key="object" ref="578799980"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="727306733"/>
+						</array>
+						<reference key="parent" ref="671139329"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">97</int>
+						<reference key="object" ref="727306733"/>
+						<reference key="parent" ref="578799980"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1111,23 +1171,44 @@
 				<string key="79.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="80.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="88.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="96.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="97.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">93</int>
+			<int key="maxID">100</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">SDPlayerWindowController</string>
 					<string key="superclassName">NSWindowController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="makeNewPlaylist:">id</string>
+						<string key="playPause:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="makeNewPlaylist:">
+							<string key="name">makeNewPlaylist:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="playPause:">
+							<string key="name">playPause:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="songsArrayController">NSArrayController</string>
 						<string key="sourceList">NSOutlineView</string>
 						<string key="treeGuy">NSTreeController</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="songsArrayController">
+							<string key="name">songsArrayController</string>
+							<string key="candidateClassName">NSArrayController</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="sourceList">
 							<string key="name">sourceList</string>
 							<string key="candidateClassName">NSOutlineView</string>

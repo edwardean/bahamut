@@ -9,8 +9,10 @@
 #import "SDPlayerWindowController.h"
 
 #import "SDUserDataManager.h"
-#import "SDPlaylist.h"
+#import "SDUserPlaylist.h"
 #import "SDPlaylistCollection.h"
+
+#import "SDMusicPlayer.h"
 
 #import "SDPlaylistNode.h"
 
@@ -18,6 +20,7 @@
 
 @property (weak) IBOutlet NSTreeController* treeGuy;
 @property (weak) IBOutlet NSOutlineView* sourceList;
+@property (weak) IBOutlet NSArrayController* songsArrayController;
 
 @end
 
@@ -61,7 +64,7 @@
 }
 
 - (IBAction) makeNewPlaylist:(id)sender {
-    SDPlaylist* newlist = [[SDPlaylist alloc] init];
+    SDUserPlaylist* newlist = [[SDUserPlaylist alloc] init];
     
     NSUInteger idxs[2];
     idxs[0] = 1;
@@ -72,7 +75,7 @@
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
     if (commandSelector == @selector(cancelOperation:)) {
-        [control setStringValue:[[[self.treeGuy selectedObjects] lastObject] title]];
+        [control setStringValue:[[self selectedPlaylist] title]];
     }
     
     return NO;
@@ -90,6 +93,19 @@
     CGFloat w = [[[sender subviews] objectAtIndex:0] frame].size.width;
     [sender adjustSubviews];
     [sender setPosition:w ofDividerAtIndex:0];
+}
+
+- (id<SDPlaylist>) selectedPlaylist {
+    return [[self.treeGuy selectedObjects] lastObject];
+}
+
+- (SDSong*) selectedSong {
+    return [[self.songsArrayController selectedObjects] lastObject];
+}
+
+- (IBAction) playPause:(id)sender {
+    [[SDMusicPlayer sharedMusicPlayer] playSong:[self selectedSong]
+                                     inPlaylist:[self selectedPlaylist]];
 }
 
 @end

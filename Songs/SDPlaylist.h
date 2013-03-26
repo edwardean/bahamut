@@ -1,5 +1,5 @@
 //
-//  MUPlaylist.h
+//  MUUserPlaylist.h
 //  Songs
 //
 //  Created by Steven Degutis on 3/25/13.
@@ -8,15 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SDPlaylistNode.h"
-#import "SDUserPlaylist.h"
+@protocol SDPlaylist <NSObject>
 
-#import "SDSong.h"
-
-@interface SDPlaylist : NSObject <SDPlaylistNode, SDUserPlaylist, NSSecureCoding>
-
-- (void) setTitle:(NSString*)title;
-
-- (void) addSongs:(NSArray*)songs;
+- (NSString*) title;
+- (BOOL) isMaster;
+- (NSArray*) songs;
 
 @end

@@ -6,18 +6,18 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "SDPlaylist.h"
+#import "SDUserPlaylist.h"
 
 #import "SDUserDataManager.h"
 
-@interface SDPlaylist ()
+@interface SDUserPlaylist ()
 
 @property NSMutableArray* cachedSongs;
 @property NSString* realTitle;
 
 @end
 
-@implementation SDPlaylist
+@implementation SDUserPlaylist
 
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [self init]) {

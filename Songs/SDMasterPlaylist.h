@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SDUserPlaylist.h"
+#import "SDPlaylist.h"
 #import "SDPlaylistNode.h"
 
-@interface SDMasterPlaylist : NSObject <SDUserPlaylist, SDPlaylistNode>
+@interface SDMasterPlaylist : NSObject <SDPlaylist, SDPlaylistNode>
 
 - (void) loadSongs:(NSArray*)songs; // only used for launching the app
 
