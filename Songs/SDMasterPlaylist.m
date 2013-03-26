@@ -47,7 +47,7 @@
             continue;
         
         SDSong* song = [[SDSong alloc] init];
-        song.url = url;
+        song.url = [url fileReferenceURL];
         
         [self.cachedSongs addObject:song];
     }

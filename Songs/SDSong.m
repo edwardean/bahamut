@@ -21,7 +21,9 @@
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
         self.uuid = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"uuid"];
-        self.url = [aDecoder decodeObjectOfClass:[NSURL self] forKey:@"url"];
+        self.url = [[aDecoder decodeObjectOfClass:[NSURL self] forKey:@"url"] fileReferenceURL];
+        
+        NSLog(@"%@", self.url);
     }
     return self;
 }
