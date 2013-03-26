@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "SDMusicManager.h"
+#import "SDUserDataManager.h"
 
 #import <AVFoundation/AVFoundation.h>
 
 #import "MAKVONotificationCenter.h"
 
-@interface SDMusicManager ()
+@interface SDUserDataManager ()
 
 @property BOOL canSave;
 
@@ -23,13 +23,13 @@
 
 @end
 
-@implementation SDMusicManager
+@implementation SDUserDataManager
 
-+ (SDMusicManager*) sharedMusicManager {
-    static SDMusicManager* sharedMusicManager;
++ (SDUserDataManager*) sharedMusicManager {
+    static SDUserDataManager* sharedMusicManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedMusicManager = [[SDMusicManager alloc] init];
+        sharedMusicManager = [[SDUserDataManager alloc] init];
     });
     return sharedMusicManager;
 }
@@ -42,7 +42,7 @@
                                                        keyPath:@"userPlaylistsCollection.playlists"
                                                        options:0
                                                          block:^(MAKVONotification *notification) {
-                                                             [SDMusicManager userDataChanged];
+                                                             [SDUserDataManager userDataChanged];
                                                          }];
     }
     return self;
@@ -85,7 +85,7 @@
 }
 
 - (void) importSongsUnderURLs:(NSArray*)urls {
-    [SDMusicManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
+    [SDUserDataManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
         [self.masterPlaylist addSongsWithURLs:urls];
     }];
 }
@@ -135,7 +135,7 @@
 }
 
 + (void) userDataChanged {
-    [[SDMusicManager sharedMusicManager] saveUserData];
+    [[SDUserDataManager sharedMusicManager] saveUserData];
 }
 
 - (NSArray*) allSongs {

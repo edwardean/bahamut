@@ -10,7 +10,7 @@
 
 #import "SDSong.h"
 
-#import "SDMusicManager.h"
+#import "SDUserDataManager.h"
 
 @interface SDMasterPlaylist ()
 
@@ -54,7 +54,7 @@
     
     [self didChangeValueForKey:@"cachedSongs"];
     
-    [SDMusicManager userDataChanged];
+    [SDUserDataManager userDataChanged];
 }
 
 + (NSSet*) keyPathsForValuesAffectingSongs {

@@ -8,7 +8,7 @@
 
 #import "SDAppDelegate.h"
 
-#import "SDMusicManager.h"
+#import "SDUserDataManager.h"
 #import "SDPlayerWindowController.h"
 
 @interface SDAppDelegate ()
@@ -20,7 +20,7 @@
 @implementation SDAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [[SDMusicManager sharedMusicManager] loadUserData];
+    [[SDUserDataManager sharedMusicManager] loadUserData];
     
     [[NSImage imageNamed:@"playlist"] setTemplate:YES];
     
@@ -49,7 +49,7 @@
     
     [openPanel beginWithCompletionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
-            [[SDMusicManager sharedMusicManager] importSongsUnderURLs:[openPanel URLs]];
+            [[SDUserDataManager sharedMusicManager] importSongsUnderURLs:[openPanel URLs]];
         }
     }];
 }

@@ -8,7 +8,7 @@
 
 #import "SDPlaylist.h"
 
-#import "SDMusicManager.h"
+#import "SDUserDataManager.h"
 
 @interface SDPlaylist ()
 
@@ -25,7 +25,7 @@
         
         NSArray* songUUIDs = [aDecoder decodeObjectOfClass:[NSArray self] forKey:@"songUUIDs"];
         
-        NSArray* allSongs = [[SDMusicManager sharedMusicManager] allSongs];
+        NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
         
         for (NSString* uuid in songUUIDs) {
             NSUInteger songIndex = [allSongs indexOfObjectPassingTest:^BOOL(SDSong* otherSong, NSUInteger idx, BOOL *stop) {
@@ -68,7 +68,7 @@
 
 - (void) setTitle:(NSString *)title {
     self.realTitle = title;
-    [SDMusicManager userDataChanged];
+    [SDUserDataManager userDataChanged];
 }
 
 - (NSString*) title {
@@ -78,7 +78,7 @@
 - (void) addSongs:(NSArray*)songs {
     // ...
     
-    [SDMusicManager userDataChanged];
+    [SDUserDataManager userDataChanged];
 }
 
 + (BOOL)supportsSecureCoding {

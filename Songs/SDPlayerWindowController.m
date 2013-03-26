@@ -8,7 +8,7 @@
 
 #import "SDPlayerWindowController.h"
 
-#import "SDMusicManager.h"
+#import "SDUserDataManager.h"
 #import "SDPlaylist.h"
 #import "SDPlaylistCollection.h"
 
@@ -38,8 +38,8 @@
     [self.killedDelegate playerWindowKilled:self];
 }
 
-- (SDMusicManager*) musicManager {
-    return [SDMusicManager sharedMusicManager];
+- (SDUserDataManager*) musicManager {
+    return [SDUserDataManager sharedMusicManager];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id<SDPlaylistNode>)item {
@@ -65,7 +65,7 @@
     
     NSUInteger idxs[2];
     idxs[0] = 1;
-    idxs[1] = [[[SDMusicManager sharedMusicManager] userPlaylists] count];
+    idxs[1] = [[[SDUserDataManager sharedMusicManager] userPlaylists] count];
     [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
     [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
 }

@@ -12,9 +12,9 @@
 #import "SDPlaylistCollection.h"
 #import "SDMasterPlaylist.h"
 
-@interface SDMusicManager : NSObject
+@interface SDUserDataManager : NSObject
 
-+ (SDMusicManager*) sharedMusicManager;
++ (SDUserDataManager*) sharedMusicManager;
 
 - (NSArray*) allSongs;
 - (NSArray*) userPlaylists;
