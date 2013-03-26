@@ -6,21 +6,21 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUAppDelegate.h"
+#import "SDAppDelegate.h"
 
-#import "MUMusicManager.h"
-#import "MUPlayerWindowController.h"
+#import "SDMusicManager.h"
+#import "SDPlayerWindowController.h"
 
-@interface MUAppDelegate ()
+@interface SDAppDelegate ()
 
 @property NSMutableArray* playerWindowControllers;
 
 @end
 
-@implementation MUAppDelegate
+@implementation SDAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [[MUMusicManager sharedMusicManager] loadUserData];
+    [[SDMusicManager sharedMusicManager] loadUserData];
     
     [[NSImage imageNamed:@"playlist"] setTemplate:YES];
     
@@ -34,7 +34,7 @@
 }
 
 - (IBAction) newPlayerWindow:(id)sender {
-    MUPlayerWindowController* player = [[MUPlayerWindowController alloc] init];
+    SDPlayerWindowController* player = [[SDPlayerWindowController alloc] init];
     player.killedDelegate = self;
     [self.playerWindowControllers addObject:player];
     [player showWindow:self];
@@ -49,7 +49,7 @@
     
     [openPanel beginWithCompletionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
-            [[MUMusicManager sharedMusicManager] importSongsUnderURLs:[openPanel URLs]];
+            [[SDMusicManager sharedMusicManager] importSongsUnderURLs:[openPanel URLs]];
         }
     }];
 }

@@ -8,7 +8,7 @@
 
 #import "SOSongManager.h"
 
-#import "SOSong.h"
+#import "SDSong.h"
 
 @interface SOSongManager ()
 

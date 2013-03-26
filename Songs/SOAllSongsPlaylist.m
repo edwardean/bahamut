@@ -45,7 +45,7 @@
         if ([[self.cachedSongs valueForKeyPath:@"url"] containsObject: url])
             continue;
         
-        SOSong* song = [[SOSong alloc] init];
+        SDSong* song = [[SDSong alloc] init];
         song.url = url;
         
         [self addSong:song];
@@ -54,7 +54,7 @@
     [SOSongManager userDataDidChange];
 }
 
-- (void) addSong:(SOSong*)song {
+- (void) addSong:(SDSong*)song {
     [self.cachedSongs addObject:song];
 }
 

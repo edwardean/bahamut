@@ -14,7 +14,7 @@
 
 @end
 
-@interface MUPlayerWindowController : NSWindowController <NSWindowDelegate>
+@interface SDPlayerWindowController : NSWindowController <NSWindowDelegate>
 
 @property (weak) id<MUPlayerWindowKilledDelegate> killedDelegate;
 

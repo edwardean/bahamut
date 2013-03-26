@@ -6,37 +6,37 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUMusicManager.h"
+#import "SDMusicManager.h"
 
 #import <AVFoundation/AVFoundation.h>
 
 #import "MAKVONotificationCenter.h"
 
-@interface MUMusicManager ()
+@interface SDMusicManager ()
 
-@property MUPlaylistCollection* rootNode;
+@property SDPlaylistCollection* rootNode;
 
 @end
 
-@implementation MUMusicManager
+@implementation SDMusicManager
 
-+ (MUMusicManager*) sharedMusicManager {
-    static MUMusicManager* sharedMusicManager;
++ (SDMusicManager*) sharedMusicManager {
+    static SDMusicManager* sharedMusicManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedMusicManager = [[MUMusicManager alloc] init];
+        sharedMusicManager = [[SDMusicManager alloc] init];
     });
     return sharedMusicManager;
 }
 
 - (id) init {
     if (self = [super init]) {
-        self.rootNode = [[MUPlaylistCollection alloc] init];
+        self.rootNode = [[SDPlaylistCollection alloc] init];
         
-        self.masterPlaylist = [[MUMasterPlaylist alloc] init];
+        self.masterPlaylist = [[SDMasterPlaylist alloc] init];
         [self.rootNode.playlists addObject:self.masterPlaylist];
         
-        self.userPlaylistsNode = [[MUPlaylistCollection alloc] init];
+        self.userPlaylistsNode = [[SDPlaylistCollection alloc] init];
         [self.rootNode.playlists addObject:self.userPlaylistsNode];
         
 //        [[MAKVONotificationCenter defaultCenter] observeTarget:self
@@ -72,7 +72,7 @@
 }
 
 - (void) importSongsUnderURLs:(NSArray*)urls {
-    [MUMusicManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
+    [SDMusicManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
         [self.masterPlaylist addSongsWithURLs:urls];
     }];
 }

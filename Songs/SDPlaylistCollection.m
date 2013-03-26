@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUPlaylistCollection.h"
+#import "SDPlaylistCollection.h"
 
-@implementation MUPlaylistCollection
+@implementation SDPlaylistCollection
 
 //@synthesize title;
 

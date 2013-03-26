@@ -8,16 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MUPlaylist.h"
-#import "MUPlaylistCollection.h"
-#import "MUMasterPlaylist.h"
+#import "SDPlaylist.h"
+#import "SDPlaylistCollection.h"
+#import "SDMasterPlaylist.h"
 
-@interface MUMusicManager : NSObject
+@interface SDMusicManager : NSObject
 
-@property MUMasterPlaylist* masterPlaylist;
-@property MUPlaylistCollection* userPlaylistsNode;
+@property SDMasterPlaylist* masterPlaylist;
+@property SDPlaylistCollection* userPlaylistsNode;
 
-+ (MUMusicManager*) sharedMusicManager;
++ (SDMusicManager*) sharedMusicManager;
 
 - (void) loadUserData;
 

@@ -8,8 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "MUPlayerWindowController.h"
+#import "SDPlayerWindowController.h"
 
-@interface MUAppDelegate : NSObject <NSApplicationDelegate, MUPlayerWindowKilledDelegate>
+@interface SDAppDelegate : NSObject <NSApplicationDelegate, MUPlayerWindowKilledDelegate>
 
 @end

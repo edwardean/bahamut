@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SOSong.h"
+#import "SDSong.h"
 
 @interface SOPlaylist : NSObject
 
@@ -16,6 +16,6 @@
 
 @property (readonly) NSArray* songs;
 
-- (void) addSong:(SOSong*)song;
+- (void) addSong:(SDSong*)song;
 
 @end

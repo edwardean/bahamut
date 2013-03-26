@@ -10,7 +10,7 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-@interface SOSong : NSObject <NSSecureCoding>
+@interface SDSong : NSObject <NSSecureCoding>
 
 @property NSURL* url;
 

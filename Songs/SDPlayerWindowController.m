@@ -6,20 +6,20 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUPlayerWindowController.h"
+#import "SDPlayerWindowController.h"
 
-#import "MUMusicManager.h"
-#import "MUPlaylist.h"
-#import "MUPlaylistCollection.h"
+#import "SDMusicManager.h"
+#import "SDPlaylist.h"
+#import "SDPlaylistCollection.h"
 
-@interface MUPlayerWindowController ()
+@interface SDPlayerWindowController ()
 
 @property (weak) IBOutlet NSTreeController* treeGuy;
 @property (weak) IBOutlet NSOutlineView* sourceList;
 
 @end
 
-@implementation MUPlayerWindowController
+@implementation SDPlayerWindowController
 
 - (NSString*) windowNibName {
     return @"PlayerWindow";
@@ -36,16 +36,16 @@
     [self.killedDelegate playerWindowKilled:self];
 }
 
-- (MUMusicManager*) musicManager {
-    return [MUMusicManager sharedMusicManager];
+- (SDMusicManager*) musicManager {
+    return [SDMusicManager sharedMusicManager];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
-    return [[item representedObject] isKindOfClass:[MUPlaylistCollection self]];
+    return [[item representedObject] isKindOfClass:[SDPlaylistCollection self]];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
-    return ![[item representedObject] isKindOfClass:[MUPlaylistCollection self]];
+    return ![[item representedObject] isKindOfClass:[SDPlaylistCollection self]];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item {
@@ -53,17 +53,17 @@
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item NS_AVAILABLE_MAC(10_7) {
-    BOOL isPlaylist = ![[item representedObject] isKindOfClass:[MUPlaylistCollection self]];
+    BOOL isPlaylist = ![[item representedObject] isKindOfClass:[SDPlaylistCollection self]];
     NSTableCellView* view = [outlineView makeViewWithIdentifier: (isPlaylist? @"DataCell" : @"HeaderCell") owner:self];
     return view;
 }
 
 - (IBAction) makeNewPlaylist:(id)sender {
-    MUPlaylist* newlist = [[MUPlaylist alloc] init];
+    SDPlaylist* newlist = [[SDPlaylist alloc] init];
     
     NSUInteger idxs[2];
     idxs[0] = 1;
-    idxs[1] = [[MUMusicManager sharedMusicManager].userPlaylistsNode.playlists count];
+    idxs[1] = [[SDMusicManager sharedMusicManager].userPlaylistsNode.playlists count];
     [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
     [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
 }

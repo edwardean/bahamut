@@ -6,19 +6,19 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUMasterPlaylist.h"
+#import "SDMasterPlaylist.h"
 
-#import "SOSong.h"
+#import "SDSong.h"
 
 //#import "MAKVONotificationCenter.h"
 
-@interface MUMasterPlaylist ()
+@interface SDMasterPlaylist ()
 
 @property NSMutableArray* cachedSongs;
 
 @end
 
-@implementation MUMasterPlaylist
+@implementation SDMasterPlaylist
 
 - (id) init {
     if (self = [super init]) {
@@ -52,14 +52,14 @@
         if ([[self.cachedSongs valueForKeyPath:@"url"] containsObject: url])
             continue;
         
-        SOSong* song = [[SOSong alloc] init];
+        SDSong* song = [[SDSong alloc] init];
         song.url = url;
         
         [self addSong:song];
     }
 }
 
-- (void) addSong:(SOSong*)song {
+- (void) addSong:(SDSong*)song {
     [self willChangeValueForKey:@"cachedSongs"];
     [self.cachedSongs addObject:song];
     [self didChangeValueForKey:@"cachedSongs"];

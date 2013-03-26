@@ -6,17 +6,17 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "MUPlaylist.h"
+#import "SDPlaylist.h"
 
-#import "MUMusicManager.h"
+#import "SDMusicManager.h"
 
-@interface MUPlaylist ()
+@interface SDPlaylist ()
 
 @property NSString* realTitle;
 
 @end
 
-@implementation MUPlaylist
+@implementation SDPlaylist
 
 - (id) init {
     if (self = [super init]) {
@@ -39,7 +39,7 @@
 
 - (void) setTitle:(NSString *)title {
     self.realTitle = title;
-    [MUMusicManager userDataChanged];
+    [SDMusicManager userDataChanged];
 }
 
 - (NSString*) title {

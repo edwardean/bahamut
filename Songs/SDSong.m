@@ -6,9 +6,9 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "SOSong.h"
+#import "SDSong.h"
 
-@interface SOSong ()
+@interface SDSong ()
 
 @property NSString* uuid;
 
@@ -16,7 +16,7 @@
 
 @end
 
-@implementation SOSong
+@implementation SDSong
 
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {

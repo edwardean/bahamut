@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-@protocol MUUserPlaylist <NSObject>
+@protocol SDUserPlaylist <NSObject>
 
 - (NSString*) title;
 - (BOOL) isMaster;

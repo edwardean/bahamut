@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MUPlaylistNode.h"
-#import "MUUserPlaylist.h"
+#import "SDPlaylistNode.h"
+#import "SDUserPlaylist.h"
 
-@interface MUPlaylist : NSObject <MUPlaylistNode, MUUserPlaylist>
+@interface SDPlaylist : NSObject <SDPlaylistNode, SDUserPlaylist>
 
 - (void) setTitle:(NSString*)title;
 

@@ -8,10 +8,10 @@
 
 #import <Foundation/Foundation.h>
 
-#import "MUUserPlaylist.h"
-#import "MUPlaylistNode.h"
+#import "SDUserPlaylist.h"
+#import "SDPlaylistNode.h"
 
-@interface MUMasterPlaylist : NSObject <MUUserPlaylist, MUPlaylistNode>
+@interface SDMasterPlaylist : NSObject <SDUserPlaylist, SDPlaylistNode>
 
 - (void) addSongsWithURLs:(NSArray*)urls;
 

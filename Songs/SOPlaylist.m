@@ -38,12 +38,12 @@
         NSArray* allSongs = [SOSongManager sharedSongManager].allSongsPlaylist.songs;
         
         for (NSString* uuid in songUUIDs) {
-            NSUInteger songIndex = [allSongs indexOfObjectPassingTest:^BOOL(SOSong* otherSong, NSUInteger idx, BOOL *stop) {
+            NSUInteger songIndex = [allSongs indexOfObjectPassingTest:^BOOL(SDSong* otherSong, NSUInteger idx, BOOL *stop) {
                 return [[otherSong valueForKey:@"uuid"] isEqualToString:uuid];
             }];
             
             if (songIndex != NSNotFound) {
-                SOSong* song = [allSongs objectAtIndex:songIndex];
+                SDSong* song = [allSongs objectAtIndex:songIndex];
                 [self.cachedSongs addObject:song];
             }
         }
@@ -56,7 +56,7 @@
     [aCoder encodeObject:self.realTitle forKey:@"title"];
 }
 
-- (void) addSong:(SOSong*)song {
+- (void) addSong:(SDSong*)song {
     [self.cachedSongs addObject:song];
     [SOSongManager userDataDidChange];
 }
