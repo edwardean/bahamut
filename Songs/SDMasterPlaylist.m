@@ -16,12 +16,27 @@
 
 @property NSMutableArray* cachedSongs;
 
+@property BOOL realDoesShuffle;
+@property BOOL realDoesRepeat;
+
 @end
 
 @implementation SDMasterPlaylist
 
-@synthesize isShuffle;
-@synthesize isRepeat;
+- (id) initWithCoder:(NSCoder *)aDecoder {
+    if (self = [self init]) {
+        self.cachedSongs = [aDecoder decodeObjectOfClass:[NSMutableArray self] forKey:@"cachedSongs"];
+        self.realDoesShuffle = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesShuffle"] boolValue];
+        self.realDoesRepeat = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesRepeat"] boolValue];
+    }
+    return self;
+}
+
+- (void) encodeWithCoder:(NSCoder *)aCoder {
+    [aCoder encodeObject:self.cachedSongs forKey:@"cachedSongs"];
+    [aCoder encodeObject:@(self.realDoesShuffle) forKey:@"doesShuffle"];
+    [aCoder encodeObject:@(self.realDoesRepeat) forKey:@"doesRepeat"];
+}
 
 - (id) init {
     if (self = [super init]) {
@@ -68,8 +83,26 @@
     return [self.cachedSongs copy];
 }
 
-- (void) loadSongs:(NSArray*)songs {
-    [self.cachedSongs addObjectsFromArray:songs];
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
+- (BOOL) doesRepeat {
+    return self.realDoesRepeat;
+}
+
+- (BOOL) doesShuffle {
+    return self.realDoesShuffle;
+}
+
+- (void) setDoesRepeat:(BOOL)doesRepeat {
+    self.realDoesRepeat = doesRepeat;
+    [SDUserDataManager userDataChanged];
+}
+
+- (void) setDoesShuffle:(BOOL)doesShuffle {
+    self.realDoesShuffle = doesShuffle;
+    [SDUserDataManager userDataChanged];
 }
 
 @end

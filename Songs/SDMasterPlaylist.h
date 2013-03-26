@@ -11,9 +11,7 @@
 #import "SDPlaylist.h"
 #import "SDPlaylistNode.h"
 
-@interface SDMasterPlaylist : NSObject <SDPlaylist, SDPlaylistNode>
-
-- (void) loadSongs:(NSArray*)songs; // only used for launching the app
+@interface SDMasterPlaylist : NSObject <SDPlaylist, SDPlaylistNode, NSSecureCoding>
 
 - (void) addSongsWithURLs:(NSArray*)urls;
 

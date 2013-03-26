@@ -24,6 +24,8 @@
 		9460F30A16FFE9BF00DB85C4 /* SDSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30916FFE9BF00DB85C4 /* SDSong.m */; };
 		94AFAD6E17008988007F10B1 /* MAKVONotificationCenter-LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = 94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */; };
 		94AFAD6F17008988007F10B1 /* MAKVONotificationCenter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */; };
+		94B8589D1701D5410012165F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B8589C1701D5410012165F /* CoreMedia.framework */; };
+		94B858A11701D67B0012165F /* SDTimeAsSeconds.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B858A01701D67B0012165F /* SDTimeAsSeconds.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -62,6 +64,9 @@
 		94AFAD6B17008988007F10B1 /* MAKVONotificationCenter-LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "MAKVONotificationCenter-LICENSE"; sourceTree = "<group>"; };
 		94AFAD6C17008988007F10B1 /* MAKVONotificationCenter.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MAKVONotificationCenter.h; sourceTree = "<group>"; };
 		94AFAD6D17008988007F10B1 /* MAKVONotificationCenter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MAKVONotificationCenter.m; sourceTree = "<group>"; };
+		94B8589C1701D5410012165F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		94B8589F1701D67B0012165F /* SDTimeAsSeconds.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTimeAsSeconds.h; sourceTree = "<group>"; };
+		94B858A01701D67B0012165F /* SDTimeAsSeconds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeAsSeconds.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -69,6 +74,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94B8589D1701D5410012165F /* CoreMedia.framework in Frameworks */,
 				9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */,
 				9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */,
 			);
@@ -106,6 +112,7 @@
 		9460F2D916FF781100DB85C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94B8589C1701D5410012165F /* CoreMedia.framework */,
 				9460F30316FFA23100DB85C4 /* AVFoundation.framework */,
 				9460F2DA16FF781100DB85C4 /* Cocoa.framework */,
 				9460F2DC16FF781100DB85C4 /* Other Frameworks */,
@@ -129,6 +136,7 @@
 				9460F2E216FF781100DB85C4 /* Songs-Info.plist */,
 				9460F2F716FF782400DB85C4 /* Songs.entitlements */,
 				94AFAD6A1700897D007F10B1 /* Third Party */,
+				94B8589E1701D66E0012165F /* Helpers */,
 				942460B617012FE2009CD8BC /* Protocols */,
 				9460F2FF16FFA19B00DB85C4 /* Models */,
 				9460F2F916FF783100DB85C4 /* XIBs */,
@@ -214,6 +222,15 @@
 			name = "Third Party";
 			sourceTree = "<group>";
 		};
+		94B8589E1701D66E0012165F /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+				94B8589F1701D67B0012165F /* SDTimeAsSeconds.h */,
+				94B858A01701D67B0012165F /* SDTimeAsSeconds.m */,
+			);
+			name = Helpers;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -291,6 +308,7 @@
 				9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */,
 				9404AB4C1700F9C000E0D3AF /* SDMasterPlaylist.m in Sources */,
 				9406AF8817014783004091DD /* SDMusicPlayer.m in Sources */,
+				94B858A11701D67B0012165F /* SDTimeAsSeconds.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,6 +21,8 @@
 			<string>NSOutlineView</string>
 			<string>NSScrollView</string>
 			<string>NSScroller</string>
+			<string>NSSlider</string>
+			<string>NSSliderCell</string>
 			<string>NSSplitView</string>
 			<string>NSTableCellView</string>
 			<string>NSTableColumn</string>
@@ -249,6 +251,32 @@
 									<reference key="NSNextResponder" ref="239354747"/>
 									<int key="NSvFlags">256</int>
 									<array class="NSMutableArray" key="NSSubviews">
+										<object class="NSSlider" id="984706167">
+											<reference key="NSNextResponder" ref="671139329"/>
+											<int key="NSvFlags">268</int>
+											<string key="NSFrame">{{228, 400}, {96, 21}}</string>
+											<reference key="NSSuperview" ref="671139329"/>
+											<reference key="NSWindow"/>
+											<reference key="NSNextKeyView" ref="986504672"/>
+											<string key="NSReuseIdentifierKey">_NS:9</string>
+											<bool key="NSEnabled">YES</bool>
+											<object class="NSSliderCell" key="NSCell" id="828152103">
+												<int key="NSCellFlags">-2080374784</int>
+												<int key="NSCellFlags2">0</int>
+												<string key="NSContents"/>
+												<string key="NSCellIdentifier">_NS:9</string>
+												<reference key="NSControlView" ref="984706167"/>
+												<double key="NSMaxValue">100</double>
+												<double key="NSMinValue">0.0</double>
+												<double key="NSValue">50</double>
+												<double key="NSAltIncValue">0.0</double>
+												<int key="NSNumberOfTickMarks">0</int>
+												<int key="NSTickMarkPosition">1</int>
+												<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
+												<bool key="NSVertical">NO</bool>
+											</object>
+											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+										</object>
 										<object class="NSButton" id="595601130">
 											<reference key="NSNextResponder" ref="671139329"/>
 											<int key="NSvFlags">268</int>
@@ -309,7 +337,7 @@
 											<string key="NSFrame">{{161, 388}, {63, 43}}</string>
 											<reference key="NSSuperview" ref="671139329"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="986504672"/>
+											<reference key="NSNextKeyView" ref="984706167"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<bool key="NSEnabled">YES</bool>
 											<object class="NSButtonCell" key="NSCell" id="244285203">
@@ -919,35 +947,76 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.isShuffle</string>
+						<string key="label">value: selection.doesShuffle</string>
 						<reference key="source" ref="986504672"/>
 						<reference key="destination" ref="530917892"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="986504672"/>
 							<reference key="NSDestination" ref="530917892"/>
-							<string key="NSLabel">value: selection.isShuffle</string>
+							<string key="NSLabel">value: selection.doesShuffle</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.isShuffle</string>
+							<string key="NSKeyPath">selection.doesShuffle</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">106</int>
+					<int key="connectionID">109</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
-						<string key="label">value: selection.isRepeat</string>
+						<string key="label">value: selection.doesRepeat</string>
 						<reference key="source" ref="595601130"/>
 						<reference key="destination" ref="530917892"/>
 						<object class="NSNibBindingConnector" key="connector">
 							<reference key="NSSource" ref="595601130"/>
 							<reference key="NSDestination" ref="530917892"/>
-							<string key="NSLabel">value: selection.isRepeat</string>
+							<string key="NSLabel">value: selection.doesRepeat</string>
 							<string key="NSBinding">value</string>
-							<string key="NSKeyPath">selection.isRepeat</string>
+							<string key="NSKeyPath">selection.doesRepeat</string>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">105</int>
+					<int key="connectionID">108</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">maxValue: musicPlayer.player.currentItem.duration</string>
+						<reference key="source" ref="984706167"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector" id="177428474">
+							<reference key="NSSource" ref="984706167"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">maxValue: musicPlayer.player.currentItem.duration</string>
+							<string key="NSBinding">maxValue</string>
+							<string key="NSKeyPath">musicPlayer.player.currentItem.duration</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">SDTimeAsSeconds</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">116</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: musicPlayer.currentTime</string>
+						<reference key="source" ref="984706167"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="984706167"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">value: musicPlayer.currentTime</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">musicPlayer.currentTime</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">SDTimeAsSeconds</string>
+							</object>
+							<reference key="NSPreviousConnector" ref="177428474"/>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">118</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1014,6 +1083,7 @@
 							<reference ref="846214451"/>
 							<reference ref="986504672"/>
 							<reference ref="595601130"/>
+							<reference ref="984706167"/>
 						</array>
 						<reference key="parent" ref="239354747"/>
 					</object>
@@ -1235,6 +1305,19 @@
 						<reference key="object" ref="518844293"/>
 						<reference key="parent" ref="595601130"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">110</int>
+						<reference key="object" ref="984706167"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="828152103"/>
+						</array>
+						<reference key="parent" ref="671139329"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">111</int>
+						<reference key="object" ref="828152103"/>
+						<reference key="parent" ref="984706167"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -1245,6 +1328,8 @@
 				<string key="102.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="103.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="104.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="110.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="111.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="14.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="18.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="18.ibExternalAutomaticallyCalculatesRowSizeFromViewHeight"/>
@@ -1293,7 +1378,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">106</int>
+			<int key="maxID">118</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

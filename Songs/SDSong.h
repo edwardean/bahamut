@@ -18,4 +18,6 @@
 - (NSString*) album;
 - (NSString*) artist;
 
+- (AVURLAsset*) asset;
+
 @end

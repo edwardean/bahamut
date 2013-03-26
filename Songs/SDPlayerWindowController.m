@@ -108,4 +108,12 @@
                                      inPlaylist:[self selectedPlaylist]];
 }
 
+- (IBAction) seekTo:(id)sender {
+    
+}
+
+- (SDMusicPlayer*) musicPlayer {
+    return [SDMusicPlayer sharedMusicPlayer];
+}
+
 @end
