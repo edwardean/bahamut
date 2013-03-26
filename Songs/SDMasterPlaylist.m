@@ -10,7 +10,7 @@
 
 #import "SDSong.h"
 
-//#import "MAKVONotificationCenter.h"
+#import "SDMusicManager.h"
 
 @interface SDMasterPlaylist ()
 
@@ -23,14 +23,6 @@
 - (id) init {
     if (self = [super init]) {
         self.cachedSongs = [NSMutableArray array];
-        
-//        [[MAKVONotificationCenter defaultCenter] observeTarget:self
-//                                                       keyPath:@"allSongsPlaylist.songs"
-//                                                       options:0
-//                                                         block:^(MAKVONotification *notification) {
-//                                                             NSLog(@"songs changed");
-//                                                         }];
-        
     }
     return self;
 }
@@ -48,6 +40,8 @@
 }
 
 - (void) addSongsWithURLs:(NSArray*)urls {
+    [self willChangeValueForKey:@"cachedSongs"];
+    
     for (NSURL* url in urls) {
         if ([[self.cachedSongs valueForKeyPath:@"url"] containsObject: url])
             continue;
@@ -55,14 +49,12 @@
         SDSong* song = [[SDSong alloc] init];
         song.url = url;
         
-        [self addSong:song];
+        [self.cachedSongs addObject:song];
     }
-}
-
-- (void) addSong:(SDSong*)song {
-    [self willChangeValueForKey:@"cachedSongs"];
-    [self.cachedSongs addObject:song];
+    
     [self didChangeValueForKey:@"cachedSongs"];
+    
+    [SDMusicManager userDataChanged];
 }
 
 + (NSSet*) keyPathsForValuesAffectingSongs {
@@ -71,6 +63,10 @@
 
 - (NSArray*) songs {
     return [self.cachedSongs copy];
+}
+
+- (void) loadSongs:(NSArray*)songs {
+    [self.cachedSongs addObjectsFromArray:songs];
 }
 
 @end

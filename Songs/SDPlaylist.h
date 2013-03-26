@@ -11,8 +11,12 @@
 #import "SDPlaylistNode.h"
 #import "SDUserPlaylist.h"
 
-@interface SDPlaylist : NSObject <SDPlaylistNode, SDUserPlaylist>
+#import "SDSong.h"
+
+@interface SDPlaylist : NSObject <SDPlaylistNode, SDUserPlaylist, NSSecureCoding>
 
 - (void) setTitle:(NSString*)title;
+
+- (void) addSongs:(NSArray*)songs;
 
 @end

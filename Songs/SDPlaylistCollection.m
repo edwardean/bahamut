@@ -10,8 +10,6 @@
 
 @implementation SDPlaylistCollection
 
-//@synthesize title;
-
 - (id) init {
     if (self = [super init]) {
         self.playlists = [NSMutableArray array];

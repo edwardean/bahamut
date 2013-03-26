@@ -12,6 +12,8 @@
 #import "SDPlaylist.h"
 #import "SDPlaylistCollection.h"
 
+#import "SDPlaylistNode.h"
+
 @interface SDPlayerWindowController ()
 
 @property (weak) IBOutlet NSTreeController* treeGuy;
@@ -40,21 +42,21 @@
     return [SDMusicManager sharedMusicManager];
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
-    return [[item representedObject] isKindOfClass:[SDPlaylistCollection self]];
+- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id<SDPlaylistNode>)item {
+    return ![item isLeaf];
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
-    return ![[item representedObject] isKindOfClass:[SDPlaylistCollection self]];
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id<SDPlaylistNode>)item {
+    return [item isLeaf];
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item {
     return NO;
 }
 
-- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item NS_AVAILABLE_MAC(10_7) {
-    BOOL isPlaylist = ![[item representedObject] isKindOfClass:[SDPlaylistCollection self]];
-    NSTableCellView* view = [outlineView makeViewWithIdentifier: (isPlaylist? @"DataCell" : @"HeaderCell") owner:self];
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id<SDPlaylistNode>)item {
+    NSString* ident = ([item isLeaf] ? @"DataCell" : @"HeaderCell");
+    NSTableCellView* view = [outlineView makeViewWithIdentifier:ident owner:self];
     return view;
 }
 
@@ -63,7 +65,7 @@
     
     NSUInteger idxs[2];
     idxs[0] = 1;
-    idxs[1] = [[SDMusicManager sharedMusicManager].userPlaylistsNode.playlists count];
+    idxs[1] = [[[SDMusicManager sharedMusicManager] userPlaylists] count];
     [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
     [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
 }

@@ -14,7 +14,12 @@
 
 @interface SDMusicManager ()
 
+@property BOOL canSave;
+
 @property SDPlaylistCollection* rootNode;
+
+@property SDMasterPlaylist* masterPlaylist;
+@property SDPlaylistCollection* userPlaylistsCollection;
 
 @end
 
@@ -33,32 +38,12 @@
     if (self = [super init]) {
         self.rootNode = [[SDPlaylistCollection alloc] init];
         
-        self.masterPlaylist = [[SDMasterPlaylist alloc] init];
-        [self.rootNode.playlists addObject:self.masterPlaylist];
-        
-        self.userPlaylistsNode = [[SDPlaylistCollection alloc] init];
-        [self.rootNode.playlists addObject:self.userPlaylistsNode];
-        
-//        [[MAKVONotificationCenter defaultCenter] observeTarget:self
-//                                                       keyPath:@"allSongsPlaylist.songs"
-//                                                       options:0
-//                                                         block:^(MAKVONotification *notification) {
-//                                                             NSLog(@"songs changed");
-//                                                         }];
-//        
-//        [[MAKVONotificationCenter defaultCenter] observeTarget:self
-//                                                       keyPath:@"userPlaylistsNode.playlists"
-//                                                       options:0
-//                                                         block:^(MAKVONotification *notification) {
-//                                                             NSLog(@"playlists changed");
-//                                                         }];
-        
-//        [[MAKVONotificationCenter defaultCenter] observeTarget:self
-//                                                       keyPath:@"userPlaylistsNode.playlists.@unionOfObjects.title"
-//                                                       options:0
-//                                                         block:^(MAKVONotification *notification) {
-//                                                             NSLog(@"playlist title changed");
-//                                                         }];
+        [[MAKVONotificationCenter defaultCenter] observeTarget:self
+                                                       keyPath:@"userPlaylistsCollection.playlists"
+                                                       options:0
+                                                         block:^(MAKVONotification *notification) {
+                                                             [SDMusicManager userDataChanged];
+                                                         }];
         
 //        [self.userPlaylistsNode.playlists addObject:[[MUPlaylist alloc] init]];
 //        [self.userPlaylistsNode.playlists addObject:[[MUPlaylist alloc] init]];
@@ -68,7 +53,39 @@
 }
 
 - (void) loadUserData {
+    NSLog(@"loading data");
     
+    NSData* allSongsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"allSongs"];
+    NSData* userPlaylistsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"userPlaylists"];
+    
+    self.masterPlaylist = [[SDMasterPlaylist alloc] init];
+    [self.rootNode.playlists addObject:self.masterPlaylist];
+    
+    self.userPlaylistsCollection = [[SDPlaylistCollection alloc] init];
+    [self.rootNode.playlists addObject:self.userPlaylistsCollection];
+    
+    if (allSongsData) {
+        NSArray* songs = [NSKeyedUnarchiver unarchiveObjectWithData:allSongsData];
+        NSLog(@"loading songs: %@", songs);
+        [self.masterPlaylist loadSongs: songs];
+    }
+    
+    if (userPlaylistsData) {
+        NSArray* playlists = [NSKeyedUnarchiver unarchiveObjectWithData:userPlaylistsData];
+        [self.userPlaylistsCollection.playlists addObjectsFromArray:playlists];
+    }
+    
+    self.canSave = YES;
+}
+
+- (void) saveUserData {
+    if (!self.canSave)
+        return;
+    
+    NSLog(@"saving");
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self.masterPlaylist songs]] forKey:@"allSongs"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self userPlaylists]] forKey:@"userPlaylists"];
 }
 
 - (void) importSongsUnderURLs:(NSArray*)urls {
@@ -122,7 +139,15 @@
 }
 
 + (void) userDataChanged {
-    
+    [[SDMusicManager sharedMusicManager] saveUserData];
+}
+
+- (NSArray*) allSongs {
+    return [self.masterPlaylist songs];
+}
+
+- (NSArray*) userPlaylists {
+    return [self.userPlaylistsCollection playlists];
 }
 
 @end

@@ -14,10 +14,10 @@
 
 @interface SDMusicManager : NSObject
 
-@property SDMasterPlaylist* masterPlaylist;
-@property SDPlaylistCollection* userPlaylistsNode;
-
 + (SDMusicManager*) sharedMusicManager;
+
+- (NSArray*) allSongs;
+- (NSArray*) userPlaylists;
 
 - (void) loadUserData;
 

@@ -13,6 +13,8 @@
 
 @interface SDMasterPlaylist : NSObject <SDUserPlaylist, SDPlaylistNode>
 
+- (void) loadSongs:(NSArray*)songs; // only used for launching the app
+
 - (void) addSongsWithURLs:(NSArray*)urls;
 
 @end
