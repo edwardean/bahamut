@@ -44,10 +44,6 @@
                                                          block:^(MAKVONotification *notification) {
                                                              [SDMusicManager userDataChanged];
                                                          }];
-        
-//        [self.userPlaylistsNode.playlists addObject:[[MUPlaylist alloc] init]];
-//        [self.userPlaylistsNode.playlists addObject:[[MUPlaylist alloc] init]];
-//        [self.userPlaylistsNode.playlists addObject:[[MUPlaylist alloc] init]];
     }
     return self;
 }
