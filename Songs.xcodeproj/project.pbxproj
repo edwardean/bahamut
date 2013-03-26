@@ -235,7 +235,7 @@
 		9460F2CF16FF781100DB85C4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = MU;
+				CLASSPREFIX = SD;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Steven Degutis";
 			};
