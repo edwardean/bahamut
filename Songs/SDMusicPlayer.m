@@ -10,9 +10,11 @@
 
 @interface SDMusicPlayer ()
 
-@property AVQueuePlayer* player;
+@property AVPlayer* player;
 @property id playerCurrentTimeObserver;
 @property CMTime currentTime;
+
+@property NSArray* currentPlayerItems;
 
 @end
 
@@ -25,6 +27,20 @@
         sharedMusicPlayer = [[SDMusicPlayer alloc] init];
     });
     return sharedMusicPlayer;
+}
+
+- (id) init {
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self
+                                                 selector:@selector(playerItemDidPlayToEndTime:)
+                                                     name:AVPlayerItemDidPlayToEndTimeNotification
+                                                   object:nil];
+    }
+    return self;
+}
+
+- (void) playerItemDidPlayToEndTime:(NSNotification*)note {
+    NSLog(@"ok hes done");
 }
 
 - (void) playSong:(SDSong*)song inPlaylist:(id<SDPlaylist>)playlist {
@@ -49,19 +65,17 @@
     
     NSMutableArray* playerItems = [NSMutableArray array];
     
-//    CMTime duration = CMTimeMake(1, 1);
-    
     for (SDSong* song in songs) {
         AVPlayerItem* item = [AVPlayerItem playerItemWithAsset:[song asset]];
         [playerItems addObject:item];
-        
-//        duration = CMTimeAdd(duration, item.duration);
     }
+    
+    self.currentPlayerItems = playerItems;
     
     [self.player removeTimeObserver:self.playerCurrentTimeObserver];
     self.playerCurrentTimeObserver = nil;
     
-    self.player = [AVQueuePlayer queuePlayerWithItems:playerItems];
+    self.player = [AVPlayer playerWithPlayerItem:[self.currentPlayerItems objectAtIndex:0]];
     
     SDMusicPlayer* __weak weakSelf = self;
     self.playerCurrentTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1,10)
@@ -71,17 +85,7 @@
                                                                           }];
     
     [self.player play];
-    
-//    [NSTimer scheduledTimerWithTimeInterval:1.0
-//                                     target:self
-//                                   selector:@selector(check)
-//                                   userInfo:nil
-//                                    repeats:YES];
 }
-
-//- (void) check {
-//    NSLog(@"%f / %f", CMTimeGetSeconds(self.currentTime), CMTimeGetSeconds(self.player.currentItem.duration));
-//}
 
 - (void) shuffleArray:(NSMutableArray*)array {
     for (NSUInteger i = [array count]; i > 1; i--) {
@@ -95,11 +99,9 @@
 }
 
 - (void) prevSong {
-//    [self.player 
 }
 
 - (void) nextSong {
-    [self.player advanceToNextItem];
 }
 
 @end
