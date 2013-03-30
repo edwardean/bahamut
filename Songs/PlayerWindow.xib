@@ -402,7 +402,7 @@
 															<string key="NSFrameSize">{454, 303}</string>
 															<reference key="NSSuperview" ref="944813563"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="755010593"/>
+															<reference key="NSNextKeyView" ref="911374977"/>
 															<string key="NSReuseIdentifierKey">_NS:13</string>
 															<bool key="NSEnabled">YES</bool>
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -523,7 +523,7 @@
 															</object>
 															<reference key="NSGridColor" ref="442287894"/>
 															<double key="NSRowHeight">17</double>
-															<int key="NSTvFlags">-683671552</int>
+															<int key="NSTvFlags">-675282944</int>
 															<reference key="NSDelegate"/>
 															<reference key="NSDataSource"/>
 															<string key="NSAutosaveName">songsCols</string>
@@ -563,6 +563,7 @@
 													<string key="NSFrame">{{1, 119}, {223, 15}}</string>
 													<reference key="NSSuperview" ref="512773086"/>
 													<reference key="NSWindow"/>
+													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:60</string>
 													<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 													<int key="NSsFlags">1</int>
@@ -590,7 +591,7 @@
 											<string key="NSFrameSize">{454, 320}</string>
 											<reference key="NSSuperview" ref="671139329"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="944813563"/>
+											<reference key="NSNextKeyView" ref="755010593"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<int key="NSsFlags">133680</int>
 											<reference key="NSVScroller" ref="911374977"/>

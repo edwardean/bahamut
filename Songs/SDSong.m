@@ -13,6 +13,7 @@
 @property NSString* uuid;
 
 @property AVURLAsset* cachedAsset;
+@property AVPlayerItem* cachedPlayerItem;
 
 @end
 
@@ -47,6 +48,10 @@
         self.cachedAsset = [AVURLAsset assetWithURL:self.url];
     
     return self.cachedAsset;
+}
+
+- (AVPlayerItem*) playerItem {
+    return [AVPlayerItem playerItemWithAsset:[self asset]];
 }
 
 - (NSString*) metadataOfType:(NSString*)type {

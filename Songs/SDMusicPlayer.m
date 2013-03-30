@@ -8,13 +8,15 @@
 
 #import "SDMusicPlayer.h"
 
+#import "SDCurrentSong.h"
+
 @interface SDMusicPlayer ()
 
-@property AVPlayer* player;
-@property id playerCurrentTimeObserver;
-@property CMTime currentTime;
+@property id<SDPlaylist> currentPlaylist;
+@property SDCurrentSong* currentSong;
 
-@property NSArray* currentPlayerItems;
+@property NSMutableArray* currentSongs;
+@property NSUInteger currentSongIndex;
 
 @end
 
@@ -40,7 +42,24 @@
 }
 
 - (void) playerItemDidPlayToEndTime:(NSNotification*)note {
-    NSLog(@"ok hes done");
+    [self nextSong];
+}
+
+- (void) playSongAt:(NSUInteger)idx {
+    self.currentSongIndex = idx;
+    
+    SDSong* song = [self.currentSongs objectAtIndex:self.currentSongIndex];
+    
+    SDCurrentSong* currentSong = [[SDCurrentSong alloc] init];
+    [currentSong playSong:song inPlaylist:self.currentPlaylist];
+    self.currentSong = currentSong;
+}
+
+- (void) stop {
+    self.currentSong = nil;
+    
+    self.currentSongs = nil;
+    self.currentPlaylist = nil;
 }
 
 - (void) playSong:(SDSong*)song inPlaylist:(id<SDPlaylist>)playlist {
@@ -63,28 +82,10 @@
         }
     }
     
-    NSMutableArray* playerItems = [NSMutableArray array];
+    self.currentPlaylist = playlist;
+    self.currentSongs = songs;
     
-    for (SDSong* song in songs) {
-        AVPlayerItem* item = [AVPlayerItem playerItemWithAsset:[song asset]];
-        [playerItems addObject:item];
-    }
-    
-    self.currentPlayerItems = playerItems;
-    
-    [self.player removeTimeObserver:self.playerCurrentTimeObserver];
-    self.playerCurrentTimeObserver = nil;
-    
-    self.player = [AVPlayer playerWithPlayerItem:[self.currentPlayerItems objectAtIndex:0]];
-    
-    SDMusicPlayer* __weak weakSelf = self;
-    self.playerCurrentTimeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1,10)
-                                                                               queue:NULL
-                                                                          usingBlock:^(CMTime time) {
-                                                                              weakSelf.currentTime = time;
-                                                                          }];
-    
-    [self.player play];
+    [self playSongAt:0];
 }
 
 - (void) shuffleArray:(NSMutableArray*)array {
@@ -95,13 +96,32 @@
 }
 
 - (void) seekToTime:(float)time {
-    [self.player seekToTime:CMTimeMakeWithSeconds(time, 1)];
+    [self.currentSong seekToTime:time];
 }
 
 - (void) prevSong {
+    NSUInteger idx = self.currentSongIndex - 1;
+    
+    if (idx == -1) {
+        idx = [self.currentSongs count] - 1;
+    }
+    
+    [self playSongAt:idx];
 }
 
 - (void) nextSong {
+    NSUInteger idx = self.currentSongIndex + 1;
+    
+    if (idx == [self.currentSongs count]) {
+        if (![self.currentPlaylist doesRepeat]) {
+            [self stop];
+            return;
+        }
+        
+        idx = 0;
+    }
+    
+    [self playSongAt:idx];
 }
 
 @end

@@ -41,12 +41,12 @@
     
     [self.songPositionSlider bind:@"currentValue"
                          toObject:[SDMusicPlayer sharedMusicPlayer]
-                      withKeyPath:@"currentTime"
+                      withKeyPath:@"currentSong.time"
                           options:@{ NSValueTransformerNameBindingOption: @"SDTimeAsSeconds" }];
     
     [self.songPositionSlider bind:@"maxValue"
                          toObject:[SDMusicPlayer sharedMusicPlayer]
-                      withKeyPath:@"player.currentItem.duration"
+                      withKeyPath:@"currentSong.duration"
                           options:@{ NSValueTransformerNameBindingOption: @"SDTimeAsSeconds" }];
     
 //    [[MAKVONotificationCenter defaultCenter] observeTarget:[SDMusicPlayer sharedMusicPlayer]
