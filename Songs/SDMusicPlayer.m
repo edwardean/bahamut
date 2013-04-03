@@ -55,6 +55,10 @@
     self.currentSong = currentSong;
 }
 
+- (void) pause {
+    [self.currentSong pause];
+}
+
 - (void) stop {
     self.currentSong = nil;
     
@@ -122,6 +126,20 @@
     }
     
     [self playSongAt:idx];
+}
+
+- (SDMusicPlayerStatus) status {
+    if (self.currentSong == nil)
+        return SDMusicPlayerStatusStopped;
+    
+    if (self.currentSong.player.rate > 0.5)
+        return SDMusicPlayerStatusPlaying;
+    
+    return SDMusicPlayerStatusPaused;
+}
+
++ (NSSet*) keyPathsForValuesAffectingIsPlaying {
+    return [NSSet setWithArray:@[@"currentSong", @"currentSong.rate"]];
 }
 
 @end

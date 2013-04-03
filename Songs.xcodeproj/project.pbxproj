@@ -28,6 +28,7 @@
 		94B8589D1701D5410012165F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B8589C1701D5410012165F /* CoreMedia.framework */; };
 		94B858A11701D67B0012165F /* SDTimeAsSeconds.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B858A01701D67B0012165F /* SDTimeAsSeconds.m */; };
 		94FEE9C41706707B001A33DB /* SDCurrentSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FEE9C31706707B001A33DB /* SDCurrentSong.m */; };
+		94FEE9C917067472001A33DB /* SDPlayButtonValueTransformer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94FEE9C817067472001A33DB /* SDPlayButtonValueTransformer.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -73,6 +74,8 @@
 		94B858A01701D67B0012165F /* SDTimeAsSeconds.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTimeAsSeconds.m; sourceTree = "<group>"; };
 		94FEE9C21706707B001A33DB /* SDCurrentSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCurrentSong.h; sourceTree = "<group>"; };
 		94FEE9C31706707B001A33DB /* SDCurrentSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCurrentSong.m; sourceTree = "<group>"; };
+		94FEE9C717067472001A33DB /* SDPlayButtonValueTransformer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlayButtonValueTransformer.h; sourceTree = "<group>"; };
+		94FEE9C817067472001A33DB /* SDPlayButtonValueTransformer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlayButtonValueTransformer.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -234,6 +237,8 @@
 			children = (
 				94B8589F1701D67B0012165F /* SDTimeAsSeconds.h */,
 				94B858A01701D67B0012165F /* SDTimeAsSeconds.m */,
+				94FEE9C717067472001A33DB /* SDPlayButtonValueTransformer.h */,
+				94FEE9C817067472001A33DB /* SDPlayButtonValueTransformer.m */,
 			);
 			name = Helpers;
 			sourceTree = "<group>";
@@ -329,6 +334,7 @@
 				94B858A11701D67B0012165F /* SDTimeAsSeconds.m in Sources */,
 				94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */,
 				94FEE9C41706707B001A33DB /* SDCurrentSong.m in Sources */,
+				94FEE9C917067472001A33DB /* SDPlayButtonValueTransformer.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

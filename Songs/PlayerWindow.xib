@@ -1003,6 +1003,26 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
+						<string key="label">title: musicPlayer.status</string>
+						<reference key="source" ref="846214451"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="846214451"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">title: musicPlayer.status</string>
+							<string key="NSBinding">title</string>
+							<string key="NSKeyPath">musicPlayer.status</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">SDPlayButtonValueTransformer</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">143</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
 						<string key="label">value: selection.doesShuffle</string>
 						<reference key="source" ref="986504672"/>
 						<reference key="destination" ref="530917892"/>
@@ -1040,6 +1060,38 @@
 						<reference key="destination" ref="1001"/>
 					</object>
 					<int key="connectionID">125</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: musicPlayer.status</string>
+						<reference key="source" ref="500290537"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="500290537"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">enabled: musicPlayer.status</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">musicPlayer.status</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">141</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">enabled: musicPlayer.status</string>
+						<reference key="source" ref="992950324"/>
+						<reference key="destination" ref="1001"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="992950324"/>
+							<reference key="NSDestination" ref="1001"/>
+							<string key="NSLabel">enabled: musicPlayer.status</string>
+							<string key="NSBinding">enabled</string>
+							<string key="NSKeyPath">musicPlayer.status</string>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">142</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1424,7 +1476,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">134</int>
+			<int key="maxID">143</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

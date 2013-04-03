@@ -147,16 +147,21 @@
 }
 
 - (IBAction) playPause:(id)sender {
-    [[SDMusicPlayer sharedMusicPlayer] playSong:[self selectedSong]
-                                     inPlaylist:[self selectedPlaylist]];
+    if ([SDMusicPlayer sharedMusicPlayer].status == SDMusicPlayerStatusPlaying) {
+        [[SDMusicPlayer sharedMusicPlayer] pause];
+    }
+    else {
+        [[SDMusicPlayer sharedMusicPlayer] playSong:[self selectedSong]
+                                         inPlaylist:[self selectedPlaylist]];
+    }
 }
 
 - (void) trackPositionMovedTo:(CGFloat)newValue {
     [[SDMusicPlayer sharedMusicPlayer] seekToTime:newValue];
 }
 
-//- (SDMusicPlayer*) musicPlayer {
-//    return [SDMusicPlayer sharedMusicPlayer];
-//}
+- (SDMusicPlayer*) musicPlayer {
+    return [SDMusicPlayer sharedMusicPlayer];
+}
 
 @end

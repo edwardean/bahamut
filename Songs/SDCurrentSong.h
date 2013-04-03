@@ -23,5 +23,6 @@
 - (void) seekToTime:(float)time;
 
 - (void) playSong:(SDSong*)song inPlaylist:(id<SDPlaylist>)playlist;
+- (void) pause;
 
 @end

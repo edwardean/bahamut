@@ -27,6 +27,10 @@
     [self.player seekToTime:CMTimeMakeWithSeconds(time, 1)];
 }
 
+- (void) pause {
+    [self.player pause];
+}
+
 - (void) playSong:(SDSong*)song inPlaylist:(id<SDPlaylist>)playlist {
     self.song = song;
     self.playlist = playlist;
