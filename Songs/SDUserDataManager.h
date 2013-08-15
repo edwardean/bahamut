@@ -8,21 +8,21 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SDUserPlaylist.h"
-#import "SDPlaylistCollection.h"
-#import "SDMasterPlaylist.h"
+//#import "SDUserPlaylist.h"
+//#import "SDPlaylistCollection.h"
+//#import "SDMasterPlaylist.h"
 
 @interface SDUserDataManager : NSObject
 
 + (SDUserDataManager*) sharedMusicManager;
 
-- (NSArray*) allSongs;
-- (NSArray*) userPlaylists;
-
-- (void) loadUserData;
-
-- (void) importSongsUnderURLs:(NSArray*)urls;
-
-+ (void) userDataChanged;
+//- (NSArray*) allSongs;
+//- (NSArray*) userPlaylists;
+//
+//- (void) loadUserData;
+//
+//- (void) importSongsUnderURLs:(NSArray*)urls;
+//
+//+ (void) userDataChanged;
 
 @end

@@ -8,13 +8,22 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SDSong.h"
+
 @protocol SDPlaylist <NSObject>
 
 - (NSString*) title;
-- (BOOL) isMaster;
-- (NSArray*) songs;
 
-@property BOOL doesShuffle;
-@property BOOL doesRepeat;
+- (NSArray*) songs;
+- (void) addSongs:(NSArray*)songs;
+
+- (BOOL) shuffles;
+- (void) setShuffles:(BOOL)shuffles;
+
+- (BOOL) repeats;
+- (void) setRepeats:(BOOL)repeats;
+
+- (void) playSong:(SDSong*)song;
+- (void) pause;
 
 @end

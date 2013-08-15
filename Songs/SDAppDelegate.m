@@ -11,6 +11,10 @@
 #import "SDUserDataManager.h"
 #import "SDPlayerWindowController.h"
 
+
+#import "SDSong.h"
+
+
 @interface SDAppDelegate ()
 
 @property NSMutableArray* playerWindowControllers;
@@ -20,13 +24,23 @@
 @implementation SDAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
-    [[SDUserDataManager sharedMusicManager] loadUserData];
     
-    [[NSImage imageNamed:@"playlist"] setTemplate:YES];
+    SDSong* song = [[SDSong alloc] init];
+    song.url = [NSURL fileURLWithPath:@"/Users/sdegutis/Music/iTunes/iTunes Media/Music/Tool/Lateralus/05 Schism.m4a"];
     
-    self.playerWindowControllers = [NSMutableArray array];
+    NSLog(@"%f", [song duration]);
     
-    [self newPlayerWindow:nil];
+//    static SDSong* s;
+//    s = song;
+    
+    
+//    [[SDUserDataManager sharedMusicManager] loadUserData];
+//    
+//    [[NSImage imageNamed:@"playlist"] setTemplate:YES];
+//    
+//    self.playerWindowControllers = [NSMutableArray array];
+//    
+//    [self newPlayerWindow:nil];
 }
 
 - (void) playerWindowKilled:(id)controller {
@@ -41,17 +55,17 @@
 }
 
 - (IBAction) importSongs:(id)sender {
-    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
-    
-    [openPanel setCanChooseDirectories:YES];
-    [openPanel setCanChooseFiles:YES];
-    [openPanel setAllowsMultipleSelection:YES];
-    
-    [openPanel beginWithCompletionHandler:^(NSInteger result) {
-        if (result == NSFileHandlingPanelOKButton) {
-            [[SDUserDataManager sharedMusicManager] importSongsUnderURLs:[openPanel URLs]];
-        }
-    }];
+//    NSOpenPanel* openPanel = [NSOpenPanel openPanel];
+//    
+//    [openPanel setCanChooseDirectories:YES];
+//    [openPanel setCanChooseFiles:YES];
+//    [openPanel setAllowsMultipleSelection:YES];
+//    
+//    [openPanel beginWithCompletionHandler:^(NSInteger result) {
+//        if (result == NSFileHandlingPanelOKButton) {
+//            [[SDUserDataManager sharedMusicManager] importSongsUnderURLs:[openPanel URLs]];
+//        }
+//    }];
 }
 
 @end

@@ -13,7 +13,7 @@
 @property NSString* uuid;
 
 @property AVURLAsset* cachedAsset;
-@property AVPlayerItem* cachedPlayerItem;
+//@property AVPlayerItem* cachedPlayerItem;
 
 @end
 
@@ -68,6 +68,11 @@
     
     AVMetadataItem* firstMatchingMetadataItem = [metadataItems objectAtIndex:0];
     return (id)[firstMatchingMetadataItem value];
+}
+
+- (CGFloat) duration {
+    CMTime dur = [[self asset] duration];
+    return CMTimeGetSeconds(dur);
 }
 
 - (NSString*) title {

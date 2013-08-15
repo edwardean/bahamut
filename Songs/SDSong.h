@@ -18,6 +18,8 @@
 - (NSString*) album;
 - (NSString*) artist;
 
+- (CGFloat) duration;
+
 - (AVPlayerItem*) playerItem;
 
 @end
