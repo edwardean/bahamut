@@ -91,17 +91,15 @@
 //    NSTableCellView* view = [outlineView makeViewWithIdentifier:ident owner:self];
 //    return view;
 //}
-//
-//- (IBAction) makeNewPlaylist:(id)sender {
-//    SDUserPlaylist* newlist = [[SDUserPlaylist alloc] init];
-//    
-//    NSUInteger idxs[2];
-//    idxs[0] = 1;
-//    idxs[1] = [[[SDUserDataManager sharedMusicManager] userPlaylists] count];
-//    [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
-//    [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
-//}
-//
+
+- (IBAction) makeNewPlaylist:(id)sender {
+    SDPlaylist* newlist = [[SDPlaylist alloc] init];
+    
+    NSUInteger idxs[2] = {1, [[[SDUserDataManager sharedMusicManager] playlists] count]};
+    [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
+    [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
+}
+
 //- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
 //    if (commandSelector == @selector(cancelOperation:)) {
 //        [control setStringValue:[[self selectedPlaylist] title]];
@@ -109,21 +107,21 @@
 //    
 //    return NO;
 //}
-//
-//- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex {
-//    return MAX(proposedMin, 150.0);
-//}
-//
-//- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex {
-//    return MIN(proposedMax, [splitView frame].size.width - 150.0);
-//}
-//
-//- (void)splitView:(NSSplitView*)sender resizeSubviewsWithOldSize:(NSSize)oldSize {
-//    CGFloat w = [[[sender subviews] objectAtIndex:0] frame].size.width;
-//    [sender adjustSubviews];
-//    [sender setPosition:w ofDividerAtIndex:0];
-//}
-//
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex {
+    return MAX(proposedMin, 150.0);
+}
+
+- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex {
+    return MIN(proposedMax, [splitView frame].size.width - 150.0);
+}
+
+- (void)splitView:(NSSplitView*)sender resizeSubviewsWithOldSize:(NSSize)oldSize {
+    CGFloat w = [[[sender subviews] objectAtIndex:0] frame].size.width;
+    [sender adjustSubviews];
+    [sender setPosition:w ofDividerAtIndex:0];
+}
+
 //- (id<SDPlaylist>) selectedPlaylist {
 //    return [[self.treeGuy selectedObjects] lastObject];
 //}

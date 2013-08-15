@@ -73,6 +73,8 @@
             
             [self.allSongs addObject:song];
         }
+        
+        [self saveUserData];
     }];
 }
 

@@ -16,8 +16,8 @@
 
 + (SDUserDataManager*) sharedMusicManager;
 
-//- (NSArray*) allSongs;
-//- (NSArray*) playlists;
+- (NSMutableArray*) allSongs;
+- (NSMutableArray*) playlists;
 
 - (void) loadUserData;
 + (void) saveUserData;

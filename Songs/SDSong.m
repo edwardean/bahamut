@@ -19,6 +19,10 @@
 
 @implementation SDSong
 
++ (BOOL)supportsSecureCoding {
+    return YES;
+}
+
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
         self.uuid = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"uuid"];
@@ -32,15 +36,19 @@
     [aCoder encodeObject:self.url forKey:@"url"];
 }
 
-+ (BOOL)supportsSecureCoding {
-    return YES;
-}
-
 - (id) init {
     if (self = [super init]) {
         self.uuid = [[NSUUID UUID] UUIDString];
     }
     return self;
+}
+
+- (BOOL) isEqual:(id)object {
+    return [object isKindOfClass: [self class]] && [self.uuid isEqual: [object uuid]];
+}
+
+- (NSUInteger) hash {
+    return [self.uuid hash];
 }
 
 - (AVURLAsset*) asset {

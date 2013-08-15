@@ -10,23 +10,17 @@
 
 #import "SDSong.h"
 
-@interface SDPlaylist : NSObject
+@interface SDPlaylist : NSObject <NSSecureCoding>
 
-- (NSString*) title;
-- (void) setTitle:(NSString*)title;
-
-- (NSArray*) songs;
-- (BOOL) canAddSongs;
 - (void) addSongs:(NSArray*)songs;
+@property NSMutableArray* songs;
 
-- (BOOL) shuffles;
-- (void) setShuffles:(BOOL)shuffles;
+@property NSString* title;
+@property BOOL shuffles;
+@property BOOL repeats;
 
-- (BOOL) repeats;
-- (void) setRepeats:(BOOL)repeats;
-
+@property BOOL isPlaying;
 - (void) playSong:(SDSong*)song;
 - (void) pause;
-- (BOOL) isPlaying;
 
 @end
