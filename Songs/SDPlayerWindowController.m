@@ -43,6 +43,9 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistsDidVisiblyChange:) name:SDPlaylistsDidVisiblyChange object:nil];
     
+    [self.songsTable setTarget:self];
+    [self.songsTable setDoubleAction:@selector(startPlayingSong:)];
+    
     [self.playlistsOutlineView expandItem:nil expandChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
@@ -67,25 +70,23 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 
-
-- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+- (NSArray*) visibleSongs {
     if (self.selectedPlaylist) {
-        return [[self.selectedPlaylist songs] count];
+        return [self.selectedPlaylist songs];
     }
     else {
-        return [[[SDUserDataManager sharedMusicManager] allSongs] count];
+        return [[SDUserDataManager sharedMusicManager] allSongs];
     }
 }
 
+
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+    return [[self visibleSongs] count];
+}
+
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-    NSArray* songs;
-    if (self.selectedPlaylist) {
-        songs = [self.selectedPlaylist songs];
-    }
-    else {
-        songs = [[SDUserDataManager sharedMusicManager] allSongs];
-    }
-    
+    NSArray* songs = [self visibleSongs];
     SDSong* song = [songs objectAtIndex:rowIndex];
     
     if ([[aTableColumn identifier] isEqual:@"title"]) {
@@ -250,6 +251,14 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 - (IBAction) prevSong:(id)sender {
 //    [[SDMusicPlayer sharedMusicPlayer] prevSong];
+}
+
+- (IBAction) startPlayingSong:(id)sender {
+    NSInteger row = [self.songsTable selectedRow];
+    if (row == -1)
+        return;
+    
+    SDSong* song = [[self visibleSongs] objectAtIndex:row];
 }
 
 - (IBAction) playPause:(id)sender {
