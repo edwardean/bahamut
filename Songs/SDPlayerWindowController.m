@@ -8,7 +8,7 @@
 
 #import "SDPlayerWindowController.h"
 
-#import "SDPersistenceManager.h"
+#import "SDUserDataManager.h"
 
 #import "SDPlaylist.h"
 
@@ -19,6 +19,7 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 @interface SDPlayerWindowController ()
 
+@property (weak) IBOutlet NSTableView* songsTable;
 @property (weak) IBOutlet NSOutlineView* sourceList;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 
@@ -30,8 +31,14 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     return @"PlayerWindow";
 }
 
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void)windowDidLoad {
     [super windowDidLoad];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChange object:nil];
     
     [self.sourceList expandItem:nil expandChildren:YES];
     [self.sourceList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
@@ -44,7 +51,10 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     [self.killedDelegate playerWindowKilled:self];
 }
 
-
+- (void) allSongsDidChange:(NSNotification*)note {
+    // TODO: only reload if master playlist is shown!
+    [self.songsTable reloadData];
+}
 
 
 
@@ -97,7 +107,7 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     else if (item == SDMasterPlaylistItem)
         return 0;
     else if (item == SDUserPlaylistsItem)
-        return [[[SDPersistenceManager sharedMusicManager] playlists] count];
+        return [[[SDUserDataManager sharedMusicManager] playlists] count];
     else
         return 0;
 }
@@ -117,7 +127,7 @@ static NSString* SDUserPlaylistsItem = @"playlists";
             return SDUserPlaylistsItem;
     }
     else if (item == SDUserPlaylistsItem) {
-        return [[[SDPersistenceManager sharedMusicManager] playlists] objectAtIndex:index];
+        return [[[SDUserDataManager sharedMusicManager] playlists] objectAtIndex:index];
     }
     return nil;
 }
@@ -147,13 +157,6 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 
-////- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
-////    if (commandSelector == @selector(cancelOperation:)) {
-////        [control setStringValue:[[self selectedPlaylist] title]];
-////    }
-////    
-////    return NO;
-////}
 
 
 
@@ -184,11 +187,18 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 - (IBAction) makeNewPlaylist:(id)sender {
-//    SDPlaylist* newlist = [[SDPlaylist alloc] init];
-//    
-//    NSUInteger idxs[2] = {1, [[[SDPersistenceManager sharedMusicManager] playlists] count]};
-//    [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
+    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+    
+    SDPlaylist* newlist = [[SDPlaylist alloc] init];
+    [playlists addObject:newlist];
+    
+    [self.sourceList reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    
+//    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1 + 2];
+//    [self.sourceList selectRowIndexes:indices byExtendingSelection:NO];
 //    [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
+    
+    [SDUserDataManager saveUserData];
 }
 
 - (IBAction) nextSong:(id)sender {
