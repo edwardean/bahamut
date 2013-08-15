@@ -17,12 +17,11 @@
 + (SDUserDataManager*) sharedMusicManager;
 
 //- (NSArray*) allSongs;
-//- (NSArray*) userPlaylists;
-//
-//- (void) loadUserData;
-//
-//- (void) importSongsUnderURLs:(NSArray*)urls;
-//
-//+ (void) userDataChanged;
+//- (NSArray*) playlists;
+
+- (void) loadUserData;
++ (void) saveUserData;
+
+- (void) importSongsUnderURLs:(NSArray*)urls;
 
 @end

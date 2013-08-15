@@ -10,16 +10,14 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import "MAKVONotificationCenter.h"
+#import "SDSong.h"
 
 @interface SDUserDataManager ()
 
 @property BOOL canSave;
 
-//@property SDPlaylistCollection* rootNode;
-//
-//@property SDMasterPlaylist* masterPlaylist;
-//@property SDPlaylistCollection* userPlaylistsCollection;
+@property NSMutableArray* allSongs;
+@property NSMutableArray* playlists;
 
 @end
 
@@ -34,116 +32,96 @@
     return sharedMusicManager;
 }
 
-//- (id) init {
-//    if (self = [super init]) {
-//        self.rootNode = [[SDPlaylistCollection alloc] init];
-//        
-//        [[MAKVONotificationCenter defaultCenter] observeTarget:self
-//                                                       keyPath:@"userPlaylistsCollection.playlists"
-//                                                       options:0
-//                                                         block:^(MAKVONotification *notification) {
-//                                                             [SDUserDataManager userDataChanged];
-//                                                         }];
-//    }
-//    return self;
-//}
-
 - (void) loadUserData {
-////    NSLog(@"loading");
-//    
-//    NSData* masterPlaylistData = [[NSUserDefaults standardUserDefaults] dataForKey:@"masterPlaylist"];
-//    NSData* userPlaylistsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"userPlaylists"];
-//    
-//    if (masterPlaylistData)
-//        self.masterPlaylist = [NSKeyedUnarchiver unarchiveObjectWithData:masterPlaylistData];
-//    else
-//        self.masterPlaylist = [[SDMasterPlaylist alloc] init];
-//    
-//    [self.rootNode.playlists addObject:self.masterPlaylist];
-//    
-//    self.userPlaylistsCollection = [[SDPlaylistCollection alloc] init];
-//    [self.rootNode.playlists addObject:self.userPlaylistsCollection];
-//    
-//    if (userPlaylistsData) {
-//        NSArray* playlists = [NSKeyedUnarchiver unarchiveObjectWithData:userPlaylistsData];
-//        [self.userPlaylistsCollection.playlists addObjectsFromArray:playlists];
-//    }
-//    
-//    self.canSave = YES;
+//    NSLog(@"loading");
+    
+    self.allSongs = [NSMutableArray array];
+    self.playlists = [NSMutableArray array];
+    
+    NSData* allSongsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"allSongs"];
+    NSData* playlistsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"playlists"];
+    
+    if (allSongsData)
+        [self.allSongs addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithData:allSongsData]];
+    
+    if (playlistsData)
+        [self.playlists addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithData:playlistsData]];
+    
+    self.canSave = YES;
 }
 
 - (void) saveUserData {
-//    if (!self.canSave)
-//        return;
-//    
-////    NSLog(@"saving");
-//    
-//    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:self.masterPlaylist] forKey:@"masterPlaylist"];
-//    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self userPlaylists]] forKey:@"userPlaylists"];
+    if (!self.canSave)
+        return;
+    
+//    NSLog(@"saving");
+    
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self allSongs]] forKey:@"allSongs"];
+    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self playlists]] forKey:@"playlists"];
 }
 
 - (void) importSongsUnderURLs:(NSArray*)urls {
-//    [SDUserDataManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
-//        [self.masterPlaylist addSongsWithURLs:urls];
-//    }];
+    [SDUserDataManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
+        NSArray* existingURLs = [self.allSongs valueForKeyPath:@"url"];
+        
+        for (NSURL* url in urls) {
+            if ([existingURLs containsObject: url])
+                continue;
+            
+            SDSong* song = [[SDSong alloc] init];
+            song.url = [url fileReferenceURL];
+            
+            [self.allSongs addObject:song];
+        }
+    }];
 }
 
 + (void) filterOnlyPlayableURLs:(NSArray*)urls completionHandler:(void(^)(NSArray* urls))handler {
-//    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-//        NSMutableArray* list = [NSMutableArray array];
-//        
-//        NSFileManager* fileManager = [[NSFileManager alloc] init];
-//        
-//        for (NSURL* url in urls) {
-//            BOOL isDir;
-//            BOOL exists = [fileManager fileExistsAtPath:[url path] isDirectory:&isDir];
-//            if (!exists)
-//                continue;
-//            
-//            if (isDir) {
-//                NSDirectoryEnumerator* dirEnum = [fileManager enumeratorAtURL:url
-//                                                   includingPropertiesForKeys:@[]
-//                                                                      options:NSDirectoryEnumerationSkipsPackageDescendants & NSDirectoryEnumerationSkipsHiddenFiles
-//                                                                 errorHandler:^BOOL(NSURL *url, NSError *error) {
-//                                                                     NSLog(@"error for [%@]! %@", url, error);
-//                                                                     return YES;
-//                                                                 }];
-//                
-//                for (NSURL* file in dirEnum) {
-//                    AVURLAsset* asset = [AVURLAsset assetWithURL:file];
-//                    if ([asset isPlayable]) {
-//                        [list addObject:file];
-//                    }
-//                }
-//            }
-//            else {
-//                AVURLAsset* asset = [AVURLAsset assetWithURL:url];
-//                if ([asset isPlayable]) {
-//                    [list addObject:url];
-//                }
-//            }
-//        }
-//        
-//        NSArray* urls = [list valueForKeyPath:@"fileReferenceURL"];
-//        
-//        dispatch_async(dispatch_get_main_queue(), ^{
-//            handler(urls);
-//        });
-//    });
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        NSMutableArray* list = [NSMutableArray array];
+        
+        NSFileManager* fileManager = [[NSFileManager alloc] init];
+        
+        for (NSURL* url in urls) {
+            BOOL isDir;
+            BOOL exists = [fileManager fileExistsAtPath:[url path] isDirectory:&isDir];
+            if (!exists)
+                continue;
+            
+            if (isDir) {
+                NSDirectoryEnumerator* dirEnum = [fileManager enumeratorAtURL:url
+                                                   includingPropertiesForKeys:@[]
+                                                                      options:NSDirectoryEnumerationSkipsPackageDescendants & NSDirectoryEnumerationSkipsHiddenFiles
+                                                                 errorHandler:^BOOL(NSURL *url, NSError *error) {
+                                                                     NSLog(@"error for [%@]! %@", url, error);
+                                                                     return YES;
+                                                                 }];
+                
+                for (NSURL* file in dirEnum) {
+                    AVURLAsset* asset = [AVURLAsset assetWithURL:file];
+                    if ([asset isPlayable]) {
+                        [list addObject:file];
+                    }
+                }
+            }
+            else {
+                AVURLAsset* asset = [AVURLAsset assetWithURL:url];
+                if ([asset isPlayable]) {
+                    [list addObject:url];
+                }
+            }
+        }
+        
+        NSArray* urls = [list valueForKeyPath:@"fileReferenceURL"];
+        
+        dispatch_async(dispatch_get_main_queue(), ^{
+            handler(urls);
+        });
+    });
 }
 
-+ (void) userDataChanged {
-//    [[SDUserDataManager sharedMusicManager] saveUserData];
-}
-
-- (NSArray*) allSongs {
-//    return [self.masterPlaylist songs];
-    return nil;
-}
-
-- (NSArray*) userPlaylists {
-//    return [self.userPlaylistsCollection playlists];
-    return nil;
++ (void) saveUserData {
+    [[SDUserDataManager sharedMusicManager] saveUserData];
 }
 
 @end

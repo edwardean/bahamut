@@ -24,23 +24,19 @@
 @implementation SDAppDelegate
 
 - (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+    [[NSImage imageNamed:@"playlist"] setTemplate:YES];
     
-    SDSong* song = [[SDSong alloc] init];
-    song.url = [NSURL fileURLWithPath:@"/Users/sdegutis/Music/iTunes/iTunes Media/Music/Tool/Lateralus/05 Schism.m4a"];
-    
-    NSLog(@"%f", [song duration]);
-    
-//    static SDSong* s;
-//    s = song;
+//    SDSong* song = [[SDSong alloc] init];
+//    song.url = [NSURL fileURLWithPath:@"/Users/sdegutis/Music/iTunes/iTunes Media/Music/Tool/Lateralus/05 Schism.m4a"];
+//    
+//    NSLog(@"%f", [song duration]);
     
     
 //    [[SDUserDataManager sharedMusicManager] loadUserData];
-//    
-//    [[NSImage imageNamed:@"playlist"] setTemplate:YES];
-//    
-//    self.playerWindowControllers = [NSMutableArray array];
-//    
-//    [self newPlayerWindow:nil];
+    
+    
+    self.playerWindowControllers = [NSMutableArray array];
+    [self newPlayerWindow:nil];
 }
 
 - (void) playerWindowKilled:(id)controller {
