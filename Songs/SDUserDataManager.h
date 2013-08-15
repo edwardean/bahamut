@@ -8,9 +8,12 @@
 
 #import <Foundation/Foundation.h>
 
-@interface SDPersistenceManager : NSObject
+#define SDAllSongsDidChange @"SDAllSongsDidChange"
+#define SDPlaylistsDidVisiblyChange @"SDPlaylistsDidVisiblyChange"
 
-+ (SDPersistenceManager*) sharedMusicManager;
+@interface SDUserDataManager : NSObject
+
++ (SDUserDataManager*) sharedMusicManager;
 
 - (NSMutableArray*) allSongs;
 - (NSMutableArray*) playlists;

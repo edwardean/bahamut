@@ -20,8 +20,10 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 @interface SDPlayerWindowController ()
 
 @property (weak) IBOutlet NSTableView* songsTable;
-@property (weak) IBOutlet NSOutlineView* sourceList;
+@property (weak) IBOutlet NSOutlineView* playlistsOutlineView;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
+
+@property SDPlaylist* selectedPlaylist;
 
 @end
 
@@ -39,16 +41,19 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     [super windowDidLoad];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChange object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistsDidVisiblyChange:) name:SDPlaylistsDidVisiblyChange object:nil];
     
-    [self.sourceList expandItem:nil expandChildren:YES];
-    [self.sourceList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+    [self.playlistsOutlineView expandItem:nil expandChildren:YES];
+    [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
-    [self.songPositionSlider unbind:@"currentValue"];
-    [self.songPositionSlider unbind:@"maxValue"];
-    
     [self.killedDelegate playerWindowKilled:self];
+}
+
+
+- (void) playlistsDidVisiblyChange:(NSNotification*)note {
+    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
 }
 
 - (void) allSongsDidChange:(NSNotification*)note {
@@ -64,10 +69,35 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-    return 0;
+    if (self.selectedPlaylist) {
+        return [[self.selectedPlaylist songs] count];
+    }
+    else {
+        return [[[SDUserDataManager sharedMusicManager] allSongs] count];
+    }
 }
 
 - (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    NSArray* songs;
+    if (self.selectedPlaylist) {
+        songs = [self.selectedPlaylist songs];
+    }
+    else {
+        songs = [[SDUserDataManager sharedMusicManager] allSongs];
+    }
+    
+    SDSong* song = [songs objectAtIndex:rowIndex];
+    
+    if ([[aTableColumn identifier] isEqual:@"title"]) {
+        return [song title];
+    }
+    if ([[aTableColumn identifier] isEqual:@"artist"]) {
+        return [song artist];
+    }
+    if ([[aTableColumn identifier] isEqual:@"album"]) {
+        return [song album];
+    }
+    
     return nil;
 }
 
@@ -79,7 +109,19 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 
-
+- (void) outlineViewSelectionDidChange:(NSNotification*)note {
+    NSInteger row = [self.playlistsOutlineView selectedRow];
+    
+    if (row == 0) {
+        self.selectedPlaylist = nil;
+    }
+    else {
+        NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+        self.selectedPlaylist = [playlists objectAtIndex:row - 2];
+    }
+    
+    [self.songsTable reloadData];
+}
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
     NSTableCellView *result;
@@ -192,13 +234,14 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     SDPlaylist* newlist = [[SDPlaylist alloc] init];
     [playlists addObject:newlist];
     
-    [self.sourceList reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    [SDUserDataManager saveUserData];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistsDidVisiblyChange object:nil];
     
 //    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1 + 2];
 //    [self.sourceList selectRowIndexes:indices byExtendingSelection:NO];
 //    [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
     
-    [SDUserDataManager saveUserData];
 }
 
 - (IBAction) nextSong:(id)sender {

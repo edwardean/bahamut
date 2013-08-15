@@ -6,13 +6,13 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "SDPersistenceManager.h"
+#import "SDUserDataManager.h"
 
 #import <AVFoundation/AVFoundation.h>
 
 #import "SDSong.h"
 
-@interface SDPersistenceManager ()
+@interface SDUserDataManager ()
 
 @property BOOL canSave;
 
@@ -21,13 +21,13 @@
 
 @end
 
-@implementation SDPersistenceManager
+@implementation SDUserDataManager
 
-+ (SDPersistenceManager*) sharedMusicManager {
-    static SDPersistenceManager* sharedMusicManager;
++ (SDUserDataManager*) sharedMusicManager {
+    static SDUserDataManager* sharedMusicManager;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedMusicManager = [[SDPersistenceManager alloc] init];
+        sharedMusicManager = [[SDUserDataManager alloc] init];
     });
     return sharedMusicManager;
 }
@@ -61,7 +61,7 @@
 }
 
 - (void) importSongsUnderURLs:(NSArray*)urls {
-    [SDPersistenceManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
+    [SDUserDataManager filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
         NSArray* existingURLs = [self.allSongs valueForKeyPath:@"url"];
         
         for (NSURL* url in urls) {
@@ -75,6 +75,8 @@
         }
         
         [self saveUserData];
+        
+        [[NSNotificationCenter defaultCenter] postNotificationName:SDAllSongsDidChange object:nil];
     }];
 }
 
@@ -123,7 +125,7 @@
 }
 
 + (void) saveUserData {
-    [[SDPersistenceManager sharedMusicManager] saveUserData];
+    [[SDUserDataManager sharedMusicManager] saveUserData];
 }
 
 @end
