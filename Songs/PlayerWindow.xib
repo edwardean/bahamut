@@ -690,6 +690,22 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
+						<string key="label">listingSection</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="239354747"/>
+					</object>
+					<int key="connectionID">152</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">playerSection</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="671139329"/>
+					</object>
+					<int key="connectionID">153</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="384763069"/>
 						<reference key="destination" ref="1001"/>
@@ -1267,7 +1283,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">151</int>
+			<int key="maxID">153</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -1279,6 +1295,7 @@
 						<string key="nextSong:">id</string>
 						<string key="playPause:">id</string>
 						<string key="prevSong:">id</string>
+						<string key="startPlayingSong:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="makeNewPlaylist:">
@@ -1297,13 +1314,27 @@
 							<string key="name">prevSong:</string>
 							<string key="candidateClassName">id</string>
 						</object>
+						<object class="IBActionInfo" key="startPlayingSong:">
+							<string key="name">startPlayingSong:</string>
+							<string key="candidateClassName">id</string>
+						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
+						<string key="listingSection">NSView</string>
+						<string key="playerSection">NSView</string>
 						<string key="playlistsOutlineView">NSOutlineView</string>
 						<string key="songPositionSlider">SDTrackPositionView</string>
 						<string key="songsTable">NSTableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
+						<object class="IBToOneOutletInfo" key="listingSection">
+							<string key="name">listingSection</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="playerSection">
+							<string key="name">playerSection</string>
+							<string key="candidateClassName">NSView</string>
+						</object>
 						<object class="IBToOneOutletInfo" key="playlistsOutlineView">
 							<string key="name">playlistsOutlineView</string>
 							<string key="candidateClassName">NSOutlineView</string>

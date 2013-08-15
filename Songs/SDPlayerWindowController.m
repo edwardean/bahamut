@@ -19,6 +19,9 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 @interface SDPlayerWindowController ()
 
+@property (weak) IBOutlet NSView* playerSection;
+@property (weak) IBOutlet NSView* listingSection;
+
 @property (weak) IBOutlet NSTableView* songsTable;
 @property (weak) IBOutlet NSOutlineView* playlistsOutlineView;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
@@ -48,6 +51,8 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     
     [self.playlistsOutlineView expandItem:nil expandChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+    
+    [self showOrHidePlayer];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
@@ -64,6 +69,28 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     [self.songsTable reloadData];
 }
 
+
+
+
+
+- (void) showOrHidePlayer {
+    NSRect contentFrame = [[[self window] contentView] frame];
+    
+    if (self.selectedPlaylist) {
+        [self.playerSection setHidden:NO];
+        
+        CGFloat playerHeight = [self.playerSection frame].size.height;
+        
+        NSRect bla;
+        NSDivideRect(contentFrame, &bla, &contentFrame, playerHeight, NSMaxYEdge);
+        
+        [self.listingSection setFrame:contentFrame];
+    }
+    else {
+        [self.playerSection setHidden:YES];
+        [self.listingSection setFrame:contentFrame];
+    }
+}
 
 
 
@@ -122,6 +149,8 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     }
     
     [self.songsTable reloadData];
+    
+    [self showOrHidePlayer];
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item {

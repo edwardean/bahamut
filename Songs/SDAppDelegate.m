@@ -19,13 +19,17 @@
 
 @implementation SDAppDelegate
 
-- (void)applicationDidFinishLaunching:(NSNotification *)aNotification {
+- (void) applicationWillFinishLaunching:(NSNotification *)notification {
     [[NSImage imageNamed:@"playlist"] setTemplate:YES];
     
     [[SDUserDataManager sharedMusicManager] loadUserData];
     
     self.playerWindowControllers = [NSMutableArray array];
+}
+
+- (BOOL) applicationOpenUntitledFile:(NSApplication *)sender {
     [self newPlayerWindow:nil];
+    return YES;
 }
 
 - (void) playerWindowKilled:(id)controller {
