@@ -16,6 +16,14 @@
     return YES;
 }
 
+- (id) init {
+    if (self = [super init]) {
+        self.songs = [NSMutableArray array];
+        self.title = @"New Playlist";
+    }
+    return self;
+}
+
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [self init]) {
         self.title = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"title"];
@@ -23,7 +31,6 @@
         self.repeats = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesRepeat"] boolValue];
         
         NSArray* songUUIDs = [aDecoder decodeObjectOfClass:[NSArray self] forKey:@"songUUIDs"];
-        
         NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
         
         for (NSString* uuid in songUUIDs) {
@@ -48,15 +55,18 @@
 }
 
 - (void) addSongs:(NSArray*)songs {
-    
+    for (SDSong* song in songs) {
+        if (![self.songs containsObject:song])
+            [self.songs addObject:song];
+    }
 }
 
 - (void) playSong:(SDSong*)song {
-    
+    self.isPlaying = YES;
 }
 
 - (void) pause {
-    
+    self.isPlaying = NO;
 }
 
 @end
