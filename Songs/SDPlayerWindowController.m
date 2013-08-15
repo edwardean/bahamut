@@ -8,18 +8,18 @@
 
 #import "SDPlayerWindowController.h"
 
-#import "SDUserDataManager.h"
+#import "SDPersistenceManager.h"
 
 #import "SDPlaylist.h"
 
 #import "SDTrackPositionView.h"
 
+static NSString* SDMasterPlaylistItem = @"master";
+static NSString* SDUserPlaylistsItem = @"playlists";
+
 @interface SDPlayerWindowController ()
 
-@property (weak) IBOutlet NSTreeController* treeGuy;
 @property (weak) IBOutlet NSOutlineView* sourceList;
-@property (weak) IBOutlet NSArrayController* songsArrayController;
-
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 
 @end
@@ -30,38 +30,12 @@
     return @"PlayerWindow";
 }
 
-//- (void)windowDidLoad {
-//    [super windowDidLoad];
-//    
-//    [self.songPositionSlider bind:@"currentValue"
-//                         toObject:[SDMusicPlayer sharedMusicPlayer]
-//                      withKeyPath:@"currentSong.time"
-//                          options:@{ NSValueTransformerNameBindingOption: @"SDTimeAsSeconds" }];
-//    
-//    [self.songPositionSlider bind:@"maxValue"
-//                         toObject:[SDMusicPlayer sharedMusicPlayer]
-//                      withKeyPath:@"currentSong.duration"
-//                          options:@{ NSValueTransformerNameBindingOption: @"SDTimeAsSeconds" }];
-//    
-////    [[MAKVONotificationCenter defaultCenter] observeTarget:[SDMusicPlayer sharedMusicPlayer]
-////                                                   keyPath:@"currentTime"
-////                                                   options:NSKeyValueObservingOptionNew
-////                                                     block:^(MAKVONotification *notification) {
-////                                                         CMTime time = [notification.newValue CMTimeValue];
-////                                                         self.songPositionSlider.floatValue = CMTimeGetSeconds(time);
-////                                                     }];
-////    
-////    [[MAKVONotificationCenter defaultCenter] observeTarget:[SDMusicPlayer sharedMusicPlayer]
-////                                                   keyPath:@"player.currentItem.duration"
-////                                                   options:NSKeyValueObservingOptionNew
-////                                                     block:^(MAKVONotification *notification) {
-////                                                         CMTime time = [notification.newValue CMTimeValue];
-////                                                         self.songPositionSlider.maxValue = CMTimeGetSeconds(time);
-////                                                     }];
-//    
-//    [self.sourceList expandItem:nil expandChildren:YES];
-//    [self.sourceList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-//}
+- (void)windowDidLoad {
+    [super windowDidLoad];
+    
+    [self.sourceList expandItem:nil expandChildren:YES];
+    [self.sourceList selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+}
 
 - (void) windowWillClose:(NSNotification *)notification {
     [self.songPositionSlider unbind:@"currentValue"];
@@ -70,43 +44,121 @@
     [self.killedDelegate playerWindowKilled:self];
 }
 
-//- (SDUserDataManager*) musicManager {
-//    return [SDUserDataManager sharedMusicManager];
-//}
-//
-//- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id<SDPlaylistNode>)item {
-//    return ![item isLeaf];
-//}
-//
-//- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id<SDPlaylistNode>)item {
-//    return [item isLeaf];
-//}
-//
-//- (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item {
-//    return NO;
-//}
-//
-//- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id<SDPlaylistNode>)item {
-//    NSString* ident = ([item isLeaf] ? @"DataCell" : @"HeaderCell");
-//    NSTableCellView* view = [outlineView makeViewWithIdentifier:ident owner:self];
-//    return view;
-//}
 
-- (IBAction) makeNewPlaylist:(id)sender {
-    SDPlaylist* newlist = [[SDPlaylist alloc] init];
-    
-    NSUInteger idxs[2] = {1, [[[SDUserDataManager sharedMusicManager] playlists] count]};
-    [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
-    [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
+
+
+
+
+
+
+
+
+- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
+    return 0;
 }
 
-//- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
-//    if (commandSelector == @selector(cancelOperation:)) {
-//        [control setStringValue:[[self selectedPlaylist] title]];
-//    }
-//    
-//    return NO;
-//}
+- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    return nil;
+}
+
+
+
+
+
+
+
+
+
+
+
+- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
+    NSTableCellView *result;
+    if (item == SDUserPlaylistsItem) {
+        result = [outlineView makeViewWithIdentifier:@"HeaderCell" owner:self];
+        [[result textField] setStringValue:@"Playlists"];
+    }
+    else {
+        result = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
+        
+        if (item == SDMasterPlaylistItem) {
+            [[result textField] setStringValue:@"All Songs"];
+        }
+        else {
+            SDPlaylist* playlist = item;
+            [[result textField] setStringValue:playlist.title];
+        }
+    }
+    return result;
+}
+
+- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
+    if (item == nil)
+        return 2;
+    else if (item == SDMasterPlaylistItem)
+        return 0;
+    else if (item == SDUserPlaylistsItem)
+        return [[[SDPersistenceManager sharedMusicManager] playlists] count];
+    else
+        return 0;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
+    if (item == SDUserPlaylistsItem)
+        return YES;
+    else
+        return NO;
+}
+
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
+    if (item == nil) {
+        if (index == 0)
+            return SDMasterPlaylistItem;
+        else if (index == 1)
+            return SDUserPlaylistsItem;
+    }
+    else if (item == SDUserPlaylistsItem) {
+        return [[[SDPersistenceManager sharedMusicManager] playlists] objectAtIndex:index];
+    }
+    return nil;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
+    return (item == SDUserPlaylistsItem);
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item {
+    return NO;
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
+    return (item != SDUserPlaylistsItem);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+////- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)commandSelector {
+////    if (commandSelector == @selector(cancelOperation:)) {
+////        [control setStringValue:[[self selectedPlaylist] title]];
+////    }
+////    
+////    return NO;
+////}
+
+
+
+
+
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex {
     return MAX(proposedMin, 150.0);
@@ -122,13 +174,22 @@
     [sender setPosition:w ofDividerAtIndex:0];
 }
 
-//- (id<SDPlaylist>) selectedPlaylist {
-//    return [[self.treeGuy selectedObjects] lastObject];
-//}
-//
-//- (SDSong*) selectedSong {
-//    return [[self.songsArrayController selectedObjects] lastObject];
-//}
+
+
+
+
+
+
+
+
+
+- (IBAction) makeNewPlaylist:(id)sender {
+//    SDPlaylist* newlist = [[SDPlaylist alloc] init];
+//    
+//    NSUInteger idxs[2] = {1, [[[SDPersistenceManager sharedMusicManager] playlists] count]};
+//    [self.treeGuy insertObject:newlist atArrangedObjectIndexPath:[NSIndexPath indexPathWithIndexes:idxs length:2]];
+//    [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
+}
 
 - (IBAction) nextSong:(id)sender {
 //    [[SDMusicPlayer sharedMusicPlayer] nextSong];
@@ -148,12 +209,8 @@
 //    }
 }
 
-//- (void) trackPositionMovedTo:(CGFloat)newValue {
+- (void) trackPositionMovedTo:(CGFloat)newValue {
 //    [[SDMusicPlayer sharedMusicPlayer] seekToTime:newValue];
-//}
-//
-//- (SDMusicPlayer*) musicPlayer {
-//    return [SDMusicPlayer sharedMusicPlayer];
-//}
+}
 
 @end

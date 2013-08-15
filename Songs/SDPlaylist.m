@@ -8,7 +8,7 @@
 
 #import "SDPlaylist.h"
 
-#import "SDUserDataManager.h"
+#import "SDPersistenceManager.h"
 
 @implementation SDPlaylist
 
@@ -31,7 +31,7 @@
         self.repeats = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesRepeat"] boolValue];
         
         NSArray* songUUIDs = [aDecoder decodeObjectOfClass:[NSArray self] forKey:@"songUUIDs"];
-        NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
+        NSArray* allSongs = [[SDPersistenceManager sharedMusicManager] allSongs];
         
         for (NSString* uuid in songUUIDs) {
             NSUInteger songIndex = [allSongs indexOfObjectPassingTest:^BOOL(SDSong* otherSong, NSUInteger idx, BOOL *stop) {

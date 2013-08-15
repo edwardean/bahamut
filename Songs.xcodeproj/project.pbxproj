@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB3A1700F3CD00E0D3AF /* playlist.png */; };
-		9404AB441700F4EF00E0D3AF /* SDUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */; };
+		9404AB441700F4EF00E0D3AF /* SDPersistenceManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB431700F4EF00E0D3AF /* SDPersistenceManager.m */; };
 		9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */; };
 		9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */; };
 		9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F2DA16FF781100DB85C4 /* Cocoa.framework */; };
@@ -25,8 +25,8 @@
 
 /* Begin PBXFileReference section */
 		9404AB3A1700F3CD00E0D3AF /* playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlist.png; sourceTree = "<group>"; };
-		9404AB421700F4EF00E0D3AF /* SDUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserDataManager.h; sourceTree = "<group>"; };
-		9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDUserDataManager.m; sourceTree = "<group>"; };
+		9404AB421700F4EF00E0D3AF /* SDPersistenceManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPersistenceManager.h; sourceTree = "<group>"; };
+		9404AB431700F4EF00E0D3AF /* SDPersistenceManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPersistenceManager.m; sourceTree = "<group>"; };
 		9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlayerWindowController.h; sourceTree = "<group>"; };
 		9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlayerWindowController.m; sourceTree = "<group>"; };
 		9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
@@ -66,15 +66,6 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
-		942460B617012FE2009CD8BC /* Playlists */ = {
-			isa = PBXGroup;
-			children = (
-				94AD9DE017BD556700D678E1 /* SDPlaylist.h */,
-				94AD9DE117BD556700D678E1 /* SDPlaylist.m */,
-			);
-			name = Playlists;
-			sourceTree = "<group>";
-		};
 		9460F2CE16FF781100DB85C4 = {
 			isa = PBXGroup;
 			children = (
@@ -122,9 +113,7 @@
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
 				94AD9DE317BD56C100D678E1 /* Persistence */,
 				9460F2FF16FFA19B00DB85C4 /* Songs */,
-				942460B617012FE2009CD8BC /* Playlists */,
 				9460F2F816FF782C00DB85C4 /* Player Window */,
-				94FEE9C617067090001A33DB /* Something Else */,
 				94AFAD661700823C007F10B1 /* Graphics */,
 				9460F2E116FF781100DB85C4 /* Supporting Files */,
 			);
@@ -156,6 +145,8 @@
 		9460F2FF16FFA19B00DB85C4 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
+				94AD9DE017BD556700D678E1 /* SDPlaylist.h */,
+				94AD9DE117BD556700D678E1 /* SDPlaylist.m */,
 				9460F30816FFE9BF00DB85C4 /* SDSong.h */,
 				9460F30916FFE9BF00DB85C4 /* SDSong.m */,
 			);
@@ -165,8 +156,8 @@
 		94AD9DE317BD56C100D678E1 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				9404AB421700F4EF00E0D3AF /* SDUserDataManager.h */,
-				9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */,
+				9404AB421700F4EF00E0D3AF /* SDPersistenceManager.h */,
+				9404AB431700F4EF00E0D3AF /* SDPersistenceManager.m */,
 			);
 			name = Persistence;
 			sourceTree = "<group>";
@@ -177,13 +168,6 @@
 				9404AB3A1700F3CD00E0D3AF /* playlist.png */,
 			);
 			name = Graphics;
-			sourceTree = "<group>";
-		};
-		94FEE9C617067090001A33DB /* Something Else */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			name = "Something Else";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -255,7 +239,7 @@
 				9460F2E716FF781100DB85C4 /* main.m in Sources */,
 				9460F2EE16FF781100DB85C4 /* SDAppDelegate.m in Sources */,
 				9460F30A16FFE9BF00DB85C4 /* SDSong.m in Sources */,
-				9404AB441700F4EF00E0D3AF /* SDUserDataManager.m in Sources */,
+				9404AB441700F4EF00E0D3AF /* SDPersistenceManager.m in Sources */,
 				9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */,
 				94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */,
 				94AD9DE217BD556700D678E1 /* SDPlaylist.m in Sources */,

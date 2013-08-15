@@ -8,13 +8,9 @@
 
 #import <Foundation/Foundation.h>
 
-//#import "SDUserPlaylist.h"
-//#import "SDPlaylistCollection.h"
-//#import "SDMasterPlaylist.h"
+@interface SDPersistenceManager : NSObject
 
-@interface SDUserDataManager : NSObject
-
-+ (SDUserDataManager*) sharedMusicManager;
++ (SDPersistenceManager*) sharedMusicManager;
 
 - (NSMutableArray*) allSongs;
 - (NSMutableArray*) playlists;
