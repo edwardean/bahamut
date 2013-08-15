@@ -10,6 +10,6 @@
 
 #import "SDPlaylist.h"
 
-@interface SDUserPlaylist : NSObject
+@interface SDUserPlaylist : SDPlaylist
 
 @end

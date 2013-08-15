@@ -1,8 +1,8 @@
 //
-//  MUUserPlaylist.h
+//  SDPlaylist.h
 //  Songs
 //
-//  Created by Steven Degutis on 3/25/13.
+//  Created by Steven Degutis on 8/15/13.
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
@@ -10,11 +10,13 @@
 
 #import "SDSong.h"
 
-@protocol SDPlaylist <NSObject>
+@interface SDPlaylist : NSObject
 
 - (NSString*) title;
+- (void) setTitle:(NSString*)title;
 
 - (NSArray*) songs;
+- (BOOL) canAddSongs;
 - (void) addSongs:(NSArray*)songs;
 
 - (BOOL) shuffles;
@@ -25,5 +27,6 @@
 
 - (void) playSong:(SDSong*)song;
 - (void) pause;
+- (BOOL) isPlaying;
 
 @end

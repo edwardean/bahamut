@@ -10,6 +10,6 @@
 
 #import "SDPlaylist.h"
 
-@interface SDMasterPlaylist : NSObject <SDPlaylist>
+@interface SDMasterPlaylist : SDPlaylist
 
 @end
