@@ -31,18 +31,7 @@
         self.repeats = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesRepeat"] boolValue];
         
         NSArray* songUUIDs = [aDecoder decodeObjectOfClass:[NSArray self] forKey:@"songUUIDs"];
-        NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
-        
-        for (NSString* uuid in songUUIDs) {
-            NSUInteger songIndex = [allSongs indexOfObjectPassingTest:^BOOL(SDSong* otherSong, NSUInteger idx, BOOL *stop) {
-                return [[otherSong valueForKey:@"uuid"] isEqualToString:uuid];
-            }];
-            
-            if (songIndex != NSNotFound) {
-                SDSong* song = [allSongs objectAtIndex:songIndex];
-                [self.songs addObject:song];
-            }
-        }
+        [self.songs addObjectsFromArray:[SDUserDataManager songsForUUIDs:songUUIDs]];
     }
     return self;
 }
@@ -55,18 +44,9 @@
 }
 
 - (void) addSongs:(NSArray*)songs {
-    for (SDSong* song in songs) {
-        if (![self.songs containsObject:song])
-            [self.songs addObject:song];
-    }
-}
-
-- (void) playSong:(SDSong*)song {
-    self.isPlaying = YES;
-}
-
-- (void) pause {
-    self.isPlaying = NO;
+    NSMutableArray* songsToAdd = [songs mutableCopy];
+    [songsToAdd removeObjectsInArray: self.songs];
+    [self.songs addObjectsFromArray: songsToAdd];
 }
 
 @end

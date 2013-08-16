@@ -10,8 +10,6 @@
 
 @interface SDSong ()
 
-@property NSString* uuid;
-
 @property AVURLAsset* cachedAsset;
 //@property AVPlayerItem* cachedPlayerItem;
 

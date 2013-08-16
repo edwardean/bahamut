@@ -23,4 +23,6 @@
 
 - (void) importSongsUnderURLs:(NSArray*)urls;
 
++ (NSArray*) songsForUUIDs:(NSArray*)songUUIDs;
+
 @end

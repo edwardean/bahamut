@@ -128,4 +128,14 @@
     [[SDUserDataManager sharedMusicManager] saveUserData];
 }
 
++ (NSArray*) songsForUUIDs:(NSArray*)songUUIDs {
+    NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
+    
+    NSIndexSet* indices = [allSongs indexesOfObjectsPassingTest:^BOOL(SDSong* song, NSUInteger idx, BOOL *stop) {
+        return [songUUIDs containsObject:[song uuid]];
+    }];
+    
+    return [allSongs objectsAtIndexes:indices];
+}
+
 @end

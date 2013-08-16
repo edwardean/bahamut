@@ -12,6 +12,7 @@
 
 @interface SDSong : NSObject <NSSecureCoding>
 
+@property NSString* uuid;
 @property NSURL* url;
 
 - (NSString*) title;

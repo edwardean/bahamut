@@ -20,7 +20,5 @@
 @property BOOL repeats;
 
 @property BOOL isPlaying;
-- (void) playSong:(SDSong*)song;
-- (void) pause;
 
 @end

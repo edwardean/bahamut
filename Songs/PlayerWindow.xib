@@ -436,7 +436,7 @@
 															<string key="NSFrameSize">{570, 431}</string>
 															<reference key="NSSuperview" ref="50003124"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="950393727"/>
+															<reference key="NSNextKeyView" ref="242560340"/>
 															<string key="NSReuseIdentifierKey">_NS:13</string>
 															<bool key="NSEnabled">YES</bool>
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -551,7 +551,7 @@
 															<reference key="NSBackgroundColor" ref="422106274"/>
 															<reference key="NSGridColor" ref="442287894"/>
 															<double key="NSRowHeight">17</double>
-															<int key="NSTvFlags">-675282944</int>
+															<int key="NSTvFlags">-608174080</int>
 															<reference key="NSDelegate"/>
 															<reference key="NSDataSource"/>
 															<string key="NSAutosaveName">songsCols</string>
@@ -619,7 +619,7 @@
 											<string key="NSFrame">{{0, 33}, {570, 448}}</string>
 											<reference key="NSSuperview" ref="9185959"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="242560340"/>
+											<reference key="NSNextKeyView" ref="50003124"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<int key="NSsFlags">133680</int>
 											<reference key="NSVScroller" ref="950393727"/>
@@ -1586,45 +1586,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SDPlayerWindowController</string>
 					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="makeNewPlaylist:">id</string>
-						<string key="nextSong:">id</string>
-						<string key="performFindPanelAction:">id</string>
-						<string key="playPause:">id</string>
-						<string key="prevSong:">id</string>
-						<string key="renamePlaylist:">NSTextField</string>
-						<string key="startPlayingSong:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="makeNewPlaylist:">
-							<string key="name">makeNewPlaylist:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="nextSong:">
-							<string key="name">nextSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="performFindPanelAction:">
-							<string key="name">performFindPanelAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="playPause:">
-							<string key="name">playPause:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="prevSong:">
-							<string key="name">prevSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="renamePlaylist:">
-							<string key="name">renamePlaylist:</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBActionInfo" key="startPlayingSong:">
-							<string key="name">startPlayingSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="playlistOptionsContainerView">NSView</string>
 						<string key="playlistTitleField">NSTextField</string>
