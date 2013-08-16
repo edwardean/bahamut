@@ -17,10 +17,14 @@
 static NSString* SDMasterPlaylistItem = @"master";
 static NSString* SDUserPlaylistsItem = @"playlists";
 
+
+
+
+
 @interface SDPlayerWindowController ()
 
-@property (weak) IBOutlet NSView* playerSection;
-@property (weak) IBOutlet NSView* listingSection;
+@property (weak) IBOutlet NSButton* repeatButton;
+@property (weak) IBOutlet NSButton* shuffleButton;
 
 @property (weak) IBOutlet NSTableView* songsTable;
 @property (weak) IBOutlet NSOutlineView* playlistsOutlineView;
@@ -51,8 +55,6 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     
     [self.playlistsOutlineView expandItem:nil expandChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-    
-    [self showOrHidePlayer];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
@@ -69,28 +71,6 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     [self.songsTable reloadData];
 }
 
-
-
-
-
-- (void) showOrHidePlayer {
-    NSRect contentFrame = [[[self window] contentView] frame];
-    
-    if (self.selectedPlaylist) {
-        [self.playerSection setHidden:NO];
-        
-        CGFloat playerHeight = [self.playerSection frame].size.height;
-        
-        NSRect bla;
-        NSDivideRect(contentFrame, &bla, &contentFrame, playerHeight, NSMaxYEdge);
-        
-        [self.listingSection setFrame:contentFrame];
-    }
-    else {
-        [self.playerSection setHidden:YES];
-        [self.listingSection setFrame:contentFrame];
-    }
-}
 
 
 
@@ -134,6 +114,13 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 
+- (BOOL) showingAllSongs {
+    return (self.selectedPlaylist == nil);
+}
+
+
+
+
 
 
 
@@ -148,9 +135,22 @@ static NSString* SDUserPlaylistsItem = @"playlists";
         self.selectedPlaylist = [playlists objectAtIndex:row - 2];
     }
     
-    [self.songsTable reloadData];
+    [self.repeatButton setEnabled: ![self showingAllSongs]];
+    [self.shuffleButton setEnabled: ![self showingAllSongs]];
     
-    [self showOrHidePlayer];
+    [self.repeatButton setAllowsMixedState: [self showingAllSongs]];
+    [self.shuffleButton setAllowsMixedState: [self showingAllSongs]];
+    
+    if ([self showingAllSongs]) {
+        [self.repeatButton setState: NSMixedState];
+        [self.shuffleButton setState: NSMixedState];
+    }
+    else {
+        [self.repeatButton setState: self.selectedPlaylist.repeats ? NSOnState : NSOffState];
+        [self.shuffleButton setState: self.selectedPlaylist.shuffles ? NSOnState : NSOffState];
+    }
+    
+    [self.songsTable reloadData];
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
