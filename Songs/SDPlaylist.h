@@ -12,8 +12,10 @@
 
 @interface SDPlaylist : NSObject <NSSecureCoding>
 
-- (void) addSongs:(NSArray*)songs;
 @property NSMutableArray* songs;
+
+- (void) addSongs:(NSArray*)songs;
+- (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex;
 
 @property NSString* title;
 @property BOOL shuffles;

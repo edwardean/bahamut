@@ -25,6 +25,13 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
+
+
+
+
+
+
+
 @interface SDPlayerWindowController ()
 
 @property (weak) IBOutlet NSSearchField* searchField;
@@ -115,22 +122,57 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
+- (IBAction) deleteSelectedSongs:(id)sender {
+    NSLog(@"ok fine");
+}
+
+
+
+
+
 
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     NSArray* songs = [[self visibleSongs] objectsAtIndexes:rowIndexes];
     NSArray* uuids = [songs valueForKey:@"uuid"];
-    [pboard setPropertyList:uuids forType:SDSongDragType];
+    NSUInteger playlistIndex = [[[SDUserDataManager sharedMusicManager] playlists] indexOfObject:self.selectedPlaylist];
+    
+    [pboard setPropertyList:@{@"uuids": uuids, @"playlist": @(playlistIndex)}
+                    forType:SDSongDragType];
+    
     return YES;
 }
 
 - (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
-    if (operation == NSTableViewDropAbove)
+    if (operation == NSTableViewDropAbove && self.selectedPlaylist != nil)
         return NSDragOperationCopy;
     else
         return NSDragOperationNone;
 }
 
 - (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
+    NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
+    
+    NSArray* uuids = [data objectForKey:@"uuids"];
+    NSArray* draggingSongs = [SDUserDataManager songsForUUIDs:uuids];
+    
+    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
+    SDPlaylist* fromPlaylist = nil;
+    
+    if (playlistIndex != NSNotFound)
+        fromPlaylist = [[[SDUserDataManager sharedMusicManager] playlists] objectAtIndex:playlistIndex];
+    
+    if (fromPlaylist == self.selectedPlaylist) {
+        // re-arranging
+        
+    }
+    else {
+        // adding
+        [self.selectedPlaylist addSongs: draggingSongs atIndex:row];
+        
+        [SDUserDataManager saveUserData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistSongsDidChange object:self.selectedPlaylist];
+    }
+    
     return YES;
 }
 
@@ -142,7 +184,8 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id < NSDraggingInfo >)info item:(SDPlaylist*)playlist childIndex:(NSInteger)index {
-    NSArray* uuids = [[info draggingPasteboard] propertyListForType:SDSongDragType];
+    NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
+    NSArray* uuids = [data objectForKey:@"uuids"];
     NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
     [playlist addSongs:songs];
     

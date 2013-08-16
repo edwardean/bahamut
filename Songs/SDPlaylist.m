@@ -49,4 +49,13 @@
     [self.songs addObjectsFromArray: songsToAdd];
 }
 
+- (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex {
+    NSMutableArray* songsToAdd = [songs mutableCopy];
+    [songsToAdd removeObjectsInArray: self.songs];
+    
+    for (SDSong* song in [songsToAdd reverseObjectEnumerator]) {
+        [self.songs insertObject:song atIndex:atIndex];
+    }
+}
+
 @end
