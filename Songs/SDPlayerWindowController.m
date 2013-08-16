@@ -23,6 +23,13 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 @interface SDPlayerWindowController ()
 
+@property (weak) IBOutlet NSSearchField* searchField;
+
+@property (weak) IBOutlet NSView* songsTableContainerView;
+@property (weak) IBOutlet NSView* searchContainerView;
+@property (weak) IBOutlet NSView* songsScrollView;
+@property (weak) IBOutlet NSView* playlistOptionsContainerView;
+
 @property (weak) IBOutlet NSTextField* playlistTitleField;
 @property (weak) IBOutlet NSButton* repeatButton;
 @property (weak) IBOutlet NSButton* shuffleButton;
@@ -53,6 +60,8 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     
     [self.songsTable setTarget:self];
     [self.songsTable setDoubleAction:@selector(startPlayingSong:)];
+    
+    [self toggleSearchBar:NO];
     
     [self.playlistsOutlineView expandItem:nil expandChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
@@ -111,6 +120,58 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     
     return nil;
 }
+
+
+
+- (void)controlTextDidChange:(NSNotification *)aNotification {
+    if ([aNotification object] == self.searchField) {
+        NSString* searchString = [self.searchField stringValue];
+        NSLog(@"[%@]", searchString);
+    }
+}
+
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
+    if (control == self.searchField && command == @selector(cancelOperation:)) {
+        [self toggleSearchBar:NO];
+        [self.searchField setStringValue:@""];
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+
+
+
+- (IBAction) performFindPanelAction:(id)sender {
+    [self toggleSearchBar:YES];
+}
+
+- (void) toggleSearchBar:(BOOL)shouldShow {
+    BOOL isShowing = ![self.searchContainerView isHidden];
+    
+    if (shouldShow != isShowing) {
+        NSRect songsTableContainerFrame = [self.songsTableContainerView bounds];
+        NSRect playlistOptionsFrame = [self.playlistOptionsContainerView frame];
+        
+        NSRect songsTableFrame;
+        NSDivideRect(songsTableContainerFrame, &playlistOptionsFrame, &songsTableFrame, playlistOptionsFrame.size.height, NSMinYEdge);
+        
+        if (shouldShow) {
+            NSRect searchSectionFrame = [self.searchContainerView frame];
+            NSDivideRect(songsTableFrame, &searchSectionFrame, &songsTableFrame, searchSectionFrame.size.height, NSMaxYEdge);
+        }
+        
+        [self.searchContainerView setHidden: !shouldShow];
+        [self.songsScrollView setFrame:songsTableFrame];
+    }
+    
+    if (shouldShow)
+        [[self.searchField window] makeFirstResponder: self.searchField];
+}
+
 
 
 
