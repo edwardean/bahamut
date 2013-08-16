@@ -23,6 +23,7 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 @interface SDPlayerWindowController ()
 
+@property (weak) IBOutlet NSTextField* playlistTitleField;
 @property (weak) IBOutlet NSButton* repeatButton;
 @property (weak) IBOutlet NSButton* shuffleButton;
 
@@ -63,12 +64,14 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 - (void) playlistsDidVisiblyChange:(NSNotification*)note {
+    NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
     [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
 }
 
 - (void) allSongsDidChange:(NSNotification*)note {
-    // TODO: only reload if master playlist is shown!
-    [self.songsTable reloadData];
+    if (self.selectedPlaylist == nil)
+        [self.songsTable reloadData];
 }
 
 
@@ -127,6 +130,9 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 - (void) outlineViewSelectionDidChange:(NSNotification*)note {
     NSInteger row = [self.playlistsOutlineView selectedRow];
     
+    if (row == -1)
+        return;
+    
     if (row == 0) {
         self.selectedPlaylist = nil;
     }
@@ -137,6 +143,7 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     
     [self.repeatButton setEnabled: ![self showingAllSongs]];
     [self.shuffleButton setEnabled: ![self showingAllSongs]];
+    [self.playlistTitleField setEnabled: ![self showingAllSongs]];
     
     [self.repeatButton setAllowsMixedState: [self showingAllSongs]];
     [self.shuffleButton setAllowsMixedState: [self showingAllSongs]];
@@ -144,10 +151,12 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     if ([self showingAllSongs]) {
         [self.repeatButton setState: NSMixedState];
         [self.shuffleButton setState: NSMixedState];
+        [self.playlistTitleField setStringValue: @""];
     }
     else {
         [self.repeatButton setState: self.selectedPlaylist.repeats ? NSOnState : NSOffState];
         [self.shuffleButton setState: self.selectedPlaylist.shuffles ? NSOnState : NSOffState];
+        [self.playlistTitleField setStringValue: self.selectedPlaylist.title];
     }
     
     [self.songsTable reloadData];
@@ -258,6 +267,21 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 
+
+
+
+
+- (IBAction) renamePlaylist:(NSTextField*)sender {
+    self.selectedPlaylist.title = [sender stringValue];
+    
+    [SDUserDataManager saveUserData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistsDidVisiblyChange object:nil];
+}
+
+
+
+
+
 - (IBAction) makeNewPlaylist:(id)sender {
     NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
     
@@ -265,13 +289,12 @@ static NSString* SDUserPlaylistsItem = @"playlists";
     [playlists addObject:newlist];
     
     [SDUserDataManager saveUserData];
-    
     [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistsDidVisiblyChange object:nil];
     
-//    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1 + 2];
-//    [self.sourceList selectRowIndexes:indices byExtendingSelection:NO];
-//    [self.sourceList editColumn:0 row:[self.sourceList selectedRow] withEvent:nil select:YES];
+    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1 + 2];
+    [self.playlistsOutlineView selectRowIndexes:indices byExtendingSelection:NO];
     
+    [[self.playlistTitleField window] makeFirstResponder: self.playlistTitleField];
 }
 
 - (IBAction) nextSong:(id)sender {
