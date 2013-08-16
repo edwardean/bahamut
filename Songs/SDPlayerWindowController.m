@@ -63,6 +63,9 @@ static NSString* SDSongDragType = @"SDSongDragType";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistsDidVisiblyChange:) name:SDPlaylistsDidVisiblyChange object:nil];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nowPlayingCurrentTimeDidChange:) name:SDNowPlayingCurrentTimeDidChange object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nowPlayingDidChange:) name:SDNowPlayingDidChange object:nil];
+    
     [self.songsTable setTarget:self];
     [self.songsTable setDoubleAction:@selector(startPlayingSong:)];
     
@@ -99,6 +102,15 @@ static NSString* SDSongDragType = @"SDSongDragType";
         [self.songsTable reloadData];
 }
 
+
+
+- (void) nowPlayingDidChange:(NSNotification*)note {
+    self.songPositionSlider.maxValue = [[SDPlayer sharedPlayer] nowPlaying].duration;
+}
+
+- (void) nowPlayingCurrentTimeDidChange:(NSNotification*)note {
+    self.songPositionSlider.currentValue = [SDPlayer sharedPlayer].currentTime;
+}
 
 
 
@@ -287,6 +299,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
         [self.playlistTitleField setStringValue: self.selectedPlaylist.title];
     }
     
+    [self.songsTable deselectAll:nil];
     [self.songsTable reloadData];
 }
 

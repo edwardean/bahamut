@@ -11,6 +11,9 @@
 #import "SDSong.h"
 #import "SDPlaylist.h"
 
+#define SDNowPlayingDidChange @"SDNowPlayingDidChange"
+#define SDNowPlayingCurrentTimeDidChange @"SDNowPlayingCurrentTimeDidChange"
+
 @interface SDPlayer : NSObject
 
 + (SDPlayer*) sharedPlayer;
@@ -25,5 +28,8 @@
 
 - (void) nextSong;
 - (void) previousSong;
+
+@property (weak) SDSong* nowPlaying;
+@property CGFloat currentTime;
 
 @end
