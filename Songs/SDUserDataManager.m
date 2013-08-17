@@ -185,6 +185,19 @@
     SDPostNote(SDPlaylistAddedNotification, nil);
 }
 
+- (void) movePlaylist:(SDPlaylist*)playlist toIndex:(NSUInteger)idx {
+//    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+//    
+//    NSUInteger oldIndex = [playlists indexOfObject:playlist];
+//    
+//    [SDAddUndo(self) movePlaylist:playlist toIndex:oldIndex];
+//    
+//    [playlists insertObject:playlist atIndex:idx];
+//    [playlists removeObjectAtIndex:oldIndex];
+//    
+//    SDSaveData();
+//    SDPostNote(SDPlaylistAddedNotification, nil);
+}
 
 
 

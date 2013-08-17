@@ -19,6 +19,7 @@ static NSString* SDUserPlaylistsItem = @"playlists";
 
 
 static NSString* SDSongDragType = @"SDSongDragType";
+static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 
@@ -89,6 +90,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     
     [self.songsTable registerForDraggedTypes:@[SDSongDragType]];
     [self.playlistsOutlineView registerForDraggedTypes:@[SDSongDragType]];
+    [self.playlistsOutlineView registerForDraggedTypes:@[SDPlaylistDragType]];
     
     [self.playlistsOutlineView expandItem:nil expandChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
@@ -265,19 +267,52 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 #pragma mark - Playlists, Drag / Drop
 
-- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)item proposedChildIndex:(NSInteger)index {
-    if ([item isKindOfClass: [SDPlaylist self]])
-        return NSDragOperationCopy;
-    else
-        return NSDragOperationNone;
+- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard {
+    if ([items count] == 1 && [[items lastObject] isKindOfClass: [SDPlaylist self]]) {
+        SDPlaylist* playlist = [items lastObject];
+        NSUInteger playlistIndex = [[SDSharedData() playlists] indexOfObject:playlist];
+        
+        [pboard setPropertyList:@(playlistIndex)
+                        forType:SDPlaylistDragType];
+        
+        return YES;
+    }
+    return NO;
 }
 
-- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id < NSDraggingInfo >)info item:(SDPlaylist*)playlist childIndex:(NSInteger)index {
-    NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
-    NSArray* uuids = [data objectForKey:@"uuids"];
-    NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
-    [playlist addSongs:songs];
-    return YES;
+- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)item proposedChildIndex:(NSInteger)index {
+    if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
+        if (item == SDUserPlaylistsItem)
+            return NSDragOperationCopy;
+        else
+            return NSDragOperationNone;
+    }
+    else {
+        if ([item isKindOfClass: [SDPlaylist self]])
+            return NSDragOperationCopy;
+        else
+            return NSDragOperationNone;
+    }
+}
+
+- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id < NSDraggingInfo >)info item:(id)item childIndex:(NSInteger)index {
+    if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
+        NSNumber* playlistIndex = [[info draggingPasteboard] propertyListForType:SDPlaylistDragType];
+        SDPlaylist* movingPlaylist = [[SDSharedData() playlists] objectAtIndex:[playlistIndex integerValue]];
+        
+        [SDSharedData() movePlaylist:movingPlaylist
+                             toIndex:index];
+        
+        return YES;
+    }
+    else {
+        NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
+        NSArray* uuids = [data objectForKey:@"uuids"];
+        NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
+        SDPlaylist* playlist = item;
+        [playlist addSongs:songs];
+        return YES;
+    }
 }
 
 
