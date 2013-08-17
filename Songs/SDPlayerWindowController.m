@@ -18,6 +18,7 @@
 #define SDPlaylistAddedNotification @"SDPlaylistAddedNotification"
 #define SDPlaylistRenamedNotification @"SDPlaylistRenamedNotification"
 #define SDPlaylistRemovedNotification @"SDPlaylistRemovedNotification"
+#define SDPlaylistOptionsChangedNotification @"SDPlaylistOptionsChangedNotification"
 
 
 static NSString* SDMasterPlaylistItem = @"master";
@@ -77,6 +78,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistOptionsChangedNotification:) name:SDPlaylistOptionsChangedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
@@ -121,10 +123,15 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 - (void) playlistRenamedNotification:(NSNotification*)note {
     [self refreshPlaylistsKeepingCurrent];
+    [self updatePlaylistOptionsViewStuff];
 }
 
 - (void) playlistRemovedNotification:(NSNotification*)note {
     [self refreshPlaylistsIgnoringCurrent];
+}
+
+- (void) playlistOptionsChangedNotification:(NSNotification*)note {
+    [self updatePlaylistOptionsViewStuff];
 }
 
 - (void) allSongsDidChange:(NSNotification*)note {
@@ -307,7 +314,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     
     if ([[aTableColumn identifier] isEqual:@"playing"]) {
         if (self.selectedPlaylist == [[SDMusicPlayer sharedPlayer] currentPlaylist] && song == [[SDMusicPlayer sharedPlayer] currentSong])
-            return [NSImage imageNamed:NSImageNameStatusAvailable];
+            return [NSImage imageNamed:NSImageNameRightFacingTriangleTemplate];
         else
             return nil;
     }
@@ -617,18 +624,18 @@ static NSString* SDSongDragType = @"SDSongDragType";
     [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] setRepeats:!repeats forPlaylist:playlist];
     
     playlist.repeats = repeats;
-    [SDUserDataManager saveUserData];
     
-    [self updatePlaylistOptionsViewStuff];
+    [SDUserDataManager saveUserData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistOptionsChangedNotification object:nil];
 }
 
 - (void) setShuffles:(BOOL)shuffles forPlaylist:(SDPlaylist*)playlist {
     [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] setShuffles:!shuffles forPlaylist:playlist];
     
     playlist.shuffles = shuffles;
-    [SDUserDataManager saveUserData];
     
-    [self updatePlaylistOptionsViewStuff];
+    [SDUserDataManager saveUserData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistOptionsChangedNotification object:nil];
 }
 
 
