@@ -43,6 +43,10 @@
     [aCoder encodeObject:@(self.repeats) forKey:@"doesRepeat"];
 }
 
+- (void) removeSongs:(NSArray*)songs {
+    [self.songs removeObjectsInArray:songs];
+}
+
 - (void) addSongs:(NSArray*)songs {
     NSMutableArray* songsToAdd = [songs mutableCopy];
     [songsToAdd removeObjectsInArray: self.songs];

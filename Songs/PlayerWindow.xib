@@ -180,7 +180,7 @@
 														</object>
 													</object>
 													<double key="NSRowHeight">24</double>
-													<int key="NSTvFlags">-767557632</int>
+													<int key="NSTvFlags">-1035993088</int>
 													<reference key="NSDelegate"/>
 													<reference key="NSDataSource"/>
 													<int key="NSColumnAutoresizingStyle">4</int>
@@ -326,7 +326,6 @@
 													<string key="NSFrame">{{285, 7}, {66, 18}}</string>
 													<reference key="NSSuperview" ref="343627916"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSButtonCell" key="NSCell" id="332928549">
@@ -437,7 +436,7 @@
 															<string key="NSFrameSize">{570, 431}</string>
 															<reference key="NSSuperview" ref="50003124"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="950393727"/>
+															<reference key="NSNextKeyView" ref="242560340"/>
 															<string key="NSReuseIdentifierKey">_NS:13</string>
 															<bool key="NSEnabled">YES</bool>
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -620,7 +619,7 @@
 											<string key="NSFrame">{{0, 33}, {570, 448}}</string>
 											<reference key="NSSuperview" ref="9185959"/>
 											<reference key="NSWindow"/>
-											<reference key="NSNextKeyView" ref="242560340"/>
+											<reference key="NSNextKeyView" ref="50003124"/>
 											<string key="NSReuseIdentifierKey">_NS:9</string>
 											<int key="NSsFlags">133680</int>
 											<reference key="NSVScroller" ref="950393727"/>
@@ -1588,20 +1587,16 @@
 					<string key="className">SDPlayerWindowController</string>
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="deleteSelectedSongs:">id</string>
 						<string key="makeNewPlaylist:">id</string>
 						<string key="nextSong:">id</string>
 						<string key="performFindPanelAction:">id</string>
 						<string key="playPause:">id</string>
 						<string key="prevSong:">id</string>
 						<string key="renamePlaylist:">NSTextField</string>
+						<string key="severelyDeleteSomething:">id</string>
 						<string key="startPlayingSong:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="deleteSelectedSongs:">
-							<string key="name">deleteSelectedSongs:</string>
-							<string key="candidateClassName">id</string>
-						</object>
 						<object class="IBActionInfo" key="makeNewPlaylist:">
 							<string key="name">makeNewPlaylist:</string>
 							<string key="candidateClassName">id</string>
@@ -1625,6 +1620,10 @@
 						<object class="IBActionInfo" key="renamePlaylist:">
 							<string key="name">renamePlaylist:</string>
 							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBActionInfo" key="severelyDeleteSomething:">
+							<string key="name">severelyDeleteSomething:</string>
+							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="startPlayingSong:">
 							<string key="name">startPlayingSong:</string>

@@ -15,6 +15,9 @@
 
 
 #define SDPlaylistSongsDidChange @"SDPlaylistSongsDidChange"
+#define SDPlaylistAddedNotification @"SDPlaylistAddedNotification"
+#define SDPlaylistRenamedNotification @"SDPlaylistRenamedNotification"
+#define SDPlaylistRemovedNotification @"SDPlaylistRemovedNotification"
 
 
 static NSString* SDMasterPlaylistItem = @"master";
@@ -68,7 +71,9 @@ static NSString* SDSongDragType = @"SDSongDragType";
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChange object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistsDidVisiblyChange:) name:SDPlaylistsDidVisiblyChange object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nowPlayingCurrentTimeDidChange:) name:SDNowPlayingCurrentTimeDidChange object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(nowPlayingDidChange:) name:SDNowPlayingDidChange object:nil];
@@ -93,10 +98,21 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 
-- (void) playlistsDidVisiblyChange:(NSNotification*)note {
+- (void) playlistAddedNotification:(NSNotification*)note {
     NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
     [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
+}
+
+- (void) playlistRenamedNotification:(NSNotification*)note {
+    NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
+    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
+}
+
+- (void) playlistRemovedNotification:(NSNotification*)note {
+    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
 
 - (void) allSongsDidChange:(NSNotification*)note {
@@ -105,8 +121,10 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 - (void) playlistSongsDidChange:(NSNotification*)note {
-    if ([note object] == self.selectedPlaylist)
+    if ([note object] == self.selectedPlaylist) {
         [self.songsTable reloadData];
+        [self.songsTable deselectAll:nil];
+    }
 }
 
 
@@ -122,8 +140,50 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
-- (IBAction) deleteSelectedSongs:(id)sender {
-    NSLog(@"ok fine");
+- (BOOL) respondsToSelector:(SEL)aSelector {
+    if (aSelector == @selector(severelyDeleteSomething:)) {
+        id firstResponder = [[self window] firstResponder];
+        
+        if (firstResponder == self.songsTable) {
+            if ([self showingAllSongs])
+                return NO;
+            
+            if ([[self.songsTable selectedRowIndexes] count] < 1)
+                return NO;
+            
+            return YES;
+        }
+        else if (firstResponder == self.playlistsOutlineView) {
+            if (self.selectedPlaylist)
+                return YES;
+            
+            return NO;
+        }
+    }
+    
+    return [super respondsToSelector:aSelector];
+}
+
+
+- (IBAction) severelyDeleteSomething:(id)sender {
+    id firstResponder = [[self window] firstResponder];
+    
+    if (firstResponder == self.songsTable) {
+        NSIndexSet* set = [self.songsTable selectedRowIndexes];
+        NSArray* songs = [[self.selectedPlaylist songs] objectsAtIndexes:set];
+        
+        [self.selectedPlaylist removeSongs: songs];
+        
+        [SDUserDataManager saveUserData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistSongsDidChange object:self.selectedPlaylist];
+    }
+    else if (firstResponder == self.playlistsOutlineView) {
+        NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+        [playlists removeObject:self.selectedPlaylist];
+        
+        [SDUserDataManager saveUserData];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistRemovedNotification object:nil];
+    }
 }
 
 
@@ -459,7 +519,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     self.selectedPlaylist.title = [sender stringValue];
     
     [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistsDidVisiblyChange object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistRenamedNotification object:nil];
 }
 
 
@@ -473,7 +533,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     [playlists addObject:newlist];
     
     [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistsDidVisiblyChange object:nil];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistAddedNotification object:nil];
     
     NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1 + 2];
     [self.playlistsOutlineView selectRowIndexes:indices byExtendingSelection:NO];

@@ -9,7 +9,6 @@
 #import <Foundation/Foundation.h>
 
 #define SDAllSongsDidChange @"SDAllSongsDidChange"
-#define SDPlaylistsDidVisiblyChange @"SDPlaylistsDidVisiblyChange"
 
 @interface SDUserDataManager : NSObject
 
