@@ -32,6 +32,7 @@
 - (void) previousSong;
 
 - (SDSong*) currentSong;
+- (SDPlaylist*) currentPlaylist;
 @property (readonly) CGFloat currentTime;
 @property (readonly) BOOL stopped;
 

@@ -105,6 +105,12 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 
+
+
+
+
+#pragma mark - Notifications
+
 - (void) playlistAddedNotification:(NSNotification*)note {
     NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
     [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
@@ -134,13 +140,14 @@ static NSString* SDSongDragType = @"SDSongDragType";
     }
 }
 
-
 - (void) playerStatusDidChange:(NSNotification*)note {
     [self.playButton setTitle: [[SDPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
 }
 
 - (void) currentSongDidChange:(NSNotification*)note {
     [self updateCurrentSongViewStuff];
+    [self.songsTable reloadData];
+//    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES]; // so we can put an icon next to the now-playing playlist
 }
 
 - (void) currentSongTimeDidChange:(NSNotification*)note {
@@ -151,23 +158,10 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
-- (void) updateCurrentSongViewStuff {
-    SDSong* currentSong = [[SDPlayer sharedPlayer] currentSong];
-    
-    if (currentSong) {
-        NSString* trackInfo = [NSString stringWithFormat:@"%@ - %@", currentSong.title, currentSong.artist];
-        [self.currentSongScrollingField setStringValue:trackInfo];
-        self.songPositionSlider.maxValue = [[SDPlayer sharedPlayer] currentSong].duration;
-    }
-    else {
-        self.songPositionSlider.maxValue = 0.0;
-        self.songPositionSlider.currentValue = 0.0;
-    }
-}
 
 
 
-
+#pragma mark - Deleting stuff
 
 - (BOOL) respondsToSelector:(SEL)aSelector {
     if (aSelector == @selector(severelyDeleteSomething:)) {
@@ -193,7 +187,6 @@ static NSString* SDSongDragType = @"SDSongDragType";
     return [super respondsToSelector:aSelector];
 }
 
-
 - (IBAction) severelyDeleteSomething:(id)sender {
     id firstResponder = [[self window] firstResponder];
     
@@ -218,7 +211,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
-
+#pragma mark - Songs table, Drag / Drop
 
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     NSArray* songs = [[self visibleSongs] objectsAtIndexes:rowIndexes];
@@ -265,6 +258,8 @@ static NSString* SDSongDragType = @"SDSongDragType";
     return YES;
 }
 
+#pragma mark - Playlists, Drag / Drop
+
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)item proposedChildIndex:(NSInteger)index {
     if ([item isKindOfClass: [SDPlaylist self]])
         return NSDragOperationCopy;
@@ -288,26 +283,8 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
-- (void) startPlayingPlaylist:(id)sender {
-    if ([self.playlistsOutlineView clickedRow] < 2)
-        return;
-    
-    [[SDPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
-}
 
-
-
-
-
-
-- (NSArray*) visibleSongs {
-    if (self.selectedPlaylist) {
-        return [self.selectedPlaylist songs];
-    }
-    else {
-        return [[SDUserDataManager sharedMusicManager] allSongs];
-    }
-}
+#pragma mark - Songs table data source
 
 
 
@@ -319,6 +296,12 @@ static NSString* SDSongDragType = @"SDSongDragType";
     NSArray* songs = [self visibleSongs];
     SDSong* song = [songs objectAtIndex:rowIndex];
     
+    if ([[aTableColumn identifier] isEqual:@"playing"]) {
+        if (self.selectedPlaylist == [[SDPlayer sharedPlayer] currentPlaylist] && song == [[SDPlayer sharedPlayer] currentSong])
+            return [NSImage imageNamed:NSImageNameStatusAvailable];
+        else
+            return nil;
+    }
     if ([[aTableColumn identifier] isEqual:@"title"]) {
         return [song title];
     }
@@ -334,26 +317,10 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
-- (void)controlTextDidChange:(NSNotification *)aNotification {
-    if ([aNotification object] == self.searchField) {
-        NSString* searchString = [self.searchField stringValue];
-        NSLog(@"[%@]", searchString);
-    }
-}
-
-
-- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
-    if (control == self.searchField && command == @selector(cancelOperation:)) {
-        [self toggleSearchBar:NO];
-        [self.searchField setStringValue:@""];
-        return YES;
-    }
-    
-    return NO;
-}
 
 
 
+#pragma mark - Search bar
 
 
 - (IBAction) performFindPanelAction:(id)sender {
@@ -383,9 +350,34 @@ static NSString* SDSongDragType = @"SDSongDragType";
         [[self.searchField window] makeFirstResponder: self.searchField];
 }
 
+- (void)controlTextDidChange:(NSNotification *)aNotification {
+    if ([aNotification object] == self.searchField) {
+        NSString* searchString = [self.searchField stringValue];
+        NSLog(@"[%@]", searchString);
+    }
+}
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
+    if (control == self.searchField && command == @selector(cancelOperation:)) {
+        [self toggleSearchBar:NO];
+        [self.searchField setStringValue:@""];
+        return YES;
+    }
+    
+    return NO;
+}
 
 
 
+
+
+
+
+
+
+
+
+#pragma mark - Helpers
 
 
 
@@ -393,6 +385,19 @@ static NSString* SDSongDragType = @"SDSongDragType";
     return (self.selectedPlaylist == nil);
 }
 
+- (NSArray*) visibleSongs {
+    if (self.selectedPlaylist) {
+        return [self.selectedPlaylist songs];
+    }
+    else {
+        return [[SDUserDataManager sharedMusicManager] allSongs];
+    }
+}
+
+
+
+
+#pragma mark - Updating View Stuff
 
 
 
@@ -416,6 +421,19 @@ static NSString* SDSongDragType = @"SDSongDragType";
     }
 }
 
+- (void) updateCurrentSongViewStuff {
+    SDSong* currentSong = [[SDPlayer sharedPlayer] currentSong];
+    
+    if (currentSong) {
+        NSString* trackInfo = [NSString stringWithFormat:@"%@ - %@", currentSong.title, currentSong.artist];
+        [self.currentSongScrollingField setStringValue:trackInfo];
+        self.songPositionSlider.maxValue = [[SDPlayer sharedPlayer] currentSong].duration;
+    }
+    else {
+        self.songPositionSlider.maxValue = 0.0;
+        self.songPositionSlider.currentValue = 0.0;
+    }
+}
 
 
 
@@ -423,6 +441,9 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
+
+
+#pragma mark - Playlists data source and delegate
 
 - (void) outlineViewSelectionDidChange:(NSNotification*)note {
     NSInteger row = [self.playlistsOutlineView selectedRow];
@@ -520,7 +541,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
-
+#pragma mark - Split view crap
 
 
 
@@ -550,7 +571,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
-
+#pragma mark - Editing the current Playlist
 
 
 - (IBAction) renamePlaylist:(NSTextField*)sender {
@@ -573,6 +594,8 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
+#pragma mark - Creating a new Playlist
+
 
 
 - (IBAction) makeNewPlaylist:(id)sender {
@@ -594,12 +617,25 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
+
+
+
+#pragma mark - Direct IB actions
+
+
 - (IBAction) nextSong:(id)sender {
     [[SDPlayer sharedPlayer] nextSong];
 }
 
 - (IBAction) prevSong:(id)sender {
     [[SDPlayer sharedPlayer] previousSong];
+}
+
+- (void) startPlayingPlaylist:(id)sender {
+    if ([self.playlistsOutlineView clickedRow] < 2)
+        return;
+    
+    [[SDPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
 }
 
 - (IBAction) startPlayingSong:(id)sender {
