@@ -30,6 +30,13 @@
     return sharedPlayer;
 }
 
+- (id) init {
+    if (self = [super init]) {
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foo:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
+    }
+    return self;
+}
+
 - (void) playSong:(SDSong*)song inPlaylist:(SDPlaylist*)playlist {
     self.songsPlaying = [playlist songs];
     self.nowPlaying = song;
@@ -46,8 +53,6 @@
                                                                  weakSelf.currentTime = CMTimeGetSeconds(time);
                                                                  [[NSNotificationCenter defaultCenter] postNotificationName:SDNowPlayingCurrentTimeDidChange object:nil];
                                                              }];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(foo:) name:AVPlayerItemDidPlayToEndTimeNotification object:self.player.currentItem];
     
     [self.player play];
     

@@ -522,6 +522,15 @@ static NSString* SDSongDragType = @"SDSongDragType";
     [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistRenamedNotification object:nil];
 }
 
+- (IBAction) setPlaylistShuffles:(NSButton*)sender {
+    NSLog(@"%d", [sender state] == NSOnState);
+}
+
+- (IBAction) setPlaylistRepeats:(NSButton*)sender {
+    NSLog(@"%d", [sender state] == NSOnState);
+}
+
+
 
 
 

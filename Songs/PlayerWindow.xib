@@ -923,6 +923,22 @@
 					<int key="connectionID">208</int>
 				</object>
 				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">setPlaylistRepeats:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="595601130"/>
+					</object>
+					<int key="connectionID">210</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">setPlaylistShuffles:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="986504672"/>
+					</object>
+					<int key="connectionID">211</int>
+				</object>
+				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="384763069"/>
@@ -1579,57 +1595,13 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">209</int>
+			<int key="maxID">211</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
 					<string key="className">SDPlayerWindowController</string>
 					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="makeNewPlaylist:">id</string>
-						<string key="nextSong:">id</string>
-						<string key="performFindPanelAction:">id</string>
-						<string key="playPause:">id</string>
-						<string key="prevSong:">id</string>
-						<string key="renamePlaylist:">NSTextField</string>
-						<string key="severelyDeleteSomething:">id</string>
-						<string key="startPlayingSong:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="makeNewPlaylist:">
-							<string key="name">makeNewPlaylist:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="nextSong:">
-							<string key="name">nextSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="performFindPanelAction:">
-							<string key="name">performFindPanelAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="playPause:">
-							<string key="name">playPause:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="prevSong:">
-							<string key="name">prevSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="renamePlaylist:">
-							<string key="name">renamePlaylist:</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBActionInfo" key="severelyDeleteSomething:">
-							<string key="name">severelyDeleteSomething:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="startPlayingSong:">
-							<string key="name">startPlayingSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="playlistOptionsContainerView">NSView</string>
 						<string key="playlistTitleField">NSTextField</string>
