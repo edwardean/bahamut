@@ -8,7 +8,7 @@
 
 #import <Foundation/Foundation.h>
 
-#define SDAllSongsDidChange @"SDAllSongsDidChange"
+#define SDAllSongsDidChangeNotification @"SDAllSongsDidChangeNotification"
 
 @interface SDUserDataManager : NSObject
 

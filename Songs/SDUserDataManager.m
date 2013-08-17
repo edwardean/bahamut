@@ -76,7 +76,7 @@
         
         [self saveUserData];
         
-        [[NSNotificationCenter defaultCenter] postNotificationName:SDAllSongsDidChange object:nil];
+        [[NSNotificationCenter defaultCenter] postNotificationName:SDAllSongsDidChangeNotification object:nil];
     }];
 }
 
