@@ -627,7 +627,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
-#pragma mark - Direct IB actions
+#pragma mark - Playing music
 
 
 - (IBAction) nextSong:(id)sender {

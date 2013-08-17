@@ -16,8 +16,6 @@
 @property BOOL _shuffles;
 @property BOOL _repeats;
 
-@property BOOL _isPlaying;
-
 @end
 
 @implementation SDPlaylist
@@ -37,8 +35,8 @@
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [self init]) {
         self._title = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"title"];
-        self.shuffles = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesShuffle"] boolValue];
-        self.repeats = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesRepeat"] boolValue];
+        self._shuffles = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesShuffle"] boolValue];
+        self._repeats = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesRepeat"] boolValue];
         
         NSArray* songUUIDs = [aDecoder decodeObjectOfClass:[NSArray self] forKey:@"songUUIDs"];
         [self.songs addObjectsFromArray:[SDUserDataManager songsForUUIDs:songUUIDs]];
@@ -53,24 +51,45 @@
     [aCoder encodeObject:@(self.repeats) forKey:@"doesRepeat"];
 }
 
+
+
+
+
+
+- (void) addSongs:(NSArray *)songs atIndexes:(NSIndexSet*)indexes {
+    [SDAddUndo(self) removeSongs:songs];
+    
+    [self.songs insertObjects:songs atIndexes:indexes];
+    
+    SDSaveData();
+    SDPostNote(SDPlaylistSongsDidChangeNotification, self);
+}
+
 - (void) removeSongs:(NSArray*)songs {
+    NSIndexSet* songIndexes = [self.songs indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return [songs containsObject: obj];
+    }];
+    [SDAddUndo(self) addSongs:songs atIndexes:songIndexes];
+    
     [self.songs removeObjectsInArray:songs];
+    
+    SDSaveData();
+    SDPostNote(SDPlaylistSongsDidChangeNotification, self);
 }
 
 - (void) addSongs:(NSArray*)songs {
-    NSMutableArray* songsToAdd = [songs mutableCopy];
-    [songsToAdd removeObjectsInArray: self.songs];
-    [self.songs addObjectsFromArray: songsToAdd];
+    [self addSongs:songs
+           atIndex:[self.songs count]];
 }
 
 - (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex {
-    NSMutableArray* songsToAdd = [songs mutableCopy];
-    [songsToAdd removeObjectsInArray: self.songs];
-    
-    for (SDSong* song in [songsToAdd reverseObjectEnumerator]) {
-        [self.songs insertObject:song atIndex:atIndex];
-    }
+    NSRange indexRange = NSMakeRange(atIndex, [songs count]);
+    NSIndexSet* indexes = [NSIndexSet indexSetWithIndexesInRange:indexRange];
+    [self addSongs:songs atIndexes:indexes];
 }
+
+
+
 
 
 
