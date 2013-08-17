@@ -185,18 +185,29 @@
     SDPostNote(SDPlaylistAddedNotification, nil);
 }
 
-- (void) movePlaylist:(SDPlaylist*)playlist toIndex:(NSUInteger)idx {
-//    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
-//    
-//    NSUInteger oldIndex = [playlists indexOfObject:playlist];
-//    
-//    [SDAddUndo(self) movePlaylist:playlist toIndex:oldIndex];
-//    
-//    [playlists insertObject:playlist atIndex:idx];
-//    [playlists removeObjectAtIndex:oldIndex];
-//    
-//    SDSaveData();
-//    SDPostNote(SDPlaylistAddedNotification, nil);
+- (void) movePlaylist:(SDPlaylist*)playlist toIndex:(NSUInteger)newIndex {
+    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+    
+    NSUInteger oldIndex = [playlists indexOfObject:playlist];
+    
+    if (oldIndex == newIndex || oldIndex == newIndex - 1)
+        return;
+    
+    if (oldIndex > newIndex) {
+        [playlists removeObjectAtIndex:oldIndex];
+        [playlists insertObject:playlist atIndex:newIndex];
+        oldIndex++;
+    }
+    else {
+        newIndex--;
+        [playlists removeObjectAtIndex:oldIndex];
+        [playlists insertObject:playlist atIndex:newIndex];
+    }
+    
+    [SDAddUndo(self) movePlaylist:playlist toIndex:oldIndex];
+    
+    SDSaveData();
+    SDPostNote(SDPlaylistAddedNotification, nil);
 }
 
 
