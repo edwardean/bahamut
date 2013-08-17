@@ -62,8 +62,11 @@
     
     [self.songsPlaying removeAllObjects];
     [self.songsPlaying addObjectsFromArray: [playlist songs]];
-    if (self.currentPlaylist.shuffles)
+    if (self.currentPlaylist.shuffles) {
         [self shuffleSongs];
+        [self.songsPlaying removeObject:song];
+        [self.songsPlaying insertObject:song atIndex:0];
+    }
     
     self.currentSongIndex = [self.songsPlaying indexOfObject: song];
     [self actuallyPlaySong];

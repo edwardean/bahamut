@@ -112,20 +112,15 @@ static NSString* SDSongDragType = @"SDSongDragType";
 #pragma mark - Notifications
 
 - (void) playlistAddedNotification:(NSNotification*)note {
-    NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
-    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
-    [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
+    [self refreshPlaylistsKeepingCurrent];
 }
 
 - (void) playlistRenamedNotification:(NSNotification*)note {
-    NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
-    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
-    [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
+    [self refreshPlaylistsKeepingCurrent];
 }
 
 - (void) playlistRemovedNotification:(NSNotification*)note {
-    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
-    [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+    [self refreshPlaylistsIgnoringCurrent];
 }
 
 - (void) allSongsDidChange:(NSNotification*)note {
@@ -147,7 +142,11 @@ static NSString* SDSongDragType = @"SDSongDragType";
 - (void) currentSongDidChange:(NSNotification*)note {
     [self updateCurrentSongViewStuff];
     [self.songsTable reloadData];
-//    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES]; // so we can put an icon next to the now-playing playlist
+    
+    // so we can put an icon next to the now-playing playlist
+    
+//    [self.playlistsOutlineView reloadItem:[[SDPlayer sharedPlayer] currentPlaylist]];
+    [self refreshPlaylistsKeepingCurrent];
 }
 
 - (void) currentSongTimeDidChange:(NSNotification*)note {
@@ -156,6 +155,16 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 
+- (void) refreshPlaylistsIgnoringCurrent {
+    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
+}
+
+- (void) refreshPlaylistsKeepingCurrent {
+    NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
+    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
+}
 
 
 
@@ -430,6 +439,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
         self.songPositionSlider.maxValue = [[SDPlayer sharedPlayer] currentSong].duration;
     }
     else {
+        [self.currentSongScrollingField setStringValue:@"n/a"];
         self.songPositionSlider.maxValue = 0.0;
         self.songPositionSlider.currentValue = 0.0;
     }
@@ -480,6 +490,9 @@ static NSString* SDSongDragType = @"SDSongDragType";
         else {
             SDPlaylist* playlist = item;
             [[result textField] setStringValue:playlist.title];
+            
+            BOOL isPlaying = ([[SDPlayer sharedPlayer] isPlaying] && playlist == [[SDPlayer sharedPlayer] currentPlaylist]);
+            [[result imageView] setImage: [NSImage imageNamed: isPlaying ? NSImageNameRightFacingTriangleTemplate : @"playlist"]];
         }
     }
     return result;
