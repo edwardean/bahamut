@@ -208,9 +208,6 @@ static NSString* SDSongDragType = @"SDSongDragType";
         NSArray* songs = [[self.selectedPlaylist songs] objectsAtIndexes:set];
         
         [self.selectedPlaylist removeSongs: songs];
-        
-        [SDUserDataManager saveUserData];
-        [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistSongsDidChangeNotification object:self.selectedPlaylist];
     }
     else if (firstResponder == self.playlistsOutlineView) {
         [SDSharedData() deletePlaylist:self.selectedPlaylist];
@@ -259,9 +256,6 @@ static NSString* SDSongDragType = @"SDSongDragType";
     else {
         // adding
         [self.selectedPlaylist addSongs: draggingSongs atIndex:row];
-        
-        [SDUserDataManager saveUserData];
-        [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistSongsDidChangeNotification object:self.selectedPlaylist];
     }
     
     return YES;
@@ -281,10 +275,6 @@ static NSString* SDSongDragType = @"SDSongDragType";
     NSArray* uuids = [data objectForKey:@"uuids"];
     NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
     [playlist addSongs:songs];
-    
-    [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistSongsDidChangeNotification object:playlist];
-    
     return YES;
 }
 
