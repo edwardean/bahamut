@@ -36,6 +36,4 @@
 @property (readonly) CGFloat currentTime;
 @property (readonly) BOOL stopped;
 
-@property NSUndoManager* undoManager;
-
 @end

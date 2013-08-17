@@ -19,12 +19,6 @@
 
 @implementation SDTrackPositionView
 
-- (id)initWithFrame:(NSRect)frame {
-    if (self = [super initWithFrame:frame]) {
-    }
-    return self;
-}
-
 - (void) setCurrentValue:(CGFloat)currentValue {
     if (self.isDragging)
         return;

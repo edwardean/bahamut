@@ -8,7 +8,16 @@
 
 #import <Foundation/Foundation.h>
 
+#import "SDPlaylist.h"
+#import "SDSong.h"
+
+
 #define SDAllSongsDidChangeNotification @"SDAllSongsDidChangeNotification"
+#define SDPlaylistSongsDidChangeNotification @"SDPlaylistSongsDidChangeNotification"
+#define SDPlaylistAddedNotification @"SDPlaylistAddedNotification"
+#define SDPlaylistRenamedNotification @"SDPlaylistRenamedNotification"
+#define SDPlaylistRemovedNotification @"SDPlaylistRemovedNotification"
+#define SDPlaylistOptionsChangedNotification @"SDPlaylistOptionsChangedNotification"
 
 @interface SDUserDataManager : NSObject
 
@@ -24,4 +33,20 @@
 
 + (NSArray*) songsForUUIDs:(NSArray*)songUUIDs;
 
+
+
+// manipulative
+
+@property NSUndoManager* undoManager;
+
+- (void) insertPlaylist:(SDPlaylist*)playlist atIndex:(NSUInteger)idx;
+- (void) deletePlaylist:(SDPlaylist*)playlist;
+
 @end
+
+
+SDUserDataManager* SDSharedData();
+
+void SDSaveData();
+void SDPostNote(NSString* name, id obj);
+id SDAddUndo(id target);

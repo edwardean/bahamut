@@ -38,7 +38,6 @@
 
 - (id) init {
     if (self = [super init]) {
-        self.undoManager = [[NSUndoManager alloc] init];
         self.stopped = YES;
         self.songsPlaying = [NSMutableArray array];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinish:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];

@@ -10,8 +10,6 @@
 
 #import <AVFoundation/AVFoundation.h>
 
-#import "SDSong.h"
-
 @interface SDUserDataManager ()
 
 @property BOOL canSave;
@@ -28,6 +26,7 @@
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
         sharedMusicManager = [[SDUserDataManager alloc] init];
+        sharedMusicManager.undoManager = [[NSUndoManager alloc] init];
     });
     return sharedMusicManager;
 }
@@ -147,4 +146,73 @@
     return foundSongs;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Deleting a playlist
+
+- (void) deletePlaylist:(SDPlaylist*)playlist {
+    NSMutableArray* playlists = [self playlists];
+    
+    NSUInteger playlistIndex = [playlists indexOfObject:playlist];
+    [SDAddUndo(self) insertPlaylist:playlist atIndex:playlistIndex];
+    
+    [playlists removeObject:playlist];
+    
+    SDSaveData();
+    SDPostNote(SDPlaylistRemovedNotification, nil);
+}
+
+- (void) insertPlaylist:(SDPlaylist*)playlist atIndex:(NSUInteger)idx {
+    [SDAddUndo(self) deletePlaylist:playlist];
+    
+    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+    
+    [playlists insertObject:playlist atIndex:idx];
+    
+    SDSaveData();
+    SDPostNote(SDPlaylistAddedNotification, nil);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 @end
+
+
+SDUserDataManager* SDSharedData() {
+    return [SDUserDataManager sharedMusicManager];
+}
+
+void SDSaveData() {
+    [SDUserDataManager saveUserData];
+}
+
+void SDPostNote(NSString* name, id obj) {
+    [[NSNotificationCenter defaultCenter] postNotificationName:name object:obj];
+}
+
+id SDAddUndo(id target) {
+    return [[SDUserDataManager sharedMusicManager].undoManager prepareWithInvocationTarget:target];
+}

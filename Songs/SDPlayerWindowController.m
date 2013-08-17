@@ -14,13 +14,6 @@
 #import "SDTrackPositionView.h"
 
 
-#define SDPlaylistSongsDidChangeNotification @"SDPlaylistSongsDidChangeNotification"
-#define SDPlaylistAddedNotification @"SDPlaylistAddedNotification"
-#define SDPlaylistRenamedNotification @"SDPlaylistRenamedNotification"
-#define SDPlaylistRemovedNotification @"SDPlaylistRemovedNotification"
-#define SDPlaylistOptionsChangedNotification @"SDPlaylistOptionsChangedNotification"
-
-
 static NSString* SDMasterPlaylistItem = @"master";
 static NSString* SDUserPlaylistsItem = @"playlists";
 
@@ -107,7 +100,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
-    return [[SDMusicPlayer sharedPlayer] undoManager];
+    return [SDSharedData() undoManager];
 }
 
 
@@ -220,7 +213,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
         [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistSongsDidChangeNotification object:self.selectedPlaylist];
     }
     else if (firstResponder == self.playlistsOutlineView) {
-        [self deletePlaylist:self.selectedPlaylist];
+        [SDSharedData() deletePlaylist:self.selectedPlaylist];
     }
 }
 
@@ -232,7 +225,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     NSArray* songs = [[self visibleSongs] objectsAtIndexes:rowIndexes];
     NSArray* uuids = [songs valueForKey:@"uuid"];
-    NSUInteger playlistIndex = [[[SDUserDataManager sharedMusicManager] playlists] indexOfObject:self.selectedPlaylist];
+    NSUInteger playlistIndex = [[SDSharedData() playlists] indexOfObject:self.selectedPlaylist];
     
     [pboard setPropertyList:@{@"uuids": uuids, @"playlist": @(playlistIndex)}
                     forType:SDSongDragType];
@@ -257,7 +250,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     SDPlaylist* fromPlaylist = nil;
     
     if (playlistIndex != NSNotFound)
-        fromPlaylist = [[[SDUserDataManager sharedMusicManager] playlists] objectAtIndex:playlistIndex];
+        fromPlaylist = [[SDSharedData() playlists] objectAtIndex:playlistIndex];
     
     if (fromPlaylist == self.selectedPlaylist) {
         // re-arranging
@@ -406,7 +399,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
         return [self.selectedPlaylist songs];
     }
     else {
-        return [[SDUserDataManager sharedMusicManager] allSongs];
+        return [SDSharedData() allSongs];
     }
 }
 
@@ -472,7 +465,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
         self.selectedPlaylist = nil;
     }
     else {
-        NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+        NSMutableArray* playlists = [SDSharedData() playlists];
         self.selectedPlaylist = [playlists objectAtIndex:row - 2];
     }
     
@@ -511,7 +504,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     else if (item == SDMasterPlaylistItem)
         return 0;
     else if (item == SDUserPlaylistsItem)
-        return [[[SDUserDataManager sharedMusicManager] playlists] count];
+        return [[SDSharedData() playlists] count];
     else
         return 0;
 }
@@ -531,7 +524,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
             return SDUserPlaylistsItem;
     }
     else if (item == SDUserPlaylistsItem) {
-        return [[[SDUserDataManager sharedMusicManager] playlists] objectAtIndex:index];
+        return [[SDSharedData() playlists] objectAtIndex:index];
     }
     return nil;
 }
@@ -594,78 +587,19 @@ static NSString* SDSongDragType = @"SDSongDragType";
 #pragma mark - Editing the current Playlist
 
 
-- (void) renamePlaylist:(SDPlaylist*)playlist to:(NSString*)newName {
-    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] renamePlaylist:playlist to:playlist.title];
-    playlist.title = newName;
-    
-    [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistRenamedNotification object:nil];
-}
-
-
 - (IBAction) renamePlaylist:(NSTextField*)sender {
-    [self renamePlaylist:self.selectedPlaylist
-                      to:[sender stringValue]];
+    self.selectedPlaylist.title = [sender stringValue];
 }
 
 - (IBAction) setPlaylistShuffles:(NSButton*)sender {
-    [self setShuffles:([sender state] == NSOnState)
-          forPlaylist:self.selectedPlaylist];
+    self.selectedPlaylist.shuffles = ([sender state] == NSOnState);
 }
 
 - (IBAction) setPlaylistRepeats:(NSButton*)sender {
-    [self setRepeats:([sender state] == NSOnState)
-         forPlaylist:self.selectedPlaylist];
+    self.selectedPlaylist.repeats = ([sender state] == NSOnState);
 }
 
 
-
-- (void) setRepeats:(BOOL)repeats forPlaylist:(SDPlaylist*)playlist {
-    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] setRepeats:!repeats forPlaylist:playlist];
-    
-    playlist.repeats = repeats;
-    
-    [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistOptionsChangedNotification object:nil];
-}
-
-- (void) setShuffles:(BOOL)shuffles forPlaylist:(SDPlaylist*)playlist {
-    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] setShuffles:!shuffles forPlaylist:playlist];
-    
-    playlist.shuffles = shuffles;
-    
-    [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistOptionsChangedNotification object:nil];
-}
-
-
-
-
-
-#pragma mark - Deleting a playlist
-
-- (void) deletePlaylist:(SDPlaylist*)playlist {
-    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
-    
-    NSUInteger playlistIndex = [playlists indexOfObject:playlist];
-    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] insertPlaylist:playlist atIndex:playlistIndex];
-    
-    [playlists removeObject:playlist];
-    
-    [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistRemovedNotification object:nil];
-}
-
-- (void) insertPlaylist:(SDPlaylist*)playlist atIndex:(NSUInteger)idx {
-    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] deletePlaylist:playlist];
-    
-    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
-    
-    [playlists insertObject:playlist atIndex:idx];
-    
-    [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistAddedNotification object:nil];
-}
 
 
 
@@ -675,10 +609,10 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 - (IBAction) makeNewPlaylist:(id)sender {
-    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+    NSMutableArray* playlists = [SDSharedData() playlists];
     
     SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
-    [self insertPlaylist:newPlaylist atIndex:[playlists count]];
+    [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
     
     NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1 + 2];
     [self.playlistsOutlineView selectRowIndexes:indices byExtendingSelection:NO];

@@ -10,6 +10,16 @@
 
 #import "SDUserDataManager.h"
 
+@interface SDPlaylist ()
+
+@property NSString* _title;
+@property BOOL _shuffles;
+@property BOOL _repeats;
+
+@property BOOL _isPlaying;
+
+@end
+
 @implementation SDPlaylist
 
 + (BOOL)supportsSecureCoding {
@@ -19,14 +29,14 @@
 - (id) init {
     if (self = [super init]) {
         self.songs = [NSMutableArray array];
-        self.title = @"New Playlist";
+        self._title = @"New Playlist";
     }
     return self;
 }
 
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [self init]) {
-        self.title = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"title"];
+        self._title = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"title"];
         self.shuffles = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesShuffle"] boolValue];
         self.repeats = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"doesRepeat"] boolValue];
         
@@ -61,5 +71,55 @@
         [self.songs insertObject:song atIndex:atIndex];
     }
 }
+
+
+
+
+
+- (void) setTitle:(NSString *)title {
+    [SDAddUndo(self) setTitle: self._title];
+    self._title = title;
+    SDSaveData();
+    SDPostNote(SDPlaylistRenamedNotification, self);
+}
+
+- (NSString*)title {
+    return self._title;
+}
+
+
+
+
+
+
+
+- (void) setRepeats:(BOOL)repeats {
+    [SDAddUndo(self) setRepeats: self._repeats];
+    self._repeats = repeats;
+    SDSaveData();
+    SDPostNote(SDPlaylistOptionsChangedNotification, self);
+}
+
+- (BOOL) repeats {
+    return self._repeats;
+}
+
+
+
+
+
+
+- (void) setShuffles:(BOOL)shuffles {
+    [SDAddUndo(self) setShuffles:self._shuffles];
+    self._shuffles = shuffles;
+    SDSaveData();
+    SDPostNote(SDPlaylistOptionsChangedNotification, self);
+}
+
+- (BOOL) shuffles {
+    return self._shuffles;
+}
+
+
 
 @end
