@@ -16,6 +16,7 @@
 
 - (void) addSongs:(NSArray*)songs;
 - (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex;
+- (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex;
 - (void) removeSongs:(NSArray*)songs;
 
 @property NSString* title;

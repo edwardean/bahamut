@@ -88,6 +88,16 @@
     [self addSongs:songs atIndexes:indexes];
 }
 
+- (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex {
+    SDGroupUndoOps(^{
+        [self removeSongs:songs];
+        [self addSongs:songs atIndex:atIndex];
+    });
+}
+
+
+
+
 
 
 

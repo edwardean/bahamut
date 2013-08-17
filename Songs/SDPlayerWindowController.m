@@ -250,12 +250,12 @@ static NSString* SDSongDragType = @"SDSongDragType";
         fromPlaylist = [[SDSharedData() playlists] objectAtIndex:playlistIndex];
     
     if (fromPlaylist == self.selectedPlaylist) {
-        // re-arranging
-        
+        [self.selectedPlaylist moveSongs:draggingSongs
+                                 toIndex:row];
     }
     else {
-        // adding
-        [self.selectedPlaylist addSongs: draggingSongs atIndex:row];
+        [self.selectedPlaylist addSongs:draggingSongs
+                                atIndex:row];
     }
     
     return YES;

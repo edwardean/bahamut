@@ -216,3 +216,9 @@ void SDPostNote(NSString* name, id obj) {
 id SDAddUndo(id target) {
     return [[SDUserDataManager sharedMusicManager].undoManager prepareWithInvocationTarget:target];
 }
+
+void SDGroupUndoOps(dispatch_block_t blk) {
+    [[SDUserDataManager sharedMusicManager].undoManager beginUndoGrouping];
+    blk();
+    [[SDUserDataManager sharedMusicManager].undoManager endUndoGrouping];
+}
