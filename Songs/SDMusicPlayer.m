@@ -6,11 +6,11 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "SDPlayer.h"
+#import "SDMusicPlayer.h"
 
 #import <AVFoundation/AVFoundation.h>
 
-@interface SDPlayer ()
+@interface SDMusicPlayer ()
 
 @property SDPlaylist* currentPlaylist;
 @property NSMutableArray* songsPlaying;
@@ -25,19 +25,20 @@
 
 @end
 
-@implementation SDPlayer
+@implementation SDMusicPlayer
 
-+ (SDPlayer*) sharedPlayer {
-    static SDPlayer* sharedPlayer;
++ (SDMusicPlayer*) sharedPlayer {
+    static SDMusicPlayer* sharedPlayer;
     static dispatch_once_t onceToken;
     dispatch_once(&onceToken, ^{
-        sharedPlayer = [[SDPlayer alloc] init];
+        sharedPlayer = [[SDMusicPlayer alloc] init];
     });
     return sharedPlayer;
 }
 
 - (id) init {
     if (self = [super init]) {
+        self.undoManager = [[NSUndoManager alloc] init];
         self.stopped = YES;
         self.songsPlaying = [NSMutableArray array];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinish:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
@@ -94,7 +95,7 @@
     
     self.currentTime = 0.0;
     
-    SDPlayer* __weak weakSelf = self;
+    SDMusicPlayer* __weak weakSelf = self;
     self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1,10)
                                                                   queue:NULL
                                                              usingBlock:^(CMTime time) {

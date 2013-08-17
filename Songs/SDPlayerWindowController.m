@@ -10,7 +10,7 @@
 
 #import "SDUserDataManager.h"
 #import "SDPlaylist.h"
-#import "SDPlayer.h"
+#import "SDMusicPlayer.h"
 #import "SDTrackPositionView.h"
 
 
@@ -104,6 +104,10 @@ static NSString* SDSongDragType = @"SDSongDragType";
     [self.killedDelegate playerWindowKilled:self];
 }
 
+- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
+    return [[SDMusicPlayer sharedPlayer] undoManager];
+}
+
 
 
 
@@ -136,7 +140,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 - (void) playerStatusDidChange:(NSNotification*)note {
-    [self.playButton setTitle: [[SDPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
+    [self.playButton setTitle: [[SDMusicPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
 }
 
 - (void) currentSongDidChange:(NSNotification*)note {
@@ -150,7 +154,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 - (void) currentSongTimeDidChange:(NSNotification*)note {
-    self.songPositionSlider.currentValue = [SDPlayer sharedPlayer].currentTime;
+    self.songPositionSlider.currentValue = [SDMusicPlayer sharedPlayer].currentTime;
 }
 
 
@@ -209,11 +213,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
         [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistSongsDidChangeNotification object:self.selectedPlaylist];
     }
     else if (firstResponder == self.playlistsOutlineView) {
-        NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
-        [playlists removeObject:self.selectedPlaylist];
-        
-        [SDUserDataManager saveUserData];
-        [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistRemovedNotification object:nil];
+        [self deletePlaylist:self.selectedPlaylist];
     }
 }
 
@@ -306,7 +306,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     SDSong* song = [songs objectAtIndex:rowIndex];
     
     if ([[aTableColumn identifier] isEqual:@"playing"]) {
-        if (self.selectedPlaylist == [[SDPlayer sharedPlayer] currentPlaylist] && song == [[SDPlayer sharedPlayer] currentSong])
+        if (self.selectedPlaylist == [[SDMusicPlayer sharedPlayer] currentPlaylist] && song == [[SDMusicPlayer sharedPlayer] currentSong])
             return [NSImage imageNamed:NSImageNameStatusAvailable];
         else
             return nil;
@@ -431,12 +431,12 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 - (void) updateCurrentSongViewStuff {
-    SDSong* currentSong = [[SDPlayer sharedPlayer] currentSong];
+    SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
     
     if (currentSong) {
         NSString* trackInfo = [NSString stringWithFormat:@"%@ - %@", currentSong.title, currentSong.artist];
         [self.currentSongScrollingField setStringValue:trackInfo];
-        self.songPositionSlider.maxValue = [[SDPlayer sharedPlayer] currentSong].duration;
+        self.songPositionSlider.maxValue = [[SDMusicPlayer sharedPlayer] currentSong].duration;
     }
     else {
         [self.currentSongScrollingField setStringValue:@"n/a"];
@@ -491,7 +491,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
             SDPlaylist* playlist = item;
             [[result textField] setStringValue:playlist.title];
             
-            BOOL isPlaying = ([[SDPlayer sharedPlayer] isPlaying] && playlist == [[SDPlayer sharedPlayer] currentPlaylist]);
+            BOOL isPlaying = ([[SDMusicPlayer sharedPlayer] isPlaying] && playlist == [[SDMusicPlayer sharedPlayer] currentPlaylist]);
             [[result imageView] setImage: [NSImage imageNamed: isPlaying ? NSImageNameRightFacingTriangleTemplate : @"playlist"]];
         }
     }
@@ -587,21 +587,77 @@ static NSString* SDSongDragType = @"SDSongDragType";
 #pragma mark - Editing the current Playlist
 
 
-- (IBAction) renamePlaylist:(NSTextField*)sender {
-    self.selectedPlaylist.title = [sender stringValue];
+- (void) renamePlaylist:(SDPlaylist*)playlist to:(NSString*)newName {
+    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] renamePlaylist:playlist to:playlist.title];
+    playlist.title = newName;
     
     [SDUserDataManager saveUserData];
     [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistRenamedNotification object:nil];
 }
 
+
+- (IBAction) renamePlaylist:(NSTextField*)sender {
+    [self renamePlaylist:self.selectedPlaylist
+                      to:[sender stringValue]];
+}
+
 - (IBAction) setPlaylistShuffles:(NSButton*)sender {
-    self.selectedPlaylist.shuffles = [sender state] == NSOnState;
-    [SDUserDataManager saveUserData];
+    [self setShuffles:([sender state] == NSOnState)
+          forPlaylist:self.selectedPlaylist];
 }
 
 - (IBAction) setPlaylistRepeats:(NSButton*)sender {
-    self.selectedPlaylist.repeats = [sender state] == NSOnState;
+    [self setRepeats:([sender state] == NSOnState)
+         forPlaylist:self.selectedPlaylist];
+}
+
+
+
+- (void) setRepeats:(BOOL)repeats forPlaylist:(SDPlaylist*)playlist {
+    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] setRepeats:!repeats forPlaylist:playlist];
+    
+    playlist.repeats = repeats;
     [SDUserDataManager saveUserData];
+    
+    [self updatePlaylistOptionsViewStuff];
+}
+
+- (void) setShuffles:(BOOL)shuffles forPlaylist:(SDPlaylist*)playlist {
+    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] setShuffles:!shuffles forPlaylist:playlist];
+    
+    playlist.shuffles = shuffles;
+    [SDUserDataManager saveUserData];
+    
+    [self updatePlaylistOptionsViewStuff];
+}
+
+
+
+
+
+#pragma mark - Deleting a playlist
+
+- (void) deletePlaylist:(SDPlaylist*)playlist {
+    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+    
+    NSUInteger playlistIndex = [playlists indexOfObject:playlist];
+    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] insertPlaylist:playlist atIndex:playlistIndex];
+    
+    [playlists removeObject:playlist];
+    
+    [SDUserDataManager saveUserData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistRemovedNotification object:nil];
+}
+
+- (void) insertPlaylist:(SDPlaylist*)playlist atIndex:(NSUInteger)idx {
+    [[[[SDMusicPlayer sharedPlayer] undoManager] prepareWithInvocationTarget:self] deletePlaylist:playlist];
+    
+    NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
+    
+    [playlists insertObject:playlist atIndex:idx];
+    
+    [SDUserDataManager saveUserData];
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistAddedNotification object:nil];
 }
 
 
@@ -614,11 +670,8 @@ static NSString* SDSongDragType = @"SDSongDragType";
 - (IBAction) makeNewPlaylist:(id)sender {
     NSMutableArray* playlists = [[SDUserDataManager sharedMusicManager] playlists];
     
-    SDPlaylist* newlist = [[SDPlaylist alloc] init];
-    [playlists addObject:newlist];
-    
-    [SDUserDataManager saveUserData];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlaylistAddedNotification object:nil];
+    SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
+    [self insertPlaylist:newPlaylist atIndex:[playlists count]];
     
     NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1 + 2];
     [self.playlistsOutlineView selectRowIndexes:indices byExtendingSelection:NO];
@@ -637,18 +690,18 @@ static NSString* SDSongDragType = @"SDSongDragType";
 
 
 - (IBAction) nextSong:(id)sender {
-    [[SDPlayer sharedPlayer] nextSong];
+    [[SDMusicPlayer sharedPlayer] nextSong];
 }
 
 - (IBAction) prevSong:(id)sender {
-    [[SDPlayer sharedPlayer] previousSong];
+    [[SDMusicPlayer sharedPlayer] previousSong];
 }
 
 - (void) startPlayingPlaylist:(id)sender {
     if ([self.playlistsOutlineView clickedRow] < 2)
         return;
     
-    [[SDPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
+    [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
 }
 
 - (IBAction) startPlayingSong:(id)sender {
@@ -664,32 +717,32 @@ static NSString* SDSongDragType = @"SDSongDragType";
     
     SDSong* song = [[self.selectedPlaylist songs] objectAtIndex:row];
     
-    [[SDPlayer sharedPlayer] playSong:song inPlaylist:self.selectedPlaylist];
+    [[SDMusicPlayer sharedPlayer] playSong:song inPlaylist:self.selectedPlaylist];
 }
 
 - (IBAction) playPause:(id)sender {
-    if ([SDPlayer sharedPlayer].stopped) {
+    if ([SDMusicPlayer sharedPlayer].stopped) {
         if ([self showingAllSongs])
             return;
         
         if ([[self.songsTable selectedRowIndexes] count] == 1) {
             SDSong* song = [[self visibleSongs] objectAtIndex: [self.songsTable selectedRow]];
-            [[SDPlayer sharedPlayer] playSong:song inPlaylist:self.selectedPlaylist];
+            [[SDMusicPlayer sharedPlayer] playSong:song inPlaylist:self.selectedPlaylist];
         }
         else {
-            [[SDPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
+            [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
         }
     }
     else {
-        if ([[SDPlayer sharedPlayer] isPlaying])
-            [[SDPlayer sharedPlayer] pause];
+        if ([[SDMusicPlayer sharedPlayer] isPlaying])
+            [[SDMusicPlayer sharedPlayer] pause];
         else
-            [[SDPlayer sharedPlayer] resume];
+            [[SDMusicPlayer sharedPlayer] resume];
     }
 }
 
 - (void) trackPositionMovedTo:(CGFloat)newValue {
-    [[SDPlayer sharedPlayer] seekToTime:newValue];
+    [[SDMusicPlayer sharedPlayer] seekToTime:newValue];
 }
 
 @end
