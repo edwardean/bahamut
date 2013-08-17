@@ -129,13 +129,22 @@
 }
 
 + (NSArray*) songsForUUIDs:(NSArray*)songUUIDs {
+    NSMutableArray* foundSongs = [NSMutableArray array];
+    
     NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
     
-    NSIndexSet* indices = [allSongs indexesOfObjectsPassingTest:^BOOL(SDSong* song, NSUInteger idx, BOOL *stop) {
-        return [songUUIDs containsObject:[song uuid]];
-    }];
+    for (NSString* uuid in songUUIDs) {
+        NSUInteger songIndex = [allSongs indexOfObjectPassingTest:^BOOL(SDSong* otherSong, NSUInteger idx, BOOL *stop) {
+            return [[otherSong valueForKey:@"uuid"] isEqualToString:uuid];
+        }];
+        
+        if (songIndex != NSNotFound) {
+            SDSong* song = [allSongs objectAtIndex:songIndex];
+            [foundSongs addObject:song];
+        }
+    }
     
-    return [allSongs objectsAtIndexes:indices];
+    return foundSongs;
 }
 
 @end
