@@ -49,6 +49,8 @@ static NSString* SDSongDragType = @"SDSongDragType";
 @property (weak) IBOutlet NSOutlineView* playlistsOutlineView;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 
+@property NSString* filterString;
+
 @property SDPlaylist* selectedPlaylist;
 
 @end
@@ -205,7 +207,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     
     if (firstResponder == self.songsTable) {
         NSIndexSet* set = [self.songsTable selectedRowIndexes];
-        NSArray* songs = [[self.selectedPlaylist songs] objectsAtIndexes:set];
+        NSArray* songs = [[self visibleSongs] objectsAtIndexes:set];
         
         [self.selectedPlaylist removeSongs: songs];
     }
@@ -352,7 +354,12 @@ static NSString* SDSongDragType = @"SDSongDragType";
 - (void)controlTextDidChange:(NSNotification *)aNotification {
     if ([aNotification object] == self.searchField) {
         NSString* searchString = [self.searchField stringValue];
-        NSLog(@"[%@]", searchString);
+        
+        if ([[searchString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0)
+            searchString = nil;
+        
+        self.filterString = searchString;
+        [self.songsTable reloadData];
     }
 }
 
@@ -360,6 +367,10 @@ static NSString* SDSongDragType = @"SDSongDragType";
     if (control == self.searchField && command == @selector(cancelOperation:)) {
         [self toggleSearchBar:NO];
         [self.searchField setStringValue:@""];
+        
+        self.filterString = nil;
+        [self.songsTable reloadData];
+        
         return YES;
     }
     
@@ -385,12 +396,17 @@ static NSString* SDSongDragType = @"SDSongDragType";
 }
 
 - (NSArray*) visibleSongs {
-    if (self.selectedPlaylist) {
-        return [self.selectedPlaylist songs];
+    NSArray* theSongs = (self.selectedPlaylist ? [self.selectedPlaylist songs] : [SDSharedData() allSongs]);
+    
+    if (self.filterString) {
+        theSongs = [theSongs filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SDSong* song, NSDictionary *bindings) {
+            return ([song.title rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound)
+            || ([song.artist rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound)
+            || ([song.album rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound);
+        }]];
     }
-    else {
-        return [SDSharedData() allSongs];
-    }
+    
+    return theSongs;
 }
 
 
@@ -646,7 +662,7 @@ static NSString* SDSongDragType = @"SDSongDragType";
     if (row == -1)
         return;
     
-    SDSong* song = [[self.selectedPlaylist songs] objectAtIndex:row];
+    SDSong* song = [[self visibleSongs] objectAtIndex:row];
     
     [[SDMusicPlayer sharedPlayer] playSong:song inPlaylist:self.selectedPlaylist];
 }
