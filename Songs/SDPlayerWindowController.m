@@ -97,6 +97,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     
     [self updatePlaylistOptionsViewStuff];
     [self updateCurrentSongViewStuff];
+    
+    [self.songsTable setSortDescriptors:@[]];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
