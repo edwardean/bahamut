@@ -14,10 +14,6 @@
 #import "SDTrackPositionView.h"
 
 
-static NSString* SDMasterPlaylistItem = @"master";
-static NSString* SDUserPlaylistsItem = @"playlists";
-
-
 static NSString* SDSongDragType = @"SDSongDragType";
 static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
@@ -69,7 +65,6 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
@@ -133,11 +128,6 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     [self updatePlaylistOptionsViewStuff];
 }
 
-- (void) allSongsDidChange:(NSNotification*)note {
-    if (self.selectedPlaylist == nil)
-        [self.songsTable reloadData];
-}
-
 - (void) playlistSongsDidChange:(NSNotification*)note {
     if ([note object] == self.selectedPlaylist) {
         [self.songsTable reloadData];
@@ -166,13 +156,13 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 - (void) refreshPlaylistsIgnoringCurrent {
-    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    [self.playlistsOutlineView reloadItem:nil reloadChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
 }
 
 - (void) refreshPlaylistsKeepingCurrent {
     NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
-    [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
+    [self.playlistsOutlineView reloadItem:nil reloadChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
 }
 
@@ -288,10 +278,10 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 - (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)item proposedChildIndex:(NSInteger)index {
     if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
-        if (item == SDUserPlaylistsItem)
-            return NSDragOperationCopy;
-        else
+        if (item == nil)
             return NSDragOperationNone;
+        else
+            return NSDragOperationCopy;
     }
     else {
         if ([item isKindOfClass: [SDPlaylist self]])
@@ -510,13 +500,13 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     if (row == -1)
         return;
     
-    if (row == 0) {
-        self.selectedPlaylist = nil;
-    }
-    else {
+//    if (row == 0) {
+//        self.selectedPlaylist = nil;
+//    }
+//    else {
         NSMutableArray* playlists = [SDSharedData() playlists];
-        self.selectedPlaylist = [playlists objectAtIndex:row - 2];
-    }
+        self.selectedPlaylist = [playlists objectAtIndex:row];
+//    }
     
     [self updatePlaylistOptionsViewStuff];
     
@@ -525,73 +515,38 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 }
 
 - (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
-    NSTableCellView *result;
-    if (item == SDUserPlaylistsItem) {
-        result = [outlineView makeViewWithIdentifier:@"HeaderCell" owner:self];
-        [[result textField] setStringValue:@"Playlists"];
-    }
-    else {
-        result = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
-        
-        if (item == SDMasterPlaylistItem) {
-            [[result textField] setStringValue:@"All Songs"];
-        }
-        else {
-            SDPlaylist* playlist = item;
-            [[result textField] setStringValue:playlist.title];
-            
-            BOOL isPlaying = ([[SDMusicPlayer sharedPlayer] isPlaying] && playlist == [[SDMusicPlayer sharedPlayer] currentPlaylist]);
-            [[result imageView] setImage: [NSImage imageNamed: isPlaying ? NSImageNameRightFacingTriangleTemplate : @"playlist"]];
-        }
-    }
-    return result;
+    NSTableCellView *cellView = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
+    
+    SDPlaylist* playlist = item;
+    [[cellView textField] setStringValue:playlist.title];
+    
+    BOOL isPlaying = ([[SDMusicPlayer sharedPlayer] isPlaying] && playlist == [[SDMusicPlayer sharedPlayer] currentPlaylist]);
+    [[cellView imageView] setImage: [NSImage imageNamed: isPlaying ? NSImageNameRightFacingTriangleTemplate : @"playlist"]];
+    
+    return cellView;
 }
 
 - (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
     if (item == nil)
-        return 2;
-    else if (item == SDMasterPlaylistItem)
-        return 0;
-    else if (item == SDUserPlaylistsItem)
         return [[SDSharedData() playlists] count];
     else
         return 0;
 }
 
+- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
+    if (item == nil)
+        return [[SDSharedData() playlists] objectAtIndex:index];
+    else
+        return nil;
+}
+
+
 - (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-    if (item == SDUserPlaylistsItem)
+    if (item == nil)
         return YES;
     else
         return NO;
 }
-
-- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-    if (item == nil) {
-        if (index == 0)
-            return SDMasterPlaylistItem;
-        else if (index == 1)
-            return SDUserPlaylistsItem;
-    }
-    else if (item == SDUserPlaylistsItem) {
-        return [[SDSharedData() playlists] objectAtIndex:index];
-    }
-    return nil;
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView isGroupItem:(id)item {
-    return (item == SDUserPlaylistsItem);
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldShowOutlineCellForItem:(id)item {
-    return NO;
-}
-
-- (BOOL)outlineView:(NSOutlineView *)outlineView shouldSelectItem:(id)item {
-    return (item != SDUserPlaylistsItem);
-}
-
-
-
 
 
 
@@ -663,7 +618,7 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
     [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
     
-    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1 + 2];
+    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1];
     [self.playlistsOutlineView selectRowIndexes:indices byExtendingSelection:NO];
     
     [[self.playlistTitleField window] makeFirstResponder: self.playlistTitleField];

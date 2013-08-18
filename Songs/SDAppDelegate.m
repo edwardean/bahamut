@@ -10,9 +10,11 @@
 
 #import "SDUserDataManager.h"
 #import "SDPlayerWindowController.h"
+#import "SDAllSongsWindowController.h"
 
 @interface SDAppDelegate ()
 
+@property SDAllSongsWindowController* allSongsWindowController;
 @property NSMutableArray* playerWindowControllers;
 
 @end
@@ -30,6 +32,13 @@
 - (BOOL) applicationOpenUntitledFile:(NSApplication *)sender {
     [self newPlayerWindow:nil];
     return YES;
+}
+
+- (IBAction) showAllSongsWindow:(id)sender {
+    if (self.allSongsWindowController == nil)
+        self.allSongsWindowController = [[SDAllSongsWindowController alloc] init];
+    
+    [self.allSongsWindowController showWindow:sender];
 }
 
 - (void) playerWindowKilled:(id)controller {
