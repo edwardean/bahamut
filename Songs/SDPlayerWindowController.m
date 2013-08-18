@@ -50,6 +50,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 @property (weak) IBOutlet NSOutlineView* playlistsOutlineView;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 
+@property (weak) IBOutlet NSCollectionView* playlistsCollectionView;
+
 @property NSString* filterString;
 
 @property SDPlaylist* selectedPlaylist;
@@ -99,6 +101,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     [self updateCurrentSongViewStuff];
     
     [self.songsTable setSortDescriptors:@[]];
+    
+    [self.playlistsCollectionView setContent:[SDSharedData() playlists]];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
@@ -171,6 +175,9 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 }
 
 - (void) refreshPlaylistsKeepingCurrent {
+    
+    [self.playlistsCollectionView setContent:[SDSharedData() playlists]];
+    
     NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
     [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
