@@ -10,6 +10,38 @@
 
 #import "SDPlaylist.h"
 
+
+
+
+
+
+
+@interface SDFancyButtonCell : NSButtonCell
+@end
+@implementation SDFancyButtonCell
+
+- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    [NSGraphicsContext saveGraphicsState];
+    
+    NSBezierPath* path = [NSBezierPath bezierPathWithOvalInRect:cellFrame];
+    
+    [[self isHighlighted] ? [NSColor grayColor] : [NSColor lightGrayColor] setFill];
+    [path fill];
+    
+    [[NSColor whiteColor] setFill];
+    
+    [self drawInteriorWithFrame:cellFrame inView:controlView];
+    
+    [NSGraphicsContext restoreGraphicsState];
+}
+
+@end
+
+
+
+
+
+
 void SDFillColor(NSRect rect, NSColor* color) {
     [color setFill];
     [[NSBezierPath bezierPathWithRect:rect] fill];

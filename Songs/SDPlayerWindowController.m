@@ -106,6 +106,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     
     [self.songsTable setSortDescriptors:@[]];
     
+    [[self window] setBackgroundColor: [NSColor whiteColor]];
+    
     self.whateverView.playlists = [SDSharedData() playlists];
 }
 
