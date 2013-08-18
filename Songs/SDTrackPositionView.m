@@ -52,25 +52,67 @@
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
+    [NSGraphicsContext saveGraphicsState];
+    
     NSRect bounds = [self bounds];
-    [[NSColor blackColor] setFill];
-    [[NSBezierPath bezierPathWithRect:bounds] fill];
+    NSRect prototypeSliderBounds = bounds;
+    bounds = NSInsetRect(bounds, 0.0, 4.0);
     
-    bounds = NSInsetRect([self bounds], 1, 1);
-    [[NSColor grayColor] setFill];
-    [[NSBezierPath bezierPathWithRect:bounds] fill];
+    bounds = NSIntegralRect(bounds);
+    bounds = NSInsetRect(bounds, 0.5, 0.5);
     
-    NSRect box = bounds;
-    box.size.width = box.size.height;
+    CGFloat wholeThingRadius = 5.0;
+    NSBezierPath* thePath = [NSBezierPath bezierPathWithRoundedRect:bounds xRadius:wholeThingRadius yRadius:wholeThingRadius];
+    [thePath setLineWidth:0.5];
+    [thePath setLineJoinStyle:NSRoundLineJoinStyle];
+    [thePath setLineCapStyle:NSRoundLineCapStyle];
     
-    CGFloat maxWidth = bounds.size.width - box.size.width;
+    [NSGraphicsContext saveGraphicsState];
+    
+    NSShadow* shadow = [[NSShadow alloc] init];
+    shadow.shadowOffset = NSMakeSize(0.0, -1.0);
+    shadow.shadowBlurRadius = 0.5;
+    shadow.shadowColor = [NSColor whiteColor];
+    [shadow set];
+    
+    NSGradient* innerWholeGradient = [[NSGradient alloc] initWithColors:@[
+                                                                          [NSColor colorWithCalibratedWhite:0.80 alpha:1.0],
+                                      [NSColor colorWithCalibratedWhite:0.70 alpha:1.0],
+                                      ]];
+    [innerWholeGradient drawInBezierPath:thePath angle:90.0];
+    
+    [NSGraphicsContext restoreGraphicsState];
+    
+    [[NSColor colorWithCalibratedWhite:0.45 alpha:1.0] setStroke];
+    [thePath stroke];
+    
+    
+    
+    
+    NSRect box = prototypeSliderBounds;
+    box.size.width = 7.0;
+    
+    CGFloat minWidth = 3;
+    CGFloat maxWidth = bounds.size.width - box.size.width - 3;
     CGFloat percentage = self.realCurrentValue / self.realMaxValue;
-    box.origin.x += percentage * maxWidth;
+    box.origin.x += (percentage * (maxWidth - minWidth)) + minWidth;
     
     box = NSIntegralRect(box);
+    box = NSInsetRect(box, 0.0, 1.0);
     
-    [[NSColor lightGrayColor] setFill];
-    [[NSBezierPath bezierPathWithRect:box] fill];
+    CGFloat sliderRadius = 4.0;
+    NSBezierPath* sliderPath = [NSBezierPath bezierPathWithRoundedRect:box xRadius:sliderRadius yRadius:sliderRadius];
+    [sliderPath setLineWidth:0.5];
+    [sliderPath setLineJoinStyle:NSRoundLineJoinStyle];
+    [sliderPath setLineCapStyle:NSRoundLineCapStyle];
+    
+    [[NSColor colorWithCalibratedWhite:0.85 alpha:1.0] setFill];
+    [sliderPath fill];
+    
+    [[NSColor colorWithCalibratedWhite:0.45 alpha:1.0] setStroke];
+    [sliderPath stroke];
+    
+    [NSGraphicsContext restoreGraphicsState];
 }
 
 - (void) userDraggedWithEvent:(NSEvent*)event {
