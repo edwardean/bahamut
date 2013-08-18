@@ -19,7 +19,6 @@
 		9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2EF16FF781100DB85C4 /* MainMenu.xib */; };
 		9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F30316FFA23100DB85C4 /* AVFoundation.framework */; };
 		9460F30A16FFE9BF00DB85C4 /* SDSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30916FFE9BF00DB85C4 /* SDSong.m */; };
-		94691D4D17C08F8A008039E6 /* SDWhateverView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94691D4C17C08F8A008039E6 /* SDWhateverView.m */; };
 		94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A811921701E0A900B400C8 /* SDTrackPositionView.m */; };
 		94AD9DE217BD556700D678E1 /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AD9DE117BD556700D678E1 /* SDPlaylist.m */; };
 		94B8589D1701D5410012165F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B8589C1701D5410012165F /* CoreMedia.framework */; };
@@ -49,8 +48,6 @@
 		9460F30316FFA23100DB85C4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9460F30816FFE9BF00DB85C4 /* SDSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSong.h; sourceTree = "<group>"; };
 		9460F30916FFE9BF00DB85C4 /* SDSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSong.m; sourceTree = "<group>"; };
-		94691D4B17C08F8A008039E6 /* SDWhateverView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDWhateverView.h; sourceTree = "<group>"; };
-		94691D4C17C08F8A008039E6 /* SDWhateverView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDWhateverView.m; sourceTree = "<group>"; };
 		94A811911701E0A900B400C8 /* SDTrackPositionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTrackPositionView.h; sourceTree = "<group>"; };
 		94A811921701E0A900B400C8 /* SDTrackPositionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTrackPositionView.m; sourceTree = "<group>"; };
 		94AD9DE017BD556700D678E1 /* SDPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylist.h; sourceTree = "<group>"; };
@@ -154,8 +151,6 @@
 				9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */,
 				94A811911701E0A900B400C8 /* SDTrackPositionView.h */,
 				94A811921701E0A900B400C8 /* SDTrackPositionView.m */,
-				94691D4B17C08F8A008039E6 /* SDWhateverView.h */,
-				94691D4C17C08F8A008039E6 /* SDWhateverView.m */,
 			);
 			name = "Player Window";
 			sourceTree = "<group>";
@@ -214,7 +209,7 @@
 		9460F2CF16FF781100DB85C4 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
-				CLASSPREFIX = "";
+				CLASSPREFIX = SD;
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Steven Degutis";
 			};
@@ -262,7 +257,6 @@
 				94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */,
 				94AD9DE217BD556700D678E1 /* SDPlaylist.m in Sources */,
 				94229B2417BE8EE900FE5A88 /* SDMusicPlayer.m in Sources */,
-				94691D4D17C08F8A008039E6 /* SDWhateverView.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

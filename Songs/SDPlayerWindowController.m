@@ -14,10 +14,6 @@
 #import "SDTrackPositionView.h"
 
 
-
-#import "SDWhateverView.h"
-
-
 static NSString* SDMasterPlaylistItem = @"master";
 static NSString* SDUserPlaylistsItem = @"playlists";
 
@@ -53,8 +49,6 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 @property (weak) IBOutlet NSTableView* songsTable;
 @property (weak) IBOutlet NSOutlineView* playlistsOutlineView;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
-
-@property (weak) IBOutlet SDWhateverView* whateverView;
 
 @property NSString* filterString;
 
@@ -105,10 +99,6 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     [self updateCurrentSongViewStuff];
     
     [self.songsTable setSortDescriptors:@[]];
-    
-    [[self window] setBackgroundColor: [NSColor whiteColor]];
-    
-    self.whateverView.playlists = [SDSharedData() playlists];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
@@ -181,9 +171,6 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 }
 
 - (void) refreshPlaylistsKeepingCurrent {
-    
-    self.whateverView.playlists = [SDSharedData() playlists];
-    
     NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
     [self.playlistsOutlineView reloadItem:SDUserPlaylistsItem reloadChildren:YES];
     [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
