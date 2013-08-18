@@ -265,6 +265,10 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     return YES;
 }
 
+- (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
+    [aTableView reloadData];
+}
+
 #pragma mark - Playlists, Drag / Drop
 
 - (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard {
@@ -440,6 +444,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
             || ([song.album rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound);
         }]];
     }
+    
+    theSongs = [theSongs sortedArrayUsingDescriptors:[self.songsTable sortDescriptors]];
     
     return theSongs;
 }
