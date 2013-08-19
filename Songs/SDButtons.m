@@ -12,7 +12,7 @@
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     NSBezierPath* path = [NSBezierPath bezierPath];
     
-    cellFrame = NSInsetRect(cellFrame, 12.0, 5.0);
+    cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
     cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
     
     [path setLineWidth:3.0];
@@ -37,7 +37,7 @@
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     NSBezierPath* path = [NSBezierPath bezierPath];
     
-    cellFrame = NSInsetRect(cellFrame, 12.0, 5.0);
+    cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
     cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
     
     [path setLineWidth:3.0];
