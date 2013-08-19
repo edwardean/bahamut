@@ -20,6 +20,8 @@
 		945C295D17C1F0750045BA94 /* PlaylistsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945C295B17C1F0750045BA94 /* PlaylistsView.xib */; };
 		945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C295F17C1F3EE0045BA94 /* SDSplitView.m */; };
 		945C296317C1F50C0045BA94 /* SDCircleButton.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296217C1F50C0045BA94 /* SDCircleButton.m */; };
+		945C296C17C1FBBB0045BA94 /* SDPlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296A17C1FBBB0045BA94 /* SDPlaylistViewController.m */; };
+		945C296D17C1FBBB0045BA94 /* PlaylistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945C296B17C1FBBB0045BA94 /* PlaylistView.xib */; };
 		9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F2DA16FF781100DB85C4 /* Cocoa.framework */; };
 		9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2E316FF781100DB85C4 /* InfoPlist.strings */; };
 		9460F2E716FF781100DB85C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2E616FF781100DB85C4 /* main.m */; };
@@ -54,6 +56,9 @@
 		945C295F17C1F3EE0045BA94 /* SDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSplitView.m; sourceTree = "<group>"; };
 		945C296117C1F50C0045BA94 /* SDCircleButton.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCircleButton.h; sourceTree = "<group>"; };
 		945C296217C1F50C0045BA94 /* SDCircleButton.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCircleButton.m; sourceTree = "<group>"; };
+		945C296917C1FBBB0045BA94 /* SDPlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylistViewController.h; sourceTree = "<group>"; };
+		945C296A17C1FBBB0045BA94 /* SDPlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylistViewController.m; sourceTree = "<group>"; };
+		945C296B17C1FBBB0045BA94 /* PlaylistView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistView.xib; sourceTree = "<group>"; };
 		9460F2D716FF781100DB85C4 /* Songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9460F2DA16FF781100DB85C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9460F2DD16FF781100DB85C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -156,6 +161,16 @@
 			name = "Circle Buttons";
 			sourceTree = "<group>";
 		};
+		945C296817C1FBA80045BA94 /* Playlist */ = {
+			isa = PBXGroup;
+			children = (
+				945C296B17C1FBBB0045BA94 /* PlaylistView.xib */,
+				945C296917C1FBBB0045BA94 /* SDPlaylistViewController.h */,
+				945C296A17C1FBBB0045BA94 /* SDPlaylistViewController.m */,
+			);
+			name = Playlist;
+			sourceTree = "<group>";
+		};
 		9460F2CE16FF781100DB85C4 = {
 			isa = PBXGroup;
 			children = (
@@ -229,6 +244,7 @@
 				9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */,
 				9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */,
 				9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */,
+				945C296817C1FBA80045BA94 /* Playlist */,
 				945C296617C1FAF10045BA94 /* Tracker */,
 				945C296417C1FAE50045BA94 /* Split View */,
 				945C296517C1FAEC0045BA94 /* Playlists */,
@@ -324,6 +340,7 @@
 				945C294817C13F2C0045BA94 /* AllSongsWindow.xib in Resources */,
 				945C294E17C144830045BA94 /* SongsView.xib in Resources */,
 				945C295D17C1F0750045BA94 /* PlaylistsView.xib in Resources */,
+				945C296D17C1FBBB0045BA94 /* PlaylistView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -347,6 +364,7 @@
 				945C295C17C1F0750045BA94 /* SDPlaylistsViewController.m in Sources */,
 				945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */,
 				945C296317C1F50C0045BA94 /* SDCircleButton.m in Sources */,
+				945C296C17C1FBBB0045BA94 /* SDPlaylistViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

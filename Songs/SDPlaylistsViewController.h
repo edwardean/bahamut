@@ -13,11 +13,14 @@
 @protocol SDPlaylistsViewDelegate <NSObject>
 
 - (void) selectPlaylist:(SDPlaylist*)playlist;
+- (void) playPlaylist:(SDPlaylist*)playlist;
 
 @end
 
 @interface SDPlaylistsViewController : NSViewController
 
 @property (weak) id<SDPlaylistsViewDelegate> playlistsViewDelegate;
+
+- (void) selectPlaylist:(SDPlaylist*)playlist;
 
 @end

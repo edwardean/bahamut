@@ -10,16 +10,13 @@
 
 @implementation SDCircleButton
 
-- (void) resetCursorRects {
-    NSCursor* c = [NSCursor pointingHandCursor];
-    [self addCursorRect:[self bounds] cursor:c];
-    [c setOnMouseEntered:YES];
-}
+//- (void) resetCursorRects {
+//    NSCursor* c = [NSCursor pointingHandCursor];
+//    [self addCursorRect:[self bounds] cursor:c];
+//    [c setOnMouseEntered:YES];
+//}
 
-- (void)awakeFromNib {
-    NSButtonCell* cell = self.cell;
-    cell.backgroundColor = [NSColor greenColor];
-    
+//- (void)awakeFromNib {
 //    NSColor *color = [NSColor whiteColor];
 //    NSMutableAttributedString *colorTitle = [[NSMutableAttributedString alloc] initWithAttributedString:[self attributedTitle]];
 //    
@@ -27,7 +24,7 @@
 //    [colorTitle addAttribute:NSForegroundColorAttributeName value:color range:titleRange];
 //    
 //    [self setAttributedTitle:colorTitle];
-}
+//}
 
 @end
 

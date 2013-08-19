@@ -15,6 +15,7 @@
 
 
 
+#import "SDPlaylistViewController.h"
 #import "SDPlaylistsViewController.h"
 
 
@@ -41,6 +42,9 @@
 @property (weak) IBOutlet NSView* playlistsViewHouser;
 @property SDPlaylistsViewController* playlistsViewController;
 @property SDPlaylist* selectedPlaylist;
+
+@property (weak) IBOutlet NSView* playlistViewHouser;
+@property NSMutableArray* playlistViewControllers;
 
 //@property (weak) IBOutlet NSTextField* currentSongScrollingField;
 //@property (weak) IBOutlet NSButton* playButton;
@@ -78,10 +82,11 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
+    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChangeNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistOptionsChangedNotification:) name:SDPlaylistOptionsChangedNotification object:nil];
 //    
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
@@ -105,21 +110,30 @@
 //    
 //    [self updatePlaylistOptionsViewStuff];
 //    [self updateCurrentSongViewStuff];
-//    
+//
 //    [self.songsTable setSortDescriptors:@[]];
+    
+    
+    self.playlistViewControllers = [NSMutableArray array];
+    
+    for (SDPlaylist* playlist in [SDSharedData() playlists]) {
+        SDPlaylistViewController* vc = [[SDPlaylistViewController alloc] init];
+        vc.playlist = playlist;
+        [self.playlistViewControllers addObject:vc];
+    }
+    
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
     
     self.playlistsViewController = [[SDPlaylistsViewController alloc] init];
+    self.playlistsViewController.playlistsViewDelegate = self;
     [[self.playlistsViewController view] setFrame:[self.playlistsViewHouser frame]];
     [self.playlistsViewHouser addSubview:[self.playlistsViewController view]];
     
     [self setNextResponder:self.playlistsViewController];
     
-//    [self.playlistsTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0]
-//                         byExtendingSelection:NO];
-    
     self.selectedPlaylist = [[SDSharedData() playlists] objectAtIndex:0];
+    [self.playlistsViewController selectPlaylist: self.selectedPlaylist];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
@@ -141,25 +155,56 @@
 
 - (void) selectPlaylist:(SDPlaylist*)playlist {
     self.selectedPlaylist = playlist;
+    
+    NSUInteger idx = [[SDSharedData() playlists] indexOfObject: self.selectedPlaylist];
+    
+    SDPlaylistViewController* vc = [self.playlistViewControllers objectAtIndex: idx];
+    
+    [[self.playlistViewHouser subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [[vc view] setFrame: [self.playlistViewHouser bounds]];
+    [self.playlistViewHouser addSubview:[vc view]];
+    [self.playlistsViewController setNextResponder: vc];
+    
+//    NSLog(@"%@", self.selectedPlaylist);
+}
+
+- (void) playPlaylist:(SDPlaylist*)playlist {
+//    NSLog(@"play %@", self.selectedPlaylist);
 }
 
 
 
-//#pragma mark - Notifications
-//
-//- (void) playlistAddedNotification:(NSNotification*)note {
-//    [self refreshPlaylistsKeepingCurrent];
-//}
-//
+#pragma mark - Notifications
+
+- (void) playlistAddedNotification:(NSNotification*)note {
+    SDPlaylist* playlist = [note object];
+    
+    NSUInteger idx = [[SDSharedData() playlists] indexOfObject:playlist];
+    
+    SDPlaylistViewController* vc = [[SDPlaylistViewController alloc] init];
+    vc.playlist = playlist;
+    [self.playlistViewControllers insertObject:vc atIndex:idx];
+    
+//    NSLog(@"its %@", playlist);
+}
+
+- (void) playlistRemovedNotification:(NSNotification*)note {
+    SDPlaylist* playlist = [note object];
+    
+    NSUInteger idx = [self.playlistViewControllers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return ![[SDSharedData() playlists] containsObject: obj];
+    }];
+    
+    [self.playlistViewControllers removeObjectAtIndex:idx];
+    
+//    NSLog(@"its %@", playlist);
+}
+
 //- (void) playlistRenamedNotification:(NSNotification*)note {
 //    [self refreshPlaylistsKeepingCurrent];
 //    [self updatePlaylistOptionsViewStuff];
 //}
-//
-//- (void) playlistRemovedNotification:(NSNotification*)note {
-//    [self refreshPlaylistsIgnoringCurrent];
-//}
-//
+
 //- (void) playlistOptionsChangedNotification:(NSNotification*)note {
 //    [self updatePlaylistOptionsViewStuff];
 //}
@@ -632,10 +677,7 @@
     SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
     [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
     
-//    [self.playlistsTableView reloadData];
-    
-    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1];
-//    [self.playlistsTableView selectRowIndexes:indices byExtendingSelection:NO];
+    [self.playlistsViewController selectPlaylist:newPlaylist];
     
 //    [[self.playlistTitleField window] makeFirstResponder: self.playlistTitleField];
 }

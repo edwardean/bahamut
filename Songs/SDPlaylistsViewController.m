@@ -28,11 +28,11 @@
     }
 }
 
-- (void) resetCursorRects {
-    NSCursor* c = [NSCursor pointingHandCursor];
-    [self addCursorRect:[self bounds] cursor:c];
-    [c setOnMouseEntered:YES];
-}
+//- (void) resetCursorRects {
+//    NSCursor* c = [NSCursor pointingHandCursor];
+//    [self addCursorRect:[self bounds] cursor:c];
+//    [c setOnMouseEntered:YES];
+//}
 
 @end
 
@@ -57,6 +57,9 @@
 
 - (void) loadView {
     [super loadView];
+    
+    [self.playlistsTableView setTarget:self];
+    [self.playlistsTableView setDoubleAction:@selector(doubleClickedThing:)];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
@@ -124,6 +127,24 @@
     NSInteger row = [self.playlistsTableView selectedRow];
     [SDSharedData() deletePlaylist: [[SDSharedData() playlists] objectAtIndex:row]];
     [self.playlistsTableView reloadData];
+}
+
+- (void) selectPlaylist:(SDPlaylist*)playlist {
+    NSUInteger idx = [[SDSharedData() playlists] indexOfObject:playlist];
+    [self.playlistsTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:idx]
+                         byExtendingSelection:NO];
+    
+    [self.playlistsViewDelegate selectPlaylist:playlist];
+}
+
+- (void) doubleClickedThing:(id)sender {
+    NSInteger row = [self.playlistsTableView clickedRow];
+    
+    if (row < 0 || row == [[SDSharedData() playlists] count])
+        return;
+    
+    SDPlaylist* playlist = [[SDSharedData() playlists] objectAtIndex:row];
+    [self.playlistsViewDelegate playPlaylist:playlist];
 }
 
 @end

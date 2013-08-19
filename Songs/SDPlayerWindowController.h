@@ -8,13 +8,15 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "SDPlaylistsViewController.h"
+
 @protocol MUPlayerWindowKilledDelegate <NSObject>
 
 - (void) playerWindowKilled:(id)controller;
 
 @end
 
-@interface SDPlayerWindowController : NSWindowController <NSWindowDelegate>
+@interface SDPlayerWindowController : NSWindowController <NSWindowDelegate, SDPlaylistsViewDelegate>
 
 @property (weak) id<MUPlayerWindowKilledDelegate> killedDelegate;
 
