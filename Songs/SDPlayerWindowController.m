@@ -14,7 +14,14 @@
 #import "SDTrackPositionView.h"
 
 
-#import "SDPlaylistChooserView.h"
+
+#import "SDPlaylistsViewController.h"
+
+
+
+
+
+//#import "SDPlaylistChooserView.h"
 
 
 //static NSString* SDSongDragType = @"SDSongDragType";
@@ -24,16 +31,6 @@
 
 
 
-@interface SDSplitView : NSSplitView
-@end
-@implementation SDSplitView
-
-- (void) drawDividerInRect:(NSRect)rect {
-}
-
-@end
-
-
 
 
 
@@ -41,7 +38,9 @@
 
 @interface SDPlayerWindowController ()
 
-@property (weak) IBOutlet SDPlaylistChooserView* playlistChooserView;
+@property (weak) IBOutlet NSView* playlistsViewHouser;
+@property SDPlaylistsViewController* playlistsViewController;
+@property SDPlaylist* selectedPlaylist;
 
 //@property (weak) IBOutlet NSTextField* currentSongScrollingField;
 //@property (weak) IBOutlet NSButton* playButton;
@@ -63,7 +62,6 @@
 //
 //@property NSString* filterString;
 //
-//@property SDPlaylist* selectedPlaylist;
 
 @end
 
@@ -112,10 +110,16 @@
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
     
-    self.playlistChooserView.playlists = [SDSharedData() playlists];
-    [self.playlistChooserView redrawPlaylists];
+    self.playlistsViewController = [[SDPlaylistsViewController alloc] init];
+    [[self.playlistsViewController view] setFrame:[self.playlistsViewHouser frame]];
+    [self.playlistsViewHouser addSubview:[self.playlistsViewController view]];
     
-//    self.playlistChooserView.cho
+    [self setNextResponder:self.playlistsViewController];
+    
+//    [self.playlistsTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:0]
+//                         byExtendingSelection:NO];
+    
+    self.selectedPlaylist = [[SDSharedData() playlists] objectAtIndex:0];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
@@ -129,10 +133,15 @@
 
 
 
-- (void) didChoosePlaylist:(SDPlaylist*)playlist {
-    
-}
 
+
+#pragma Playlists
+
+
+
+- (void) selectPlaylist:(SDPlaylist*)playlist {
+    self.selectedPlaylist = playlist;
+}
 
 
 
@@ -203,21 +212,21 @@
 //    if (aSelector == @selector(severelyDeleteSomething:)) {
 //        id firstResponder = [[self window] firstResponder];
 //        
-//        if (firstResponder == self.songsTable) {
-//            if ([self showingAllSongs])
-//                return NO;
-//            
-//            if ([[self.songsTable selectedRowIndexes] count] < 1)
-//                return NO;
-//            
-//            return YES;
-//        }
-//        else if (firstResponder == self.playlistsOutlineView) {
+////        if (firstResponder == self.songsTable) {
+////            if ([self showingAllSongs])
+////                return NO;
+////            
+////            if ([[self.songsTable selectedRowIndexes] count] < 1)
+////                return NO;
+////            
+////            return YES;
+////        }
+////        else if (firstResponder == self.playlistsTableView) {
 //            if (self.selectedPlaylist)
 //                return YES;
 //            
 //            return NO;
-//        }
+////        }
 //    }
 //    
 //    return [super respondsToSelector:aSelector];
@@ -226,15 +235,16 @@
 //- (IBAction) severelyDeleteSomething:(id)sender {
 //    id firstResponder = [[self window] firstResponder];
 //    
-//    if (firstResponder == self.songsTable) {
-//        NSIndexSet* set = [self.songsTable selectedRowIndexes];
-//        NSArray* songs = [[self visibleSongs] objectsAtIndexes:set];
-//        
-//        [self.selectedPlaylist removeSongs: songs];
-//    }
-//    else if (firstResponder == self.playlistsOutlineView) {
+////    if (firstResponder == self.songsTable) {
+////        NSIndexSet* set = [self.songsTable selectedRowIndexes];
+////        NSArray* songs = [[self visibleSongs] objectsAtIndexes:set];
+////        
+////        [self.selectedPlaylist removeSongs: songs];
+////    }
+////    else if (firstResponder == self.playlistsOutlineView) {
 //        [SDSharedData() deletePlaylist:self.selectedPlaylist];
-//    }
+//        [self.playlistsTableView reloadData];
+////    }
 //}
 
 
@@ -585,29 +595,6 @@
 
 
 
-//#pragma mark - Split view crap
-//
-//
-//
-//
-//
-//- (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex {
-//    return MAX(proposedMin, 150.0);
-//}
-//
-//- (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex {
-//    return MIN(proposedMax, [splitView frame].size.width - 150.0);
-//}
-//
-//- (void)splitView:(NSSplitView*)sender resizeSubviewsWithOldSize:(NSSize)oldSize {
-//    CGFloat w = [[[sender subviews] objectAtIndex:0] frame].size.width;
-//    [sender adjustSubviews];
-//    [sender setPosition:w ofDividerAtIndex:0];
-//}
-
-
-
-
 
 
 
@@ -645,11 +632,11 @@
     SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
     [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
     
-    [self.playlistChooserView redrawPlaylists];
+//    [self.playlistsTableView reloadData];
     
-//    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1];
-//    [self.playlistsOutlineView selectRowIndexes:indices byExtendingSelection:NO];
-//    
+    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1];
+//    [self.playlistsTableView selectRowIndexes:indices byExtendingSelection:NO];
+    
 //    [[self.playlistTitleField window] makeFirstResponder: self.playlistTitleField];
 }
 
