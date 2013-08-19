@@ -73,10 +73,10 @@
     CGFloat percentage = self.realCurrentValue / self.realMaxValue;
     box.origin.x += (percentage * (maxWidth - minWidth)) + minWidth;
     
-    box = NSIntegralRect(box);
+//    box = NSIntegralRect(box);
     box = NSInsetRect(box, 0.0, 2.5);
     
-    [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0] setFill];
+    [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:0.5] setFill];
     [[NSBezierPath bezierPathWithRect:box] fill];
     
     [NSGraphicsContext restoreGraphicsState];

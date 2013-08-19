@@ -24,7 +24,7 @@
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMaxCoordinate:(CGFloat)proposedMax ofSubviewAt:(NSInteger)dividerIndex {
-    return MIN(proposedMax, [splitView frame].size.width - 150.0);
+    return MIN(proposedMax, [splitView frame].size.width - 225.0);
 }
 
 - (void)splitView:(NSSplitView*)sender resizeSubviewsWithOldSize:(NSSize)oldSize {

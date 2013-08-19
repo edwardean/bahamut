@@ -85,19 +85,29 @@
 }
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-    return [[SDSharedData() playlists] count] + 1;
+    return [[SDSharedData() playlists] count] + 3;
 }
 
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
-    if (row < [[SDSharedData() playlists] count]) {
+    NSUInteger count = [[SDSharedData() playlists] count];
+    
+    if (row < count) {
         NSTableCellView *result = [tableView makeViewWithIdentifier:@"ExistingPlaylist" owner:self];
         [result textField].stringValue = [[[SDSharedData() playlists] objectAtIndex:row] title];
         return result;
     }
-    else {
+    else if (row == count) {
         return [tableView makeViewWithIdentifier:@"NewPlaylist" owner:self];
+    }
+    else if (row == count + 1) {
+        return [tableView makeViewWithIdentifier:@"Divider" owner:self];
+    }
+    else {
+        NSTableCellView *result = [tableView makeViewWithIdentifier:@"ExistingPlaylist" owner:self];
+        [result textField].stringValue = @"All Songs";
+        return result;
     }
 }
 
@@ -105,13 +115,24 @@
     return [[SDTableRowView alloc] init];
 }
 
+- (CGFloat)tableView:(NSTableView *)tableView heightOfRow:(NSInteger)row {
+    NSUInteger count = [[SDSharedData() playlists] count];
+    if (row == count + 1) {
+        return 14.0;
+    }
+    return 30.0;
+}
+
 - (BOOL)tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex {
-    return (rowIndex < [[SDSharedData() playlists] count]);
+    NSUInteger count = [[SDSharedData() playlists] count];
+    return (rowIndex != count && rowIndex != count + 1);
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
     NSInteger row = [self.playlistsTableView selectedRow];
-    [self.playlistsViewDelegate selectPlaylist: [[SDSharedData() playlists] objectAtIndex:row]];
+    
+    if (row < [[SDSharedData() playlists] count])
+        [self.playlistsViewDelegate selectPlaylist: [[SDSharedData() playlists] objectAtIndex:row]];
 }
 
 
