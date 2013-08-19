@@ -16,16 +16,8 @@
 		945C295D17C1F0750045BA94 /* SourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945C295B17C1F0750045BA94 /* SourceListView.xib */; };
 		945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C295F17C1F3EE0045BA94 /* SDSplitView.m */; };
 		945C296317C1F50C0045BA94 /* SDButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296217C1F50C0045BA94 /* SDButtons.m */; };
-		945C296C17C1FBBB0045BA94 /* SDPlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296A17C1FBBB0045BA94 /* SDPlaylistViewController.m */; };
-		945C296D17C1FBBB0045BA94 /* PlaylistView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945C296B17C1FBBB0045BA94 /* PlaylistView.xib */; };
-		945C297717C20AAA0045BA94 /* next_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 945C296F17C20AAA0045BA94 /* next_black.png */; };
-		945C297817C20AAA0045BA94 /* next_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 945C297017C20AAA0045BA94 /* next_white.png */; };
-		945C297917C20AAA0045BA94 /* pause_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 945C297117C20AAA0045BA94 /* pause_black.png */; };
-		945C297A17C20AAA0045BA94 /* pause_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 945C297217C20AAA0045BA94 /* pause_white.png */; };
-		945C297B17C20AAA0045BA94 /* play_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 945C297317C20AAA0045BA94 /* play_black.png */; };
-		945C297C17C20AAA0045BA94 /* play_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 945C297417C20AAA0045BA94 /* play_white.png */; };
-		945C297D17C20AAA0045BA94 /* prev_black.png in Resources */ = {isa = PBXBuildFile; fileRef = 945C297517C20AAA0045BA94 /* prev_black.png */; };
-		945C297E17C20AAA0045BA94 /* prev_white.png in Resources */ = {isa = PBXBuildFile; fileRef = 945C297617C20AAA0045BA94 /* prev_white.png */; };
+		945C296C17C1FBBB0045BA94 /* SDSongListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296A17C1FBBB0045BA94 /* SDSongListViewController.m */; };
+		945C296D17C1FBBB0045BA94 /* SongListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945C296B17C1FBBB0045BA94 /* SongListView.xib */; };
 		9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F2DA16FF781100DB85C4 /* Cocoa.framework */; };
 		9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2E316FF781100DB85C4 /* InfoPlist.strings */; };
 		9460F2E716FF781100DB85C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2E616FF781100DB85C4 /* main.m */; };
@@ -53,17 +45,9 @@
 		945C295E17C1F3EE0045BA94 /* SDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSplitView.h; sourceTree = "<group>"; };
 		945C295F17C1F3EE0045BA94 /* SDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSplitView.m; sourceTree = "<group>"; };
 		945C296217C1F50C0045BA94 /* SDButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDButtons.m; sourceTree = "<group>"; };
-		945C296917C1FBBB0045BA94 /* SDPlaylistViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylistViewController.h; sourceTree = "<group>"; };
-		945C296A17C1FBBB0045BA94 /* SDPlaylistViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylistViewController.m; sourceTree = "<group>"; };
-		945C296B17C1FBBB0045BA94 /* PlaylistView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistView.xib; sourceTree = "<group>"; };
-		945C296F17C20AAA0045BA94 /* next_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_black.png; sourceTree = "<group>"; };
-		945C297017C20AAA0045BA94 /* next_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = next_white.png; sourceTree = "<group>"; };
-		945C297117C20AAA0045BA94 /* pause_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_black.png; sourceTree = "<group>"; };
-		945C297217C20AAA0045BA94 /* pause_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = pause_white.png; sourceTree = "<group>"; };
-		945C297317C20AAA0045BA94 /* play_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_black.png; sourceTree = "<group>"; };
-		945C297417C20AAA0045BA94 /* play_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = play_white.png; sourceTree = "<group>"; };
-		945C297517C20AAA0045BA94 /* prev_black.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prev_black.png; sourceTree = "<group>"; };
-		945C297617C20AAA0045BA94 /* prev_white.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = prev_white.png; sourceTree = "<group>"; };
+		945C296917C1FBBB0045BA94 /* SDSongListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSongListViewController.h; sourceTree = "<group>"; };
+		945C296A17C1FBBB0045BA94 /* SDSongListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSongListViewController.m; sourceTree = "<group>"; };
+		945C296B17C1FBBB0045BA94 /* SongListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongListView.xib; sourceTree = "<group>"; };
 		9460F2D716FF781100DB85C4 /* Songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9460F2DA16FF781100DB85C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9460F2DD16FF781100DB85C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -137,38 +121,23 @@
 			name = Tracker;
 			sourceTree = "<group>";
 		};
-		945C296717C1FAF70045BA94 /* Circle Buttons */ = {
+		945C296717C1FAF70045BA94 /* Player Buttons */ = {
 			isa = PBXGroup;
 			children = (
 				945C296217C1F50C0045BA94 /* SDButtons.m */,
 			);
-			name = "Circle Buttons";
+			name = "Player Buttons";
 			sourceTree = "<group>";
 		};
-		945C296817C1FBA80045BA94 /* Playlist */ = {
+		945C296817C1FBA80045BA94 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
-				945C296B17C1FBBB0045BA94 /* PlaylistView.xib */,
-				945C296917C1FBBB0045BA94 /* SDPlaylistViewController.h */,
-				945C296A17C1FBBB0045BA94 /* SDPlaylistViewController.m */,
+				945C296B17C1FBBB0045BA94 /* SongListView.xib */,
+				945C296917C1FBBB0045BA94 /* SDSongListViewController.h */,
+				945C296A17C1FBBB0045BA94 /* SDSongListViewController.m */,
 			);
-			name = Playlist;
+			name = Songs;
 			sourceTree = "<group>";
-		};
-		945C296E17C20AA90045BA94 /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				945C296F17C20AAA0045BA94 /* next_black.png */,
-				945C297017C20AAA0045BA94 /* next_white.png */,
-				945C297117C20AAA0045BA94 /* pause_black.png */,
-				945C297217C20AAA0045BA94 /* pause_white.png */,
-				945C297317C20AAA0045BA94 /* play_black.png */,
-				945C297417C20AAA0045BA94 /* play_white.png */,
-				945C297517C20AAA0045BA94 /* prev_black.png */,
-				945C297617C20AAA0045BA94 /* prev_white.png */,
-			);
-			path = Graphics;
-			sourceTree = SOURCE_ROOT;
 		};
 		9460F2CE16FF781100DB85C4 = {
 			isa = PBXGroup;
@@ -215,7 +184,6 @@
 				9460F2EF16FF781100DB85C4 /* MainMenu.xib */,
 				9460F2EC16FF781100DB85C4 /* SDAppDelegate.h */,
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
-				945C296E17C20AA90045BA94 /* Graphics */,
 				94AD9DE317BD56C100D678E1 /* Persistence */,
 				9460F2FF16FFA19B00DB85C4 /* Songs */,
 				94229B2117BE8EDC00FE5A88 /* Player */,
@@ -243,10 +211,10 @@
 				9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */,
 				9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */,
 				945C296517C1FAEC0045BA94 /* Source List */,
-				945C296817C1FBA80045BA94 /* Playlist */,
+				945C296817C1FBA80045BA94 /* Songs */,
 				945C296617C1FAF10045BA94 /* Tracker */,
 				945C296417C1FAE50045BA94 /* Split View */,
-				945C296717C1FAF70045BA94 /* Circle Buttons */,
+				945C296717C1FAF70045BA94 /* Player Buttons */,
 			);
 			name = "Player Window";
 			sourceTree = "<group>";
@@ -336,15 +304,7 @@
 				9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */,
 				9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */,
 				945C295D17C1F0750045BA94 /* SourceListView.xib in Resources */,
-				945C296D17C1FBBB0045BA94 /* PlaylistView.xib in Resources */,
-				945C297717C20AAA0045BA94 /* next_black.png in Resources */,
-				945C297817C20AAA0045BA94 /* next_white.png in Resources */,
-				945C297917C20AAA0045BA94 /* pause_black.png in Resources */,
-				945C297A17C20AAA0045BA94 /* pause_white.png in Resources */,
-				945C297B17C20AAA0045BA94 /* play_black.png in Resources */,
-				945C297C17C20AAA0045BA94 /* play_white.png in Resources */,
-				945C297D17C20AAA0045BA94 /* prev_black.png in Resources */,
-				945C297E17C20AAA0045BA94 /* prev_white.png in Resources */,
+				945C296D17C1FBBB0045BA94 /* SongListView.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -366,7 +326,7 @@
 				945C295C17C1F0750045BA94 /* SDSourceListViewController.m in Sources */,
 				945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */,
 				945C296317C1F50C0045BA94 /* SDButtons.m in Sources */,
-				945C296C17C1FBBB0045BA94 /* SDPlaylistViewController.m in Sources */,
+				945C296C17C1FBBB0045BA94 /* SDSongListViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

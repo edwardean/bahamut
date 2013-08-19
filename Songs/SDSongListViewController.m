@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "SDPlaylistViewController.h"
+#import "SDSongListViewController.h"
 
 
 
@@ -52,7 +52,7 @@
 
 
 
-@interface SDPlaylistViewController ()
+@interface SDSongListViewController ()
 
 @property (weak) IBOutlet NSView* songsHousingView;
 
@@ -65,10 +65,10 @@
 
 @end
 
-@implementation SDPlaylistViewController
+@implementation SDSongListViewController
 
 - (NSString*) nibName {
-    return @"PlaylistView";
+    return @"SongListView";
 }
 
 - (void) loadView {

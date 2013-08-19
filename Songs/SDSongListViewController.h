@@ -10,7 +10,7 @@
 
 #import "SDPlaylist.h"
 
-@interface SDPlaylistViewController : NSViewController
+@interface SDSongListViewController : NSViewController
 
 @property (weak) SDPlaylist* playlist;
 

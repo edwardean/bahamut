@@ -15,7 +15,7 @@
 
 
 
-#import "SDPlaylistViewController.h"
+#import "SDSongListViewController.h"
 #import "SDSourceListViewController.h"
 
 
@@ -111,7 +111,7 @@
     self.playlistViewControllers = [NSMutableArray array];
     
     for (SDPlaylist* playlist in [SDSharedData() playlists]) {
-        SDPlaylistViewController* vc = [[SDPlaylistViewController alloc] init];
+        SDSongListViewController* vc = [[SDSongListViewController alloc] init];
         vc.playlist = playlist;
         [self.playlistViewControllers addObject:vc];
     }
@@ -152,7 +152,7 @@
     
     NSUInteger idx = [[SDSharedData() playlists] indexOfObject: self.selectedPlaylist];
     
-    SDPlaylistViewController* vc = [self.playlistViewControllers objectAtIndex: idx];
+    SDSongListViewController* vc = [self.playlistViewControllers objectAtIndex: idx];
     
     [[self.playlistViewHouser subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
     [[vc view] setFrame: [self.playlistViewHouser bounds]];
@@ -175,7 +175,7 @@
     
     NSUInteger idx = [[SDSharedData() playlists] indexOfObject:playlist];
     
-    SDPlaylistViewController* vc = [[SDPlaylistViewController alloc] init];
+    SDSongListViewController* vc = [[SDSongListViewController alloc] init];
     vc.playlist = playlist;
     [self.playlistViewControllers insertObject:vc atIndex:idx];
     
@@ -185,7 +185,7 @@
 - (void) playlistRemovedNotification:(NSNotification*)note {
     SDPlaylist* playlist = [note object];
     
-    NSUInteger idx = [self.playlistViewControllers indexOfObjectPassingTest:^BOOL(SDPlaylistViewController* obj, NSUInteger idx, BOOL *stop) {
+    NSUInteger idx = [self.playlistViewControllers indexOfObjectPassingTest:^BOOL(SDSongListViewController* obj, NSUInteger idx, BOOL *stop) {
         return obj.playlist == playlist;
     }];
     
