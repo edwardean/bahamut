@@ -123,10 +123,6 @@
     });
 }
 
-+ (void) saveUserData {
-    [[SDUserDataManager sharedMusicManager] saveUserData];
-}
-
 + (NSArray*) songsForUUIDs:(NSArray*)songUUIDs {
     NSMutableArray* foundSongs = [NSMutableArray array];
     
@@ -171,7 +167,7 @@
     [playlists removeObject:playlist];
     
     SDSaveData();
-    SDPostNote(SDPlaylistRemovedNotification, nil);
+    SDPostNote(SDPlaylistRemovedNotification, playlist);
 }
 
 - (void) insertPlaylist:(SDPlaylist*)playlist atIndex:(NSUInteger)idx {
@@ -182,7 +178,7 @@
     [playlists insertObject:playlist atIndex:idx];
     
     SDSaveData();
-    SDPostNote(SDPlaylistAddedNotification, nil);
+    SDPostNote(SDPlaylistAddedNotification, playlist);
 }
 
 - (void) movePlaylist:(SDPlaylist*)playlist toIndex:(NSUInteger)newIndex {
@@ -207,7 +203,7 @@
     [SDAddUndo(self) movePlaylist:playlist toIndex:oldIndex];
     
     SDSaveData();
-    SDPostNote(SDPlaylistAddedNotification, nil);
+    SDPostNote(SDPlaylistAddedNotification, playlist);
 }
 
 
@@ -230,7 +226,7 @@ SDUserDataManager* SDSharedData() {
 }
 
 void SDSaveData() {
-    [SDUserDataManager saveUserData];
+    [[SDUserDataManager sharedMusicManager] saveUserData];
 }
 
 void SDPostNote(NSString* name, id obj) {

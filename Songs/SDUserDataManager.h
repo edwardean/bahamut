@@ -27,7 +27,6 @@
 - (NSMutableArray*) playlists;
 
 - (void) loadUserData;
-+ (void) saveUserData;
 
 - (void) importSongsUnderURLs:(NSArray*)urls;
 
