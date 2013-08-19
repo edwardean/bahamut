@@ -206,7 +206,11 @@
     SDPostNote(SDPlaylistAddedNotification, playlist);
 }
 
-
+- (SDPlaylist*) createPlaylist {
+    SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
+    [self insertPlaylist:newPlaylist atIndex:[[self playlists] count]];
+    return newPlaylist;
+}
 
 
 

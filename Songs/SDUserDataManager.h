@@ -41,6 +41,7 @@
 - (void) insertPlaylist:(SDPlaylist*)playlist atIndex:(NSUInteger)idx;
 - (void) movePlaylist:(SDPlaylist*)playlist toIndex:(NSUInteger)idx;
 - (void) deletePlaylist:(SDPlaylist*)playlist;
+- (SDPlaylist*) createPlaylist;
 
 @end
 

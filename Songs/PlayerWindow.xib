@@ -53,7 +53,7 @@
 			<object class="NSWindowTemplate" id="384763069">
 				<int key="NSWindowStyleMask">15</int>
 				<int key="NSWindowBacking">2</int>
-				<string key="NSWindowRect">{{999, 605}, {735, 619}}</string>
+				<string key="NSWindowRect">{{912, 394}, {735, 619}}</string>
 				<int key="NSWTFlags">1954021376</int>
 				<string key="NSWindowTitle">Songs</string>
 				<string key="NSWindowClass">NSWindow</string>
@@ -80,7 +80,7 @@
 													<reference key="NSNextResponder" ref="667446081"/>
 													<int key="NSvFlags">256</int>
 													<array class="NSMutableArray" key="NSSubviews"/>
-													<string key="NSFrameSize">{164, 532}</string>
+													<string key="NSFrameSize">{164, 554}</string>
 													<reference key="NSSuperview" ref="667446081"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="459623973"/>
@@ -195,7 +195,7 @@
 													<bool key="NSOutlineViewAutoresizesOutlineColumnKey">NO</bool>
 												</object>
 											</array>
-											<string key="NSFrameSize">{164, 532}</string>
+											<string key="NSFrameSize">{164, 554}</string>
 											<reference key="NSSuperview" ref="706147345"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="791498854"/>
@@ -232,7 +232,7 @@
 											<double key="NSPercent">0.99270072992700731</double>
 										</object>
 									</array>
-									<string key="NSFrameSize">{164, 532}</string>
+									<string key="NSFrameSize">{164, 554}</string>
 									<reference key="NSSuperview" ref="239354747"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="667446081"/>
@@ -327,6 +327,7 @@
 													<string key="NSFrame">{{285, 7}, {66, 18}}</string>
 													<reference key="NSSuperview" ref="343627916"/>
 													<reference key="NSWindow"/>
+													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSButtonCell" key="NSCell" id="332928549">
@@ -416,7 +417,7 @@
 													<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 												</object>
 											</array>
-											<string key="NSFrame">{{0, 495}, {570, 37}}</string>
+											<string key="NSFrame">{{0, 517}, {570, 37}}</string>
 											<reference key="NSSuperview" ref="9185959"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="45262121"/>
@@ -434,7 +435,7 @@
 														<object class="NSTableView" id="748779351">
 															<reference key="NSNextResponder" ref="50003124"/>
 															<int key="NSvFlags">4352</int>
-															<string key="NSFrameSize">{570, 445}</string>
+															<string key="NSFrameSize">{570, 467}</string>
 															<reference key="NSSuperview" ref="50003124"/>
 															<reference key="NSWindow"/>
 															<reference key="NSNextKeyView" ref="950393727"/>
@@ -611,7 +612,7 @@
 															<int key="NSTableViewGroupRowStyle">1</int>
 														</object>
 													</array>
-													<string key="NSFrame">{{0, 17}, {570, 445}}</string>
+													<string key="NSFrame">{{0, 17}, {570, 467}}</string>
 													<reference key="NSSuperview" ref="104949999"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="748779351"/>
@@ -664,7 +665,7 @@
 												</object>
 												<reference ref="962492621"/>
 											</array>
-											<string key="NSFrame">{{0, 33}, {570, 462}}</string>
+											<string key="NSFrame">{{0, 33}, {570, 484}}</string>
 											<reference key="NSSuperview" ref="9185959"/>
 											<reference key="NSWindow"/>
 											<reference key="NSNextKeyView" ref="242560340"/>
@@ -681,7 +682,7 @@
 											<double key="NSMagnification">1</double>
 										</object>
 									</array>
-									<string key="NSFrame">{{165, 0}, {570, 532}}</string>
+									<string key="NSFrame">{{165, 0}, {570, 554}}</string>
 									<reference key="NSSuperview" ref="239354747"/>
 									<reference key="NSWindow"/>
 									<reference key="NSNextKeyView" ref="206134575"/>
@@ -689,7 +690,7 @@
 									<string key="NSClassName">NSView</string>
 								</object>
 							</array>
-							<string key="NSFrame">{{0, 22}, {735, 532}}</string>
+							<string key="NSFrameSize">{735, 554}</string>
 							<reference key="NSSuperview" ref="453444170"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="706147345"/>
@@ -826,6 +827,7 @@
 									<string key="NSFrame">{{1, 1}, {735, 64}}</string>
 									<reference key="NSSuperview" ref="818960658"/>
 									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="500290537"/>
 									<string key="NSReuseIdentifierKey">_NS:11</string>
 								</object>
 							</array>
@@ -864,14 +866,12 @@
 					<string key="NSFrameSize">{735, 619}</string>
 					<reference key="NSSuperview"/>
 					<reference key="NSWindow"/>
-					<reference key="NSNextKeyView"/>
+					<reference key="NSNextKeyView" ref="818960658"/>
 				</object>
 				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{400, 322}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">songswindow</string>
-				<bool key="NSAutorecalculatesContentBorderThicknessMinY">NO</bool>
-				<double key="NSContentBorderThicknessMinY">22</double>
 				<bool key="NSWindowIsRestorable">YES</bool>
 			</object>
 		</array>
@@ -887,179 +887,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">playlistsOutlineView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="791498854"/>
-					</object>
-					<int key="connectionID">150</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">songsTable</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="748779351"/>
-					</object>
-					<int key="connectionID">199</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">shuffleButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="986504672"/>
-					</object>
-					<int key="connectionID">186</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">repeatButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="595601130"/>
-					</object>
-					<int key="connectionID">185</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">playlistTitleField</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="886115708"/>
-					</object>
-					<int key="connectionID">195</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">renamePlaylist:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="886115708"/>
-					</object>
-					<int key="connectionID">196</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">playlistOptionsContainerView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="343627916"/>
-					</object>
-					<int key="connectionID">204</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">searchContainerView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="206134575"/>
-					</object>
-					<int key="connectionID">205</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">songsTableContainerView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="9185959"/>
-					</object>
-					<int key="connectionID">206</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">searchField</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="45262121"/>
-					</object>
-					<int key="connectionID">207</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">songsScrollView</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="104949999"/>
-					</object>
-					<int key="connectionID">208</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">setPlaylistRepeats:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="595601130"/>
-					</object>
-					<int key="connectionID">210</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">setPlaylistShuffles:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="986504672"/>
-					</object>
-					<int key="connectionID">211</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">currentSongScrollingField</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="803963954"/>
-					</object>
-					<int key="connectionID">212</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">songPositionSlider</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="404546447"/>
-					</object>
-					<int key="connectionID">124</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">playButton</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="846214451"/>
-					</object>
-					<int key="connectionID">213</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">playPause:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="846214451"/>
-					</object>
-					<int key="connectionID">133</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">prevSong:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="500290537"/>
-					</object>
-					<int key="connectionID">132</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">nextSong:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="992950324"/>
-					</object>
-					<int key="connectionID">134</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
 						<reference key="source" ref="384763069"/>
 						<reference key="destination" ref="1001"/>
 					</object>
 					<int key="connectionID">49</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="791498854"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">52</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">dataSource</string>
-						<reference key="source" ref="791498854"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">145</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1203,50 +1035,10 @@
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">delegate</string>
-						<reference key="source" ref="431908498"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">53</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
 						<reference key="source" ref="239354747"/>
 						<reference key="destination" ref="1001"/>
 					</object>
 					<int key="connectionID">81</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">trackPositionDelegate</string>
-						<reference key="source" ref="404546447"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">125</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="748779351"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">183</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">dataSource</string>
-						<reference key="source" ref="748779351"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">184</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">delegate</string>
-						<reference key="source" ref="45262121"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">209</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1717,75 +1509,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SDPlayerWindowController</string>
 					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="currentSongScrollingField">NSTextField</string>
-						<string key="playButton">NSButton</string>
-						<string key="playlistOptionsContainerView">NSView</string>
-						<string key="playlistTitleField">NSTextField</string>
-						<string key="playlistsOutlineView">NSOutlineView</string>
-						<string key="repeatButton">NSButton</string>
-						<string key="searchContainerView">NSView</string>
-						<string key="searchField">NSSearchField</string>
-						<string key="shuffleButton">NSButton</string>
-						<string key="songPositionSlider">SDTrackPositionView</string>
-						<string key="songsScrollView">NSView</string>
-						<string key="songsTable">NSTableView</string>
-						<string key="songsTableContainerView">NSView</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="currentSongScrollingField">
-							<string key="name">currentSongScrollingField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="playButton">
-							<string key="name">playButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="playlistOptionsContainerView">
-							<string key="name">playlistOptionsContainerView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="playlistTitleField">
-							<string key="name">playlistTitleField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="playlistsOutlineView">
-							<string key="name">playlistsOutlineView</string>
-							<string key="candidateClassName">NSOutlineView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="repeatButton">
-							<string key="name">repeatButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="searchContainerView">
-							<string key="name">searchContainerView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="searchField">
-							<string key="name">searchField</string>
-							<string key="candidateClassName">NSSearchField</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="shuffleButton">
-							<string key="name">shuffleButton</string>
-							<string key="candidateClassName">NSButton</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="songPositionSlider">
-							<string key="name">songPositionSlider</string>
-							<string key="candidateClassName">SDTrackPositionView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="songsScrollView">
-							<string key="name">songsScrollView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="songsTable">
-							<string key="name">songsTable</string>
-							<string key="candidateClassName">NSTableView</string>
-						</object>
-						<object class="IBToOneOutletInfo" key="songsTableContainerView">
-							<string key="name">songsTableContainerView</string>
-							<string key="candidateClassName">NSView</string>
-						</object>
-					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/SDPlayerWindowController.h</string>
