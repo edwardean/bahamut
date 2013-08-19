@@ -21,8 +21,6 @@
 @property IBOutlet NSSearchField* searchField;
 @property IBOutlet NSScrollView* songsScrollView;
 
-@property SDPlaylist* playlist;
-
 @property NSString* filterString;
 
 @end
@@ -37,6 +35,9 @@
     [super loadView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChangeNotification object:nil];
+    
+//    [self.allSongsTable setTarget:self];
+//    [self.allSongsTable setDoubleAction:@selector(startPlayingSong:)];
     
     [self toggleSearchBar:NO];
 }

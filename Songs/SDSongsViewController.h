@@ -8,6 +8,10 @@
 
 #import <Cocoa/Cocoa.h>
 
+#import "SDPlaylist.h"
+
 @interface SDSongsViewController : NSViewController
+
+@property SDPlaylist* playlist;
 
 @end

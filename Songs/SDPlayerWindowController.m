@@ -46,9 +46,10 @@
 @property (weak) IBOutlet NSView* playlistViewHouser;
 @property NSMutableArray* playlistViewControllers;
 
-//@property (weak) IBOutlet NSTextField* currentSongScrollingField;
-//@property (weak) IBOutlet NSButton* playButton;
-//
+@property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
+@property (weak) IBOutlet NSButton* playButton;
+@property (weak) IBOutlet NSTextField* currentSongInfoField;
+
 //@property (weak) IBOutlet NSSearchField* searchField;
 //
 //@property (weak) IBOutlet NSView* songsTableContainerView;
@@ -62,7 +63,6 @@
 //
 //@property (weak) IBOutlet NSTableView* songsTable;
 //@property (weak) IBOutlet NSOutlineView* playlistsOutlineView;
-//@property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 //
 //@property NSString* filterString;
 //
@@ -88,30 +88,25 @@
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChangeNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
 //    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistOptionsChangedNotification:) name:SDPlaylistOptionsChangedNotification object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
-//    
-//    [self.songsTable setTarget:self];
-//    [self.songsTable setDoubleAction:@selector(startPlayingSong:)];
-//    
-//    [self.playlistsOutlineView setTarget:self];
-//    [self.playlistsOutlineView setDoubleAction:@selector(startPlayingPlaylist:)];
-//    
-//    [self toggleSearchBar:NO];
-//    
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
+    
+    
+    
 //    [self.songsTable registerForDraggedTypes:@[SDSongDragType]];
 //    [self.playlistsOutlineView registerForDraggedTypes:@[SDSongDragType]];
 //    [self.playlistsOutlineView registerForDraggedTypes:@[SDPlaylistDragType]];
 //    
 //    [self.playlistsOutlineView expandItem:nil expandChildren:YES];
 //    [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-//    
+    
 //    [self updatePlaylistOptionsViewStuff];
-//    [self updateCurrentSongViewStuff];
-//
+    [self updateCurrentSongViewStuff];
+
 //    [self.songsTable setSortDescriptors:@[]];
+    
     
     
     self.playlistViewControllers = [NSMutableArray array];
@@ -169,7 +164,7 @@
 }
 
 - (void) playPlaylist:(SDPlaylist*)playlist {
-//    NSLog(@"play %@", self.selectedPlaylist);
+    [[SDMusicPlayer sharedPlayer] playPlaylist: playlist];
 }
 
 
@@ -215,24 +210,26 @@
 //        [self.songsTable deselectAll:nil];
 //    }
 //}
-//
-//- (void) playerStatusDidChange:(NSNotification*)note {
-//    [self.playButton setTitle: [[SDMusicPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
-//}
-//
-//- (void) currentSongDidChange:(NSNotification*)note {
-//    [self updateCurrentSongViewStuff];
+
+
+
+- (void) playerStatusDidChange:(NSNotification*)note {
+    [self.playButton setTitle: [[SDMusicPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
+}
+
+- (void) currentSongDidChange:(NSNotification*)note {
+    [self updateCurrentSongViewStuff];
 //    [self.songsTable reloadData];
-//    
-//    // so we can put an icon next to the now-playing playlist
-//    
-////    [self.playlistsOutlineView reloadItem:[[SDPlayer sharedPlayer] currentPlaylist]];
+    
+    // so we can put an icon next to the now-playing playlist
+    
+//    [self.playlistsOutlineView reloadItem:[[SDPlayer sharedPlayer] currentPlaylist]];
 //    [self refreshPlaylistsKeepingCurrent];
-//}
-//
-//- (void) currentSongTimeDidChange:(NSNotification*)note {
-//    self.songPositionSlider.currentValue = [SDMusicPlayer sharedPlayer].currentTime;
-//}
+}
+
+- (void) currentSongTimeDidChange:(NSNotification*)note {
+    self.songPositionSlider.currentValue = [SDMusicPlayer sharedPlayer].currentTime;
+}
 
 
 
@@ -550,21 +547,21 @@
 //        [self.playlistTitleField setStringValue: self.selectedPlaylist.title];
 //    }
 //}
-//
-//- (void) updateCurrentSongViewStuff {
-//    SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
-//    
-//    if (currentSong) {
-//        NSString* trackInfo = [NSString stringWithFormat:@"%@ - %@", currentSong.title, currentSong.artist];
-//        [self.currentSongScrollingField setStringValue:trackInfo];
-//        self.songPositionSlider.maxValue = [[SDMusicPlayer sharedPlayer] currentSong].duration;
-//    }
-//    else {
-//        [self.currentSongScrollingField setStringValue:@"n/a"];
-//        self.songPositionSlider.maxValue = 0.0;
-//        self.songPositionSlider.currentValue = 0.0;
-//    }
-//}
+
+- (void) updateCurrentSongViewStuff {
+    SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
+    
+    if (currentSong) {
+        NSString* trackInfo = [NSString stringWithFormat:@"%@ - %@", currentSong.title, currentSong.artist];
+        [self.currentSongInfoField setStringValue:trackInfo];
+        self.songPositionSlider.maxValue = [[SDMusicPlayer sharedPlayer] currentSong].duration;
+    }
+    else {
+        [self.currentSongInfoField setStringValue:@"n/a"];
+        self.songPositionSlider.maxValue = 0.0;
+        self.songPositionSlider.currentValue = 0.0;
+    }
+}
 
 
 
@@ -689,24 +686,17 @@
 
 
 
-//#pragma mark - Playing music
-//
-//
-//- (IBAction) nextSong:(id)sender {
-//    [[SDMusicPlayer sharedPlayer] nextSong];
-//}
-//
-//- (IBAction) prevSong:(id)sender {
-//    [[SDMusicPlayer sharedPlayer] previousSong];
-//}
-//
-//- (void) startPlayingPlaylist:(id)sender {
-//    if ([self.playlistsOutlineView clickedRow] < 2)
-//        return;
-//    
-//    [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
-//}
-//
+#pragma mark - Playing music
+
+
+- (IBAction) nextSong:(id)sender {
+    [[SDMusicPlayer sharedPlayer] nextSong];
+}
+
+- (IBAction) prevSong:(id)sender {
+    [[SDMusicPlayer sharedPlayer] previousSong];
+}
+
 //- (IBAction) startPlayingSong:(id)sender {
 //    if ([[self.songsTable selectedRowIndexes] count] != 1)
 //        return;
@@ -722,9 +712,9 @@
 //    
 //    [[SDMusicPlayer sharedPlayer] playSong:song inPlaylist:self.selectedPlaylist];
 //}
-//
-//- (IBAction) playPause:(id)sender {
-//    if ([SDMusicPlayer sharedPlayer].stopped) {
+
+- (IBAction) playPause:(id)sender {
+    if ([SDMusicPlayer sharedPlayer].stopped) {
 //        if ([self showingAllSongs])
 //            return;
 //        
@@ -735,17 +725,17 @@
 //        else {
 //            [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
 //        }
-//    }
-//    else {
-//        if ([[SDMusicPlayer sharedPlayer] isPlaying])
-//            [[SDMusicPlayer sharedPlayer] pause];
-//        else
-//            [[SDMusicPlayer sharedPlayer] resume];
-//    }
-//}
-//
-//- (void) trackPositionMovedTo:(CGFloat)newValue {
-//    [[SDMusicPlayer sharedPlayer] seekToTime:newValue];
-//}
+    }
+    else {
+        if ([[SDMusicPlayer sharedPlayer] isPlaying])
+            [[SDMusicPlayer sharedPlayer] pause];
+        else
+            [[SDMusicPlayer sharedPlayer] resume];
+    }
+}
+
+- (void) trackPositionMovedTo:(CGFloat)newValue {
+    [[SDMusicPlayer sharedPlayer] seekToTime:newValue];
+}
 
 @end

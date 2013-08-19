@@ -12,6 +12,8 @@
 
 - (void) awakeFromNib {
     self.delegate = self;
+    
+    [self setPosition:[[[self subviews] objectAtIndex:0] frame].size.width ofDividerAtIndex:0];
 }
 
 - (void) drawDividerInRect:(NSRect)rect {
