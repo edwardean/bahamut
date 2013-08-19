@@ -17,7 +17,7 @@
 
 @end
 
-@interface SDPlaylistsViewController : NSViewController
+@interface SDSourceListViewController : NSViewController
 
 @property (weak) id<SDPlaylistsViewDelegate> playlistsViewDelegate;
 

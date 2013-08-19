@@ -12,10 +12,8 @@
 		9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */; };
 		9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */; };
 		94229B2417BE8EE900FE5A88 /* SDMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94229B2317BE8EE900FE5A88 /* SDMusicPlayer.m */; };
-		945C294D17C144830045BA94 /* SDSongsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C294B17C144830045BA94 /* SDSongsViewController.m */; };
-		945C294E17C144830045BA94 /* SongsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945C294C17C144830045BA94 /* SongsView.xib */; };
-		945C295C17C1F0750045BA94 /* SDPlaylistsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C295A17C1F0750045BA94 /* SDPlaylistsViewController.m */; };
-		945C295D17C1F0750045BA94 /* PlaylistsView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945C295B17C1F0750045BA94 /* PlaylistsView.xib */; };
+		945C295C17C1F0750045BA94 /* SDSourceListViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C295A17C1F0750045BA94 /* SDSourceListViewController.m */; };
+		945C295D17C1F0750045BA94 /* SourceListView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 945C295B17C1F0750045BA94 /* SourceListView.xib */; };
 		945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C295F17C1F3EE0045BA94 /* SDSplitView.m */; };
 		945C296317C1F50C0045BA94 /* SDButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296217C1F50C0045BA94 /* SDButtons.m */; };
 		945C296C17C1FBBB0045BA94 /* SDPlaylistViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296A17C1FBBB0045BA94 /* SDPlaylistViewController.m */; };
@@ -49,12 +47,9 @@
 		9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
 		94229B2217BE8EE900FE5A88 /* SDMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMusicPlayer.h; sourceTree = "<group>"; };
 		94229B2317BE8EE900FE5A88 /* SDMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMusicPlayer.m; sourceTree = "<group>"; };
-		945C294A17C144830045BA94 /* SDSongsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSongsViewController.h; sourceTree = "<group>"; };
-		945C294B17C144830045BA94 /* SDSongsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSongsViewController.m; sourceTree = "<group>"; };
-		945C294C17C144830045BA94 /* SongsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SongsView.xib; sourceTree = "<group>"; };
-		945C295917C1F0750045BA94 /* SDPlaylistsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylistsViewController.h; sourceTree = "<group>"; };
-		945C295A17C1F0750045BA94 /* SDPlaylistsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylistsViewController.m; sourceTree = "<group>"; };
-		945C295B17C1F0750045BA94 /* PlaylistsView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlaylistsView.xib; sourceTree = "<group>"; };
+		945C295917C1F0750045BA94 /* SDSourceListViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSourceListViewController.h; sourceTree = "<group>"; };
+		945C295A17C1F0750045BA94 /* SDSourceListViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSourceListViewController.m; sourceTree = "<group>"; };
+		945C295B17C1F0750045BA94 /* SourceListView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SourceListView.xib; sourceTree = "<group>"; };
 		945C295E17C1F3EE0045BA94 /* SDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSplitView.h; sourceTree = "<group>"; };
 		945C295F17C1F3EE0045BA94 /* SDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSplitView.m; sourceTree = "<group>"; };
 		945C296217C1F50C0045BA94 /* SDButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDButtons.m; sourceTree = "<group>"; };
@@ -114,16 +109,6 @@
 			name = Player;
 			sourceTree = "<group>";
 		};
-		945C294917C1446E0045BA94 /* Song List View */ = {
-			isa = PBXGroup;
-			children = (
-				945C294C17C144830045BA94 /* SongsView.xib */,
-				945C294A17C144830045BA94 /* SDSongsViewController.h */,
-				945C294B17C144830045BA94 /* SDSongsViewController.m */,
-			);
-			name = "Song List View";
-			sourceTree = "<group>";
-		};
 		945C296417C1FAE50045BA94 /* Split View */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,14 +118,14 @@
 			name = "Split View";
 			sourceTree = "<group>";
 		};
-		945C296517C1FAEC0045BA94 /* Playlists */ = {
+		945C296517C1FAEC0045BA94 /* Source List */ = {
 			isa = PBXGroup;
 			children = (
-				945C295B17C1F0750045BA94 /* PlaylistsView.xib */,
-				945C295917C1F0750045BA94 /* SDPlaylistsViewController.h */,
-				945C295A17C1F0750045BA94 /* SDPlaylistsViewController.m */,
+				945C295B17C1F0750045BA94 /* SourceListView.xib */,
+				945C295917C1F0750045BA94 /* SDSourceListViewController.h */,
+				945C295A17C1F0750045BA94 /* SDSourceListViewController.m */,
 			);
-			name = Playlists;
+			name = "Source List";
 			sourceTree = "<group>";
 		};
 		945C296617C1FAF10045BA94 /* Tracker */ = {
@@ -232,7 +217,6 @@
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
 				945C296E17C20AA90045BA94 /* Graphics */,
 				94AD9DE317BD56C100D678E1 /* Persistence */,
-				945C294917C1446E0045BA94 /* Song List View */,
 				9460F2FF16FFA19B00DB85C4 /* Songs */,
 				94229B2117BE8EDC00FE5A88 /* Player */,
 				9460F2F816FF782C00DB85C4 /* Player Window */,
@@ -258,10 +242,10 @@
 				9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */,
 				9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */,
 				9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */,
+				945C296517C1FAEC0045BA94 /* Source List */,
 				945C296817C1FBA80045BA94 /* Playlist */,
 				945C296617C1FAF10045BA94 /* Tracker */,
 				945C296417C1FAE50045BA94 /* Split View */,
-				945C296517C1FAEC0045BA94 /* Playlists */,
 				945C296717C1FAF70045BA94 /* Circle Buttons */,
 			);
 			name = "Player Window";
@@ -351,8 +335,7 @@
 				9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */,
 				9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */,
 				9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */,
-				945C294E17C144830045BA94 /* SongsView.xib in Resources */,
-				945C295D17C1F0750045BA94 /* PlaylistsView.xib in Resources */,
+				945C295D17C1F0750045BA94 /* SourceListView.xib in Resources */,
 				945C296D17C1FBBB0045BA94 /* PlaylistView.xib in Resources */,
 				945C297717C20AAA0045BA94 /* next_black.png in Resources */,
 				945C297817C20AAA0045BA94 /* next_white.png in Resources */,
@@ -380,8 +363,7 @@
 				94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */,
 				94AD9DE217BD556700D678E1 /* SDPlaylist.m in Sources */,
 				94229B2417BE8EE900FE5A88 /* SDMusicPlayer.m in Sources */,
-				945C294D17C144830045BA94 /* SDSongsViewController.m in Sources */,
-				945C295C17C1F0750045BA94 /* SDPlaylistsViewController.m in Sources */,
+				945C295C17C1F0750045BA94 /* SDSourceListViewController.m in Sources */,
 				945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */,
 				945C296317C1F50C0045BA94 /* SDButtons.m in Sources */,
 				945C296C17C1FBBB0045BA94 /* SDPlaylistViewController.m in Sources */,

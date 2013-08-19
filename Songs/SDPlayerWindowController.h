@@ -8,7 +8,7 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "SDPlaylistsViewController.h"
+#import "SDSourceListViewController.h"
 
 @protocol MUPlayerWindowKilledDelegate <NSObject>
 

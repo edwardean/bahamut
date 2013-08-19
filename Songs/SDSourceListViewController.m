@@ -6,7 +6,7 @@
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
-#import "SDPlaylistsViewController.h"
+#import "SDSourceListViewController.h"
 
 #import "SDUserDataManager.h"
 
@@ -40,16 +40,16 @@
 
 
 
-@interface SDPlaylistsViewController ()
+@interface SDSourceListViewController ()
 
 @property (weak) IBOutlet NSTableView* playlistsTableView;
 
 @end
 
-@implementation SDPlaylistsViewController
+@implementation SDSourceListViewController
 
 - (NSString*) nibName {
-    return @"PlaylistsView";
+    return @"SourceListView";
 }
 
 - (void) dealloc {

@@ -16,7 +16,7 @@
 
 
 #import "SDPlaylistViewController.h"
-#import "SDPlaylistsViewController.h"
+#import "SDSourceListViewController.h"
 
 
 
@@ -40,7 +40,7 @@
 @interface SDPlayerWindowController ()
 
 @property (weak) IBOutlet NSView* playlistsViewHouser;
-@property SDPlaylistsViewController* playlistsViewController;
+@property SDSourceListViewController* playlistsViewController;
 @property SDPlaylist* selectedPlaylist;
 
 @property (weak) IBOutlet NSView* playlistViewHouser;
@@ -119,7 +119,7 @@
     
     [[self window] setBackgroundColor:[NSColor whiteColor]];
     
-    self.playlistsViewController = [[SDPlaylistsViewController alloc] init];
+    self.playlistsViewController = [[SDSourceListViewController alloc] init];
     self.playlistsViewController.playlistsViewDelegate = self;
     [[self.playlistsViewController view] setFrame:[self.playlistsViewHouser frame]];
     [self.playlistsViewHouser addSubview:[self.playlistsViewController view]];
