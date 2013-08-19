@@ -14,6 +14,69 @@
 
 #define SDSongDragType @"SDSongDragType"
 
+
+
+
+
+
+
+
+@interface NSTableView (SDHA)
+- (NSColor *) _highlightColorForCell: (NSCell *) aCell;
+@end
+
+
+
+@interface SDSongsTableView : NSTableView
+@end
+
+@implementation SDSongsTableView
+
+
+#pragma mark PRIVATE CLASS METHODS -- NSTableView OVERRIDES
+
+//  Override to let the delegate choose the background color.
+//  (This method is private AppKit API, but Googling suggests it’s
+//  used regularly and with good results. If Apple stops using this
+//  method, we'll just lose the ability to intercept this. We'll
+//  assume they won't change the arg or return type for it.)
+- (NSColor *) _highlightColorForCell: (NSCell *) aCell; {
+    NSColor* result = [super _highlightColorForCell: aCell];
+    return result;
+    return [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0];
+}
+
+
+@end
+
+
+
+
+
+@interface SDSongsTableHeaderCell : NSTableHeaderCell
+@end
+@implementation SDSongsTableHeaderCell
+
+- (NSRect)drawingRectForBounds:(NSRect)theRect {
+    theRect.origin.y += 7;
+    return theRect;
+}
+
+- (void)drawWithFrame:(CGRect)cellFrame inView:(NSView *)view {
+    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
+    [NSBezierPath fillRect:cellFrame];
+    
+    [self drawInteriorWithFrame:cellFrame inView:view];
+}
+
+@end
+
+
+
+
+
+
+
 @interface SDSongsViewController ()
 
 @property IBOutlet NSTableView* allSongsTable;
@@ -35,6 +98,19 @@
     [super loadView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChangeNotification object:nil];
+    
+    for (NSTableColumn* column in [self.allSongsTable tableColumns]) {
+        [column setHeaderCell:[[SDSongsTableHeaderCell alloc] initTextCell:[[column headerCell] stringValue]]];
+    }
+    
+    NSRect frame = self.allSongsTable.headerView.frame;
+    frame.size.height = 27;
+    self.allSongsTable.headerView.frame = frame;
+    
+//    [self.allSongsTable setr]
+    
+    
+//    [self.allSongsTable setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
     
 //    [self.allSongsTable setTarget:self];
 //    [self.allSongsTable setDoubleAction:@selector(startPlayingSong:)];
