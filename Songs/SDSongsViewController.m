@@ -21,37 +21,6 @@
 
 
 
-@interface NSTableView (SDHA)
-- (NSColor *) _highlightColorForCell: (NSCell *) aCell;
-@end
-
-
-
-@interface SDSongsTableView : NSTableView
-@end
-
-@implementation SDSongsTableView
-
-
-#pragma mark PRIVATE CLASS METHODS -- NSTableView OVERRIDES
-
-//  Override to let the delegate choose the background color.
-//  (This method is private AppKit API, but Googling suggests it’s
-//  used regularly and with good results. If Apple stops using this
-//  method, we'll just lose the ability to intercept this. We'll
-//  assume they won't change the arg or return type for it.)
-- (NSColor *) _highlightColorForCell: (NSCell *) aCell; {
-    NSColor* result = [super _highlightColorForCell: aCell];
-    return result;
-    return [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0];
-}
-
-
-@end
-
-
-
-
 
 @interface SDSongsTableHeaderCell : NSTableHeaderCell
 @end
@@ -79,7 +48,7 @@
 
 @interface SDSongsViewController ()
 
-@property IBOutlet NSTableView* allSongsTable;
+@property IBOutlet NSTableView* songsTable;
 @property IBOutlet NSView* searchContainerView;
 @property IBOutlet NSSearchField* searchField;
 @property IBOutlet NSScrollView* songsScrollView;
@@ -99,29 +68,30 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChangeNotification object:nil];
     
-    for (NSTableColumn* column in [self.allSongsTable tableColumns]) {
+    for (NSTableColumn* column in [self.songsTable tableColumns]) {
         [column setHeaderCell:[[SDSongsTableHeaderCell alloc] initTextCell:[[column headerCell] stringValue]]];
     }
     
-    NSRect frame = self.allSongsTable.headerView.frame;
+    NSRect frame = self.songsTable.headerView.frame;
     frame.size.height = 27;
-    self.allSongsTable.headerView.frame = frame;
+    self.songsTable.headerView.frame = frame;
     
-//    [self.allSongsTable setr]
+    [self.songsTable setSortDescriptors:@[]];
     
-    
-//    [self.allSongsTable setSelectionHighlightStyle:NSTableViewSelectionHighlightStyleNone];
-    
-//    [self.allSongsTable setTarget:self];
-//    [self.allSongsTable setDoubleAction:@selector(startPlayingSong:)];
+    [self.songsTable setTarget:self];
+    [self.songsTable setDoubleAction:@selector(startPlayingSong:)];
     
     [self toggleSearchBar:NO];
+}
+
+- (void) startPlayingSong:(id)sender {
+    NSLog(@"ok, playing a song");
 }
 
 
 
 - (void) allSongsDidChange:(NSNotification*)note {
-    [self.allSongsTable reloadData];
+    [self.songsTable reloadData];
 }
 
 
@@ -185,7 +155,7 @@
         }]];
     }
     
-    theSongs = [theSongs sortedArrayUsingDescriptors:[self.allSongsTable sortDescriptors]];
+    theSongs = [theSongs sortedArrayUsingDescriptors:[self.songsTable sortDescriptors]];
     
     return theSongs;
 }
@@ -231,7 +201,7 @@
             searchString = nil;
         
         self.filterString = searchString;
-        [self.allSongsTable reloadData];
+        [self.songsTable reloadData];
     }
 }
 
@@ -241,7 +211,7 @@
         [self.searchField setStringValue:@""];
         
         self.filterString = nil;
-        [self.allSongsTable reloadData];
+        [self.songsTable reloadData];
         
         return YES;
     }

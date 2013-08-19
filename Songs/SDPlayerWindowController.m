@@ -104,8 +104,7 @@
     
 //    [self updatePlaylistOptionsViewStuff];
     [self updateCurrentSongViewStuff];
-
-//    [self.songsTable setSortDescriptors:@[]];
+    
     
     
     
