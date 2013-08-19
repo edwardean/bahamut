@@ -14,11 +14,24 @@
 #import "SDTrackPositionView.h"
 
 
+#import "SDPlaylistChooserView.h"
+
+
 //static NSString* SDSongDragType = @"SDSongDragType";
 //static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 
+
+
+@interface SDSplitView : NSSplitView
+@end
+@implementation SDSplitView
+
+- (void) drawDividerInRect:(NSRect)rect {
+}
+
+@end
 
 
 
@@ -27,6 +40,8 @@
 
 
 @interface SDPlayerWindowController ()
+
+@property (weak) IBOutlet SDPlaylistChooserView* playlistChooserView;
 
 //@property (weak) IBOutlet NSTextField* currentSongScrollingField;
 //@property (weak) IBOutlet NSButton* playButton;
@@ -94,6 +109,13 @@
 //    [self updateCurrentSongViewStuff];
 //    
 //    [self.songsTable setSortDescriptors:@[]];
+    
+    [[self window] setBackgroundColor:[NSColor whiteColor]];
+    
+    self.playlistChooserView.playlists = [SDSharedData() playlists];
+    [self.playlistChooserView redrawPlaylists];
+    
+//    self.playlistChooserView.cho
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
@@ -105,6 +127,11 @@
 }
 
 
+
+
+- (void) didChoosePlaylist:(SDPlaylist*)playlist {
+    
+}
 
 
 
@@ -608,21 +635,23 @@
 
 
 
-//#pragma mark - Creating a new Playlist
-//
-//
-//
-//- (IBAction) makeNewPlaylist:(id)sender {
-//    NSMutableArray* playlists = [SDSharedData() playlists];
-//    
-//    SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
-//    [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
-//    
+#pragma mark - Creating a new Playlist
+
+
+
+- (IBAction) makeNewPlaylist:(id)sender {
+    NSMutableArray* playlists = [SDSharedData() playlists];
+    
+    SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
+    [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
+    
+    [self.playlistChooserView redrawPlaylists];
+    
 //    NSIndexSet* indices = [NSIndexSet indexSetWithIndex:[playlists count] - 1];
 //    [self.playlistsOutlineView selectRowIndexes:indices byExtendingSelection:NO];
 //    
 //    [[self.playlistTitleField window] makeFirstResponder: self.playlistTitleField];
-//}
+}
 
 
 
