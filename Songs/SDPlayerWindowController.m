@@ -191,8 +191,8 @@
 - (void) playlistRemovedNotification:(NSNotification*)note {
     SDPlaylist* playlist = [note object];
     
-    NSUInteger idx = [self.playlistViewControllers indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        return ![[SDSharedData() playlists] containsObject: obj];
+    NSUInteger idx = [self.playlistViewControllers indexOfObjectPassingTest:^BOOL(SDPlaylistViewController* obj, NSUInteger idx, BOOL *stop) {
+        return obj.playlist == playlist;
     }];
     
     [self.playlistViewControllers removeObjectAtIndex:idx];
