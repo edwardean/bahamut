@@ -25,4 +25,6 @@
 
 @property BOOL isPlaying;
 
+- (BOOL) isMasterPlaylist;
+
 @end

@@ -151,4 +151,8 @@
 
 
 
+- (BOOL) isMasterPlaylist {
+    return NO;
+}
+
 @end
