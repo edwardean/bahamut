@@ -81,6 +81,8 @@
         [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMinY(cellFrame))];
     }
     else {
+        cellFrame.origin.x += 2.0;
+        
         [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
         [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMidY(cellFrame))];
         [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
