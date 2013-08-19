@@ -93,18 +93,18 @@
                   row:(NSInteger)row {
     NSUInteger count = [[SDSharedData() playlists] count];
     
-    if (row < count) {
-        NSTableCellView *result = [tableView makeViewWithIdentifier:@"ExistingPlaylist" owner:self];
-        [result textField].stringValue = [[[SDSharedData() playlists] objectAtIndex:row] title];
-        return result;
-    }
-    else if (row == count) {
-        return [tableView makeViewWithIdentifier:@"NewPlaylist" owner:self];
-    }
-    else {
+    if (row == 0) {
         NSTableCellView *result = [tableView makeViewWithIdentifier:@"ExistingPlaylist" owner:self];
         [result textField].stringValue = @"All Songs";
         return result;
+    }
+    else if (row < count + 1) {
+        NSTableCellView *result = [tableView makeViewWithIdentifier:@"ExistingPlaylist" owner:self];
+        [result textField].stringValue = [[[SDSharedData() playlists] objectAtIndex:row - 1] title];
+        return result;
+    }
+    else {
+        return [tableView makeViewWithIdentifier:@"NewPlaylist" owner:self];
     }
 }
 
@@ -114,7 +114,7 @@
 
 - (BOOL)tableView:(NSTableView *)aTableView shouldSelectRow:(NSInteger)rowIndex {
     NSUInteger count = [[SDSharedData() playlists] count];
-    return (rowIndex != count);
+    return (rowIndex != count + 1);
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
