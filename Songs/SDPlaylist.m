@@ -83,6 +83,10 @@
 }
 
 - (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex {
+    NSMutableArray* songsToAdd = [songs mutableCopy];
+    [songsToAdd removeObjectsInArray: self.songs];
+    songs = songsToAdd;
+    
     NSRange indexRange = NSMakeRange(atIndex, [songs count]);
     NSIndexSet* indexes = [NSIndexSet indexSetWithIndexesInRange:indexRange];
     [self addSongs:songs atIndexes:indexes];
