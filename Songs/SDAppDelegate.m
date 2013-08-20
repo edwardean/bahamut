@@ -20,8 +20,6 @@
 @implementation SDAppDelegate
 
 - (void) applicationWillFinishLaunching:(NSNotification *)notification {
-    [[NSImage imageNamed:@"playlist"] setTemplate:YES];
-    
     [[SDUserDataManager sharedMusicManager] loadUserData];
     
     self.playerWindowControllers = [NSMutableArray array];

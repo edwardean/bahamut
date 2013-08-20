@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB3A1700F3CD00E0D3AF /* playlist.png */; };
 		9404AB441700F4EF00E0D3AF /* SDUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */; };
 		9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */; };
 		9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */; };
@@ -32,7 +31,6 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
-		9404AB3A1700F3CD00E0D3AF /* playlist.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = playlist.png; sourceTree = "<group>"; };
 		9404AB421700F4EF00E0D3AF /* SDUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserDataManager.h; sourceTree = "<group>"; };
 		9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDUserDataManager.m; sourceTree = "<group>"; };
 		9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlayerWindowController.h; sourceTree = "<group>"; };
@@ -177,7 +175,6 @@
 				94229B2117BE8EDC00FE5A88 /* Player */,
 				9460F2FF16FFA19B00DB85C4 /* Songs */,
 				9460F2F816FF782C00DB85C4 /* Player Window */,
-				94AFAD661700823C007F10B1 /* Graphics */,
 				9460F2E116FF781100DB85C4 /* Supporting Files */,
 			);
 			path = Songs;
@@ -226,14 +223,6 @@
 				9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */,
 			);
 			name = Persistence;
-			sourceTree = "<group>";
-		};
-		94AFAD661700823C007F10B1 /* Graphics */ = {
-			isa = PBXGroup;
-			children = (
-				9404AB3A1700F3CD00E0D3AF /* playlist.png */,
-			);
-			name = Graphics;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -290,7 +279,6 @@
 			files = (
 				9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */,
 				9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */,
-				9404AB3B1700F3CD00E0D3AF /* playlist.png in Resources */,
 				9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */,
 				945C295D17C1F0750045BA94 /* SourceListView.xib in Resources */,
 				945C296D17C1FBBB0045BA94 /* SongListView.xib in Resources */,
