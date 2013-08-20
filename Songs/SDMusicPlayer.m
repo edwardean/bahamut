@@ -95,7 +95,7 @@
     self.currentTime = 0.0;
     
     SDMusicPlayer* __weak weakSelf = self;
-    self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1,1000)
+    self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1,2)
                                                                   queue:NULL
                                                              usingBlock:^(CMTime time) {
                                                                  weakSelf.currentTime = CMTimeGetSeconds(time);
