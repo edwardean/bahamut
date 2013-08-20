@@ -6,6 +6,27 @@
 * Requires: OS X 10.8 and up
 * Download: get [.zip file](comingsoon.zip), unzip, right-click app, choose "Open"
 
+#### What's left for 1.0
+
+- Keyboard shortcuts for *everything*
+- Optional Menu bar interface (TunesBar port)
+- Fix all the playlist- and song-selection bugs
+    - When you filter a playlist, the selection doesn't follow the songs
+    - When you add/remove a song, the selection doesn't follow the songs
+    - When you add/remove a playlist, the selection doesn't follow the playlist
+- Make the track-bar not jump after you finish dragging it
+- Find (or draw?) a "pause" icon for the playlist/song currently-playing rows
+- Delete songs from All Songs (and remove from every playlist)
+    - This should be undo-able!
+- Make "create playlist" button prettier somehow
+- Figure out how to get Track info field to display "..." without tightening at every resize
+- Only display track info parts that exist! ("album" sometimes doesn't, I think)
+- Make it not take 500MB of memory just because you filtered all the songs.
+
+#### To do after 1.0
+
+- Figure out what exactly should happen when you change anything about playlist while it's playing
+
 #### Screenshot
 
 [![songsapp.png](https://photos-6.dropbox.com/t/0/AACNyd5w7M8yaH8uE7LpQY57pktCsOKC9MMMEVtCl7M-Ng/12/152474301/png/1024x768/3/1376989200/0/2/songsapp.png/wYejrRNowvVA9kV-jNwPxJyiGuUzhzTLPZeLRXQkJ2w)](https://www.dropbox.com/s/qum47sh7cyfileg/songsapp.png)
