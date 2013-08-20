@@ -48,9 +48,6 @@
     [self drawInteriorWithFrame:cellFrame inView:controlView];
 }
 
-- (void) drawFocusRingMaskWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-}
-
 @end
 
 
