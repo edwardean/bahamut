@@ -10,8 +10,8 @@
 
 @interface SDTrackPositionView ()
 
-@property (nonatomic) CGFloat realCurrentValue;
-@property (nonatomic) CGFloat realMaxValue;
+@property CGFloat _currentValue;
+@property CGFloat _maxValue;
 
 @property BOOL isDragging;
 
@@ -24,9 +24,9 @@
         return;
     
     if (isnan(currentValue))
-        self.realCurrentValue = 0;
+        self._currentValue = 0;
     else
-        self.realCurrentValue = currentValue;
+        self._currentValue = currentValue;
     
     [self setNeedsDisplay:YES];
 }
@@ -36,19 +36,19 @@
         return;
     
     if (isnan(maxValue))
-        self.realMaxValue = 0;
+        self._maxValue = 0;
     else
-        self.realMaxValue = maxValue;
+        self._maxValue = maxValue;
     
     [self setNeedsDisplay:YES];
 }
 
 - (CGFloat) maxValue {
-    return self.realMaxValue;
+    return self._maxValue;
 }
 
 - (CGFloat) currentValue {
-    return self.realCurrentValue;
+    return self._currentValue;
 }
 
 - (void)drawRect:(NSRect)dirtyRect {
@@ -70,7 +70,7 @@
     
     CGFloat minWidth = 2;
     CGFloat maxWidth = bounds.size.width - box.size.width - 2;
-    CGFloat percentage = self.realCurrentValue / self.realMaxValue;
+    CGFloat percentage = self._currentValue / self._maxValue;
     box.origin.x += (percentage * (maxWidth - minWidth)) + minWidth;
     
 //    box = NSIntegralRect(box);
@@ -90,8 +90,8 @@
     percentage = MAX(0, percentage);
     percentage = MIN(1, percentage);
     
-    self.realCurrentValue = percentage * self.realMaxValue;
-    [self.trackPositionDelegate trackPositionMovedTo:self.realCurrentValue];
+    self._currentValue = percentage * self._maxValue;
+    [self.trackPositionDelegate trackPositionMovedTo:self._currentValue];
 }
 
 - (void) mouseDown:(NSEvent *)theEvent {
