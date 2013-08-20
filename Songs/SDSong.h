@@ -23,4 +23,6 @@
 
 - (AVPlayerItem*) playerItem;
 
+- (void) prefetchData;
+
 @end

@@ -50,6 +50,12 @@
     else
         [self.playlists addObject: [[SDMasterPlaylist alloc] init]];
     
+//    double delayInSeconds = 1.0;
+//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//    dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void){
+//        [self.allSongs makeObjectsPerformSelector:@selector(prefetchData)];
+//    });
+    
     self.canSave = YES;
 }
 

@@ -49,6 +49,10 @@
     return [self.uuid hash];
 }
 
+- (void) prefetchData {
+//    [[self asset] loadValuesAsynchronouslyForKeys:@[@"commonMetadata"] completionHandler:^{}];
+}
+
 - (AVURLAsset*) asset {
     if (self.cachedAsset == nil)
         self.cachedAsset = [AVURLAsset assetWithURL:self.url];
