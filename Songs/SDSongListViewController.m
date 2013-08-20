@@ -491,6 +491,11 @@
         [[self.searchField window] makeFirstResponder: self.searchField];
 }
 
+- (void) refreshFilterStuff {
+    [self cacheFilteredSongs];
+    [self.songsTable reloadData];
+}
+
 - (void)controlTextDidChange:(NSNotification *)aNotification {
     if ([aNotification object] == self.searchField) {
         NSString* searchString = [self.searchField stringValue];
@@ -499,8 +504,9 @@
             searchString = nil;
         
         self.filterString = searchString;
-        [self cacheFilteredSongs];
-        [self.songsTable reloadData];
+        
+        [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(refreshFilterStuff) object:nil];
+        [self performSelector:@selector(refreshFilterStuff) withObject:nil afterDelay:0.15];
     }
 }
 
