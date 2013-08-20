@@ -106,10 +106,11 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     SDPlaylist* playlist = [[SDSharedData() playlists] objectAtIndex:row];
     BOOL isPlaying = ([[SDMusicPlayer sharedPlayer] isPlaying] && playlist == [[SDMusicPlayer sharedPlayer] currentPlaylist]);
     
-    NSTableCellView *result = [tableView makeViewWithIdentifier:@"ExistingPlaylist" owner:self];
-    [result textField].stringValue = [playlist title];
-    [[result imageView] setHidden: !isPlaying];
-    return result;
+    NSTableCellView *cellView = [tableView makeViewWithIdentifier:@"ExistingPlaylist" owner:self];
+    [cellView textField].stringValue = [playlist title];
+    [[cellView textField] setEditable: ![playlist isMasterPlaylist]];
+    [[cellView imageView] setHidden: !isPlaying];
+    return cellView;
 }
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
@@ -133,22 +134,7 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 - (BOOL) respondsToSelector:(SEL)aSelector {
-    if (aSelector == @selector(startRenamingPlaylist:)) {
-        if ([NSApp currentEvent] == nil)
-            return YES;
-        
-        NSInteger row = [self.playlistsTableView clickedRow];
-        
-        if (row == -1)
-            return NO;
-        
-        SDPlaylist* playlist = [[SDSharedData() playlists] objectAtIndex:row];
-        if ([playlist isMasterPlaylist])
-            return NO;
-        
-        return YES;
-    }
-    else if (aSelector == @selector(severelyDeleteSomething:)) {
+    if (aSelector == @selector(severelyDeleteSomething:)) {
         if ([[self.playlistsTableView window] firstResponder] != self.playlistsTableView)
             return NO;
         
