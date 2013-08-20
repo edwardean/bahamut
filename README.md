@@ -8,7 +8,7 @@
 
 #### Screenshot
 
-![https://www.dropbox.com/s/qum47sh7cyfileg/songsapp.png](sshot)
+![songsapp.png](https://www.dropbox.com/s/qum47sh7cyfileg/songsapp.png)
 
 #### License
 
