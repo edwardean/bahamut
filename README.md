@@ -14,6 +14,7 @@
 - Optional Menu bar interface (TunesBar port)
 - Fix all the playlist- and song-selection bugs
     - When you filter a playlist, the selection doesn't follow the songs
+    - Double-clicking a songs deselects it for some reason
     - When you add/remove a song, the selection doesn't follow the songs
     - When you add/remove a playlist, the selection doesn't follow the playlist
 - Make the track-bar not jump after you finish dragging it
@@ -23,6 +24,7 @@
 - Make "create playlist" button prettier somehow
 - Figure out how to get Track info field to display "..." without tightening at every resize
 - Only display track info parts that exist! ("album" sometimes doesn't, I think)
+- Hasten start-up time
 - Preload songs smarter
     - Make it not take 500MB of memory just because you filtered all the songs
         - Probably just needs an @autorelease{} block
