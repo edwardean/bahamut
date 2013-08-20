@@ -26,6 +26,35 @@
 
 
 
+@interface SDTextFieldCell : NSTextFieldCell
+@end
+@implementation SDTextFieldCell
+
+- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    NSBezierPath* path = [NSBezierPath bezierPathWithRect:cellFrame];
+    
+    [[NSColor colorWithDeviceWhite:0.96 alpha:1.0] setFill];
+    [path fill];
+    
+    if ([[controlView window] firstResponder] == [[controlView window] fieldEditor:NO forObject:controlView]) {
+        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0] setStroke];
+        
+        cellFrame = NSInsetRect(cellFrame, 0.5, 0.5);
+        NSBezierPath* path = [NSBezierPath bezierPathWithRect:cellFrame];
+        [path setLineWidth:2.0];
+        [path stroke];
+    }
+    
+    [self drawInteriorWithFrame:cellFrame inView:controlView];
+}
+
+- (void) drawFocusRingMaskWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+}
+
+@end
+
+
+
 
 
 
