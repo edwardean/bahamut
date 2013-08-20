@@ -56,16 +56,6 @@
 //@property (weak) IBOutlet NSView* searchContainerView;
 //@property (weak) IBOutlet NSView* songsScrollView;
 //@property (weak) IBOutlet NSView* playlistOptionsContainerView;
-//
-//@property (weak) IBOutlet NSTextField* playlistTitleField;
-//@property (weak) IBOutlet NSButton* repeatButton;
-//@property (weak) IBOutlet NSButton* shuffleButton;
-//
-//@property (weak) IBOutlet NSTableView* songsTable;
-//@property (weak) IBOutlet NSOutlineView* playlistsOutlineView;
-//
-//@property NSString* filterString;
-//
 
 @end
 
@@ -84,10 +74,6 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
-    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChangeNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistOptionsChangedNotification:) name:SDPlaylistOptionsChangedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
@@ -197,21 +183,7 @@
 //    NSLog(@"its %@", playlist);
 }
 
-//- (void) playlistRenamedNotification:(NSNotification*)note {
-//    [self refreshPlaylistsKeepingCurrent];
-//    [self updatePlaylistOptionsViewStuff];
-//}
 
-//- (void) playlistOptionsChangedNotification:(NSNotification*)note {
-//    [self updatePlaylistOptionsViewStuff];
-//}
-//
-//- (void) playlistSongsDidChange:(NSNotification*)note {
-//    if ([note object] == self.selectedPlaylist) {
-//        [self.songsTable reloadData];
-//        [self.songsTable deselectAll:nil];
-//    }
-//}
 
 
 
@@ -232,20 +204,6 @@
 - (void) currentSongTimeDidChange:(NSNotification*)note {
     self.songPositionSlider.currentValue = [SDMusicPlayer sharedPlayer].currentTime;
 }
-
-
-
-//- (void) refreshPlaylistsIgnoringCurrent {
-//    [self.playlistsOutlineView reloadItem:nil reloadChildren:YES];
-//    [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
-//}
-//
-//- (void) refreshPlaylistsKeepingCurrent {
-//    NSIndexSet* sel = [self.playlistsOutlineView selectedRowIndexes];
-//    [self.playlistsOutlineView reloadItem:nil reloadChildren:YES];
-//    [self.playlistsOutlineView selectRowIndexes:sel byExtendingSelection:NO];
-//}
-
 
 
 
@@ -433,61 +391,6 @@
 
 
 
-//#pragma mark - Search bar
-//
-//
-//- (IBAction) performFindPanelAction:(id)sender {
-//    [self toggleSearchBar:YES];
-//}
-//
-//- (void) toggleSearchBar:(BOOL)shouldShow {
-//    BOOL isShowing = ![self.searchContainerView isHidden];
-//    
-//    if (shouldShow != isShowing) {
-//        NSRect songsTableContainerFrame = [self.songsTableContainerView bounds];
-//        NSRect playlistOptionsFrame = [self.playlistOptionsContainerView frame];
-//        
-//        NSRect songsTableFrame;
-//        NSDivideRect(songsTableContainerFrame, &playlistOptionsFrame, &songsTableFrame, playlistOptionsFrame.size.height, NSMinYEdge);
-//        
-//        if (shouldShow) {
-//            NSRect searchSectionFrame = [self.searchContainerView frame];
-//            NSDivideRect(songsTableFrame, &searchSectionFrame, &songsTableFrame, searchSectionFrame.size.height, NSMaxYEdge);
-//        }
-//        
-//        [self.searchContainerView setHidden: !shouldShow];
-//        [self.songsScrollView setFrame:songsTableFrame];
-//    }
-//    
-//    if (shouldShow)
-//        [[self.searchField window] makeFirstResponder: self.searchField];
-//}
-//
-//- (void)controlTextDidChange:(NSNotification *)aNotification {
-//    if ([aNotification object] == self.searchField) {
-//        NSString* searchString = [self.searchField stringValue];
-//        
-//        if ([[searchString stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]] length] == 0)
-//            searchString = nil;
-//        
-//        self.filterString = searchString;
-//        [self.songsTable reloadData];
-//    }
-//}
-//
-//- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
-//    if (control == self.searchField && command == @selector(cancelOperation:)) {
-//        [self toggleSearchBar:NO];
-//        [self.searchField setStringValue:@""];
-//        
-//        self.filterString = nil;
-//        [self.songsTable reloadData];
-//        
-//        return YES;
-//    }
-//    
-//    return NO;
-//}
 
 
 
@@ -497,58 +400,6 @@
 
 
 
-
-
-//#pragma mark - Helpers
-//
-//
-//
-//- (BOOL) showingAllSongs {
-//    return (self.selectedPlaylist == nil);
-//}
-//
-//- (NSArray*) visibleSongs {
-//    NSArray* theSongs = (self.selectedPlaylist ? [self.selectedPlaylist songs] : [SDSharedData() allSongs]);
-//    
-//    if (self.filterString) {
-//        theSongs = [theSongs filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SDSong* song, NSDictionary *bindings) {
-//            return ([song.title rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound)
-//            || ([song.artist rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound)
-//            || ([song.album rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound);
-//        }]];
-//    }
-//    
-//    theSongs = [theSongs sortedArrayUsingDescriptors:[self.songsTable sortDescriptors]];
-//    
-//    return theSongs;
-//}
-
-
-
-
-//#pragma mark - Updating View Stuff
-//
-//
-//
-//- (void) updatePlaylistOptionsViewStuff {
-//    [self.repeatButton setEnabled: ![self showingAllSongs]];
-//    [self.shuffleButton setEnabled: ![self showingAllSongs]];
-//    [self.playlistTitleField setEnabled: ![self showingAllSongs]];
-//    
-//    [self.repeatButton setAllowsMixedState: [self showingAllSongs]];
-//    [self.shuffleButton setAllowsMixedState: [self showingAllSongs]];
-//    
-//    if ([self showingAllSongs]) {
-//        [self.repeatButton setState: NSMixedState];
-//        [self.shuffleButton setState: NSMixedState];
-//        [self.playlistTitleField setStringValue: @""];
-//    }
-//    else {
-//        [self.repeatButton setState: self.selectedPlaylist.repeats ? NSOnState : NSOffState];
-//        [self.shuffleButton setState: self.selectedPlaylist.shuffles ? NSOnState : NSOffState];
-//        [self.playlistTitleField setStringValue: self.selectedPlaylist.title];
-//    }
-//}
 
 - (void) updateCurrentSongViewStuff {
     SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
@@ -646,20 +497,6 @@
 
 
 
-//#pragma mark - Editing the current Playlist
-//
-//
-//- (IBAction) renamePlaylist:(NSTextField*)sender {
-//    self.selectedPlaylist.title = [sender stringValue];
-//}
-//
-//- (IBAction) setPlaylistShuffles:(NSButton*)sender {
-//    self.selectedPlaylist.shuffles = ([sender state] == NSOnState);
-//}
-//
-//- (IBAction) setPlaylistRepeats:(NSButton*)sender {
-//    self.selectedPlaylist.repeats = ([sender state] == NSOnState);
-//}
 
 
 

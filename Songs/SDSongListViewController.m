@@ -61,6 +61,10 @@
 @property (weak) IBOutlet NSSearchField* searchField;
 @property (weak) IBOutlet NSScrollView* songsScrollView;
 
+@property (weak) IBOutlet NSTextField* playlistTitleField;
+@property (weak) IBOutlet NSButton* repeatButton;
+@property (weak) IBOutlet NSButton* shuffleButton;
+
 @property NSString* filterString;
 
 @end
@@ -75,6 +79,10 @@
     [super loadView];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChangeNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChangeNotification object:self.playlist];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:self.playlist];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistOptionsChangedNotification:) name:SDPlaylistOptionsChangedNotification object:self.playlist];
     
     for (NSTableColumn* column in [self.songsTable tableColumns]) {
         [column setHeaderCell:[[SDSongsTableHeaderCell alloc] initTextCell:[[column headerCell] stringValue]]];
@@ -94,6 +102,9 @@
     [self.songsTable setDoubleAction:@selector(startPlayingSong:)];
     
     [self toggleSearchBar:NO];
+    
+    [self.playlistTitleField setEnabled: ![self.playlist isMasterPlaylist]];
+    [self updatePlaylistOptionsViewStuff];
 }
 
 
@@ -155,13 +166,8 @@
 
 
 
-
-- (BOOL) showingAllSongs {
-    return (self.playlist == nil);
-}
-
 - (NSArray*) visibleSongs {
-    NSArray* theSongs = (self.playlist ? [self.playlist songs] : @[]);
+    NSArray* theSongs = [self.playlist songs];
     
     if (self.filterString) {
         theSongs = [theSongs filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SDSong* song, NSDictionary *bindings) {
@@ -174,6 +180,68 @@
     theSongs = [theSongs sortedArrayUsingDescriptors:[self.songsTable sortDescriptors]];
     
     return theSongs;
+}
+
+
+
+
+
+
+
+
+#pragma mark - Updating View Stuff
+
+
+
+- (void) updatePlaylistOptionsViewStuff {
+    [self.repeatButton setState: self.playlist.repeats ? NSOnState : NSOffState];
+    [self.shuffleButton setState: self.playlist.shuffles ? NSOnState : NSOffState];
+    [self.playlistTitleField setStringValue: self.playlist.title];
+}
+
+
+
+
+
+
+
+- (void) playlistRenamedNotification:(NSNotification*)note {
+    [self updatePlaylistOptionsViewStuff];
+}
+
+- (void) playlistOptionsChangedNotification:(NSNotification*)note {
+    [self updatePlaylistOptionsViewStuff];
+}
+
+- (void) playlistSongsDidChange:(NSNotification*)note {
+    if ([note object] == self.playlist) {
+        [self.songsTable reloadData];
+        [self.songsTable deselectAll:nil];
+    }
+}
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Editing the current Playlist
+
+
+- (IBAction) renamePlaylist:(NSTextField*)sender {
+    self.playlist.title = [sender stringValue];
+}
+
+- (IBAction) setPlaylistShuffles:(NSButton*)sender {
+    self.playlist.shuffles = ([sender state] == NSOnState);
+}
+
+- (IBAction) setPlaylistRepeats:(NSButton*)sender {
+    self.playlist.repeats = ([sender state] == NSOnState);
 }
 
 
