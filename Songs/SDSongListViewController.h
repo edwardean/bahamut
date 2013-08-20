@@ -14,4 +14,6 @@
 
 @property (weak) SDPlaylist* playlist;
 
+- (void) focusTitleField;
+
 @end

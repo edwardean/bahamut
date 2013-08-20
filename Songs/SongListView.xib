@@ -154,7 +154,7 @@
 												<string key="NSFrameSize">{480, 181}</string>
 												<reference key="NSSuperview" ref="229961288"/>
 												<reference key="NSWindow"/>
-												<reference key="NSNextKeyView" ref="85229395"/>
+												<reference key="NSNextKeyView" ref="353989365"/>
 												<string key="NSReuseIdentifierKey">_NS:13</string>
 												<bool key="NSEnabled">YES</bool>
 												<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -381,6 +381,7 @@
 										<string key="NSFrame">{{0, 433}, {570, 15}}</string>
 										<reference key="NSSuperview" ref="191381200"/>
 										<reference key="NSWindow"/>
+										<reference key="NSNextKeyView" ref="29089419"/>
 										<string key="NSReuseIdentifierKey">_NS:60</string>
 										<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										<int key="NSsFlags">1</int>
@@ -408,7 +409,7 @@
 								<string key="NSFrameSize">{480, 198}</string>
 								<reference key="NSSuperview" ref="1008387459"/>
 								<reference key="NSWindow"/>
-								<reference key="NSNextKeyView" ref="229961288"/>
+								<reference key="NSNextKeyView" ref="85229395"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<int key="NSsFlags">133680</int>
 								<reference key="NSVScroller" ref="353989365"/>
@@ -438,6 +439,7 @@
 								<string key="NSFrame">{{390, 8}, {72, 18}}</string>
 								<reference key="NSSuperview" ref="29089419"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSButtonCell" key="NSCell" id="765947168">
@@ -501,7 +503,7 @@
 								<bool key="NSEnabled">YES</bool>
 								<object class="NSTextFieldCell" key="NSCell" id="1011705805">
 									<int key="NSCellFlags">-1804599231</int>
-									<int key="NSCellFlags2">272630784</int>
+									<int key="NSCellFlags2">268436480</int>
 									<string key="NSContents"/>
 									<reference key="NSSupport" ref="686868372"/>
 									<string key="NSCellIdentifier">_NS:9</string>
@@ -529,6 +531,7 @@
 				<string key="NSFrameSize">{480, 272}</string>
 				<reference key="NSSuperview"/>
 				<reference key="NSWindow"/>
+				<reference key="NSNextKeyView" ref="1008387459"/>
 				<string key="NSClassName">NSView</string>
 			</object>
 		</array>
@@ -905,7 +908,7 @@
 						<string key="performFindPanelAction:">id</string>
 						<string key="renamePlaylist:">NSTextField</string>
 						<string key="setPlaylistRepeats:">NSButton</string>
-						<string key="setPlaylistShuffles:">NSButton</string>
+						<string key="severelyDeleteSomething:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
 						<object class="IBActionInfo" key="performFindPanelAction:">
@@ -920,9 +923,9 @@
 							<string key="name">setPlaylistRepeats:</string>
 							<string key="candidateClassName">NSButton</string>
 						</object>
-						<object class="IBActionInfo" key="setPlaylistShuffles:">
-							<string key="name">setPlaylistShuffles:</string>
-							<string key="candidateClassName">NSButton</string>
+						<object class="IBActionInfo" key="severelyDeleteSomething:">
+							<string key="name">severelyDeleteSomething:</string>
+							<string key="candidateClassName">id</string>
 						</object>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">

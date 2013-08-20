@@ -228,10 +228,7 @@
     NSArray* draggingSongs = [SDUserDataManager songsForUUIDs:uuids];
     
     NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
-    SDPlaylist* fromPlaylist = nil;
-    
-    if (playlistIndex != NSNotFound)
-        fromPlaylist = [[SDSharedData() playlists] objectAtIndex:playlistIndex];
+    SDPlaylist* fromPlaylist = [[SDSharedData() playlists] objectAtIndex:playlistIndex];
     
     if (fromPlaylist == self.playlist) {
         [self.playlist moveSongs:draggingSongs
@@ -374,6 +371,11 @@
 
 
 
+
+
+- (void) focusTitleField {
+    [[self.playlistTitleField window] makeFirstResponder: self.playlistTitleField];
+}
 
 
 

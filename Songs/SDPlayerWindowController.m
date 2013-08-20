@@ -43,17 +43,13 @@
 @property SDSourceListViewController* playlistsViewController;
 @property SDPlaylist* selectedPlaylist;
 
-@property (weak) IBOutlet NSView* playlistViewHouser;
-@property NSMutableArray* playlistViewControllers;
+@property (weak) IBOutlet NSView* songListViewHouser;
+@property NSMutableArray* songListViewControllers;
+@property (weak) SDSongListViewController* currentSongListViewController;
 
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 @property (weak) IBOutlet NSButton* playButton;
 @property (weak) IBOutlet NSTextField* currentSongInfoField;
-
-//@property (weak) IBOutlet NSView* songsTableContainerView;
-//@property (weak) IBOutlet NSView* searchContainerView;
-//@property (weak) IBOutlet NSView* songsScrollView;
-//@property (weak) IBOutlet NSView* playlistOptionsContainerView;
 
 @end
 
@@ -77,20 +73,17 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
     
-//    [self.playlistsOutlineView registerForDraggedTypes:@[SDSongDragType]];
-//    [self.playlistsOutlineView registerForDraggedTypes:@[SDPlaylistDragType]];
-    
-    [self updateCurrentSongViewStuff];
+    [self updatePlayerViews];
     
     
     
     
-    self.playlistViewControllers = [NSMutableArray array];
+    self.songListViewControllers = [NSMutableArray array];
     
     for (SDPlaylist* playlist in [SDSharedData() playlists]) {
         SDSongListViewController* vc = [[SDSongListViewController alloc] init];
         vc.playlist = playlist;
-        [self.playlistViewControllers addObject:vc];
+        [self.songListViewControllers addObject:vc];
     }
     
     
@@ -132,11 +125,12 @@
     
     NSUInteger idx = [[SDSharedData() playlists] indexOfObject: self.selectedPlaylist];
     
-    SDSongListViewController* vc = [self.playlistViewControllers objectAtIndex: idx];
+    SDSongListViewController* vc = [self.songListViewControllers objectAtIndex: idx];
+    self.currentSongListViewController = vc;
     
-    [[self.playlistViewHouser subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-    [[vc view] setFrame: [self.playlistViewHouser bounds]];
-    [self.playlistViewHouser addSubview:[vc view]];
+    [[self.songListViewHouser subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
+    [[vc view] setFrame: [self.songListViewHouser bounds]];
+    [self.songListViewHouser addSubview:[vc view]];
     [self.playlistsViewController setNextResponder: vc];
     
 //    NSLog(@"%@", self.selectedPlaylist);
@@ -157,7 +151,7 @@
     
     SDSongListViewController* vc = [[SDSongListViewController alloc] init];
     vc.playlist = playlist;
-    [self.playlistViewControllers insertObject:vc atIndex:idx];
+    [self.songListViewControllers insertObject:vc atIndex:idx];
     
 //    NSLog(@"its %@", playlist);
 }
@@ -165,11 +159,11 @@
 - (void) playlistRemovedNotification:(NSNotification*)note {
     SDPlaylist* playlist = [note object];
     
-    NSUInteger idx = [self.playlistViewControllers indexOfObjectPassingTest:^BOOL(SDSongListViewController* obj, NSUInteger idx, BOOL *stop) {
+    NSUInteger idx = [self.songListViewControllers indexOfObjectPassingTest:^BOOL(SDSongListViewController* obj, NSUInteger idx, BOOL *stop) {
         return obj.playlist == playlist;
     }];
     
-    [self.playlistViewControllers removeObjectAtIndex:idx];
+    [self.songListViewControllers removeObjectAtIndex:idx];
     
 //    NSLog(@"its %@", playlist);
 }
@@ -183,12 +177,7 @@
 }
 
 - (void) currentSongDidChange:(NSNotification*)note {
-    [self updateCurrentSongViewStuff];
-    
-    // so we can put an icon next to the now-playing playlist
-    
-//    [self.playlistsOutlineView reloadItem:[[SDPlayer sharedPlayer] currentPlaylist]];
-//    [self refreshPlaylistsKeepingCurrent];
+    [self updatePlayerViews];
 }
 
 - (void) currentSongTimeDidChange:(NSNotification*)note {
@@ -203,55 +192,6 @@
 
 
 
-//#pragma mark - Playlists, Drag / Drop
-//
-//- (BOOL)outlineView:(NSOutlineView *)outlineView writeItems:(NSArray *)items toPasteboard:(NSPasteboard *)pboard {
-//    if ([items count] == 1 && [[items lastObject] isKindOfClass: [SDPlaylist self]]) {
-//        SDPlaylist* playlist = [items lastObject];
-//        NSUInteger playlistIndex = [[SDSharedData() playlists] indexOfObject:playlist];
-//        
-//        [pboard setPropertyList:@(playlistIndex)
-//                        forType:SDPlaylistDragType];
-//        
-//        return YES;
-//    }
-//    return NO;
-//}
-//
-//- (NSDragOperation)outlineView:(NSOutlineView *)outlineView validateDrop:(id < NSDraggingInfo >)info proposedItem:(id)item proposedChildIndex:(NSInteger)index {
-//    if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
-//        if (item == nil)
-//            return NSDragOperationNone;
-//        else
-//            return NSDragOperationCopy;
-//    }
-//    else {
-//        if ([item isKindOfClass: [SDPlaylist self]])
-//            return NSDragOperationCopy;
-//        else
-//            return NSDragOperationNone;
-//    }
-//}
-//
-//- (BOOL)outlineView:(NSOutlineView *)outlineView acceptDrop:(id < NSDraggingInfo >)info item:(id)item childIndex:(NSInteger)index {
-//    if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
-//        NSNumber* playlistIndex = [[info draggingPasteboard] propertyListForType:SDPlaylistDragType];
-//        SDPlaylist* movingPlaylist = [[SDSharedData() playlists] objectAtIndex:[playlistIndex integerValue]];
-//        
-//        [SDSharedData() movePlaylist:movingPlaylist
-//                             toIndex:index];
-//        
-//        return YES;
-//    }
-//    else {
-//        NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
-//        NSArray* uuids = [data objectForKey:@"uuids"];
-//        NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
-//        SDPlaylist* playlist = item;
-//        [playlist addSongs:songs];
-//        return YES;
-//    }
-//}
 
 
 
@@ -272,8 +212,7 @@
 
 
 
-
-- (void) updateCurrentSongViewStuff {
+- (void) updatePlayerViews {
     SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
     
     if (currentSong) {
@@ -294,61 +233,6 @@
 
 
 
-
-
-//#pragma mark - Playlists data source and delegate
-//
-//- (void) outlineViewSelectionDidChange:(NSNotification*)note {
-//    NSInteger row = [self.playlistsOutlineView selectedRow];
-//    
-//    if (row == -1)
-//        return;
-//    
-////    if (row == 0) {
-////        self.selectedPlaylist = nil;
-////    }
-////    else {
-//        NSMutableArray* playlists = [SDSharedData() playlists];
-//        self.selectedPlaylist = [playlists objectAtIndex:row];
-////    }
-//    
-//    [self.songsTable deselectAll:nil];
-//    [self.songsTable reloadData];
-//}
-//
-//- (NSView *)outlineView:(NSOutlineView *)outlineView viewForTableColumn:(NSTableColumn *)tableColumn item:(id)item {
-//    NSTableCellView *cellView = [outlineView makeViewWithIdentifier:@"DataCell" owner:self];
-//    
-//    SDPlaylist* playlist = item;
-//    [[cellView textField] setStringValue:playlist.title];
-//    
-//    BOOL isPlaying = ([[SDMusicPlayer sharedPlayer] isPlaying] && playlist == [[SDMusicPlayer sharedPlayer] currentPlaylist]);
-//    [[cellView imageView] setImage: [NSImage imageNamed: isPlaying ? NSImageNameRightFacingTriangleTemplate : @"playlist"]];
-//    
-//    return cellView;
-//}
-//
-//- (NSInteger)outlineView:(NSOutlineView *)outlineView numberOfChildrenOfItem:(id)item {
-//    if (item == nil)
-//        return [[SDSharedData() playlists] count];
-//    else
-//        return 0;
-//}
-//
-//- (id)outlineView:(NSOutlineView *)outlineView child:(NSInteger)index ofItem:(id)item {
-//    if (item == nil)
-//        return [[SDSharedData() playlists] objectAtIndex:index];
-//    else
-//        return nil;
-//}
-//
-//
-//- (BOOL)outlineView:(NSOutlineView *)outlineView isItemExpandable:(id)item {
-//    if (item == nil)
-//        return YES;
-//    else
-//        return NO;
-//}
 
 
 
@@ -385,7 +269,7 @@
     
     [self.playlistsViewController selectPlaylist:newPlaylist];
     
-//    [[self.playlistTitleField window] makeFirstResponder: self.playlistTitleField];
+    [self.currentSongListViewController focusTitleField];
 }
 
 
