@@ -26,6 +26,7 @@
 #### To do after 1.0
 
 - Figure out what exactly should happen when you change anything about playlist while it's playing
+- Make it scriptable maybe?
 
 #### Screenshot
 
