@@ -79,6 +79,51 @@
 
 
 
+@interface SDSongsTableView : NSTableView
+@end
+@implementation SDSongsTableView
+
+- (void)highlightSelectionInClipRect:(NSRect)clipRect {
+    NSRange aVisibleRowIndexes = [self rowsInRect:clipRect];
+    NSIndexSet* aSelectedRowIndexes = [self selectedRowIndexes];
+    
+    NSUInteger aRow = aVisibleRowIndexes.location;
+    NSUInteger anEndRow = aRow + aVisibleRowIndexes.length;
+    
+    if (self == [[self window] firstResponder] && [[self window] isMainWindow] && [[self window] isKeyWindow]) {
+        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0] setFill];
+    }
+    else {
+        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:0.5] setFill];
+    }
+    
+    for (; aRow < anEndRow; aRow++) {
+        if ([aSelectedRowIndexes containsIndex:aRow]) {
+            [[NSBezierPath bezierPathWithRect:[self rectOfRow:aRow]] fill];
+        }
+    }
+}
+
+@end
+
+
+
+@interface SDSongCell : NSTextFieldCell
+@end
+@implementation SDSongCell
+
+- (NSColor *)highlightColorWithFrame:(NSRect)cellFrame inView: (NSView *)controlView {
+    return nil;
+}
+
+@end
+
+
+
+
+
+
+
 
 
 @interface SDSongListViewController ()
@@ -281,6 +326,8 @@
 - (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
     [aTableView reloadData];
 }
+
+
 
 
 
