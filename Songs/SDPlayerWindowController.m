@@ -128,6 +128,9 @@
     
     self.selectedPlaylist = [[SDSharedData() playlists] objectAtIndex:0];
     [self.playlistsViewController selectPlaylist: self.selectedPlaylist];
+    
+//    self.window.styleMask = NSBorderlessWindowMask;
+//    [self.window setMovableByWindowBackground:YES];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {

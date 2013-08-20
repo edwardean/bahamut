@@ -10,6 +10,8 @@
 
 #import <AVFoundation/AVFoundation.h>
 
+#import "SDMasterPlaylist.h"
+
 @interface SDUserDataManager ()
 
 @property BOOL canSave;
@@ -45,6 +47,8 @@
     
     if (playlistsData)
         [self.playlists addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithData:playlistsData]];
+    else
+        [self.playlists addObject: [[SDMasterPlaylist alloc] init]];
     
     self.canSave = YES;
 }

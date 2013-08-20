@@ -84,6 +84,10 @@
     frame.size.height = 27;
     self.songsTable.headerView.frame = frame;
     
+    frame = self.songsTable.cornerView.frame;
+    frame.size.height = 27;
+    self.songsTable.cornerView.frame = frame;
+    
     [self.songsTable setSortDescriptors:@[]];
     
     [self.songsTable setTarget:self];
@@ -157,7 +161,7 @@
 }
 
 - (NSArray*) visibleSongs {
-    NSArray* theSongs = (self.playlist ? [self.playlist songs] : [SDSharedData() allSongs]);
+    NSArray* theSongs = (self.playlist ? [self.playlist songs] : @[]);
     
     if (self.filterString) {
         theSongs = [theSongs filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SDSong* song, NSDictionary *bindings) {
