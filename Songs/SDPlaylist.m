@@ -57,6 +57,9 @@
 
 
 - (void) addSongs:(NSArray *)songs atIndexes:(NSIndexSet*)indexes {
+    if ([songs count] == 0)
+        return;
+    
     [SDAddUndo(self) removeSongs:songs];
     
     [self.songs insertObjects:songs atIndexes:indexes];
