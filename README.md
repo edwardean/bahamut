@@ -23,7 +23,11 @@
 - Make "create playlist" button prettier somehow
 - Figure out how to get Track info field to display "..." without tightening at every resize
 - Only display track info parts that exist! ("album" sometimes doesn't, I think)
-- Make it not take 500MB of memory just because you filtered all the songs.
+- Preload songs smarter
+    - Make it not take 500MB of memory just because you filtered all the songs
+        - Probably just needs an @autorelease{} block
+    - But make the methods still load on-demand
+    - Probably do it from within SDSong, so that nobody else needs to be bothered
 
 #### To do after 1.0
 
