@@ -12,6 +12,13 @@
 #import "SDMusicPlayer.h"
 
 
+
+//static NSString* SDSongDragType = @"SDSongDragType";
+
+static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
+
+
+
 @interface SDTableRowView : NSTableRowView
 @end
 
@@ -63,7 +70,7 @@
     [self.playlistsTableView setDoubleAction:@selector(doubleClickedThing:)];
     
 //    [self.playlistsOutlineView registerForDraggedTypes:@[SDSongDragType]];
-//    [self.playlistsOutlineView registerForDraggedTypes:@[SDPlaylistDragType]];
+    [self.playlistsTableView registerForDraggedTypes:@[SDPlaylistDragType]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];

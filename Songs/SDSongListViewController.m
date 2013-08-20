@@ -123,8 +123,14 @@
 
 
 
-- (void) startPlayingSong:(id)sender {
-    NSLog(@"ok, playing a song");
+- (IBAction) startPlayingSong:(id)sender {
+    NSArray* songs = [self selectedSongs];
+    
+    if ([songs count] != 1)
+        return;
+    
+    [[SDMusicPlayer sharedPlayer] playSong:[songs lastObject]
+                                inPlaylist:self.playlist];
 }
 
 
@@ -435,6 +441,10 @@
 
 - (NSArray*) selectedSongs {
     NSIndexSet* set = [self.songsTable selectedRowIndexes];
+    
+    if ([set isEqualToIndexSet: [NSIndexSet indexSetWithIndex: -1]])
+         return nil;
+    
     return [[self visibleSongs] objectsAtIndexes:set];
 }
 

@@ -17,19 +17,6 @@
 #import "SDSourceListViewController.h"
 
 
-
-//static NSString* SDSongDragType = @"SDSongDragType";
-//static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
-
-
-
-
-
-
-
-
-
-
 @interface SDPlayerWindowController ()
 
 @property (weak) IBOutlet NSView* playlistsViewHouser;
@@ -281,22 +268,6 @@
 - (IBAction) prevSong:(id)sender {
     [[SDMusicPlayer sharedPlayer] previousSong];
 }
-
-//- (IBAction) startPlayingSong:(id)sender {
-//    if ([[self.songsTable selectedRowIndexes] count] != 1)
-//        return;
-//    
-//    if ([self showingAllSongs])
-//        return;
-//    
-//    NSInteger row = [self.songsTable selectedRow];
-//    if (row == -1)
-//        return;
-//    
-//    SDSong* song = [[self visibleSongs] objectAtIndex:row];
-//    
-//    [[SDMusicPlayer sharedPlayer] playSong:song inPlaylist:self.selectedPlaylist];
-//}
 
 - (IBAction) playPause:(id)sender {
     if ([SDMusicPlayer sharedPlayer].stopped) {
