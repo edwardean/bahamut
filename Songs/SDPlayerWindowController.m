@@ -184,7 +184,6 @@
 
 - (void) currentSongDidChange:(NSNotification*)note {
     [self updateCurrentSongViewStuff];
-//    [self.songsTable reloadData];
     
     // so we can put an icon next to the now-playing playlist
     
@@ -258,37 +257,6 @@
 
 
 
-
-//#pragma mark - Songs table data source
-//
-//
-//
-//- (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
-//    return [[self visibleSongs] count];
-//}
-//
-//- (id)tableView:(NSTableView *)aTableView objectValueForTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
-//    NSArray* songs = [self visibleSongs];
-//    SDSong* song = [songs objectAtIndex:rowIndex];
-//    
-//    if ([[aTableColumn identifier] isEqual:@"playing"]) {
-//        if (self.selectedPlaylist == [[SDMusicPlayer sharedPlayer] currentPlaylist] && song == [[SDMusicPlayer sharedPlayer] currentSong])
-//            return [NSImage imageNamed:NSImageNameRightFacingTriangleTemplate];
-//        else
-//            return nil;
-//    }
-//    if ([[aTableColumn identifier] isEqual:@"title"]) {
-//        return [song title];
-//    }
-//    if ([[aTableColumn identifier] isEqual:@"artist"]) {
-//        return [song artist];
-//    }
-//    if ([[aTableColumn identifier] isEqual:@"album"]) {
-//        return [song album];
-//    }
-//    
-//    return nil;
-//}
 
 
 

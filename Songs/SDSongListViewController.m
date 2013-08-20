@@ -16,6 +16,9 @@
 #import "SDSong.h"
 
 
+#import "SDMusicPlayer.h"
+
+
 #define SDSongDragType @"SDSongDragType"
 
 
@@ -75,6 +78,10 @@
     return @"SongListView";
 }
 
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+}
+
 - (void) loadView {
     [super loadView];
     
@@ -83,6 +90,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChangeNotification object:self.playlist];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:self.playlist];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistOptionsChangedNotification:) name:SDPlaylistOptionsChangedNotification object:self.playlist];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
     
     for (NSTableColumn* column in [self.songsTable tableColumns]) {
         [column setHeaderCell:[[SDSongsTableHeaderCell alloc] initTextCell:[[column headerCell] stringValue]]];
@@ -126,6 +136,32 @@
 
 
 
+
+
+
+
+
+
+
+
+- (void) playerStatusDidChange:(NSNotification*)note {
+    [self.songsTable reloadData];
+}
+
+- (void) currentSongDidChange:(NSNotification*)note {
+    [self.songsTable reloadData];
+}
+
+
+
+
+
+
+
+
+
+
+
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
     return [[self visibleSongs] count];
 }
@@ -135,7 +171,10 @@
     SDSong* song = [songs objectAtIndex:rowIndex];
     
     if ([[aTableColumn identifier] isEqual:@"playing"]) {
-        return nil;
+        if (self.playlist == [[SDMusicPlayer sharedPlayer] currentPlaylist] && song == [[SDMusicPlayer sharedPlayer] currentSong])
+            return [NSImage imageNamed:NSImageNameRightFacingTriangleTemplate];
+        else
+            return nil;
     }
     if ([[aTableColumn identifier] isEqual:@"title"]) {
         return [song title];

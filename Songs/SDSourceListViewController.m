@@ -9,7 +9,7 @@
 #import "SDSourceListViewController.h"
 
 #import "SDUserDataManager.h"
-
+#import "SDMusicPlayer.h"
 
 
 @interface SDTableRowView : NSTableRowView
@@ -65,20 +65,28 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
 }
 
-- (void) playlistAddedNotification:(NSNotification*)note {
+
+
+
+- (void) refreshKeepingCurrentSelection {
     NSInteger row = [self.playlistsTableView selectedRow];
     [self.playlistsTableView reloadData];
     [self.playlistsTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
+}
+
+
+
+- (void) playlistAddedNotification:(NSNotification*)note {
+    [self refreshKeepingCurrentSelection];
 }
 
 - (void) playlistRenamedNotification:(NSNotification*)note {
-    NSInteger row = [self.playlistsTableView selectedRow];
-    [self.playlistsTableView reloadData];
-    [self.playlistsTableView selectRowIndexes:[NSIndexSet indexSetWithIndex:row] byExtendingSelection:NO];
-    
-//    [self updatePlaylistOptionsViewStuff];
+    [self refreshKeepingCurrentSelection];
 }
 
 - (void) playlistRemovedNotification:(NSNotification*)note {
@@ -92,8 +100,12 @@
 - (NSView *)tableView:(NSTableView *)tableView
    viewForTableColumn:(NSTableColumn *)tableColumn
                   row:(NSInteger)row {
+    SDPlaylist* playlist = [[SDSharedData() playlists] objectAtIndex:row];
+    BOOL isPlaying = ([[SDMusicPlayer sharedPlayer] isPlaying] && playlist == [[SDMusicPlayer sharedPlayer] currentPlaylist]);
+    
     NSTableCellView *result = [tableView makeViewWithIdentifier:@"ExistingPlaylist" owner:self];
-    [result textField].stringValue = [[[SDSharedData() playlists] objectAtIndex:row] title];
+    [result textField].stringValue = [playlist title];
+    [[result imageView] setHidden: !isPlaying];
     return result;
 }
 
@@ -156,5 +168,23 @@
     SDPlaylist* playlist = [[SDSharedData() playlists] objectAtIndex:row];
     [self.playlistsViewDelegate playPlaylist:playlist];
 }
+
+
+
+
+
+
+
+
+
+- (void) playerStatusDidChange:(NSNotification*)note {
+    [self refreshKeepingCurrentSelection];
+}
+
+- (void) currentSongDidChange:(NSNotification*)note {
+    [self refreshKeepingCurrentSelection];
+}
+
+
 
 @end

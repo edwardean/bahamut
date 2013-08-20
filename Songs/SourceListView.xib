@@ -15,6 +15,8 @@
 			<string>NSButtonCell</string>
 			<string>NSCustomObject</string>
 			<string>NSCustomView</string>
+			<string>NSImageCell</string>
+			<string>NSImageView</string>
 			<string>NSScrollView</string>
 			<string>NSScroller</string>
 			<string>NSTableCellView</string>
@@ -50,6 +52,7 @@
 						<string key="NSFrame">{{7, 1}, {239, 24}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="367791691">
@@ -215,6 +218,7 @@
 								<string key="NSFrame">{{1, 119}, {223, 15}}</string>
 								<reference key="NSSuperview" ref="641514136"/>
 								<reference key="NSWindow"/>
+								<reference key="NSNextKeyView" ref="826851589"/>
 								<string key="NSReuseIdentifierKey">_NS:60</string>
 								<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								<int key="NSsFlags">1</int>
@@ -299,6 +303,7 @@
 									<int key="NSvFlags">298</int>
 									<string key="NSFrame">{{6, 4.5}, {238, 17}}</string>
 									<reference key="NSSuperview" ref="1071650740"/>
+									<reference key="NSNextKeyView" ref="924019340"/>
 									<string key="NSAntiCompressionPriority">{250, 750}</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="4830744">
@@ -317,6 +322,37 @@
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 								</object>
+								<object class="NSImageView" id="751327296">
+									<reference key="NSNextResponder" ref="1071650740"/>
+									<int key="NSvFlags">297</int>
+									<set class="NSMutableSet" key="NSDragTypes">
+										<string>Apple PDF pasteboard type</string>
+										<string>Apple PICT pasteboard type</string>
+										<string>Apple PNG pasteboard type</string>
+										<string>NSFilenamesPboardType</string>
+										<string>NeXT Encapsulated PostScript v1.2 pasteboard type</string>
+										<string>NeXT TIFF v4.0 pasteboard type</string>
+									</set>
+									<string key="NSFrame">{{230, 2}, {20, 20}}</string>
+									<reference key="NSSuperview" ref="1071650740"/>
+									<string key="NSReuseIdentifierKey">_NS:9</string>
+									<bool key="NSEnabled">YES</bool>
+									<object class="NSImageCell" key="NSCell" id="523069213">
+										<int key="NSCellFlags">134217728</int>
+										<int key="NSCellFlags2">33554432</int>
+										<object class="NSCustomResource" key="NSContents">
+											<string key="NSClassName">NSImage</string>
+											<string key="NSResourceName">NSRightFacingTriangleTemplate</string>
+										</object>
+										<string key="NSCellIdentifier">_NS:9</string>
+										<int key="NSAlign">0</int>
+										<int key="NSScale">0</int>
+										<int key="NSStyle">0</int>
+										<bool key="NSAnimates">NO</bool>
+									</object>
+									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+									<bool key="NSEditable">YES</bool>
+								</object>
 							</array>
 							<string key="NSFrame">{{1, 1}, {250, 25}}</string>
 							<reference key="NSNextKeyView" ref="496137240"/>
@@ -324,6 +360,14 @@
 						<reference key="destination" ref="496137240"/>
 					</object>
 					<int key="connectionID">15</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">imageView</string>
+						<reference key="source" ref="1071650740"/>
+						<reference key="destination" ref="751327296"/>
+					</object>
+					<int key="connectionID">38</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -403,6 +447,7 @@
 						<reference key="object" ref="1071650740"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="496137240"/>
+							<reference ref="751327296"/>
 						</array>
 						<reference key="parent" ref="676376333"/>
 					</object>
@@ -437,6 +482,19 @@
 						<reference key="object" ref="367791691"/>
 						<reference key="parent" ref="826851589"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">36</int>
+						<reference key="object" ref="751327296"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="523069213"/>
+						</array>
+						<reference key="parent" ref="1071650740"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">37</int>
+						<reference key="object" ref="523069213"/>
+						<reference key="parent" ref="751327296"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -450,6 +508,8 @@
 				<string key="29.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="3.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="30.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -466,7 +526,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">31</int>
+			<int key="maxID">38</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -510,9 +570,9 @@
 		</object>
 		<bool key="IBDocument.PluginDeclaredDependenciesTrackSystemTargetVersion">YES</bool>
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
-		<object class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
-			<string key="NS.key.0">NSAddTemplate</string>
-			<string key="NS.object.0">{8, 8}</string>
-		</object>
+		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
+			<string key="NSAddTemplate">{8, 8}</string>
+			<string key="NSRightFacingTriangleTemplate">{9, 9}</string>
+		</dictionary>
 	</data>
 </archive>
