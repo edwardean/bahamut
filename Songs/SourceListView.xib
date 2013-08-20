@@ -52,6 +52,7 @@
 						<string key="NSFrame">{{13, 7}, {233, 24}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
+						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="367791691">
@@ -275,7 +276,7 @@
 							<int key="NSvFlags">298</int>
 							<string key="NSFrame">{{19, 4.5}, {225, 17}}</string>
 							<reference key="NSSuperview" ref="1071650740"/>
-							<reference key="NSNextKeyView" ref="269543765"/>
+							<reference key="NSNextKeyView" ref="924019340"/>
 							<string key="NSAntiCompressionPriority">{250, 750}</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="4830744">
@@ -342,7 +343,7 @@
 									</set>
 									<string key="NSFrame">{{-1, 1}, {20, 20}}</string>
 									<reference key="NSSuperview" ref="1071650740"/>
-									<reference key="NSNextKeyView" ref="924019340"/>
+									<reference key="NSNextKeyView" ref="496137240"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSImageCell" key="NSCell" id="14625500">
@@ -363,7 +364,7 @@
 								</object>
 							</array>
 							<string key="NSFrame">{{1, 1}, {250, 25}}</string>
-							<reference key="NSNextKeyView" ref="496137240"/>
+							<reference key="NSNextKeyView" ref="269543765"/>
 						</object>
 						<reference key="destination" ref="496137240"/>
 					</object>
@@ -518,7 +519,9 @@
 				<string key="30.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="4.CustomClassName">SDScroller</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="5.CustomClassName">SDScroller</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="6.ibExternalAutomaticallyCalculatesRowSizeFromViewHeight"/>

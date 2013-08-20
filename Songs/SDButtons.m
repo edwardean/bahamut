@@ -118,3 +118,25 @@
     }
 }
 @end
+
+
+
+
+
+
+
+
+
+
+
+@interface SDScroller : NSScroller
+@end
+
+@implementation SDScroller
+
+- (void)drawKnobSlotInRect:(NSRect)slotRect highlight:(BOOL)flag {
+//    [[NSColor whiteColor] setFill];
+//    [NSBezierPath fillRect:slotRect];
+}
+
+@end
