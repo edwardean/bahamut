@@ -32,7 +32,7 @@
 
 #### Screenshot
 
-[![songsapp.png](https://photos-6.dropbox.com/t/0/AACNyd5w7M8yaH8uE7LpQY57pktCsOKC9MMMEVtCl7M-Ng/12/152474301/png/1024x768/3/1376989200/0/2/songsapp.png/wYejrRNowvVA9kV-jNwPxJyiGuUzhzTLPZeLRXQkJ2w)](https://www.dropbox.com/s/qum47sh7cyfileg/songsapp.png)
+![songsapp.png](songsapp.png)
 
 #### License
 
