@@ -13,16 +13,9 @@
 #import "SDMusicPlayer.h"
 #import "SDTrackPositionView.h"
 
-
-
 #import "SDSongListViewController.h"
 #import "SDSourceListViewController.h"
 
-
-
-
-
-//#import "SDPlaylistChooserView.h"
 
 
 //static NSString* SDSongDragType = @"SDSongDragType";
@@ -75,9 +68,6 @@
     
     [self updatePlayerViews];
     
-    
-    
-    
     self.songListViewControllers = [NSMutableArray array];
     
     for (SDPlaylist* playlist in [SDSharedData() playlists]) {
@@ -118,8 +108,6 @@
 
 #pragma Playlists
 
-
-
 - (void) selectPlaylist:(SDPlaylist*)playlist {
     self.selectedPlaylist = playlist;
     
@@ -139,6 +127,10 @@
 - (void) playPlaylist:(SDPlaylist*)playlist {
     [[SDMusicPlayer sharedPlayer] playPlaylist: playlist];
 }
+
+
+
+
 
 
 
@@ -308,16 +300,15 @@
 
 - (IBAction) playPause:(id)sender {
     if ([SDMusicPlayer sharedPlayer].stopped) {
-//        if ([self showingAllSongs])
-//            return;
-//        
-//        if ([[self.songsTable selectedRowIndexes] count] == 1) {
-//            SDSong* song = [[self visibleSongs] objectAtIndex: [self.songsTable selectedRow]];
-//            [[SDMusicPlayer sharedPlayer] playSong:song inPlaylist:self.selectedPlaylist];
-//        }
-//        else {
-//            [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
-//        }
+        NSArray* selectedSongs = [self.currentSongListViewController selectedSongs];
+        
+        if ([selectedSongs count] == 1) {
+            [[SDMusicPlayer sharedPlayer] playSong:[selectedSongs lastObject]
+                                        inPlaylist:self.selectedPlaylist];
+        }
+        else {
+            [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
+        }
     }
     else {
         if ([[SDMusicPlayer sharedPlayer] isPlaying])

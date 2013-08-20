@@ -277,9 +277,7 @@
 }
 
 - (IBAction) severelyDeleteSomething:(id)sender {
-    NSIndexSet* set = [self.songsTable selectedRowIndexes];
-    NSArray* songs = [[self visibleSongs] objectsAtIndexes:set];
-    [self.playlist removeSongs: songs];
+    [self.playlist removeSongs: [self selectedSongs]];
 }
 
 
@@ -431,5 +429,13 @@
     return NO;
 }
 
+
+
+
+
+- (NSArray*) selectedSongs {
+    NSIndexSet* set = [self.songsTable selectedRowIndexes];
+    return [[self visibleSongs] objectsAtIndexes:set];
+}
 
 @end

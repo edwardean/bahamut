@@ -16,4 +16,6 @@
 
 - (void) focusTitleField;
 
+- (NSArray*) selectedSongs;
+
 @end
