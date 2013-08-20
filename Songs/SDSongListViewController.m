@@ -140,6 +140,8 @@
 
 @property NSString* filterString;
 
+@property NSMutableArray* filteredSongs;
+
 @end
 
 @implementation SDSongListViewController
@@ -155,6 +157,8 @@
 - (void) loadView {
     [super loadView];
     
+    self.filteredSongs = [NSMutableArray array];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(allSongsDidChange:) name:SDAllSongsDidChangeNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistSongsDidChange:) name:SDPlaylistSongsDidChangeNotification object:self.playlist];
@@ -167,6 +171,8 @@
     for (NSTableColumn* column in [self.songsTable tableColumns]) {
         [column setHeaderCell:[[SDSongsTableHeaderCell alloc] initTextCell:[[column headerCell] stringValue]]];
     }
+    
+    [self cacheFilteredSongs];
     
     NSBox* grayBox = [[NSBox alloc] init];
     grayBox.fillColor = [NSColor colorWithDeviceWhite:0.97 alpha:1.0];
@@ -211,6 +217,7 @@
 
 
 - (void) allSongsDidChange:(NSNotification*)note {
+    [self cacheFilteredSongs];
     [self.songsTable reloadData];
 }
 
@@ -371,20 +378,23 @@
 
 
 - (NSArray*) visibleSongs {
-    NSArray* theSongs = [self.playlist songs];
+    return [self.filteredSongs sortedArrayUsingDescriptors:[self.songsTable sortDescriptors]];
+}
+
+- (void) cacheFilteredSongs {
+    [self.filteredSongs setArray: [self.playlist songs]];
     
     if (self.filterString) {
-        theSongs = [theSongs filteredArrayUsingPredicate:[NSPredicate predicateWithBlock:^BOOL(SDSong* song, NSDictionary *bindings) {
-            return ([song.title rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound)
-            || ([song.artist rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound)
-            || ([song.album rangeOfString:self.filterString options:NSCaseInsensitiveSearch].location != NSNotFound);
-        }]];
+        NSPredicate* pred = [NSPredicate predicateWithFormat:@"(title CONTAINS[cd] %@) OR (artist CONTAINS[cd] %@) OR (album CONTAINS[cd] %@)",
+                             self.filterString,
+                             self.filterString,
+                             self.filterString
+                             ];
+        
+        [self.filteredSongs filterUsingPredicate:pred];
     }
-    
-    theSongs = [theSongs sortedArrayUsingDescriptors:[self.songsTable sortDescriptors]];
-    
-    return theSongs;
 }
+
 
 
 
@@ -418,6 +428,7 @@
 
 - (void) playlistSongsDidChange:(NSNotification*)note {
     if ([note object] == self.playlist) {
+        [self cacheFilteredSongs];
         [self.songsTable reloadData];
         [self.songsTable deselectAll:nil];
     }
@@ -442,6 +453,10 @@
 - (IBAction) setPlaylistRepeats:(NSButton*)sender {
     self.playlist.repeats = ([sender state] == NSOnState);
 }
+
+
+
+
 
 
 
@@ -484,6 +499,7 @@
             searchString = nil;
         
         self.filterString = searchString;
+        [self cacheFilteredSongs];
         [self.songsTable reloadData];
     }
 }
@@ -494,6 +510,7 @@
         [self.searchField setStringValue:@""];
         
         self.filterString = nil;
+        [self cacheFilteredSongs];
         [self.songsTable reloadData];
         
         return YES;
