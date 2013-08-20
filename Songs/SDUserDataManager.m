@@ -59,14 +59,19 @@
     self.canSave = YES;
 }
 
-- (void) saveUserData {
-    if (!self.canSave)
-        return;
-    
+- (void) reallySaveData {
 //    NSLog(@"saving");
     
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self allSongs]] forKey:@"allSongs"];
     [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self playlists]] forKey:@"playlists"];
+}
+
+- (void) saveUserData {
+    if (!self.canSave)
+        return;
+    
+    [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(reallySaveData) object:nil];
+    [self performSelector:@selector(reallySaveData) withObject:nil afterDelay:1.0];
 }
 
 - (void) importSongsUnderURLs:(NSArray*)urls {
