@@ -8,6 +8,7 @@
 
 #### What's left for 1.0
 
+- Hope someone makes a really pretty icon for it :)
 - Window title should show selected playlist
 - Steal Sparkle and the auto-build stuff from Zephyros
 - Keyboard shortcuts for *everything*
