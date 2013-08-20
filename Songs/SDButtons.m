@@ -20,10 +20,10 @@
     NSBezierPath* path = [NSBezierPath bezierPath];
     
     NSColor* color;
-    if ([self isHighlighted])
-        color = [NSColor lightGrayColor];
     if (![self isEnabled])
         color = [NSColor colorWithDeviceWhite:0.85 alpha:1.0];
+    else if ([self isHighlighted])
+        color = [NSColor lightGrayColor];
     else
         color = [NSColor grayColor];
     [color set];
