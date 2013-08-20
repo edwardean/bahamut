@@ -103,6 +103,8 @@
     
     [self toggleSearchBar:NO];
     
+    [self.songsTable registerForDraggedTypes:@[SDSongDragType]];
+    
     [self.playlistTitleField setEnabled: ![self.playlist isMasterPlaylist]];
     [self updatePlaylistOptionsViewStuff];
 }
@@ -122,16 +124,6 @@
 }
 
 
-
-- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
-    NSArray* songs = [[self visibleSongs] objectsAtIndexes:rowIndexes];
-    NSArray* uuids = [songs valueForKey:@"uuid"];
-    
-    [pboard setPropertyList:@{@"uuids": uuids}
-                    forType:SDSongDragType];
-    
-    return YES;
-}
 
 
 - (NSInteger)numberOfRowsInTableView:(NSTableView *)aTableView {
@@ -158,6 +150,101 @@
     return nil;
 }
 
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Songs table, Drag / Drop
+
+
+- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+    NSArray* songs = [[self visibleSongs] objectsAtIndexes:rowIndexes];
+    NSArray* uuids = [songs valueForKey:@"uuid"];
+    NSUInteger playlistIndex = [[SDSharedData() playlists] indexOfObject:self.playlist];
+    
+    [pboard setPropertyList:@{@"uuids": uuids, @"playlist": @(playlistIndex)}
+                    forType:SDSongDragType];
+    
+    return YES;
+}
+
+- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
+    if (operation == NSTableViewDropAbove && ![self.playlist isMasterPlaylist])
+        return NSDragOperationCopy;
+    else
+        return NSDragOperationNone;
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
+    NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
+    
+    NSArray* uuids = [data objectForKey:@"uuids"];
+    NSArray* draggingSongs = [SDUserDataManager songsForUUIDs:uuids];
+    
+    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
+    SDPlaylist* fromPlaylist = nil;
+    
+    if (playlistIndex != NSNotFound)
+        fromPlaylist = [[SDSharedData() playlists] objectAtIndex:playlistIndex];
+    
+    if (fromPlaylist == self.playlist) {
+        [self.playlist moveSongs:draggingSongs
+                         toIndex:row];
+    }
+    else {
+        [self.playlist addSongs:draggingSongs
+                        atIndex:row];
+    }
+    
+    return YES;
+}
+
+- (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
+    [aTableView reloadData];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Deleting stuff
+
+- (BOOL) respondsToSelector:(SEL)aSelector {
+    if (aSelector == @selector(severelyDeleteSomething:)) {
+        if ([[self.songsTable window] firstResponder] != self.songsTable)
+            return NO;
+        
+        if ([self.playlist isMasterPlaylist])
+            return NO;
+        
+        if ([[self.songsTable selectedRowIndexes] count] < 1)
+            return NO;
+        
+        return YES;
+    }
+    
+    return [super respondsToSelector:aSelector];
+}
+
+- (IBAction) severelyDeleteSomething:(id)sender {
+    NSIndexSet* set = [self.songsTable selectedRowIndexes];
+    NSArray* songs = [[self visibleSongs] objectsAtIndexes:set];
+    [self.playlist removeSongs: songs];
+}
 
 
 

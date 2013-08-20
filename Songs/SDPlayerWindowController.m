@@ -50,8 +50,6 @@
 @property (weak) IBOutlet NSButton* playButton;
 @property (weak) IBOutlet NSTextField* currentSongInfoField;
 
-//@property (weak) IBOutlet NSSearchField* searchField;
-//
 //@property (weak) IBOutlet NSView* songsTableContainerView;
 //@property (weak) IBOutlet NSView* searchContainerView;
 //@property (weak) IBOutlet NSView* songsScrollView;
@@ -79,16 +77,9 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
     
-    
-    
-//    [self.songsTable registerForDraggedTypes:@[SDSongDragType]];
 //    [self.playlistsOutlineView registerForDraggedTypes:@[SDSongDragType]];
 //    [self.playlistsOutlineView registerForDraggedTypes:@[SDPlaylistDragType]];
-//    
-//    [self.playlistsOutlineView expandItem:nil expandChildren:YES];
-//    [self.playlistsOutlineView selectRowIndexes:[NSIndexSet indexSetWithIndex:0] byExtendingSelection:NO];
     
-//    [self updatePlaylistOptionsViewStuff];
     [self updateCurrentSongViewStuff];
     
     
@@ -208,97 +199,10 @@
 
 
 
-//#pragma mark - Deleting stuff
-//
-//- (BOOL) respondsToSelector:(SEL)aSelector {
-//    if (aSelector == @selector(severelyDeleteSomething:)) {
-//        id firstResponder = [[self window] firstResponder];
-//        
-////        if (firstResponder == self.songsTable) {
-////            if ([self showingAllSongs])
-////                return NO;
-////            
-////            if ([[self.songsTable selectedRowIndexes] count] < 1)
-////                return NO;
-////            
-////            return YES;
-////        }
-////        else if (firstResponder == self.playlistsTableView) {
-//            if (self.selectedPlaylist)
-//                return YES;
-//            
-//            return NO;
-////        }
-//    }
-//    
-//    return [super respondsToSelector:aSelector];
-//}
-//
-//- (IBAction) severelyDeleteSomething:(id)sender {
-//    id firstResponder = [[self window] firstResponder];
-//    
-////    if (firstResponder == self.songsTable) {
-////        NSIndexSet* set = [self.songsTable selectedRowIndexes];
-////        NSArray* songs = [[self visibleSongs] objectsAtIndexes:set];
-////        
-////        [self.selectedPlaylist removeSongs: songs];
-////    }
-////    else if (firstResponder == self.playlistsOutlineView) {
-//        [SDSharedData() deletePlaylist:self.selectedPlaylist];
-//        [self.playlistsTableView reloadData];
-////    }
-//}
 
 
 
 
-//#pragma mark - Songs table, Drag / Drop
-//
-//- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
-//    NSArray* songs = [[self visibleSongs] objectsAtIndexes:rowIndexes];
-//    NSArray* uuids = [songs valueForKey:@"uuid"];
-//    NSUInteger playlistIndex = [[SDSharedData() playlists] indexOfObject:self.selectedPlaylist];
-//    
-//    [pboard setPropertyList:@{@"uuids": uuids, @"playlist": @(playlistIndex)}
-//                    forType:SDSongDragType];
-//    
-//    return YES;
-//}
-//
-//- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
-//    if (operation == NSTableViewDropAbove && self.selectedPlaylist != nil)
-//        return NSDragOperationCopy;
-//    else
-//        return NSDragOperationNone;
-//}
-//
-//- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
-//    NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
-//    
-//    NSArray* uuids = [data objectForKey:@"uuids"];
-//    NSArray* draggingSongs = [SDUserDataManager songsForUUIDs:uuids];
-//    
-//    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
-//    SDPlaylist* fromPlaylist = nil;
-//    
-//    if (playlistIndex != NSNotFound)
-//        fromPlaylist = [[SDSharedData() playlists] objectAtIndex:playlistIndex];
-//    
-//    if (fromPlaylist == self.selectedPlaylist) {
-//        [self.selectedPlaylist moveSongs:draggingSongs
-//                                 toIndex:row];
-//    }
-//    else {
-//        [self.selectedPlaylist addSongs:draggingSongs
-//                                atIndex:row];
-//    }
-//    
-//    return YES;
-//}
-//
-//- (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
-//    [aTableView reloadData];
-//}
 
 //#pragma mark - Playlists, Drag / Drop
 //
@@ -439,8 +343,6 @@
 //        NSMutableArray* playlists = [SDSharedData() playlists];
 //        self.selectedPlaylist = [playlists objectAtIndex:row];
 ////    }
-//    
-//    [self updatePlaylistOptionsViewStuff];
 //    
 //    [self.songsTable deselectAll:nil];
 //    [self.songsTable reloadData];
