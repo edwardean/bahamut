@@ -44,6 +44,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 @property (weak) IBOutlet NSTableView* playlistsTableView;
 
+@property (copy) void(^doneRenamingPlaylist)(NSString* newName);
+
 @end
 
 @implementation SDSourceListViewController
@@ -133,7 +135,22 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 - (BOOL) respondsToSelector:(SEL)aSelector {
-    if (aSelector == @selector(severelyDeleteSomething:)) {
+    if (aSelector == @selector(startRenamingPlaylist:)) {
+        if ([NSApp currentEvent] == nil)
+            return YES;
+        
+        NSInteger row = [self.playlistsTableView clickedRow];
+        
+        if (row == -1)
+            return NO;
+        
+        SDPlaylist* playlist = [[SDSharedData() playlists] objectAtIndex:row];
+        if ([playlist isMasterPlaylist])
+            return NO;
+        
+        return YES;
+    }
+    else if (aSelector == @selector(severelyDeleteSomething:)) {
         if ([[self.playlistsTableView window] firstResponder] != self.playlistsTableView)
             return NO;
         
@@ -145,8 +162,9 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
         
         return YES;
     }
-    
-    return [super respondsToSelector:aSelector];
+    else {
+        return [super respondsToSelector:aSelector];
+    }
 }
 
 - (IBAction) severelyDeleteSomething:(id)sender {
@@ -238,6 +256,35 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 
+
+
+- (IBAction) startRenamingPlaylist:(id)sender {
+    NSInteger row = [self.playlistsTableView clickedRow];
+    [self editPlaylistTitle:row];
+}
+
+- (IBAction) renamePlaylist:(id)sender {
+    if (self.doneRenamingPlaylist)
+        self.doneRenamingPlaylist([sender stringValue]);
+    
+    self.doneRenamingPlaylist = nil;
+}
+
+- (void) editPlaylistTitle:(NSInteger)idx {
+    self.doneRenamingPlaylist = ^(NSString* newName){
+        SDPlaylist* playlist = [[SDSharedData() playlists] objectAtIndex:idx];
+        playlist.title = newName;
+    };
+    
+    [self.playlistsTableView editColumn:0
+                                    row:idx
+                              withEvent:nil
+                                 select:YES];
+}
+
+- (void) editPlaylistTitle {
+    [self editPlaylistTitle:[[SDSharedData() playlists] count] - 1];
+}
 
 
 

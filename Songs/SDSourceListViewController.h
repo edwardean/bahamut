@@ -22,5 +22,6 @@
 @property (weak) id<SDPlaylistsViewDelegate> playlistsViewDelegate;
 
 - (void) selectPlaylist:(SDPlaylist*)playlist;
+- (void) editPlaylistTitle;
 
 @end

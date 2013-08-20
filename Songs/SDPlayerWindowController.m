@@ -257,8 +257,7 @@
     [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
     
     [self.playlistsViewController selectPlaylist:newPlaylist];
-    
-    [self.currentSongListViewController focusTitleField];
+    [self.playlistsViewController editPlaylistTitle];
 }
 
 

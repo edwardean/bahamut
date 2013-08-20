@@ -15,6 +15,8 @@
 }
 
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    [NSGraphicsContext saveGraphicsState];
+    
     NSBezierPath* path = [NSBezierPath bezierPath];
     
     NSColor* color;
@@ -24,11 +26,13 @@
         color = [NSColor colorWithDeviceWhite:0.85 alpha:1.0];
     else
         color = [NSColor grayColor];
+    [color set];
     
     [self sd_drawPath:path inFrame:cellFrame];
     
-    [color setStroke];
     [path stroke];
+    
+    [NSGraphicsContext restoreGraphicsState];
 }
 
 @end
@@ -79,7 +83,9 @@
     [path setLineJoinStyle:NSMiterLineJoinStyle];
     
     if ([[[self title] lowercaseString] isEqualToString: @"pause"]) {
-        cellFrame = NSInsetRect(cellFrame, 5.0, 0.0);
+        cellFrame = NSInsetRect(cellFrame, 5.0, 1.0);
+        
+        [path setLineWidth:4.0];
         
         [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
         [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];

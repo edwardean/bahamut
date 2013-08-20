@@ -90,7 +90,6 @@
 @property (weak) IBOutlet NSSearchField* searchField;
 @property (weak) IBOutlet NSScrollView* songsScrollView;
 
-@property (weak) IBOutlet NSTextField* playlistTitleField;
 @property (weak) IBOutlet NSButton* repeatButton;
 @property (weak) IBOutlet NSButton* shuffleButton;
 
@@ -141,7 +140,6 @@
     
     [self.songsTable registerForDraggedTypes:@[SDSongDragType]];
     
-    [self.playlistTitleField setEnabled: ![self.playlist isMasterPlaylist]];
     [self updatePlaylistOptionsViewStuff];
 }
 
@@ -349,7 +347,6 @@
 - (void) updatePlaylistOptionsViewStuff {
     [self.repeatButton setState: self.playlist.repeats ? NSOnState : NSOffState];
     [self.shuffleButton setState: self.playlist.shuffles ? NSOnState : NSOffState];
-    [self.playlistTitleField setStringValue: self.playlist.title];
 }
 
 
@@ -385,10 +382,6 @@
 #pragma mark - Editing the current Playlist
 
 
-- (IBAction) renamePlaylist:(NSTextField*)sender {
-    self.playlist.title = [sender stringValue];
-}
-
 - (IBAction) setPlaylistShuffles:(NSButton*)sender {
     self.playlist.shuffles = ([sender state] == NSOnState);
 }
@@ -401,11 +394,6 @@
 
 
 
-
-
-- (void) focusTitleField {
-    [[self.playlistTitleField window] makeFirstResponder: self.playlistTitleField];
-}
 
 
 

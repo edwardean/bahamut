@@ -14,8 +14,6 @@
 
 @property (weak) SDPlaylist* playlist;
 
-- (void) focusTitleField;
-
 - (NSArray*) selectedSongs;
 
 @end
