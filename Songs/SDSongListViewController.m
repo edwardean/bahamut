@@ -123,6 +123,12 @@
         [column setHeaderCell:[[SDSongsTableHeaderCell alloc] initTextCell:[[column headerCell] stringValue]]];
     }
     
+    NSBox* grayBox = [[NSBox alloc] init];
+    grayBox.fillColor = [NSColor colorWithDeviceWhite:0.97 alpha:1.0];
+    grayBox.borderColor = [NSColor clearColor];
+    grayBox.boxType = NSBoxCustom;
+    self.songsTable.cornerView = grayBox;
+    
     NSRect headerViewFrame = self.songsTable.headerView.frame;
     headerViewFrame.size.height = 27;
     self.songsTable.headerView.frame = headerViewFrame;
