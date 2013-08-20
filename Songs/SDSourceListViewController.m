@@ -13,8 +13,7 @@
 
 
 
-//static NSString* SDSongDragType = @"SDSongDragType";
-
+static NSString* SDSongDragType = @"SDSongDragType";
 static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
@@ -34,12 +33,6 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
         [[NSBezierPath bezierPathWithRect:self.bounds] fill];
     }
 }
-
-//- (void) resetCursorRects {
-//    NSCursor* c = [NSCursor pointingHandCursor];
-//    [self addCursorRect:[self bounds] cursor:c];
-//    [c setOnMouseEntered:YES];
-//}
 
 @end
 
@@ -69,8 +62,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     [self.playlistsTableView setTarget:self];
     [self.playlistsTableView setDoubleAction:@selector(doubleClickedThing:)];
     
-//    [self.playlistsOutlineView registerForDraggedTypes:@[SDSongDragType]];
     [self.playlistsTableView registerForDraggedTypes:@[SDPlaylistDragType]];
+    [self.playlistsTableView registerForDraggedTypes:@[SDSongDragType]];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
@@ -211,7 +204,11 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
             return NSDragOperationNone;
     }
     else {
-        return NSDragOperationNone; // TODO: drop songs
+        if (operation == NSTableViewDropOn && ![[[SDSharedData() playlists] objectAtIndex: row] isMasterPlaylist]) {
+            return NSDragOperationCopy;
+        }
+        else
+            return NSDragOperationNone;
     }
 }
 
@@ -226,11 +223,13 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
         return YES;
     }
     else {
-//        NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
-//        NSArray* uuids = [data objectForKey:@"uuids"];
-//        NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
-//        SDPlaylist* playlist = item;
-//        [playlist addSongs:songs];
+        NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
+        NSArray* uuids = [data objectForKey:@"uuids"];
+        NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
+        
+        SDPlaylist* toPlaylist = [[SDSharedData() playlists] objectAtIndex: row];
+        [toPlaylist addSongs:songs];
+        
         return YES;
     }
 }
