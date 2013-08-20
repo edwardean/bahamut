@@ -8,6 +8,7 @@
 
 #### What's left for 1.0
 
+- Window title should show selected playlist
 - Steal Sparkle and the auto-build stuff from Zephyros
 - Keyboard shortcuts for *everything*
 - Optional Menu bar interface (TunesBar port)
