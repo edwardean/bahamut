@@ -8,6 +8,7 @@
 
 #### What's left for 1.0
 
+- Steal Sparkle and the auto-build stuff from Zephyros
 - Keyboard shortcuts for *everything*
 - Optional Menu bar interface (TunesBar port)
 - Fix all the playlist- and song-selection bugs
