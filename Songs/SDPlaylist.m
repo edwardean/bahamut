@@ -96,18 +96,16 @@
 }
 
 - (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex {
-    SDGroupUndoOps(^{
-        NSIndexSet* indices = [self.songs indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-            return [songs containsObject:obj];
-        }];
-        
-        NSUInteger knockDownBy = [indices countOfIndexesInRange:NSMakeRange(0, atIndex)];
-        NSInteger moveToIndex = atIndex - knockDownBy;
-        
-        [self removeSongs:songs];
-        [self addSongs:songs
-               atIndex:moveToIndex];
-    });
+    NSIndexSet* indices = [self.songs indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return [songs containsObject:obj];
+    }];
+    
+    NSUInteger knockDownBy = [indices countOfIndexesInRange:NSMakeRange(0, atIndex)];
+    NSInteger moveToIndex = atIndex - knockDownBy;
+    
+    [self removeSongs:songs];
+    [self addSongs:songs
+           atIndex:moveToIndex];
 }
 
 

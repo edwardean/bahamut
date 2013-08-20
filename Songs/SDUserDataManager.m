@@ -12,6 +12,9 @@
 
 #import "SDMasterPlaylist.h"
 
+#import "iTunes.h"
+
+
 @interface SDUserDataManager ()
 
 @property BOOL canSave;
@@ -138,6 +141,12 @@
     });
 }
 
+- (SDSong*) songForURL:(NSURL*)songURL {
+    NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
+    allSongs = [allSongs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"url = %@", songURL]];
+    return [allSongs lastObject];
+}
+
 + (NSArray*) songsForUUIDs:(NSArray*)songUUIDs {
     NSMutableArray* foundSongs = [NSMutableArray array];
     
@@ -235,6 +244,61 @@
 
 
 
+- (void) importFromiTunes {
+    iTunesApplication* iTunesApp = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+    iTunesSource* library;
+    
+    for (iTunesSource* source in [iTunesApp.sources get]) {
+        if (source.kind == iTunesESrcLibrary) {
+            library = source;
+            break;
+        }
+    }
+    
+    NSArray* playlists = [library.playlists get];
+    
+    // we can assume iTunes doesn't have duplicates
+    NSArray* currentSongFileURLs = [[SDSharedData() allSongs] valueForKey:@"url"];
+    
+    for (iTunesPlaylist* playlist in playlists) {
+        if ([[playlist className] isEqualToString: @"ITunesUserPlaylist"]) {
+            SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
+            newPlaylist.title = playlist.name;
+            newPlaylist.repeats = (playlist.songRepeat == iTunesERptAll);
+            newPlaylist.shuffles = playlist.shuffle;
+            
+            NSMutableArray* songsToAdd = [NSMutableArray array];
+            
+            for (iTunesFileTrack* track in [playlist.tracks get]) {
+                if ([NSStringFromClass([track class]) isEqualToString: @"ITunesFileTrack"]) {
+                    NSURL* trackFileURL = [[track location] fileReferenceURL];
+                    BOOL real = [[NSFileManager defaultManager] fileExistsAtPath:[trackFileURL path]];
+                    
+                    if (real) {
+                        SDSong* song;
+                        
+                        if (![currentSongFileURLs containsObject: trackFileURL]) {
+                            song = [[SDSong alloc] init];
+                            song.url = trackFileURL;
+                            
+                            [self.allSongs addObject:song];
+                        }
+                        else {
+                            song = [self songForURL:trackFileURL];
+                        }
+                        
+                        [songsToAdd addObject: song];
+                    }
+                }
+            }
+            
+            [newPlaylist addSongs: songsToAdd];
+            [self insertPlaylist:newPlaylist
+                         atIndex:[[self playlists] count]];
+        }
+    }
+}
+
 
 
 @end
@@ -254,10 +318,4 @@ void SDPostNote(NSString* name, id obj) {
 
 id SDAddUndo(id target) {
     return [[SDUserDataManager sharedMusicManager].undoManager prepareWithInvocationTarget:target];
-}
-
-void SDGroupUndoOps(dispatch_block_t blk) {
-    [[SDUserDataManager sharedMusicManager].undoManager beginUndoGrouping];
-    blk();
-    [[SDUserDataManager sharedMusicManager].undoManager endUndoGrouping];
 }

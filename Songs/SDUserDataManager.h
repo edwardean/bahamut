@@ -32,6 +32,7 @@
 
 + (NSArray*) songsForUUIDs:(NSArray*)songUUIDs;
 
+- (void) importFromiTunes;
 
 
 // manipulative
@@ -51,4 +52,3 @@ SDUserDataManager* SDSharedData();
 void SDSaveData();
 void SDPostNote(NSString* name, id obj);
 id SDAddUndo(id target);
-void SDGroupUndoOps(dispatch_block_t blk);

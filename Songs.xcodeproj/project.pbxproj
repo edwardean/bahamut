@@ -28,6 +28,7 @@
 		94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A811921701E0A900B400C8 /* SDTrackPositionView.m */; };
 		94AD9DE217BD556700D678E1 /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AD9DE117BD556700D678E1 /* SDPlaylist.m */; };
 		94B8589D1701D5410012165F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B8589C1701D5410012165F /* CoreMedia.framework */; };
+		94C2E7D617C3AE1400AC90A3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C2E7D517C3AE1400AC90A3 /* ScriptingBridge.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -69,6 +70,8 @@
 		94AD9DE017BD556700D678E1 /* SDPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylist.h; sourceTree = "<group>"; };
 		94AD9DE117BD556700D678E1 /* SDPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylist.m; sourceTree = "<group>"; };
 		94B8589C1701D5410012165F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		94C2E7D417C3AD8F00AC90A3 /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
+		94C2E7D517C3AE1400AC90A3 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -76,6 +79,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				94C2E7D617C3AE1400AC90A3 /* ScriptingBridge.framework in Frameworks */,
 				94B8589D1701D5410012165F /* CoreMedia.framework in Frameworks */,
 				9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */,
 				9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */,
@@ -146,6 +150,7 @@
 		9460F2D916FF781100DB85C4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				94C2E7D517C3AE1400AC90A3 /* ScriptingBridge.framework */,
 				94B8589C1701D5410012165F /* CoreMedia.framework */,
 				9460F30316FFA23100DB85C4 /* AVFoundation.framework */,
 				9460F2DA16FF781100DB85C4 /* Cocoa.framework */,
@@ -169,6 +174,7 @@
 			children = (
 				9460F2E216FF781100DB85C4 /* Songs-Info.plist */,
 				9460F2EF16FF781100DB85C4 /* MainMenu.xib */,
+				94C2E7D417C3AD8F00AC90A3 /* iTunes.h */,
 				9460F2EC16FF781100DB85C4 /* SDAppDelegate.h */,
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
 				94AD9DE317BD56C100D678E1 /* Persistence */,

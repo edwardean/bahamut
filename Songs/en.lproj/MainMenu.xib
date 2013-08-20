@@ -235,7 +235,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="65008844">
+								<object class="NSMenuItem" id="1006489750">
 									<reference key="NSMenu" ref="714887771"/>
 									<bool key="NSIsDisabled">YES</bool>
 									<bool key="NSIsSeparator">YES</bool>
@@ -254,11 +254,29 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="309520939">
+								<object class="NSMenuItem" id="65008844">
 									<reference key="NSMenu" ref="714887771"/>
-									<string key="NSTitle">Import Songs...</string>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="336016729">
+									<reference key="NSMenu" ref="714887771"/>
+									<string key="NSTitle">Import Song Files...</string>
 									<string key="NSKeyEquiv">o</string>
 									<int key="NSKeyEquivModMask">1048576</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="309520939">
+									<reference key="NSMenu" ref="714887771"/>
+									<string key="NSTitle">Import Playlists from iTunes</string>
+									<string key="NSKeyEquiv"/>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -1189,19 +1207,27 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">importSongs:</string>
-						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="309520939"/>
-					</object>
-					<int key="connectionID">541</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">newPlayerWindow:</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="998247710"/>
 					</object>
 					<int key="connectionID">547</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">importSongs:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="336016729"/>
+					</object>
+					<int key="connectionID">583</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">importFromiTunes:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="309520939"/>
+					</object>
+					<int key="connectionID">584</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -1752,15 +1778,17 @@
 						<int key="objectID">537</int>
 						<reference key="object" ref="714887771"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="309520939"/>
 							<reference ref="998247710"/>
 							<reference ref="687242737"/>
-							<reference ref="65008844"/>
 							<reference ref="272644688"/>
 							<reference ref="420241380"/>
 							<reference ref="746696326"/>
 							<reference ref="93684752"/>
 							<reference ref="66302759"/>
+							<reference ref="65008844"/>
+							<reference ref="1006489750"/>
+							<reference ref="309520939"/>
+							<reference ref="336016729"/>
 						</array>
 						<reference key="parent" ref="664275912"/>
 					</object>
@@ -1807,6 +1835,16 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">580</int>
 						<reference key="object" ref="66302759"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">581</int>
+						<reference key="object" ref="1006489750"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">582</int>
+						<reference key="object" ref="336016729"/>
 						<reference key="parent" ref="714887771"/>
 					</object>
 				</array>
@@ -1903,13 +1941,15 @@
 				<string key="57.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="580.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="581.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="582.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">580</int>
+			<int key="maxID">584</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

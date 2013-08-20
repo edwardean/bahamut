@@ -34,6 +34,10 @@
     [self.playerWindowControllers removeObject:controller];
 }
 
+- (IBAction) importFromiTunes:(id)sender {
+    [SDSharedData() importFromiTunes];
+}
+
 - (IBAction) newPlayerWindow:(id)sender {
     SDPlayerWindowController* player = [[SDPlayerWindowController alloc] init];
     player.killedDelegate = self;
