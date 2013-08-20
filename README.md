@@ -15,6 +15,7 @@
 - Steal Sparkle and the auto-build stuff from Zephyros
 - Keyboard shortcuts for *everything*
 - Optional Menu bar interface (TunesBar port)
+- Add licenses for all open source components to project (as "Licenses" folder reference is easiest)
 - Fix all the playlist- and song-selection bugs
     - When you filter a playlist, the selection doesn't follow the songs
     - Double-clicking a songs deselects it for some reason
