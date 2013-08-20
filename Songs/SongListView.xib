@@ -435,7 +435,7 @@
 							<object class="NSButton" id="534917706">
 								<reference key="NSNextResponder" ref="29089419"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{390, 8}, {72, 18}}</string>
+								<string key="NSFrame">{{390, 9}, {72, 18}}</string>
 								<reference key="NSSuperview" ref="29089419"/>
 								<reference key="NSWindow"/>
 								<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -466,7 +466,7 @@
 							<object class="NSButton" id="557068568">
 								<reference key="NSNextResponder" ref="29089419"/>
 								<int key="NSvFlags">265</int>
-								<string key="NSFrame">{{314, 8}, {72, 18}}</string>
+								<string key="NSFrame">{{314, 9}, {72, 18}}</string>
 								<reference key="NSSuperview" ref="29089419"/>
 								<reference key="NSWindow"/>
 								<reference key="NSNextKeyView" ref="534917706"/>
@@ -844,7 +844,6 @@
 					<string key="className">SDSongListViewController</string>
 					<string key="superclassName">NSViewController</string>
 					<dictionary class="NSMutableDictionary" key="outlets">
-						<string key="playlistTitleField">NSTextField</string>
 						<string key="repeatButton">NSButton</string>
 						<string key="searchContainerView">NSView</string>
 						<string key="searchField">NSSearchField</string>
@@ -854,10 +853,6 @@
 						<string key="songsTable">NSTableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<object class="IBToOneOutletInfo" key="playlistTitleField">
-							<string key="name">playlistTitleField</string>
-							<string key="candidateClassName">NSTextField</string>
-						</object>
 						<object class="IBToOneOutletInfo" key="repeatButton">
 							<string key="name">repeatButton</string>
 							<string key="candidateClassName">NSButton</string>

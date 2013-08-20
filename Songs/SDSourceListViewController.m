@@ -44,8 +44,6 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 @property (weak) IBOutlet NSTableView* playlistsTableView;
 
-@property (copy) void(^doneRenamingPlaylist)(NSString* newName);
-
 @end
 
 @implementation SDSourceListViewController
@@ -258,32 +256,15 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 
-- (IBAction) startRenamingPlaylist:(id)sender {
-    NSInteger row = [self.playlistsTableView clickedRow];
-    [self editPlaylistTitle:row];
-}
-
 - (IBAction) renamePlaylist:(id)sender {
-    if (self.doneRenamingPlaylist)
-        self.doneRenamingPlaylist([sender stringValue]);
-    
-    self.doneRenamingPlaylist = nil;
-}
-
-- (void) editPlaylistTitle:(NSInteger)idx {
-    self.doneRenamingPlaylist = ^(NSString* newName){
-        SDPlaylist* playlist = [[SDSharedData() playlists] objectAtIndex:idx];
-        playlist.title = newName;
-    };
-    
-    [self.playlistsTableView editColumn:0
-                                    row:idx
-                              withEvent:nil
-                                 select:YES];
+    [self selectedPlaylist].title = [sender stringValue];
 }
 
 - (void) editPlaylistTitle {
-    [self editPlaylistTitle:[[SDSharedData() playlists] count] - 1];
+    [self.playlistsTableView editColumn:0
+                                    row:[[SDSharedData() playlists] count] - 1
+                              withEvent:nil
+                                 select:YES];
 }
 
 

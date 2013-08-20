@@ -17,8 +17,6 @@
 			<string>NSCustomView</string>
 			<string>NSImageCell</string>
 			<string>NSImageView</string>
-			<string>NSMenu</string>
-			<string>NSMenuItem</string>
 			<string>NSScrollView</string>
 			<string>NSScroller</string>
 			<string>NSTableCellView</string>
@@ -51,10 +49,9 @@
 					<object class="NSButton" id="826851589">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">298</int>
-						<string key="NSFrame">{{13, 2}, {233, 24}}</string>
+						<string key="NSFrame">{{13, 5}, {233, 24}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
-						<reference key="NSNextKeyView"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
 						<bool key="NSEnabled">YES</bool>
 						<object class="NSButtonCell" key="NSCell" id="367791691">
@@ -250,25 +247,6 @@
 				<reference key="NSNextKeyView" ref="641514136"/>
 				<string key="NSClassName">NSView</string>
 			</object>
-			<object class="NSMenu" id="227391373">
-				<string key="NSTitle"/>
-				<array class="NSMutableArray" key="NSMenuItems">
-					<object class="NSMenuItem" id="377856113">
-						<reference key="NSMenu" ref="227391373"/>
-						<string key="NSTitle">Rename Playlist</string>
-						<string key="NSKeyEquiv"/>
-						<int key="NSMnemonicLoc">2147483647</int>
-						<object class="NSCustomResource" key="NSOnImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">NSMenuCheckmark</string>
-						</object>
-						<object class="NSCustomResource" key="NSMixedImage">
-							<string key="NSClassName">NSImage</string>
-							<string key="NSResourceName">NSMenuMixedState</string>
-						</object>
-					</object>
-				</array>
-			</object>
 		</array>
 		<object class="IBObjectContainer" key="IBDocument.Objects">
 			<array class="NSMutableArray" key="connectionRecords">
@@ -297,12 +275,12 @@
 							<int key="NSvFlags">298</int>
 							<string key="NSFrame">{{6, 4.5}, {238, 17}}</string>
 							<reference key="NSSuperview" ref="1071650740"/>
-							<reference key="NSNextKeyView" ref="487192904"/>
+							<reference key="NSNextKeyView" ref="894025600"/>
 							<string key="NSAntiCompressionPriority">{250, 750}</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="4830744">
 								<int key="NSCellFlags">337641537</int>
-								<int key="NSCellFlags2">272631808</int>
+								<int key="NSCellFlags2">268437504</int>
 								<string key="NSContents">Table View Cell</string>
 								<reference key="NSSupport" ref="1009876376"/>
 								<reference key="NSControlView" ref="496137240"/>
@@ -318,14 +296,6 @@
 						</object>
 					</object>
 					<int key="connectionID">47</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">startRenamingPlaylist:</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="377856113"/>
-					</object>
-					<int key="connectionID">48</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -353,21 +323,13 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">menu</string>
-						<reference key="source" ref="831598455"/>
-						<reference key="destination" ref="227391373"/>
-					</object>
-					<int key="connectionID">43</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">textField</string>
 						<object class="NSTableCellView" key="source" id="1071650740">
 							<nil key="NSNextResponder"/>
 							<int key="NSvFlags">274</int>
 							<array class="NSMutableArray" key="NSSubviews">
 								<reference ref="496137240"/>
-								<object class="NSImageView" id="487192904">
+								<object class="NSImageView" id="894025600">
 									<reference key="NSNextResponder" ref="1071650740"/>
 									<int key="NSvFlags">297</int>
 									<set class="NSMutableSet" key="NSDragTypes">
@@ -383,7 +345,7 @@
 									<reference key="NSNextKeyView" ref="924019340"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
 									<bool key="NSEnabled">YES</bool>
-									<object class="NSImageCell" key="NSCell" id="348047918">
+									<object class="NSImageCell" key="NSCell" id="277223379">
 										<int key="NSCellFlags">134217728</int>
 										<int key="NSCellFlags2">33554432</int>
 										<object class="NSCustomResource" key="NSContents">
@@ -411,7 +373,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">imageView</string>
 						<reference key="source" ref="1071650740"/>
-						<reference key="destination" ref="487192904"/>
+						<reference key="destination" ref="894025600"/>
 					</object>
 					<int key="connectionID">38</int>
 				</object>
@@ -493,7 +455,7 @@
 						<reference key="object" ref="1071650740"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="496137240"/>
-							<reference ref="487192904"/>
+							<reference ref="894025600"/>
 						</array>
 						<reference key="parent" ref="676376333"/>
 					</object>
@@ -530,29 +492,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">36</int>
-						<reference key="object" ref="487192904"/>
+						<reference key="object" ref="894025600"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="348047918"/>
+							<reference ref="277223379"/>
 						</array>
 						<reference key="parent" ref="1071650740"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
-						<reference key="object" ref="348047918"/>
-						<reference key="parent" ref="487192904"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">39</int>
-						<reference key="object" ref="227391373"/>
-						<array class="NSMutableArray" key="children">
-							<reference ref="377856113"/>
-						</array>
-						<reference key="parent" ref="0"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">40</int>
-						<reference key="object" ref="377856113"/>
-						<reference key="parent" ref="227391373"/>
+						<reference key="object" ref="277223379"/>
+						<reference key="parent" ref="894025600"/>
 					</object>
 				</array>
 			</object>
@@ -569,9 +518,7 @@
 				<string key="30.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="36.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="37.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="39.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="4.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="40.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="5.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="6.ibExternalAutomaticallyCalculatesRowSizeFromViewHeight"/>
@@ -594,6 +541,25 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SDSourceListViewController</string>
 					<string key="superclassName">NSViewController</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="renamePlaylist:">id</string>
+						<string key="severelyDeleteSomething:">id</string>
+						<string key="startRenamingPlaylist:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="renamePlaylist:">
+							<string key="name">renamePlaylist:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="severelyDeleteSomething:">
+							<string key="name">severelyDeleteSomething:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="startRenamingPlaylist:">
+							<string key="name">startRenamingPlaylist:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">playlistsTableView</string>
 						<string key="NS.object.0">NSTableView</string>
@@ -622,8 +588,6 @@
 		<int key="IBDocument.defaultPropertyAccessControl">3</int>
 		<dictionary class="NSMutableDictionary" key="IBDocument.LastKnownImageSizes">
 			<string key="NSAddTemplate">{8, 8}</string>
-			<string key="NSMenuCheckmark">{11, 11}</string>
-			<string key="NSMenuMixedState">{10, 3}</string>
 			<string key="NSRightFacingTriangleTemplate">{9, 9}</string>
 		</dictionary>
 	</data>
