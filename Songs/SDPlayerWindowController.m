@@ -220,7 +220,7 @@ NSString* timeForSeconds(CGFloat seconds) {
     SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
     
     if (currentSong) {
-        NSString* trackInfo = [NSString stringWithFormat:@"%@ - %@ - %@", currentSong.title, currentSong.artist, currentSong.album];
+        NSString* trackInfo = [NSString stringWithFormat:@"%@   -   %@   -   %@", currentSong.title, currentSong.artist, currentSong.album];
         [self.currentSongInfoField setStringValue:trackInfo];
         self.songPositionSlider.maxValue = [[SDMusicPlayer sharedPlayer] currentSong].duration;
     }
