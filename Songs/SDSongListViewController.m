@@ -80,13 +80,13 @@
         [column setHeaderCell:[[SDSongsTableHeaderCell alloc] initTextCell:[[column headerCell] stringValue]]];
     }
     
-    NSRect frame = self.songsTable.headerView.frame;
-    frame.size.height = 27;
-    self.songsTable.headerView.frame = frame;
+    NSRect headerViewFrame = self.songsTable.headerView.frame;
+    headerViewFrame.size.height = 27;
+    self.songsTable.headerView.frame = headerViewFrame;
     
-    frame = self.songsTable.cornerView.frame;
-    frame.size.height = 27;
-    self.songsTable.cornerView.frame = frame;
+    NSRect cornerViewFrame = self.songsTable.cornerView.frame;
+    cornerViewFrame.size.height = 27;
+    self.songsTable.cornerView.frame = cornerViewFrame;
     
     [self.songsTable setSortDescriptors:@[]];
     

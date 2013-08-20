@@ -102,22 +102,40 @@
 }
 
 - (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
+    [self.playlistsViewDelegate selectPlaylist: [self selectedPlaylist]];
+}
+
+
+
+- (SDPlaylist*) selectedPlaylist {
     NSInteger row = [self.playlistsTableView selectedRow];
-    [self.playlistsViewDelegate selectPlaylist: [[SDSharedData() playlists] objectAtIndex:row]];
+    
+    if (row == -1)
+        return nil;
+    else
+        return [[SDSharedData() playlists] objectAtIndex:row];
 }
 
 
 - (BOOL) respondsToSelector:(SEL)aSelector {
     if (aSelector == @selector(severelyDeleteSomething:)) {
-        return ([self.playlistsTableView selectedRow] != -1);
+        if ([[self.playlistsTableView window] firstResponder] != self.playlistsTableView)
+            return NO;
+        
+        if ([self selectedPlaylist] == nil)
+            return NO;
+        
+        if ([[self selectedPlaylist] isMasterPlaylist])
+            return NO;
+        
+        return YES;
     }
     
     return [super respondsToSelector:aSelector];
 }
 
 - (IBAction) severelyDeleteSomething:(id)sender {
-    NSInteger row = [self.playlistsTableView selectedRow];
-    [SDSharedData() deletePlaylist: [[SDSharedData() playlists] objectAtIndex:row]];
+    [SDSharedData() deletePlaylist: [self selectedPlaylist]];
     [self.playlistsTableView reloadData];
 }
 
