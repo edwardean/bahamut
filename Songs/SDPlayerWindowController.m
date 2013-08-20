@@ -27,6 +27,7 @@
 @property NSMutableArray* songListViewControllers;
 @property (weak) SDSongListViewController* currentSongListViewController;
 
+@property (weak) IBOutlet NSView* nowPlayingControlsView;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 @property (weak) IBOutlet NSButton* playButton;
 @property (weak) IBOutlet NSTextField* currentSongInfoField;
@@ -152,7 +153,7 @@
 
 
 - (void) playerStatusDidChange:(NSNotification*)note {
-    [self.playButton setTitle: [[SDMusicPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
+    [self updatePlayerViews];
 }
 
 - (void) currentSongDidChange:(NSNotification*)note {
@@ -192,6 +193,10 @@
 
 
 - (void) updatePlayerViews {
+    [self.nowPlayingControlsView setHidden: [[SDMusicPlayer sharedPlayer] stopped]];
+    
+    [self.playButton setTitle: [[SDMusicPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
+    
     SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
     
     if (currentSong) {
@@ -260,6 +265,10 @@
 
 #pragma mark - Playing music
 
+
+- (IBAction) stopSong:(id)sender {
+    [[SDMusicPlayer sharedPlayer] stop];
+}
 
 - (IBAction) nextSong:(id)sender {
     [[SDMusicPlayer sharedPlayer] nextSong];

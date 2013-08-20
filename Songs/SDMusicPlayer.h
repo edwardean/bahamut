@@ -28,6 +28,8 @@
 - (void) resume;
 - (BOOL) isPlaying;
 
+- (void) stop;
+
 - (void) nextSong;
 - (void) previousSong;
 
