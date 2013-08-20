@@ -30,6 +30,8 @@
 @property (weak) IBOutlet NSView* nowPlayingControlsView;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 @property (weak) IBOutlet NSButton* playButton;
+@property (weak) IBOutlet NSButton* prevButton;
+@property (weak) IBOutlet NSButton* nextButton;
 @property (weak) IBOutlet NSTextField* currentSongInfoField;
 
 @end
@@ -65,7 +67,7 @@
     }
     
     
-    [[self window] setBackgroundColor:[NSColor whiteColor]];
+    [[self window] setBackgroundColor:[NSColor colorWithDeviceWhite:0.92 alpha:1.0]];
     
     self.playlistsViewController = [[SDSourceListViewController alloc] init];
     self.playlistsViewController.playlistsViewDelegate = self;
@@ -194,6 +196,9 @@
 
 - (void) updatePlayerViews {
     [self.nowPlayingControlsView setHidden: [[SDMusicPlayer sharedPlayer] stopped]];
+    
+    [self.prevButton setEnabled: ![[SDMusicPlayer sharedPlayer] stopped]];
+    [self.nextButton setEnabled: ![[SDMusicPlayer sharedPlayer] stopped]];
     
     [self.playButton setTitle: [[SDMusicPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
     

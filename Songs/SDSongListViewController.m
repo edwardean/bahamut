@@ -33,7 +33,7 @@
 - (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     NSBezierPath* path = [NSBezierPath bezierPathWithRect:cellFrame];
     
-    [[NSColor colorWithDeviceWhite:0.96 alpha:1.0] setFill];
+    [[NSColor whiteColor] setFill];
     [path fill];
     
     if ([[controlView window] firstResponder] == [[controlView window] fieldEditor:NO forObject:controlView]) {

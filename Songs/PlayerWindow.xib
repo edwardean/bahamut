@@ -174,15 +174,15 @@
 											</object>
 											<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 										</object>
-										<object class="NSCustomView" id="650732304">
+										<object class="NSCustomView" id="958406578">
 											<reference key="NSNextResponder" ref="934331757"/>
 											<int key="NSvFlags">266</int>
 											<array class="NSMutableArray" key="NSSubviews">
 												<object class="NSTextField" id="586836583">
-													<reference key="NSNextResponder" ref="650732304"/>
+													<reference key="NSNextResponder" ref="958406578"/>
 													<int key="NSvFlags">266</int>
 													<string key="NSFrame">{{17, 43}, {518, 17}}</string>
-													<reference key="NSSuperview" ref="650732304"/>
+													<reference key="NSSuperview" ref="958406578"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="1000879875"/>
 													<string key="NSReuseIdentifierKey">_NS:1535</string>
@@ -216,10 +216,10 @@
 													<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 												</object>
 												<object class="NSCustomView" id="1000879875">
-													<reference key="NSNextResponder" ref="650732304"/>
+													<reference key="NSNextResponder" ref="958406578"/>
 													<int key="NSvFlags">266</int>
 													<string key="NSFrame">{{20, 10}, {512, 20}}</string>
-													<reference key="NSSuperview" ref="650732304"/>
+													<reference key="NSSuperview" ref="958406578"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="143507510"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -374,9 +374,25 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">nowPlayingControlsView</string>
 						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="650732304"/>
+						<reference key="destination" ref="958406578"/>
 					</object>
 					<int key="connectionID">276</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">prevButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="143507510"/>
+					</object>
+					<int key="connectionID">277</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">nextButton</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="663099415"/>
+					</object>
+					<int key="connectionID">278</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -468,7 +484,7 @@
 							<reference ref="618337653"/>
 							<reference ref="663099415"/>
 							<reference ref="143507510"/>
-							<reference ref="650732304"/>
+							<reference ref="958406578"/>
 						</array>
 						<reference key="parent" ref="453444170"/>
 					</object>
@@ -519,7 +535,7 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">275</int>
-						<reference key="object" ref="650732304"/>
+						<reference key="object" ref="958406578"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="1000879875"/>
 							<reference ref="586836583"/>
@@ -529,7 +545,7 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">264</int>
 						<reference key="object" ref="1000879875"/>
-						<reference key="parent" ref="650732304"/>
+						<reference key="parent" ref="958406578"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">268</int>
@@ -537,7 +553,7 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="580168804"/>
 						</array>
-						<reference key="parent" ref="650732304"/>
+						<reference key="parent" ref="958406578"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">269</int>
@@ -577,7 +593,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">276</int>
+			<int key="maxID">278</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -600,35 +616,13 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SDPlayerWindowController</string>
 					<string key="superclassName">NSWindowController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="makeNewPlaylist:">id</string>
-						<string key="nextSong:">id</string>
-						<string key="playPause:">id</string>
-						<string key="prevSong:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="makeNewPlaylist:">
-							<string key="name">makeNewPlaylist:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="nextSong:">
-							<string key="name">nextSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="playPause:">
-							<string key="name">playPause:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="prevSong:">
-							<string key="name">prevSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="currentSongInfoField">NSTextField</string>
+						<string key="nextButton">NSButton</string>
 						<string key="nowPlayingControlsView">NSView</string>
 						<string key="playButton">NSButton</string>
 						<string key="playlistsViewHouser">NSView</string>
+						<string key="prevButton">NSButton</string>
 						<string key="songListViewHouser">NSView</string>
 						<string key="songPositionSlider">SDTrackPositionView</string>
 					</dictionary>
@@ -636,6 +630,10 @@
 						<object class="IBToOneOutletInfo" key="currentSongInfoField">
 							<string key="name">currentSongInfoField</string>
 							<string key="candidateClassName">NSTextField</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="nextButton">
+							<string key="name">nextButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="nowPlayingControlsView">
 							<string key="name">nowPlayingControlsView</string>
@@ -648,6 +646,10 @@
 						<object class="IBToOneOutletInfo" key="playlistsViewHouser">
 							<string key="name">playlistsViewHouser</string>
 							<string key="candidateClassName">NSView</string>
+						</object>
+						<object class="IBToOneOutletInfo" key="prevButton">
+							<string key="name">prevButton</string>
+							<string key="candidateClassName">NSButton</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="songListViewHouser">
 							<string key="name">songListViewHouser</string>
