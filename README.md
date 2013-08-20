@@ -4,7 +4,7 @@
 
 * Current version: **0.1**
 * Requires: OS X 10.8 and up
-<!-- * Download: get [.zip file](comingsoon.zip), unzip, right-click app, choose "Open" -->
+* Download: coming soon
 
 #### What's left for 1.0
 
