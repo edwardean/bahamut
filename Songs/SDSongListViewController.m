@@ -418,7 +418,7 @@
         
         if (shouldShow) {
             NSRect searchSectionFrame = [self.searchContainerView frame];
-            NSDivideRect(songsTableFrame, &searchSectionFrame, &songsTableFrame, searchSectionFrame.size.height, NSMaxYEdge);
+            NSDivideRect(songsTableFrame, &searchSectionFrame, &songsTableFrame, searchSectionFrame.size.height, NSMinYEdge);
         }
         
         [self.searchContainerView setHidden: !shouldShow];

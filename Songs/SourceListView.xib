@@ -49,7 +49,7 @@
 					<object class="NSButton" id="826851589">
 						<reference key="NSNextResponder" ref="1005"/>
 						<int key="NSvFlags">298</int>
-						<string key="NSFrame">{{13, 5}, {233, 24}}</string>
+						<string key="NSFrame">{{13, 4}, {233, 24}}</string>
 						<reference key="NSSuperview" ref="1005"/>
 						<reference key="NSWindow"/>
 						<string key="NSReuseIdentifierKey">_NS:9</string>
@@ -275,7 +275,7 @@
 							<int key="NSvFlags">298</int>
 							<string key="NSFrame">{{6, 4.5}, {238, 17}}</string>
 							<reference key="NSSuperview" ref="1071650740"/>
-							<reference key="NSNextKeyView" ref="894025600"/>
+							<reference key="NSNextKeyView" ref="266237943"/>
 							<string key="NSAntiCompressionPriority">{250, 750}</string>
 							<bool key="NSEnabled">YES</bool>
 							<object class="NSTextFieldCell" key="NSCell" id="4830744">
@@ -329,7 +329,7 @@
 							<int key="NSvFlags">274</int>
 							<array class="NSMutableArray" key="NSSubviews">
 								<reference ref="496137240"/>
-								<object class="NSImageView" id="894025600">
+								<object class="NSImageView" id="266237943">
 									<reference key="NSNextResponder" ref="1071650740"/>
 									<int key="NSvFlags">297</int>
 									<set class="NSMutableSet" key="NSDragTypes">
@@ -345,7 +345,7 @@
 									<reference key="NSNextKeyView" ref="924019340"/>
 									<string key="NSReuseIdentifierKey">_NS:9</string>
 									<bool key="NSEnabled">YES</bool>
-									<object class="NSImageCell" key="NSCell" id="277223379">
+									<object class="NSImageCell" key="NSCell" id="430593385">
 										<int key="NSCellFlags">134217728</int>
 										<int key="NSCellFlags2">33554432</int>
 										<object class="NSCustomResource" key="NSContents">
@@ -373,7 +373,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">imageView</string>
 						<reference key="source" ref="1071650740"/>
-						<reference key="destination" ref="894025600"/>
+						<reference key="destination" ref="266237943"/>
 					</object>
 					<int key="connectionID">38</int>
 				</object>
@@ -455,7 +455,7 @@
 						<reference key="object" ref="1071650740"/>
 						<array class="NSMutableArray" key="children">
 							<reference ref="496137240"/>
-							<reference ref="894025600"/>
+							<reference ref="266237943"/>
 						</array>
 						<reference key="parent" ref="676376333"/>
 					</object>
@@ -492,16 +492,16 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">36</int>
-						<reference key="object" ref="894025600"/>
+						<reference key="object" ref="266237943"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="277223379"/>
+							<reference ref="430593385"/>
 						</array>
 						<reference key="parent" ref="1071650740"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">37</int>
-						<reference key="object" ref="277223379"/>
-						<reference key="parent" ref="894025600"/>
+						<reference key="object" ref="430593385"/>
+						<reference key="parent" ref="266237943"/>
 					</object>
 				</array>
 			</object>
@@ -541,25 +541,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SDSourceListViewController</string>
 					<string key="superclassName">NSViewController</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="renamePlaylist:">id</string>
-						<string key="severelyDeleteSomething:">id</string>
-						<string key="startRenamingPlaylist:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="renamePlaylist:">
-							<string key="name">renamePlaylist:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="severelyDeleteSomething:">
-							<string key="name">severelyDeleteSomething:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="startRenamingPlaylist:">
-							<string key="name">startRenamingPlaylist:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<object class="NSMutableDictionary" key="outlets">
 						<string key="NS.key.0">playlistsTableView</string>
 						<string key="NS.object.0">NSTableView</string>
