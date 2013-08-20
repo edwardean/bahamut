@@ -33,6 +33,8 @@
 @property (weak) IBOutlet NSButton* prevButton;
 @property (weak) IBOutlet NSButton* nextButton;
 @property (weak) IBOutlet NSTextField* currentSongInfoField;
+@property (weak) IBOutlet NSTextField* timeElapsedField;
+@property (weak) IBOutlet NSTextField* timeRemainingField;
 
 @end
 
@@ -162,8 +164,21 @@
     [self updatePlayerViews];
 }
 
+NSString* timeForSeconds(CGFloat seconds) {
+    CGFloat mins = seconds / 60.0;
+    CGFloat secs = fmod(seconds, 60.0);
+    return [NSString stringWithFormat:@"%d:%02d", (int)mins, (int)secs];
+}
+
 - (void) currentSongTimeDidChange:(NSNotification*)note {
-    self.songPositionSlider.currentValue = [SDMusicPlayer sharedPlayer].currentTime;
+    CGFloat current = [SDMusicPlayer sharedPlayer].currentTime;
+    CGFloat max = [SDMusicPlayer sharedPlayer].currentSong.duration;
+    CGFloat left = max - current;
+    
+    [self.timeElapsedField setStringValue: timeForSeconds(current)];
+    [self.timeRemainingField setStringValue: timeForSeconds(left)];
+    
+    self.songPositionSlider.currentValue = current;
 }
 
 
@@ -205,7 +220,7 @@
     SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
     
     if (currentSong) {
-        NSString* trackInfo = [NSString stringWithFormat:@"%@ - %@", currentSong.title, currentSong.artist];
+        NSString* trackInfo = [NSString stringWithFormat:@"%@ - %@ - %@", currentSong.title, currentSong.artist, currentSong.album];
         [self.currentSongInfoField setStringValue:trackInfo];
         self.songPositionSlider.maxValue = [[SDMusicPlayer sharedPlayer] currentSong].duration;
     }
