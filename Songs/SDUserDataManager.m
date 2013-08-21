@@ -53,12 +53,6 @@
     else
         [self.playlists addObject: [[SDMasterPlaylist alloc] init]];
     
-//    double delayInSeconds = 1.0;
-//    dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//    dispatch_after(popTime, dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_LOW, 0), ^(void){
-//        [self.allSongs makeObjectsPerformSelector:@selector(prefetchData)];
-//    });
-    
     self.canSave = YES;
 }
 
@@ -232,56 +226,63 @@
 
 
 - (void) importFromiTunes {
-    iTunesApplication* iTunesApp = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-    iTunesSource* library;
-    
-    for (iTunesSource* source in [iTunesApp.sources get]) {
-        if (source.kind == iTunesESrcLibrary) {
-            library = source;
-            break;
+    @autoreleasepool {
+        iTunesApplication* iTunesApp = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+        iTunesSource* library;
+        
+        for (iTunesSource* source in [iTunesApp.sources get]) {
+            if (source.kind == iTunesESrcLibrary) {
+                library = source;
+                break;
+            }
         }
-    }
-    
-    NSArray* playlists = [library.playlists get];
-    
-    // we can assume iTunes doesn't have duplicates
-    NSArray* currentSongFileURLs = [[SDSharedData() allSongs] valueForKey:@"url"];
-    
-    for (iTunesPlaylist* playlist in playlists) {
-        if ([[playlist className] isEqualToString: @"ITunesUserPlaylist"]) {
-            SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
-            newPlaylist.title = playlist.name;
-            newPlaylist.repeats = (playlist.songRepeat == iTunesERptAll);
-            newPlaylist.shuffles = playlist.shuffle;
-            
-            NSMutableArray* songsToAdd = [NSMutableArray array];
-            
-            for (iTunesFileTrack* track in [playlist.tracks get]) {
-                if ([NSStringFromClass([track class]) isEqualToString: @"ITunesFileTrack"]) {
-                    NSURL* trackFileURL = [[track location] fileReferenceURL];
-                    BOOL real = [[NSFileManager defaultManager] fileExistsAtPath:[trackFileURL path]];
+        
+        NSArray* playlists = [library.playlists get];
+        
+        // we can assume iTunes doesn't have duplicates
+        NSArray* currentSongFileURLs = [[SDSharedData() allSongs] valueForKey:@"url"];
+        
+        for (iTunesPlaylist* playlist in playlists) {
+            @autoreleasepool {
+                if ([[playlist className] isEqualToString: @"ITunesUserPlaylist"]) {
+                    SDPlaylist* newPlaylist = [[SDPlaylist alloc] init];
+                    newPlaylist.title = playlist.name;
+                    newPlaylist.repeats = (playlist.songRepeat == iTunesERptAll);
+                    newPlaylist.shuffles = playlist.shuffle;
                     
-                    if (real) {
-                        SDSong* song;
-                        
-                        if (![currentSongFileURLs containsObject: trackFileURL]) {
-                            song = [[SDSong alloc] init];
-                            song.url = trackFileURL;
-                            
-                            [self.allSongs addObject:song];
+                    NSMutableArray* songsToAdd = [NSMutableArray array];
+                    
+                    for (iTunesFileTrack* track in [playlist.tracks get]) {
+                        @autoreleasepool {
+                            if ([NSStringFromClass([track class]) isEqualToString: @"ITunesFileTrack"]) {
+                                NSURL* trackFileURL = [[track location] fileReferenceURL];
+                                BOOL real = [[NSFileManager defaultManager] fileExistsAtPath:[trackFileURL path]];
+                                
+                                if (real) {
+                                    SDSong* song;
+                                    
+                                    if (![currentSongFileURLs containsObject: trackFileURL]) {
+                                        song = [[SDSong alloc] init];
+                                        song.url = trackFileURL;
+                                        [song prefetchData];
+                                        
+                                        [self.allSongs addObject:song];
+                                    }
+                                    else {
+                                        song = [self songForURL:trackFileURL];
+                                    }
+                                    
+                                    [songsToAdd addObject: song];
+                                }
+                            }
                         }
-                        else {
-                            song = [self songForURL:trackFileURL];
-                        }
-                        
-                        [songsToAdd addObject: song];
                     }
+                    
+                    [newPlaylist addSongs: songsToAdd];
+                    [self insertPlaylist:newPlaylist
+                                 atIndex:[[self playlists] count]];
                 }
             }
-            
-            [newPlaylist addSongs: songsToAdd];
-            [self insertPlaylist:newPlaylist
-                         atIndex:[[self playlists] count]];
         }
     }
 }
