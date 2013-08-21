@@ -2,29 +2,35 @@
 //  SDPlaylist.h
 //  Songs
 //
-//  Created by Steven Degutis on 8/15/13.
+//  Created by Steven on 8/21/13.
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-#import "SDSong.h"
+@class SDSong, SDUserData;
 
-@interface SDPlaylist : NSObject <NSSecureCoding>
+@interface SDPlaylist : NSManagedObject
 
-@property NSMutableArray* songs;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic) BOOL shuffles;
+@property (nonatomic) BOOL repeats;
+@property (nonatomic) BOOL isMaster;
+@property (nonatomic, retain) SDUserData *userData;
+@property (nonatomic, retain) NSOrderedSet *songs;
+@end
 
-- (void) addSongs:(NSArray*)songs;
-- (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex;
-- (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex;
-- (void) removeSongs:(NSArray*)songs;
+@interface SDPlaylist (CoreDataGeneratedAccessors)
 
-@property NSString* title;
-@property BOOL shuffles;
-@property BOOL repeats;
-
-@property BOOL isPlaying;
-
-- (BOOL) isMasterPlaylist;
-
+- (void)insertObject:(SDSong *)value inSongsAtIndex:(NSUInteger)idx;
+- (void)removeObjectFromSongsAtIndex:(NSUInteger)idx;
+- (void)insertSongs:(NSArray *)value atIndexes:(NSIndexSet *)indexes;
+- (void)removeSongsAtIndexes:(NSIndexSet *)indexes;
+- (void)replaceObjectInSongsAtIndex:(NSUInteger)idx withObject:(SDSong *)value;
+- (void)replaceSongsAtIndexes:(NSIndexSet *)indexes withSongs:(NSArray *)values;
+- (void)addSongsObject:(SDSong *)value;
+- (void)removeSongsObject:(SDSong *)value;
+- (void)addSongs:(NSOrderedSet *)values;
+- (void)removeSongs:(NSOrderedSet *)values;
 @end

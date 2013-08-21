@@ -1,28 +1,30 @@
 //
-//  SOSong.h
+//  SDSong.h
 //  Songs
 //
-//  Created by Steven Degutis on 3/24/13.
+//  Created by Steven on 8/21/13.
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
 #import <Foundation/Foundation.h>
+#import <CoreData/CoreData.h>
 
-#import <AVFoundation/AVFoundation.h>
 
-@interface SDSong : NSObject <NSSecureCoding>
+@interface SDSong : NSManagedObject
 
-@property NSString* uuid;
-@property NSURL* url;
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic) double duration;
+@property (nonatomic, retain) NSString * album;
+@property (nonatomic, retain) NSString * artist;
+@property (nonatomic, retain) NSString * path;
+@property (nonatomic, retain) NSSet *playlists;
+@end
 
-@property (readonly) NSString* title;
-@property (readonly) NSString* album;
-@property (readonly) NSString* artist;
+@interface SDSong (CoreDataGeneratedAccessors)
 
-@property (readonly) CGFloat duration;
-
-- (AVPlayerItem*) playerItem;
-
-- (void) prefetchData;
+- (void)addPlaylistsObject:(NSManagedObject *)value;
+- (void)removePlaylistsObject:(NSManagedObject *)value;
+- (void)addPlaylists:(NSSet *)values;
+- (void)removePlaylists:(NSSet *)values;
 
 @end

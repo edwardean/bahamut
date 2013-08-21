@@ -12,7 +12,7 @@
 
 @interface SDMusicPlayer ()
 
-@property SDPlaylist* currentPlaylist;
+//@property SDOldPlaylist* currentPlaylist;
 @property NSMutableArray* songsPlaying;
 
 @property NSUInteger currentSongIndex;
@@ -45,32 +45,32 @@
     return self;
 }
 
-- (void) playPlaylist:(SDPlaylist*)playlist {
-    if ([[playlist songs] count] == 0)
-        return;
-    
-    [self playSong:[[playlist songs] objectAtIndex:0]
-        inPlaylist:playlist];
-}
-
-- (void) playSong:(SDSong*)song inPlaylist:(SDPlaylist*)playlist {
-    self.stopped = NO;
-    
-    self.currentPlaylist.isPlaying = NO;
-    self.currentPlaylist = playlist;
-    self.currentPlaylist.isPlaying = YES;
-    
-    [self.songsPlaying removeAllObjects];
-    [self.songsPlaying addObjectsFromArray: [playlist songs]];
-    if (self.currentPlaylist.shuffles) {
-        [self shuffleSongs];
-        [self.songsPlaying removeObject:song];
-        [self.songsPlaying insertObject:song atIndex:0];
-    }
-    
-    self.currentSongIndex = [self.songsPlaying indexOfObject: song];
-    [self actuallyPlaySong];
-}
+//- (void) playPlaylist:(SDOldPlaylist*)playlist {
+//    if ([[playlist songs] count] == 0)
+//        return;
+//    
+//    [self playSong:[[playlist songs] objectAtIndex:0]
+//        inPlaylist:playlist];
+//}
+//
+//- (void) playSong:(SDOldSong*)song inPlaylist:(SDOldPlaylist*)playlist {
+//    self.stopped = NO;
+//    
+//    self.currentPlaylist.isPlaying = NO;
+//    self.currentPlaylist = playlist;
+//    self.currentPlaylist.isPlaying = YES;
+//    
+//    [self.songsPlaying removeAllObjects];
+//    [self.songsPlaying addObjectsFromArray: [playlist songs]];
+//    if (self.currentPlaylist.shuffles) {
+//        [self shuffleSongs];
+//        [self.songsPlaying removeObject:song];
+//        [self.songsPlaying insertObject:song atIndex:0];
+//    }
+//    
+//    self.currentSongIndex = [self.songsPlaying indexOfObject: song];
+//    [self actuallyPlaySong];
+//}
 
 - (void) stop {
     self.stopped = YES;
@@ -90,7 +90,7 @@
     [self.player pause];
     [self.player removeTimeObserver:self.timeObserver];
     
-    self.player = [AVPlayer playerWithPlayerItem: [[self currentSong] playerItem]];
+//    self.player = [AVPlayer playerWithPlayerItem: [[self currentSong] playerItem]];
     
     self.currentTime = 0.0;
     
@@ -109,12 +109,12 @@
     [[NSNotificationCenter defaultCenter] postNotificationName:SDPlayerStatusDidChangeNotification object:nil];
 }
 
-- (SDSong*) currentSong {
-    if (self.stopped)
-        return nil;
-    else
-        return [self.songsPlaying objectAtIndex: self.currentSongIndex];
-}
+//- (SDOldSong*) currentSong {
+//    if (self.stopped)
+//        return nil;
+//    else
+//        return [self.songsPlaying objectAtIndex: self.currentSongIndex];
+//}
 
 - (void) shuffleSongs {
     for (NSUInteger i = [self.songsPlaying count]; i > 1; i--) {
@@ -146,41 +146,41 @@
 }
 
 - (void) nextSong {
-    self.currentSongIndex++;
-    
-    if (self.currentSongIndex == [self.songsPlaying count]) {
-        if (self.currentPlaylist.repeats) {
-            self.currentSongIndex = 0;
-            
-            if (self.currentPlaylist.shuffles)
-                [self shuffleSongs];
-        }
-        else {
-            [self stop];
-            return;
-        }
-    }
-    
-    [self actuallyPlaySong];
+//    self.currentSongIndex++;
+//    
+//    if (self.currentSongIndex == [self.songsPlaying count]) {
+//        if (self.currentPlaylist.repeats) {
+//            self.currentSongIndex = 0;
+//            
+//            if (self.currentPlaylist.shuffles)
+//                [self shuffleSongs];
+//        }
+//        else {
+//            [self stop];
+//            return;
+//        }
+//    }
+//    
+//    [self actuallyPlaySong];
 }
 
 - (void) previousSong {
-    self.currentSongIndex--;
-    
-    if (self.currentSongIndex == -1) {
-        if (self.currentPlaylist.repeats) {
-            self.currentSongIndex = [self.songsPlaying count] - 1;
-            
-            if (self.currentPlaylist.shuffles)
-                [self shuffleSongs];
-        }
-        else {
-            [self stop];
-            return;
-        }
-    }
-    
-    [self actuallyPlaySong];
+//    self.currentSongIndex--;
+//    
+//    if (self.currentSongIndex == -1) {
+//        if (self.currentPlaylist.repeats) {
+//            self.currentSongIndex = [self.songsPlaying count] - 1;
+//            
+//            if (self.currentPlaylist.shuffles)
+//                [self shuffleSongs];
+//        }
+//        else {
+//            [self stop];
+//            return;
+//        }
+//    }
+//    
+//    [self actuallyPlaySong];
 }
 
 @end

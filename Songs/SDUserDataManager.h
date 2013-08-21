@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-#import "SDPlaylist.h"
-#import "SDSong.h"
+//#import "SDOldPlaylist.h"
+//#import "SDOldSong.h"
 
 
 #define SDAllSongsDidChangeNotification @"SDAllSongsDidChangeNotification"
@@ -18,37 +18,37 @@
 #define SDPlaylistRenamedNotification @"SDPlaylistRenamedNotification"
 #define SDPlaylistRemovedNotification @"SDPlaylistRemovedNotification"
 #define SDPlaylistOptionsChangedNotification @"SDPlaylistOptionsChangedNotification"
-
-@interface SDUserDataManager : NSObject
-
-+ (SDUserDataManager*) sharedMusicManager;
-
-- (NSMutableArray*) allSongs;
-- (NSMutableArray*) playlists;
-
-- (void) loadUserData;
-
-- (void) importSongsUnderURLs:(NSArray*)urls;
-
-+ (NSArray*) songsForUUIDs:(NSArray*)songUUIDs;
-
-- (void) importFromiTunes;
-
-
-// manipulative
-
-@property NSUndoManager* undoManager;
-
-- (void) insertPlaylist:(SDPlaylist*)playlist atIndex:(NSUInteger)idx;
-- (void) movePlaylist:(SDPlaylist*)playlist toIndex:(NSUInteger)idx;
-- (void) deletePlaylist:(SDPlaylist*)playlist;
-- (SDPlaylist*) createPlaylist;
-
-@end
-
-
-SDUserDataManager* SDSharedData();
-
-void SDSaveData();
-void SDPostNote(NSString* name, id obj);
-id SDAddUndo(id target);
+//
+//@interface SDUserDataManager : NSObject
+//
+//+ (SDUserDataManager*) sharedMusicManager;
+//
+//- (NSMutableArray*) allSongs;
+//- (NSMutableArray*) playlists;
+//
+//- (void) loadUserData;
+//
+//- (void) importSongsUnderURLs:(NSArray*)urls;
+//
+//+ (NSArray*) songsForUUIDs:(NSArray*)songUUIDs;
+//
+//- (void) importFromiTunes;
+//
+//
+//// manipulative
+//
+//@property NSUndoManager* undoManager;
+//
+////- (void) insertPlaylist:(SDOldPlaylist*)playlist atIndex:(NSUInteger)idx;
+////- (void) movePlaylist:(SDOldPlaylist*)playlist toIndex:(NSUInteger)idx;
+////- (void) deletePlaylist:(SDOldPlaylist*)playlist;
+////- (SDOldPlaylist*) createPlaylist;
+//
+//@end
+//
+//
+//SDUserDataManager* SDSharedData();
+//
+//void SDSaveData();
+//void SDPostNote(NSString* name, id obj);
+//id SDAddUndo(id target);

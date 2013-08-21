@@ -16,7 +16,7 @@
 
 @end
 
-@interface SDPlayerWindowController : NSWindowController <NSWindowDelegate, SDPlaylistsViewDelegate>
+@interface SDPlayerWindowController : NSWindowController <NSWindowDelegate>
 
 @property (weak) id<MUPlayerWindowKilledDelegate> killedDelegate;
 

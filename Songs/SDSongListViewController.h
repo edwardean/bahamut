@@ -1,21 +1,21 @@
+////
+////  SDPlaylistViewController.h
+////  Songs
+////
+////  Created by Steven on 8/19/13.
+////  Copyright (c) 2013 Steven Degutis. All rights reserved.
+////
 //
-//  SDPlaylistViewController.h
-//  Songs
+//#import <Cocoa/Cocoa.h>
 //
-//  Created by Steven on 8/19/13.
-//  Copyright (c) 2013 Steven Degutis. All rights reserved.
+//#import "SDOldPlaylist.h"
 //
-
-#import <Cocoa/Cocoa.h>
-
-#import "SDPlaylist.h"
-
-@interface SDSongListViewController : NSViewController
-
-@property (weak) SDPlaylist* playlist;
-
-- (NSArray*) selectedSongs;
-
-- (void) selectSongs:(NSArray*)songs;
-
-@end
+//@interface SDSongListViewController : NSViewController
+//
+//@property (weak) SDOldPlaylist* playlist;
+//
+//- (NSArray*) selectedSongs;
+//
+//- (void) selectSongs:(NSArray*)songs;
+//
+//@end

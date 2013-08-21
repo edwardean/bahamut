@@ -16,6 +16,7 @@
 @property (nonatomic) NSManagedObjectModel *managedObjectModel;
 @property (nonatomic) NSManagedObjectContext *managedObjectContext;
 
+- (void) setup;
 - (void) save;
 
 @end
