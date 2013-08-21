@@ -53,6 +53,7 @@
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
@@ -96,12 +97,19 @@
 
 
 
+- (void) updateWindowTitle {
+    self.window.title = [NSString stringWithFormat:@"%@ - %@", @"Songs", self.selectedPlaylist.title];
+}
+
+
 
 
 #pragma Playlists
 
 - (void) selectPlaylist:(SDPlaylist*)playlist {
     self.selectedPlaylist = playlist;
+    
+    [self updateWindowTitle];
     
     NSUInteger idx = [[SDSharedData() playlists] indexOfObject: self.selectedPlaylist];
     
@@ -150,6 +158,10 @@
     [self.songListViewControllers removeObjectAtIndex:idx];
     
 //    NSLog(@"its %@", playlist);
+}
+
+- (void) playlistRenamedNotification:(NSNotification*)note {
+    [self updateWindowTitle];
 }
 
 
@@ -247,7 +259,10 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 
 
-
+- (IBAction) jumpToCurrentSong:(id)sender {
+    [self.playlistsViewController selectPlaylist: [SDMusicPlayer sharedPlayer].currentPlaylist];
+    [self.currentSongListViewController selectSongs: @[[SDMusicPlayer sharedPlayer].currentSong]];
+}
 
 
 

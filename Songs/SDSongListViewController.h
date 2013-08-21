@@ -16,4 +16,6 @@
 
 - (NSArray*) selectedSongs;
 
+- (void) selectSongs:(NSArray*)songs;
+
 @end

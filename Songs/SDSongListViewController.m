@@ -462,6 +462,15 @@
 
 
 
+- (void) selectSongs:(NSArray*)songs {
+    NSIndexSet* indices = [[self visibleSongs] indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return [songs containsObject: obj];
+    }];
+    [self.songsTable selectRowIndexes:indices byExtendingSelection:NO];
+    [self.songsTable scrollRowToVisible:[indices firstIndex]];
+    [[self.songsTable window] makeFirstResponder: self.songsTable];
+}
+
 
 
 

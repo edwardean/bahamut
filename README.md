@@ -10,12 +10,9 @@
 
 - Pick a better (and unique) app name. "Songs" is lame.
 - Hope someone makes a really pretty icon for it :)
-- Add "Jump to currently playing song" which will select the right playlist and right song, and scroll to both in their respective tables (Cmd-L)
-- Window title should show selected playlist
 - Steal Sparkle and the auto-build stuff from Zephyros
 - Keyboard shortcuts for *everything*
 - Optional Menu bar interface (TunesBar port)
-- Add licenses for all open source components to project (as "Licenses" folder reference is easiest)
 - Fix all the playlist- and song-selection bugs
     - When you filter a playlist, the selection doesn't follow the songs
     - Double-clicking a songs deselects it for some reason
