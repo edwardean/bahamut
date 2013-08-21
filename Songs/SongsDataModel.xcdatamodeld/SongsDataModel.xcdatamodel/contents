@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="MasterPlaylist" representedClassName="MasterPlaylist" parentEntity="Playlist" syncable="YES"/>
     <entity name="Playlist" representedClassName="Playlist" syncable="YES">
         <attribute name="repeats" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="shuffles" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" defaultValueString="New Playlist" syncable="YES"/>
         <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Song" inverseName="playlist" inverseEntity="Song" syncable="YES"/>
+        <relationship name="userData" optional="YES" minCount="1" maxCount="1" deletionRule="Nullify" destinationEntity="UserData" inverseName="playlists" inverseEntity="UserData" syncable="YES"/>
     </entity>
     <entity name="Song" representedClassName="Song" syncable="YES">
         <attribute name="album" optional="YES" attributeType="String" syncable="YES"/>
@@ -14,8 +16,13 @@
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="playlist" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Playlist" inverseName="songs" inverseEntity="Playlist" syncable="YES"/>
     </entity>
+    <entity name="UserData" representedClassName="UserData" syncable="YES">
+        <relationship name="playlists" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Playlist" inverseName="userData" inverseEntity="Playlist" syncable="YES"/>
+    </entity>
     <elements>
-        <element name="Playlist" positionX="-261" positionY="-27" width="128" height="103"/>
+        <element name="Playlist" positionX="-261" positionY="-27" width="128" height="120"/>
         <element name="Song" positionX="-9" positionY="99" width="128" height="133"/>
+        <element name="MasterPlaylist" positionX="160" positionY="192" width="128" height="45"/>
+        <element name="UserData" positionX="160" positionY="192" width="128" height="60"/>
     </elements>
 </model>

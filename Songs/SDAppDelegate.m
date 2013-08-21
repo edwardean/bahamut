@@ -14,6 +14,14 @@
 #import "SDMediaKeyHijacker.h"
 #import "SDMusicPlayer.h"
 
+
+
+#import "SDCoreData.h"
+#import "UserData.h"
+#import "Playlist.h"
+#import "Song.h"
+
+
 @interface SDAppDelegate ()
 
 @property NSMutableArray* playerWindowControllers;
@@ -24,6 +32,31 @@
 @implementation SDAppDelegate
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification {
+    
+    NSManagedObjectContext* ctx = [[SDCoreData sharedCoreData] managedObjectContext];
+    
+    
+    
+    NSFetchRequest* req = [NSFetchRequest fetchRequestWithEntityName:@"Song"];
+    
+    NSError* __autoreleasing error;
+    NSArray* results = [ctx executeFetchRequest:req error:&error];
+    
+    NSLog(@"%@", results);
+    NSLog(@"%@", [[results lastObject] title]);
+    NSLog(@"%@", error);
+    
+    
+//    Song* s = [[Song alloc] initWithEntity:[NSEntityDescription entityForName:@"Song" inManagedObjectContext:ctx]
+//  insertIntoManagedObjectContext:ctx];
+//    
+//    s.title = @"foobar";
+//    
+//    [[SDCoreData sharedCoreData] save];
+    
+    
+    return;
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedPlayPause:) name:SDMediaKeyPressedPlayPause object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedNext:) name:SDMediaKeyPressedNext object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedPrevious:) name:SDMediaKeyPressedPrevious object:nil];

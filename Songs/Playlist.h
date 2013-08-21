@@ -31,4 +31,7 @@
 - (void)removeSongsObject:(Song *)value;
 - (void)addSongs:(NSOrderedSet *)values;
 - (void)removeSongs:(NSOrderedSet *)values;
+
+- (BOOL) isMasterPlaylist;
+
 @end

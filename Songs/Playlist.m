@@ -17,4 +17,8 @@
 @dynamic title;
 @dynamic songs;
 
+- (BOOL) isMasterPlaylist {
+    return NO;
+}
+
 @end
