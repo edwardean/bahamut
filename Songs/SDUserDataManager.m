@@ -36,22 +36,40 @@
     return sharedMusicManager;
 }
 
+- (NSString*) dataFile {
+    NSError *error;
+    NSURL *appSupportDir = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory
+                                                                  inDomain:NSUserDomainMask
+                                                         appropriateForURL:nil
+                                                                    create:YES
+                                                                     error:&error];
+    
+    NSURL* dataDirURL = [appSupportDir URLByAppendingPathComponent:@"Songs"];
+    
+    [[NSFileManager defaultManager] createDirectoryAtURL:dataDirURL
+                             withIntermediateDirectories:YES
+                                              attributes:nil
+                                                   error:NULL];
+    
+    return [[dataDirURL URLByAppendingPathComponent:@"data"] path];
+}
+
 - (void) loadUserData {
 //    NSLog(@"loading");
     
     self.allSongs = [NSMutableArray array];
     self.playlists = [NSMutableArray array];
     
-    NSData* allSongsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"allSongs"];
-    NSData* playlistsData = [[NSUserDefaults standardUserDefaults] dataForKey:@"playlists"];
+    NSData* savedData = [[NSFileManager defaultManager] contentsAtPath:[self dataFile]];
     
-    if (allSongsData)
-        [self.allSongs addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithData:allSongsData]];
-    
-    if (playlistsData)
-        [self.playlists addObjectsFromArray: [NSKeyedUnarchiver unarchiveObjectWithData:playlistsData]];
-    else
+    if (savedData) {
+        NSDictionary* stuff = [NSKeyedUnarchiver unarchiveObjectWithData:savedData];
+        [self.allSongs addObjectsFromArray: [stuff objectForKey:@"allSongs"]];
+        [self.playlists addObjectsFromArray: [stuff objectForKey:@"playlists"]];
+    }
+    else {
         [self.playlists addObject: [[SDMasterPlaylist alloc] init]];
+    }
     
     self.canSave = YES;
 }
@@ -59,8 +77,12 @@
 - (void) reallySaveData {
 //    NSLog(@"saving");
     
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self allSongs]] forKey:@"allSongs"];
-    [[NSUserDefaults standardUserDefaults] setObject:[NSKeyedArchiver archivedDataWithRootObject:[self playlists]] forKey:@"playlists"];
+    NSDictionary* contents = @{@"allSongs": [self allSongs], @"playlists": [self playlists]};
+    NSData* contentsData = [NSKeyedArchiver archivedDataWithRootObject:contents];
+    
+    [[NSFileManager defaultManager] createFileAtPath:[self dataFile]
+                                            contents:contentsData
+                                          attributes:nil];
 }
 
 - (void) saveUserData {
