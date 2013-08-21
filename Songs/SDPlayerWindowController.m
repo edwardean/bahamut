@@ -260,6 +260,9 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 
 - (IBAction) jumpToCurrentSong:(id)sender {
+    if ([SDMusicPlayer sharedPlayer].stopped)
+        return;
+    
     [self.playlistsViewController selectPlaylist: [SDMusicPlayer sharedPlayer].currentPlaylist];
     [self.currentSongListViewController selectSongs: @[[SDMusicPlayer sharedPlayer].currentSong]];
 }

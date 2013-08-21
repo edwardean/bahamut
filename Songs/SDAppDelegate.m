@@ -23,19 +23,23 @@
 
 @implementation SDAppDelegate
 
-- (void) applicationWillFinishLaunching:(NSNotification *)notification {
-    self.mediaKeyHijacker = [[SDMediaKeyHijacker alloc] init];
-    [self.mediaKeyHijacker hijack];
-    
-    [[SDUserDataManager sharedMusicManager] loadUserData];
-    
-    self.playerWindowControllers = [NSMutableArray array];
-}
-
 - (void) applicationDidFinishLaunching:(NSNotification *)notification {
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedPlayPause:) name:SDMediaKeyPressedPlayPause object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedNext:) name:SDMediaKeyPressedNext object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedPrevious:) name:SDMediaKeyPressedPrevious object:nil];
+    
+    self.mediaKeyHijacker = [[SDMediaKeyHijacker alloc] init];
+    [self.mediaKeyHijacker hijack];
+    
+    NSLog(@"loading");
+    
+    [[SDUserDataManager sharedMusicManager] loadUserData];
+    
+    NSLog(@"DONE");
+    
+    self.playerWindowControllers = [NSMutableArray array];
+    
+    [self newPlayerWindow:nil];
 }
 
 - (void) mediaKeyPressedPlayPause:(NSNotification*)note {
@@ -76,6 +80,9 @@
 }
 
 - (BOOL) applicationOpenUntitledFile:(NSApplication *)sender {
+    if (self.playerWindowControllers == nil)
+        return NO;
+    
     [self newPlayerWindow:nil];
     return YES;
 }
