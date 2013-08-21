@@ -15,11 +15,11 @@
 @property NSString* uuid;
 @property NSURL* url;
 
-- (NSString*) title;
-- (NSString*) album;
-- (NSString*) artist;
+@property (readonly) NSString* title;
+@property (readonly) NSString* album;
+@property (readonly) NSString* artist;
 
-- (CGFloat) duration;
+@property (readonly) CGFloat duration;
 
 - (AVPlayerItem*) playerItem;
 

@@ -87,6 +87,7 @@
             
             SDSong* song = [[SDSong alloc] init];
             song.url = [url fileReferenceURL];
+            [song prefetchData];
             
             [self.allSongs addObject:song];
         }

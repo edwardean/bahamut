@@ -10,8 +10,11 @@
 
 @interface SDSong ()
 
-@property AVURLAsset* cachedAsset;
-//@property AVPlayerItem* cachedPlayerItem;
+@property NSString* title;
+@property NSString* album;
+@property NSString* artist;
+
+@property CGFloat duration;
 
 @end
 
@@ -23,15 +26,37 @@
 
 - (id) initWithCoder:(NSCoder *)aDecoder {
     if (self = [super init]) {
+        self.title = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"title"];
+        self.album = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"album"];
+        self.artist = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"artist"];
+        self.duration = [[aDecoder decodeObjectOfClass:[NSNumber self] forKey:@"duration"] doubleValue];
+        
         self.uuid = [aDecoder decodeObjectOfClass:[NSString self] forKey:@"uuid"];
-        self.url = [[aDecoder decodeObjectOfClass:[NSURL self] forKey:@"url"] fileReferenceURL];
+        NSData* urlData = [aDecoder decodeObjectOfClass:[NSURL self] forKey:@"urlData"];
+        
+        BOOL stale;
+        NSError* __autoreleasing error;
+        self.url = [NSURL URLByResolvingBookmarkData:urlData
+                                             options:NSURLBookmarkResolutionWithoutUI
+                                       relativeToURL:nil
+                                 bookmarkDataIsStale:&stale
+                                               error:&error];
     }
     return self;
 }
 
 - (void) encodeWithCoder:(NSCoder *)aCoder {
+    NSError* __autoreleasing error;
+    NSData* urlData = [self.url bookmarkDataWithOptions:0 includingResourceValuesForKeys:nil relativeToURL:nil error:&error];
+    
     [aCoder encodeObject:self.uuid forKey:@"uuid"];
-    [aCoder encodeObject:self.url forKey:@"url"];
+    [aCoder encodeObject:urlData forKey:@"urlData"];
+    
+    [aCoder encodeObject:self.title forKey:@"title"];
+    [aCoder encodeObject:self.album forKey:@"album"];
+    [aCoder encodeObject:self.artist forKey:@"artist"];
+    
+    [aCoder encodeObject:@(self.duration) forKey:@"duration"];
 }
 
 - (id) init {
@@ -49,29 +74,15 @@
     return [self.uuid hash];
 }
 
-- (void) prefetchData {
-//    [[self asset] loadValuesAsynchronouslyForKeys:@[@"commonMetadata"] completionHandler:^{}];
-}
 
-- (AVURLAsset*) asset {
-    if (self.cachedAsset == nil)
-        self.cachedAsset = [AVURLAsset assetWithURL:self.url];
-    
-    return self.cachedAsset;
-}
-
-- (AVPlayerItem*) playerItem {
-    return [AVPlayerItem playerItemWithAsset:[self asset]];
-}
-
-- (NSString*) metadataOfType:(NSString*)type {
-    NSArray* metadataItems = [AVMetadataItem metadataItemsFromArray:[[self asset] commonMetadata]
+static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
+    NSArray* metadataItems = [AVMetadataItem metadataItemsFromArray:[asset commonMetadata]
                                                             withKey:type
                                                            keySpace:AVMetadataKeySpaceCommon];
     
     if ([metadataItems count] == 0) {
         if (type == AVMetadataCommonKeyTitle)
-            return [[[self asset] URL] lastPathComponent];
+            return [[asset URL] lastPathComponent];
         else
             return @"";
     }
@@ -80,21 +91,17 @@
     return (id)[firstMatchingMetadataItem value];
 }
 
-- (CGFloat) duration {
-    CMTime dur = [[self asset] duration];
-    return CMTimeGetSeconds(dur);
+- (void) prefetchData {
+    AVURLAsset* asset = [AVURLAsset assetWithURL:self.url];
+    
+    self.duration = CMTimeGetSeconds([asset duration]);
+    self.title = SDGetMetadata(asset, AVMetadataCommonKeyTitle);
+    self.artist = SDGetMetadata(asset, AVMetadataCommonKeyArtist);
+    self.album = SDGetMetadata(asset, AVMetadataCommonKeyAlbumName);
 }
 
-- (NSString*) title {
-    return [self metadataOfType:AVMetadataCommonKeyTitle];
-}
-
-- (NSString*) album {
-    return [self metadataOfType:AVMetadataCommonKeyAlbumName];
-}
-
-- (NSString*) artist {
-    return [self metadataOfType:AVMetadataCommonKeyArtist];
+- (AVPlayerItem*) playerItem {
+    return [AVPlayerItem playerItemWithAsset:[AVURLAsset assetWithURL:self.url]];
 }
 
 @end
