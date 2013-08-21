@@ -28,12 +28,15 @@
 		9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2EF16FF781100DB85C4 /* MainMenu.xib */; };
 		9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F30316FFA23100DB85C4 /* AVFoundation.framework */; };
 		9460F30A16FFE9BF00DB85C4 /* SDSong.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F30916FFE9BF00DB85C4 /* SDSong.m */; };
+		9471F53217C4FF7C00604963 /* SongsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9471F53017C4FF7C00604963 /* SongsDataModel.xcdatamodeld */; };
 		947279A317C2D15400F09C23 /* SDMasterPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 947279A217C2D15400F09C23 /* SDMasterPlaylist.m */; };
 		94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A811921701E0A900B400C8 /* SDTrackPositionView.m */; };
 		94AD9DE217BD556700D678E1 /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AD9DE117BD556700D678E1 /* SDPlaylist.m */; };
 		94AFF27917C446AF005C30AE /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 94AFF27817C446AF005C30AE /* Licenses */; };
 		94AFF27B17C446F8005C30AE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AFF27A17C446F8005C30AE /* Sparkle.framework */; };
 		94AFF27D17C44706005C30AE /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94AFF27A17C446F8005C30AE /* Sparkle.framework */; };
+		94B8377917C50A57003302B0 /* Song.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B8377817C50A57003302B0 /* Song.m */; };
+		94B8377C17C50A58003302B0 /* Playlist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94B8377B17C50A58003302B0 /* Playlist.m */; };
 		94B8589D1701D5410012165F /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94B8589C1701D5410012165F /* CoreMedia.framework */; };
 		94C2E7D617C3AE1400AC90A3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C2E7D517C3AE1400AC90A3 /* ScriptingBridge.framework */; };
 /* End PBXBuildFile section */
@@ -90,6 +93,7 @@
 		9460F30316FFA23100DB85C4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9460F30816FFE9BF00DB85C4 /* SDSong.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSong.h; sourceTree = "<group>"; };
 		9460F30916FFE9BF00DB85C4 /* SDSong.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSong.m; sourceTree = "<group>"; };
+		9471F53117C4FF7C00604963 /* SongsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SongsDataModel.xcdatamodel; sourceTree = "<group>"; };
 		947279A117C2D15400F09C23 /* SDMasterPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMasterPlaylist.h; sourceTree = "<group>"; };
 		947279A217C2D15400F09C23 /* SDMasterPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMasterPlaylist.m; sourceTree = "<group>"; };
 		94A811911701E0A900B400C8 /* SDTrackPositionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTrackPositionView.h; sourceTree = "<group>"; };
@@ -98,6 +102,10 @@
 		94AD9DE117BD556700D678E1 /* SDPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylist.m; sourceTree = "<group>"; };
 		94AFF27817C446AF005C30AE /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Licenses; sourceTree = SOURCE_ROOT; };
 		94AFF27A17C446F8005C30AE /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = ThirdParty/Sparkle.framework; sourceTree = "<group>"; };
+		94B8377717C50A57003302B0 /* Song.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Song.h; sourceTree = "<group>"; };
+		94B8377817C50A57003302B0 /* Song.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Song.m; sourceTree = "<group>"; };
+		94B8377A17C50A58003302B0 /* Playlist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Playlist.h; sourceTree = "<group>"; };
+		94B8377B17C50A58003302B0 /* Playlist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = Playlist.m; sourceTree = "<group>"; };
 		94B8589C1701D5410012165F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 		94C2E7D417C3AD8F00AC90A3 /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		94C2E7D517C3AE1400AC90A3 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
@@ -262,6 +270,11 @@
 			children = (
 				947279A117C2D15400F09C23 /* SDMasterPlaylist.h */,
 				947279A217C2D15400F09C23 /* SDMasterPlaylist.m */,
+				9471F53017C4FF7C00604963 /* SongsDataModel.xcdatamodeld */,
+				94B8377A17C50A58003302B0 /* Playlist.h */,
+				94B8377B17C50A58003302B0 /* Playlist.m */,
+				94B8377717C50A57003302B0 /* Song.h */,
+				94B8377817C50A57003302B0 /* Song.m */,
 				94AD9DE017BD556700D678E1 /* SDPlaylist.h */,
 				94AD9DE117BD556700D678E1 /* SDPlaylist.m */,
 				9460F30816FFE9BF00DB85C4 /* SDSong.h */,
@@ -364,6 +377,9 @@
 				941B114417C409E7008F8A79 /* SPMediaKeyTap.m in Sources */,
 				941B114517C409E7008F8A79 /* NSObject+SPInvocationGrabbing.m in Sources */,
 				941B114A17C40F12008F8A79 /* SDMediaKeyHijacker.m in Sources */,
+				9471F53217C4FF7C00604963 /* SongsDataModel.xcdatamodeld in Sources */,
+				94B8377917C50A57003302B0 /* Song.m in Sources */,
+				94B8377C17C50A58003302B0 /* Playlist.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -502,6 +518,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		9471F53017C4FF7C00604963 /* SongsDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				9471F53117C4FF7C00604963 /* SongsDataModel.xcdatamodel */,
+			);
+			currentVersion = 9471F53117C4FF7C00604963 /* SongsDataModel.xcdatamodel */;
+			path = SongsDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 9460F2CF16FF781100DB85C4 /* Project object */;
 }

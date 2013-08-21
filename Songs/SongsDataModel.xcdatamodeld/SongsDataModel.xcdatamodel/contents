@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
+    <entity name="Playlist" representedClassName="Playlist" syncable="YES">
+        <attribute name="repeats" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="shuffles" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" defaultValueString="New Playlist" syncable="YES"/>
+        <relationship name="songs" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="Song" inverseName="playlist" inverseEntity="Song" syncable="YES"/>
+    </entity>
+    <entity name="Song" representedClassName="Song" syncable="YES">
+        <attribute name="album" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
+        <relationship name="playlist" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="Playlist" inverseName="songs" inverseEntity="Playlist" syncable="YES"/>
+    </entity>
+    <elements>
+        <element name="Playlist" positionX="-261" positionY="-27" width="128" height="103"/>
+        <element name="Song" positionX="-9" positionY="99" width="128" height="133"/>
+    </elements>
+</model>
