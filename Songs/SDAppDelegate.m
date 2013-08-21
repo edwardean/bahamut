@@ -63,6 +63,18 @@
     }
 }
 
+- (IBAction) stopSong:(id)sender {
+    [[SDMusicPlayer sharedPlayer] stop];
+}
+
+- (IBAction) nextSong:(id)sender {
+    [[SDMusicPlayer sharedPlayer] nextSong];
+}
+
+- (IBAction) prevSong:(id)sender {
+    [[SDMusicPlayer sharedPlayer] previousSong];
+}
+
 - (BOOL) applicationOpenUntitledFile:(NSApplication *)sender {
     [self newPlayerWindow:nil];
     return YES;

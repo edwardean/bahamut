@@ -33,4 +33,14 @@
     [sender setPosition:w ofDividerAtIndex:0];
 }
 
+//- (CGFloat)dividerThickness {
+//    return 1.0;
+//}
+//
+//- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex {
+//    proposedEffectiveRect.origin.x -= 8.0;
+//    proposedEffectiveRect.size.width += 16.0;
+//    return proposedEffectiveRect;
+//}
+
 @end

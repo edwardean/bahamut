@@ -58,8 +58,6 @@
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
     
-    [self updatePlayerViews];
-    
     self.songListViewControllers = [NSMutableArray array];
     
     for (SDPlaylist* playlist in [SDSharedData() playlists]) {
@@ -80,6 +78,8 @@
     
     self.selectedPlaylist = [[SDSharedData() playlists] objectAtIndex:0];
     [self.playlistsViewController selectPlaylist: self.selectedPlaylist];
+    
+    [self updatePlayerViews];
     
 //    self.window.styleMask = NSBorderlessWindowMask;
 //    [self.window setMovableByWindowBackground:YES];
@@ -171,14 +171,7 @@ NSString* timeForSeconds(CGFloat seconds) {
 }
 
 - (void) currentSongTimeDidChange:(NSNotification*)note {
-    CGFloat current = [SDMusicPlayer sharedPlayer].currentTime;
-    CGFloat max = [SDMusicPlayer sharedPlayer].currentSong.duration;
-    CGFloat left = max - current;
-    
-    [self.timeElapsedField setStringValue: timeForSeconds(current)];
-    [self.timeRemainingField setStringValue: timeForSeconds(left)];
-    
-    self.songPositionSlider.currentValue = current;
+    [self updatePlayerViews];
 }
 
 
@@ -220,14 +213,18 @@ NSString* timeForSeconds(CGFloat seconds) {
     SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
     
     if (currentSong) {
-        NSString* trackInfo = [NSString stringWithFormat:@"%@   -   %@   -   %@", currentSong.title, currentSong.artist, currentSong.album];
+        NSString* trackInfo = [NSString stringWithFormat:@"%@  -  %@  -  %@", currentSong.title, currentSong.artist, currentSong.album];
         [self.currentSongInfoField setStringValue:trackInfo];
-        self.songPositionSlider.maxValue = [[SDMusicPlayer sharedPlayer] currentSong].duration;
-    }
-    else {
-        [self.currentSongInfoField setStringValue:@"n/a"];
-        self.songPositionSlider.maxValue = 0.0;
-        self.songPositionSlider.currentValue = 0.0;
+        
+        CGFloat current = [SDMusicPlayer sharedPlayer].currentTime;
+        CGFloat max = currentSong.duration;
+        CGFloat left = max - current;
+        
+        [self.timeElapsedField setStringValue: timeForSeconds(current)];
+        [self.timeRemainingField setStringValue: timeForSeconds(left)];
+        
+        self.songPositionSlider.maxValue = currentSong.duration;
+        self.songPositionSlider.currentValue = current;
     }
 }
 
@@ -284,18 +281,6 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 #pragma mark - Playing music
 
-
-- (IBAction) stopSong:(id)sender {
-    [[SDMusicPlayer sharedPlayer] stop];
-}
-
-- (IBAction) nextSong:(id)sender {
-    [[SDMusicPlayer sharedPlayer] nextSong];
-}
-
-- (IBAction) prevSong:(id)sender {
-    [[SDMusicPlayer sharedPlayer] previousSong];
-}
 
 - (IBAction) playPause:(id)sender {
     if ([SDMusicPlayer sharedPlayer].stopped) {

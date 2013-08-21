@@ -8,8 +8,8 @@
 
 #### What's left for 1.0
 
+- Pick a better (and unique) app name. "Songs" is lame.
 - Hope someone makes a really pretty icon for it :)
-- When opening (new?) window, refresh progress-tracker-view
 - Add "Jump to currently playing song" which will select the right playlist and right song, and scroll to both in their respective tables (Cmd-L)
 - Window title should show selected playlist
 - Steal Sparkle and the auto-build stuff from Zephyros
@@ -21,7 +21,6 @@
     - Double-clicking a songs deselects it for some reason
     - When you add/remove a song, the selection doesn't follow the songs
     - When you add/remove a playlist, the selection doesn't follow the playlist
-- Make the track-bar not jump after you finish dragging it
 - Find (or draw?) a "pause" icon for the playlist/song currently-playing rows
 - Delete songs from All Songs (and remove from every playlist)
     - This should be undo-able!
