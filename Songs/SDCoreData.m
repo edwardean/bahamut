@@ -8,6 +8,8 @@
 
 #import "SDCoreData.h"
 
+#import "SDUserData.h"
+
 #import "NSManagedObjectModel+KCOrderedAccessorFix.h"
 
 @implementation SDCoreData
@@ -37,6 +39,10 @@
     [self.managedObjectContext setPersistentStoreCoordinator:self.persistentStoreCoordinator];
     
     [self.managedObjectModel kc_generateOrderedSetAccessors];
+    
+    [[self.managedObjectContext undoManager] disableUndoRegistration]; // this barely seems to help.
+    [SDUserData sharedUserData]; // force it to load.
+    [[self.managedObjectContext undoManager] enableUndoRegistration];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveSoon:) name:NSManagedObjectContextObjectsDidChangeNotification object:self.managedObjectContext];
 }

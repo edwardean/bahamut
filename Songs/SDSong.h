@@ -9,6 +9,8 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import <AVFoundation/AVFoundation.h>
+
 @class SDPlaylist;
 
 @interface SDSong : NSManagedObject
@@ -27,6 +29,7 @@
 @property (nonatomic, retain) NSSet *playlists;
 
 - (void) prefetchData;
+- (AVPlayerItem*) playerItem;
 
 @end
 

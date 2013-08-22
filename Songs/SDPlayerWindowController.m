@@ -58,12 +58,6 @@
 @property IBOutlet SDPlaylistTableDelegate* playlistTableDelegate;
 @property IBOutlet SDSongTableDelegate* songTableDelegate;
 
-@property (weak) IBOutlet NSView* playlistsViewHouser;
-//@property SDOldPlaylist* selectedPlaylist;
-
-@property (weak) IBOutlet NSView* songListViewHouser;
-//@property (weak) SDSongListViewController* currentSongListViewController;
-
 @property (weak) IBOutlet NSView* nowPlayingControlsView;
 @property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
 @property (weak) IBOutlet NSButton* playButton;
@@ -243,30 +237,6 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 
 
-
-
-#pragma mark - Playing music
-
-
-- (IBAction) playPause:(id)sender {
-    if ([SDMusicPlayer sharedPlayer].stopped) {
-//        NSArray* selectedSongs = [self.currentSongListViewController selectedSongs];
-//        
-//        if ([selectedSongs count] == 1) {
-//            [[SDMusicPlayer sharedPlayer] playSong:[selectedSongs lastObject]
-//                                        inPlaylist:self.selectedPlaylist];
-//        }
-//        else {
-//            [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
-//        }
-    }
-    else {
-        if ([[SDMusicPlayer sharedPlayer] isPlaying])
-            [[SDMusicPlayer sharedPlayer] pause];
-        else
-            [[SDMusicPlayer sharedPlayer] resume];
-    }
-}
 
 - (void) trackPositionMovedTo:(CGFloat)newValue {
     [[SDMusicPlayer sharedPlayer] seekToTime:newValue];

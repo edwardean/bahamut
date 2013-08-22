@@ -310,6 +310,37 @@
 
 
 
+#pragma mark - Playing music
+
+
+- (IBAction) playPause:(id)sender {
+    if ([SDMusicPlayer sharedPlayer].stopped) {
+        NSArray* selectedSongs = [self selectedSongs];
+        
+        if ([selectedSongs count] == 1) {
+            [[SDMusicPlayer sharedPlayer] playSong:[selectedSongs lastObject]
+                                        inPlaylist:self.selectedPlaylist];
+        }
+        else {
+            [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
+        }
+    }
+    else {
+        if ([[SDMusicPlayer sharedPlayer] isPlaying])
+            [[SDMusicPlayer sharedPlayer] pause];
+        else
+            [[SDMusicPlayer sharedPlayer] resume];
+    }
+}
+
+
+
+
+
+
+
+
+
 
 
 

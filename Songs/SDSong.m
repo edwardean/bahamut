@@ -9,8 +9,6 @@
 #import "SDSong.h"
 #import "SDPlaylist.h"
 
-#import <AVFoundation/AVFoundation.h>
-
 @implementation SDSong
 
 @dynamic album;

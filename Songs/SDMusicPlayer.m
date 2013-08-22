@@ -90,7 +90,7 @@
     [self.player pause];
     [self.player removeTimeObserver:self.timeObserver];
     
-//    self.player = [AVPlayer playerWithPlayerItem: [[self currentSong] playerItem]];
+    self.player = [AVPlayer playerWithPlayerItem: [[self currentSong] playerItem]];
     
     self.currentTime = 0.0;
     
