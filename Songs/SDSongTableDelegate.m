@@ -131,6 +131,9 @@
     if (aSelector == @selector(copy:)) {
         return ([[self.songsTable window] firstResponder] == self.songsTable) && [[self selectedSongs] count] > 0;
     }
+    if (aSelector == @selector(cut:)) {
+        return ![[self selectedPlaylist] isMaster] && ([[self.songsTable window] firstResponder] == self.songsTable) && [[self selectedSongs] count] > 0;
+    }
     else if (aSelector == @selector(paste:)) {
         return ([[self.songsTable window] firstResponder] == self.songsTable) && ([[NSPasteboard generalPasteboard] availableTypeFromArray:@[@"Song"]] != nil);
     }
@@ -181,6 +184,13 @@
 
 
 
+- (IBAction) cut:(id)sender {
+    [self copy:sender];
+    [[self selectedPlaylist] removeSongs: [NSOrderedSet orderedSetWithArray:[self selectedSongs]]];
+}
+
+
+
 
 - (IBAction) copy:(id)sender {
     NSArray* songs = [self selectedSongs];
@@ -208,24 +218,19 @@
         [draggingSongs addObject:obj];
     }
     
-    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
-    SDPlaylist* fromPlaylist = [[self.playlistsArrayController arrangedObjects] objectAtIndex:playlistIndex];
+    NSIndexSet* indices = [self.songsTable selectedRowIndexes];
     
-    if (fromPlaylist != [self selectedPlaylist]) {
-        NSIndexSet* indices = [self.songsTable selectedRowIndexes];
-        
-        NSUInteger toIndex = [indices lastIndex] + 1;
-        
-        if ([indices count] == 0) {
-            [[self selectedPlaylist] addSongs:[NSOrderedSet orderedSetWithArray:draggingSongs]];
-        }
-        else {
-            [[self selectedPlaylist] addSongs:draggingSongs
-                                      atIndex:toIndex];
-        }
-        
-        [self.songsArrayController setSelectedObjects: draggingSongs];
+    NSUInteger toIndex = [indices lastIndex] + 1;
+    
+    if ([indices count] == 0) {
+        [[self selectedPlaylist] addSongs:[NSOrderedSet orderedSetWithArray:draggingSongs]];
     }
+    else {
+        [[self selectedPlaylist] addSongs:draggingSongs
+                                  atIndex:toIndex];
+    }
+    
+    [self.songsArrayController setSelectedObjects: draggingSongs];
 }
 
 
