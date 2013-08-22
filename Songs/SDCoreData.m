@@ -60,7 +60,7 @@
                                                                     create:YES
                                                                      error:&error];
     
-    NSURL* dataDirURL = [appSupportDir URLByAppendingPathComponent:@"Songs"];
+    NSURL* dataDirURL = [appSupportDir URLByAppendingPathComponent:@"Bahamut"];
     
     [[NSFileManager defaultManager] createDirectoryAtURL:dataDirURL
                              withIntermediateDirectories:YES
