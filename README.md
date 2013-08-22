@@ -9,8 +9,9 @@
 #### What's left for 1.0
 
 - Hope someone makes a really pretty icon for it :)
-- Optional Menu bar interface (TunesBar port)
+- Optional menu-bar interface (TunesBar port) and optional hide dock icon
 - Make isCurrentSong/Playlist and isPaused **not** undo-able.
+- Add video player
 
 #### To do after 1.0
 
