@@ -101,6 +101,48 @@
     }
 }
 
+- (void) keyDown:(NSEvent *)theEvent {
+    NSString* chars = [theEvent charactersIgnoringModifiers];
+    NSString* lowerChars = [chars lowercaseString];
+    
+    if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"n"]) {
+        [self moveDownAndExtend:[chars isEqualToString: @"N"]];
+    }
+    else if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"p"]) {
+        [self moveUpAndExtend:[chars isEqualToString: @"P"]];
+    }
+    else {
+//        NSLog(@"%@", theEvent);
+        [super keyDown:theEvent];
+    }
+}
+
+- (void) moveDownAndExtend:(BOOL)extend {
+    NSUInteger nextIndex;
+    
+    NSUInteger idx = [[self selectedRowIndexes] lastIndex];
+    if (idx == NSNotFound)
+        nextIndex = 0;
+    else
+        nextIndex = idx + 1;
+    
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:nextIndex] byExtendingSelection: extend];
+    [self scrollRowToVisible:[self selectedRow]];
+}
+
+- (void) moveUpAndExtend:(BOOL)extend {
+    NSUInteger nextIndex;
+    
+    NSUInteger idx = [[self selectedRowIndexes] firstIndex];
+    if (idx == NSNotFound || idx == 0)
+        nextIndex = 0;
+    else
+        nextIndex = idx - 1;
+    
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:nextIndex] byExtendingSelection: extend];
+    [self scrollRowToVisible:[self selectedRow]];
+}
+
 @end
 
 
@@ -118,7 +160,7 @@
 
 @interface SDSongTableDelegate ()
 
-@property (weak) IBOutlet NSTableView* songsTable;
+@property (weak) IBOutlet SDSongsTableView* songsTable;
 @property (weak) IBOutlet NSArrayController* playlistsArrayController;
 @property (weak) IBOutlet NSArrayController* songsArrayController;
 
@@ -302,11 +344,30 @@
 }
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
-    if (control == self.searchField && command == @selector(cancelOperation:)) {
-        [self toggleSearchBar:NO];
-        [self.searchField setStringValue:@""];
-        self.filterString = nil;
-        return YES;
+    NSLog(@"%@", NSStringFromSelector(command));
+    if (control == self.searchField) {
+        if (command == @selector(cancelOperation:)) {
+            [self toggleSearchBar:NO];
+            [self.searchField setStringValue:@""];
+            self.filterString = nil;
+            return YES;
+        }
+        if (command == @selector(moveUp:)) {
+            [self.songsTable moveUpAndExtend:NO];
+            return YES;
+        }
+        if (command == @selector(moveDown:)) {
+            [self.songsTable moveDownAndExtend:NO];
+            return YES;
+        }
+        if (command == @selector(moveUpAndModifySelection:)) {
+            [self.songsTable moveUpAndExtend:YES];
+            return YES;
+        }
+        if (command == @selector(moveDownAndModifySelection:)) {
+            [self.songsTable moveDownAndExtend:YES];
+            return YES;
+        }
     }
     
     return NO;
