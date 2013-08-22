@@ -46,6 +46,42 @@
 }
 
 - (void) mediaKeyPressedPlayPause:(NSNotification*)note {
+    
+    
+//    static BOOL wut;
+//    
+//    if (wut) {
+//        ProcessSerialNumber psn = { 0, kCurrentProcess };
+//        TransformProcessType(&psn, kProcessTransformToForegroundApplication);
+//        ShowHideProcess(&psn, 1);
+//        SetFrontProcess(&psn);
+//    }
+//    else {
+//        NSArray* wins = [[NSApp windows] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isVisible = YES"]];
+//        
+//        for (NSWindow* win in wins) {
+//            [win setCanHide: NO];
+//        }
+//        
+//        ProcessSerialNumber psn = { 0, kCurrentProcess };
+//        TransformProcessType(&psn, kProcessTransformToUIElementApplication);
+//        ShowHideProcess(&psn, 1);
+//        SetFrontProcess(&psn);
+//        
+//        double delayInSeconds = 0.25;
+//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+//            for (NSWindow* win in wins) {
+//                [win setCanHide: YES];
+//            }
+//        });
+//    }
+//    
+//    wut = !wut;
+    
+    
+    
+    
     [NSApp sendAction:@selector(playPause:) to:nil from:nil];
 }
 
