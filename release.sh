@@ -4,13 +4,13 @@ set -e
 
 # build app
 xcodebuild clean build
-VERSION=$(defaults read $(pwd)/Zephyros/Zephyros-Info CFBundleVersion)
-FILENAME="Builds/Zephyros-$VERSION.app.tar.gz"
-LATEST="Builds/Zephyros-LATEST.app.tar.gz"
+VERSION=$(defaults read $(pwd)/Bahamut/Bahamut-Info CFBundleVersion)
+FILENAME="Builds/Bahamut-$VERSION.app.tar.gz"
+LATEST="Builds/Bahamut-LATEST.app.tar.gz"
 
 # build .zip
 rm -rf $FILENAME
-tar -zcf $FILENAME -C build/Release Zephyros.app
+tar -zcf $FILENAME -C build/Release Bahamut.app
 echo "Created $FILENAME"
 
 # make "latest" version for the link in the readme

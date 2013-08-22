@@ -79,15 +79,15 @@
 		9427376117C529D500715D18 /* SDCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCoreData.m; sourceTree = "<group>"; };
 		945C295E17C1F3EE0045BA94 /* SDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSplitView.h; sourceTree = "<group>"; };
 		945C295F17C1F3EE0045BA94 /* SDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSplitView.m; sourceTree = "<group>"; };
-		9460F2D716FF781100DB85C4 /* Songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		9460F2D716FF781100DB85C4 /* Bahamut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bahamut.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9460F2DA16FF781100DB85C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9460F2DD16FF781100DB85C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
 		9460F2DE16FF781100DB85C4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		9460F2DF16FF781100DB85C4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
-		9460F2E216FF781100DB85C4 /* Songs-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Songs-Info.plist"; sourceTree = "<group>"; };
+		9460F2E216FF781100DB85C4 /* Bahamut-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "Bahamut-Info.plist"; sourceTree = "<group>"; };
 		9460F2E416FF781100DB85C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		9460F2E616FF781100DB85C4 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		9460F2E816FF781100DB85C4 /* Songs-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Songs-Prefix.pch"; sourceTree = "<group>"; };
+		9460F2E816FF781100DB85C4 /* Bahamut-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Bahamut-Prefix.pch"; sourceTree = "<group>"; };
 		9460F2EC16FF781100DB85C4 /* SDAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDAppDelegate.h; sourceTree = "<group>"; };
 		9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDAppDelegate.m; sourceTree = "<group>"; };
 		9460F2F016FF781100DB85C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
@@ -234,7 +234,7 @@
 		9460F2D816FF781100DB85C4 /* Products */ = {
 			isa = PBXGroup;
 			children = (
-				9460F2D716FF781100DB85C4 /* Songs.app */,
+				9460F2D716FF781100DB85C4 /* Bahamut.app */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -266,7 +266,7 @@
 		9460F2E016FF781100DB85C4 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
-				9460F2E216FF781100DB85C4 /* Songs-Info.plist */,
+				9460F2E216FF781100DB85C4 /* Bahamut-Info.plist */,
 				9460F2EF16FF781100DB85C4 /* MainMenu.xib */,
 				94C2E7D417C3AD8F00AC90A3 /* iTunes.h */,
 				9460F2EC16FF781100DB85C4 /* SDAppDelegate.h */,
@@ -287,7 +287,7 @@
 				94AFF27817C446AF005C30AE /* Licenses */,
 				9460F2E316FF781100DB85C4 /* InfoPlist.strings */,
 				9460F2E616FF781100DB85C4 /* main.m */,
-				9460F2E816FF781100DB85C4 /* Songs-Prefix.pch */,
+				9460F2E816FF781100DB85C4 /* Bahamut-Prefix.pch */,
 			);
 			name = "Supporting Files";
 			sourceTree = "<group>";
@@ -342,9 +342,9 @@
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
-		9460F2D616FF781100DB85C4 /* Songs */ = {
+		9460F2D616FF781100DB85C4 /* Bahamut */ = {
 			isa = PBXNativeTarget;
-			buildConfigurationList = 9460F2F416FF781100DB85C4 /* Build configuration list for PBXNativeTarget "Songs" */;
+			buildConfigurationList = 9460F2F416FF781100DB85C4 /* Build configuration list for PBXNativeTarget "Bahamut" */;
 			buildPhases = (
 				9460F2D316FF781100DB85C4 /* Sources */,
 				9460F2D416FF781100DB85C4 /* Frameworks */,
@@ -355,9 +355,9 @@
 			);
 			dependencies = (
 			);
-			name = Songs;
+			name = Bahamut;
 			productName = Songs;
-			productReference = 9460F2D716FF781100DB85C4 /* Songs.app */;
+			productReference = 9460F2D716FF781100DB85C4 /* Bahamut.app */;
 			productType = "com.apple.product-type.application";
 		};
 /* End PBXNativeTarget section */
@@ -370,7 +370,7 @@
 				LastUpgradeCheck = 0460;
 				ORGANIZATIONNAME = "Steven Degutis";
 			};
-			buildConfigurationList = 9460F2D216FF781100DB85C4 /* Build configuration list for PBXProject "Songs" */;
+			buildConfigurationList = 9460F2D216FF781100DB85C4 /* Build configuration list for PBXProject "Bahamut" */;
 			compatibilityVersion = "Xcode 3.2";
 			developmentRegion = English;
 			hasScannedForEncodings = 0;
@@ -382,7 +382,7 @@
 			projectDirPath = "";
 			projectRoot = "";
 			targets = (
-				9460F2D616FF781100DB85C4 /* Songs */,
+				9460F2D616FF781100DB85C4 /* Bahamut */,
 			);
 		};
 /* End PBXProject section */
@@ -527,9 +527,9 @@
 					"\"$(SRCROOT)/ThirdParty\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Songs/Songs-Prefix.pch";
-				INFOPLIST_FILE = "Songs/Songs-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Songs/Bahamut-Prefix.pch";
+				INFOPLIST_FILE = "Songs/Bahamut-Info.plist";
+				PRODUCT_NAME = Bahamut;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
@@ -543,9 +543,9 @@
 					"\"$(SRCROOT)/ThirdParty\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Songs/Songs-Prefix.pch";
-				INFOPLIST_FILE = "Songs/Songs-Info.plist";
-				PRODUCT_NAME = "$(TARGET_NAME)";
+				GCC_PREFIX_HEADER = "Songs/Bahamut-Prefix.pch";
+				INFOPLIST_FILE = "Songs/Bahamut-Info.plist";
+				PRODUCT_NAME = Bahamut;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -553,7 +553,7 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
-		9460F2D216FF781100DB85C4 /* Build configuration list for PBXProject "Songs" */ = {
+		9460F2D216FF781100DB85C4 /* Build configuration list for PBXProject "Bahamut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9460F2F216FF781100DB85C4 /* Debug */,
@@ -562,7 +562,7 @@
 			defaultConfigurationIsVisible = 0;
 			defaultConfigurationName = Release;
 		};
-		9460F2F416FF781100DB85C4 /* Build configuration list for PBXNativeTarget "Songs" */ = {
+		9460F2F416FF781100DB85C4 /* Build configuration list for PBXNativeTarget "Bahamut" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
 				9460F2F516FF781100DB85C4 /* Debug */,

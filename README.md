@@ -1,4 +1,4 @@
-## Songs
+## Bahamut
 
 *The OS X music player I always wanted*
 
@@ -8,7 +8,6 @@
 
 #### What's left for 1.0
 
-- Pick a better (and unique) app name. "Songs" is lame.
 - Hope someone makes a really pretty icon for it :)
 - Steal Sparkle and the auto-build stuff from Zephyros
 
@@ -22,7 +21,7 @@
 
 #### Screenshot
 
-![songsapp.png](songsapp.png)
+![bahamutapp.png](bahamutapp.png)
 
 #### License
 
