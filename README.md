@@ -12,23 +12,14 @@
 - Hope someone makes a really pretty icon for it :)
 - Steal Sparkle and the auto-build stuff from Zephyros
 - Keyboard shortcuts for *everything*
-- Optional Menu bar interface (TunesBar port)
-- Fix all the playlist- and song-selection bugs
-    - When you filter a playlist, the selection doesn't follow the songs
-    - Double-clicking a songs deselects it for some reason
-    - When you add/remove a song, the selection doesn't follow the songs
-    - When you add/remove a playlist, the selection doesn't follow the playlist
-- Find (or draw?) a "pause" icon for the playlist/song currently-playing rows
-- Delete songs from All Songs (and remove from every playlist)
-    - This should be undo-able!
-- Make "create playlist" button prettier somehow
-- Figure out how to get Track info field to display "..." without tightening at every resize
-- Only display track info parts that exist! ("album" sometimes doesn't, I think)
 
 #### To do after 1.0
 
+- Only display track info parts that exist! ("album" sometimes doesn't, I think)
 - Figure out what exactly should happen when you change anything about playlist while it's playing
+- Figure out how to get Track info field to display "..." without tightening at every resize
 - Make it scriptable maybe?
+- Optional Menu bar interface (TunesBar port)
 
 #### Screenshot
 

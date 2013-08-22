@@ -216,8 +216,8 @@
         if ([[self.songsTable window] firstResponder] != self.songsTable)
             return NO;
         
-        if ([[self selectedPlaylist] isMaster])
-            return NO;
+//        if ([[self selectedPlaylist] isMaster])
+//            return NO;
         
         if ([[self.songsTable selectedRowIndexes] count] < 1)
             return NO;
@@ -229,7 +229,23 @@
 }
 
 - (IBAction) severelyDeleteSomething:(id)sender {
-    [[self selectedPlaylist] removeSongs: [NSOrderedSet orderedSetWithArray:[self selectedSongs]]];
+    if ([[self selectedPlaylist] isMaster]) {
+        NSInteger result = NSRunAlertPanel(@"Really remove these songs?",
+                                           @"Don't worry, the song files will still be on your hard drive. But they'll be completely removed from this app!",
+                                           @"Remove Songs",
+                                           @"Wait, never mind!",
+                                           nil);
+        
+        if (result == NSAlertDefaultReturn) {
+            for (SDSong* song in [self selectedSongs]) {
+                [[SDCoreData sharedCoreData].managedObjectContext deleteObject: song];
+            }
+        }
+    }
+    else {
+        [[self selectedPlaylist] removeSongs: [NSOrderedSet orderedSetWithArray:[self selectedSongs]]];
+    }
+    
 }
 
 
