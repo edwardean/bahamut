@@ -13,8 +13,6 @@
 #import "SDMusicPlayer.h"
 #import "SDTrackPositionView.h"
 
-#import "SDSongListViewController.h"
-
 
 
 #import "SDCoreData.h"
@@ -64,7 +62,6 @@
 //@property SDOldPlaylist* selectedPlaylist;
 
 @property (weak) IBOutlet NSView* songListViewHouser;
-@property NSMutableArray* songListViewControllers;
 //@property (weak) SDSongListViewController* currentSongListViewController;
 
 @property (weak) IBOutlet NSView* nowPlayingControlsView;
@@ -91,47 +88,16 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
-//    
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
-//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
-    
-    self.songListViewControllers = [NSMutableArray array];
-    
-//    return;
-    
-//    for (SDOldPlaylist* playlist in [SDSharedData() playlists]) {
-//        SDSongListViewController* vc = [[SDSongListViewController alloc] init];
-//        vc.playlist = playlist;
-//        [self.songListViewControllers addObject:vc];
-//    }
-    
-    
-    
-    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
     
     [self setNextResponder: self.playlistTableDelegate];
     [self.playlistTableDelegate setNextResponder: self.songTableDelegate];
     
-    
-    
-    
     [[self window] setBackgroundColor:[NSColor colorWithDeviceWhite:0.92 alpha:1.0]];
     
-//    self.playlistsViewController = [[SDSourceListViewController alloc] init];
-//    self.playlistsViewController.playlistsViewDelegate = self;
-//    [[self.playlistsViewController view] setFrame:[self.playlistsViewHouser frame]];
-//    [self.playlistsViewHouser addSubview:[self.playlistsViewController view]];
-    
-//    [self setNextResponder:self.playlistsViewController];
-    
-//    self.selectedPlaylist = [[SDSharedData() playlists] objectAtIndex:0];
-//    [self.playlistsViewController selectPlaylist: self.selectedPlaylist];
-    
-//    [self updatePlayerViews];
+    [self updatePlayerViews];
     
 //    self.window.styleMask = NSBorderlessWindowMask;
 //    [self.window setMovableByWindowBackground:YES];
@@ -157,68 +123,12 @@
 
 
 
-- (void) updateWindowTitle {
-//    self.window.title = [NSString stringWithFormat:@"%@ - %@", @"Songs", [self selectedPlaylist].title];
-}
-
-
-
-
-#pragma Playlists
-
-//- (void) selectPlaylist:(SDOldPlaylist*)playlist {
-//    self.selectedPlaylist = playlist;
-//    
-//    [self updateWindowTitle];
-//    
-//    NSUInteger idx = [[SDSharedData() playlists] indexOfObject: self.selectedPlaylist];
-//    
-//    SDSongListViewController* vc = [self.songListViewControllers objectAtIndex: idx];
-//    self.currentSongListViewController = vc;
-//    
-//    [[self.songListViewHouser subviews] makeObjectsPerformSelector:@selector(removeFromSuperview)];
-//    [[vc view] setFrame: [self.songListViewHouser bounds]];
-//    [self.songListViewHouser addSubview:[vc view]];
-//    [self.playlistsViewController setNextResponder: vc];
-//    
-////    NSLog(@"%@", self.selectedPlaylist);
-//}
-
-
 
 
 
 
 
 #pragma mark - Notifications
-
-- (void) playlistAddedNotification:(NSNotification*)note {
-//    SDOldPlaylist* playlist = [note object];
-//    
-//    NSUInteger idx = [[SDSharedData() playlists] indexOfObject:playlist];
-//    
-//    SDSongListViewController* vc = [[SDSongListViewController alloc] init];
-//    vc.playlist = playlist;
-//    [self.songListViewControllers insertObject:vc atIndex:idx];
-//    
-////    NSLog(@"its %@", playlist);
-}
-
-- (void) playlistRemovedNotification:(NSNotification*)note {
-//    SDOldPlaylist* playlist = [note object];
-//    
-//    NSUInteger idx = [self.songListViewControllers indexOfObjectPassingTest:^BOOL(SDSongListViewController* obj, NSUInteger idx, BOOL *stop) {
-//        return obj.playlist == playlist;
-//    }];
-//    
-//    [self.songListViewControllers removeObjectAtIndex:idx];
-//    
-////    NSLog(@"its %@", playlist);
-}
-
-- (void) playlistRenamedNotification:(NSNotification*)note {
-    [self updateWindowTitle];
-}
 
 
 
@@ -278,22 +188,22 @@ NSString* timeForSeconds(CGFloat seconds) {
     
     [self.playButton setTitle: [[SDMusicPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
     
-//    SDOldSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
-//    
-//    if (currentSong) {
-//        NSString* trackInfo = [NSString stringWithFormat:@"%@  -  %@  -  %@", currentSong.title, currentSong.artist, currentSong.album];
-//        [self.currentSongInfoField setStringValue:trackInfo];
-//        
-//        CGFloat current = [SDMusicPlayer sharedPlayer].currentTime;
-//        CGFloat max = currentSong.duration;
-//        CGFloat left = max - current;
-//        
-//        [self.timeElapsedField setStringValue: timeForSeconds(current)];
-//        [self.timeRemainingField setStringValue: timeForSeconds(left)];
-//        
-//        self.songPositionSlider.maxValue = currentSong.duration;
-//        self.songPositionSlider.currentValue = current;
-//    }
+    SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
+    
+    if (currentSong) {
+        NSString* trackInfo = [NSString stringWithFormat:@"%@  -  %@  -  %@", currentSong.title, currentSong.artist, currentSong.album];
+        [self.currentSongInfoField setStringValue:trackInfo];
+        
+        CGFloat current = [SDMusicPlayer sharedPlayer].currentTime;
+        CGFloat max = currentSong.duration;
+        CGFloat left = max - current;
+        
+        [self.timeElapsedField setStringValue: timeForSeconds(current)];
+        [self.timeRemainingField setStringValue: timeForSeconds(left)];
+        
+        self.songPositionSlider.maxValue = currentSong.duration;
+        self.songPositionSlider.currentValue = current;
+    }
 }
 
 
@@ -332,28 +242,6 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 
 
-#pragma mark - Creating a new Playlist
-
-
-
-//- (IBAction) makeNewPlaylist:(id)sender {
-////    NSMutableArray* playlists = [SDSharedData() playlists];
-//    
-////    SDPlaylist* playlist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist" inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext] insertIntoManagedObjectContext:nil];
-//    
-////    [self.playlistsViewController insertPlaylist: playlist];
-//    
-////    SDOldPlaylist* newPlaylist = [[SDOldPlaylist alloc] init];
-////    [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
-//    
-////    [self.playlistsViewController selectPlaylist:newPlaylist];
-////    [self.playlistsViewController editPlaylistTitle];
-//}
-
-
-
-
-
 
 
 
@@ -361,7 +249,7 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 
 - (IBAction) playPause:(id)sender {
-//    if ([SDMusicPlayer sharedPlayer].stopped) {
+    if ([SDMusicPlayer sharedPlayer].stopped) {
 //        NSArray* selectedSongs = [self.currentSongListViewController selectedSongs];
 //        
 //        if ([selectedSongs count] == 1) {
@@ -371,13 +259,13 @@ NSString* timeForSeconds(CGFloat seconds) {
 //        else {
 //            [[SDMusicPlayer sharedPlayer] playPlaylist:self.selectedPlaylist];
 //        }
-//    }
-//    else {
-//        if ([[SDMusicPlayer sharedPlayer] isPlaying])
-//            [[SDMusicPlayer sharedPlayer] pause];
-//        else
-//            [[SDMusicPlayer sharedPlayer] resume];
-//    }
+    }
+    else {
+        if ([[SDMusicPlayer sharedPlayer] isPlaying])
+            [[SDMusicPlayer sharedPlayer] pause];
+        else
+            [[SDMusicPlayer sharedPlayer] resume];
+    }
 }
 
 - (void) trackPositionMovedTo:(CGFloat)newValue {

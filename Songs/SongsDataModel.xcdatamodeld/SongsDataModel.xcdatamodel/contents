@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <model name="" userDefinedModelVersionIdentifier="" type="com.apple.IDECoreDataModeler.DataModel" documentVersion="1.0" lastSavedToolsVersion="2061" systemVersion="12E55" minimumToolsVersion="Xcode 4.3" macOSVersion="Automatic" iOSVersion="Automatic">
     <entity name="SDPlaylist" representedClassName="SDPlaylist" syncable="YES">
+        <attribute name="isCurrentPlaylist" optional="YES" transient="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="isMaster" optional="YES" attributeType="Boolean" syncable="YES"/>
+        <attribute name="paused" optional="YES" transient="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="repeats" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="shuffles" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" defaultValueString="New Playlist" syncable="YES"/>
@@ -11,8 +13,8 @@
     <entity name="SDSong" representedClassName="SDSong" syncable="YES">
         <attribute name="album" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
-        <attribute name="currentSong" optional="YES" transient="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
+        <attribute name="isCurrentSong" optional="YES" transient="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="paused" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
@@ -22,7 +24,7 @@
         <relationship name="playlists" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SDPlaylist" inverseName="userData" inverseEntity="SDPlaylist" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SDPlaylist" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="SDPlaylist" positionX="160" positionY="192" width="128" height="165"/>
         <element name="SDSong" positionX="160" positionY="192" width="128" height="165"/>
         <element name="SDUserData" positionX="160" positionY="192" width="128" height="60"/>
     </elements>

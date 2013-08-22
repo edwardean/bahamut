@@ -19,6 +19,8 @@
 @dynamic isMaster;
 @dynamic userData;
 @dynamic songs;
+@dynamic isCurrentPlaylist;
+@dynamic paused;
 
 
 //- (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex {

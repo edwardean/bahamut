@@ -152,8 +152,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
     if (row < 0)
         return;
     
-//    SDPlaylist* playlist = [[self.playlistsArrayController arrangedObjects] objectAtIndex:row];
-//    [[SDMusicPlayer sharedPlayer] playPlaylist: playlist];
+    SDPlaylist* playlist = [[self.playlistsArrayController arrangedObjects] objectAtIndex:row];
+    [[SDMusicPlayer sharedPlayer] playPlaylist: playlist];
 }
 
 

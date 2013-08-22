@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9404AB441700F4EF00E0D3AF /* SDUserDataManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */; };
 		9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */; };
 		9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */; };
 		941B114417C409E7008F8A79 /* SPMediaKeyTap.m in Sources */ = {isa = PBXBuildFile; fileRef = 941B114117C409E7008F8A79 /* SPMediaKeyTap.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
@@ -56,7 +55,6 @@
 
 /* Begin PBXFileReference section */
 		9404AB421700F4EF00E0D3AF /* SDUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserDataManager.h; sourceTree = "<group>"; };
-		9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDUserDataManager.m; sourceTree = "<group>"; };
 		9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlayerWindowController.h; sourceTree = "<group>"; };
 		9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlayerWindowController.m; sourceTree = "<group>"; };
 		9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
@@ -278,7 +276,6 @@
 			isa = PBXGroup;
 			children = (
 				9404AB421700F4EF00E0D3AF /* SDUserDataManager.h */,
-				9404AB431700F4EF00E0D3AF /* SDUserDataManager.m */,
 				94BEB65917C5D66C007723F3 /* SDImporter.h */,
 				94BEB65A17C5D66C007723F3 /* SDImporter.m */,
 			);
@@ -365,7 +362,6 @@
 			files = (
 				9460F2E716FF781100DB85C4 /* main.m in Sources */,
 				9460F2EE16FF781100DB85C4 /* SDAppDelegate.m in Sources */,
-				9404AB441700F4EF00E0D3AF /* SDUserDataManager.m in Sources */,
 				9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */,
 				94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */,
 				94AD9DE217BD556700D678E1 /* SDOldPlaylist.m in Sources */,

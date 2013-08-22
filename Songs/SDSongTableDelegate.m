@@ -124,14 +124,10 @@
 
 
 
-
 @property (readonly) NSPredicate* filterPredicate;
 @property NSString* filterString;
 
-
 @property (weak) IBOutlet NSView* songsHousingView;
-
-//@property (weak) IBOutlet NSTableView* songsTable;
 @property (weak) IBOutlet NSView* searchContainerView;
 @property (weak) IBOutlet NSSearchField* searchField;
 @property (weak) IBOutlet NSScrollView* songsScrollView;
@@ -187,8 +183,8 @@
     if ([songs count] != 1)
         return;
     
-//    [[SDMusicPlayer sharedPlayer] playSong:[songs lastObject]
-//                                inPlaylist:[self selectedPlaylist]];
+    [[SDMusicPlayer sharedPlayer] playSong:[songs lastObject]
+                                inPlaylist:[self selectedPlaylist]];
 }
 
 

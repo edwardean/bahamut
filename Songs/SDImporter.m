@@ -15,7 +15,23 @@
 #import "SDSong.h"
 #import "SDPlaylist.h"
 
+#import "iTunes.h"
+
 @implementation SDImporter
+
+
+
+//- (SDOldSong*) songForURL:(NSURL*)songURL {
+//    NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
+//    allSongs = [allSongs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"url = %@", songURL]];
+//    return [allSongs lastObject];
+//}
+//
+//+ (NSArray*) songsForUUIDs:(NSArray*)songUUIDs {
+//    NSArray* allSongs = [[SDUserDataManager sharedMusicManager] allSongs];
+//    return [allSongs filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"uuid in %@", songUUIDs]];
+//}
+
 
 
 + (void) importSongsUnderURLs:(NSArray*)urls {
@@ -94,6 +110,79 @@
         });
     });
 }
+
+
+
+
+
+
+
+
+
+
+//
+//- (void) importFromiTunes {
+//    @autoreleasepool {
+//        iTunesApplication* iTunesApp = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+//        iTunesSource* library;
+//
+//        for (iTunesSource* source in [iTunesApp.sources get]) {
+//            if (source.kind == iTunesESrcLibrary) {
+//                library = source;
+//                break;
+//            }
+//        }
+//
+//        NSArray* playlists = [library.playlists get];
+//
+//        // we can assume iTunes doesn't have duplicates
+//        NSArray* currentSongFileURLs = [[SDSharedData() allSongs] valueForKey:@"url"];
+//
+//        for (iTunesPlaylist* playlist in playlists) {
+//            @autoreleasepool {
+//                if ([[playlist className] isEqualToString: @"ITunesUserPlaylist"]) {
+//                    SDOldPlaylist* newPlaylist = [[SDOldPlaylist alloc] init];
+//                    newPlaylist.title = playlist.name;
+//                    newPlaylist.repeats = (playlist.songRepeat == iTunesERptAll);
+//                    newPlaylist.shuffles = playlist.shuffle;
+//
+//                    NSMutableArray* songsToAdd = [NSMutableArray array];
+//
+//                    for (iTunesFileTrack* track in [playlist.tracks get]) {
+//                        @autoreleasepool {
+//                            if ([NSStringFromClass([track class]) isEqualToString: @"ITunesFileTrack"]) {
+//                                NSURL* trackFileURL = [[track location] fileReferenceURL];
+//                                BOOL real = [[NSFileManager defaultManager] fileExistsAtPath:[trackFileURL path]];
+//
+//                                if (real) {
+//                                    SDOldSong* song;
+//
+//                                    if (![currentSongFileURLs containsObject: trackFileURL]) {
+//                                        song = [[SDOldSong alloc] init];
+//                                        song.url = trackFileURL;
+//                                        [song prefetchData];
+//
+//                                        [self.allSongs addObject:song];
+//                                    }
+//                                    else {
+//                                        song = [self songForURL:trackFileURL];
+//                                    }
+//
+//                                    [songsToAdd addObject: song];
+//                                }
+//                            }
+//                        }
+//                    }
+//
+//                    [newPlaylist addSongs: songsToAdd];
+//                    [self insertPlaylist:newPlaylist
+//                                 atIndex:[[self playlists] count]];
+//                }
+//            }
+//        }
+//    }
+//}
+//
 
 
 @end

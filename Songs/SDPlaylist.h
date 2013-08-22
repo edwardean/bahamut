@@ -13,12 +13,18 @@
 
 @interface SDPlaylist : NSManagedObject
 
+@property (nonatomic) BOOL isMaster;
+@property (nonatomic, retain) NSOrderedSet *songs;
+
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic) BOOL shuffles;
 @property (nonatomic) BOOL repeats;
-@property (nonatomic) BOOL isMaster;
+
+@property (nonatomic) BOOL isCurrentPlaylist;
+@property (nonatomic) BOOL paused;
+
 @property (nonatomic, retain) SDUserData *userData;
-@property (nonatomic, retain) NSOrderedSet *songs;
+
 @end
 
 @interface SDPlaylist (CoreDataGeneratedAccessors)

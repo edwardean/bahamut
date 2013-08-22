@@ -8,8 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-//#import "SDOldSong.h"
-//#import "SDOldPlaylist.h"
+#import "SDSong.h"
+#import "SDPlaylist.h"
 
 #define SDCurrentSongDidChangeNotification @"SDCurrentSongDidChangeNotification"
 #define SDCurrentSongTimeDidChangeNotification @"SDCurrentSongTimeDidChangeNotification"
@@ -19,8 +19,8 @@
 
 + (SDMusicPlayer*) sharedPlayer;
 
-//- (void) playSong:(SDOldSong*)song inPlaylist:(SDOldPlaylist*)playlist;
-//- (void) playPlaylist:(SDOldPlaylist*)playlist;
+- (void) playSong:(SDSong*)song inPlaylist:(SDPlaylist*)playlist;
+- (void) playPlaylist:(SDPlaylist*)playlist;
 
 - (void) seekToTime:(CGFloat)percent;
 
@@ -33,8 +33,8 @@
 - (void) nextSong;
 - (void) previousSong;
 
-//- (SDOldSong*) currentSong;
-//- (SDOldPlaylist*) currentPlaylist;
+- (SDSong*) currentSong;
+- (SDPlaylist*) currentPlaylist;
 @property (readonly) CGFloat currentTime;
 @property (readonly) BOOL stopped;
 

@@ -18,7 +18,7 @@
 @dynamic duration;
 @dynamic path;
 @dynamic title;
-@dynamic currentSong;
+@dynamic isCurrentSong;
 @dynamic paused;
 @dynamic playlists;
 
