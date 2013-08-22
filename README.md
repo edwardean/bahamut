@@ -9,15 +9,14 @@
 #### What's left for 1.0
 
 - Hope someone makes a really pretty icon for it :)
-- Steal Sparkle and the auto-build stuff from Zephyros
+- Optional Menu bar interface (TunesBar port)
+- Only display track info parts that exist! ("album" sometimes doesn't, I think)
 
 #### To do after 1.0
 
-- Only display track info parts that exist! ("album" sometimes doesn't, I think)
 - Figure out what exactly should happen when you change anything about playlist while it's playing
 - Figure out how to get Track info field to display "..." without tightening at every resize
 - Make it scriptable maybe?
-- Optional Menu bar interface (TunesBar port)
 
 #### Screenshot
 
