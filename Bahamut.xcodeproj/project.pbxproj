@@ -23,6 +23,7 @@
 		9460F2EE16FF781100DB85C4 /* SDAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */; };
 		9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2EF16FF781100DB85C4 /* MainMenu.xib */; };
 		9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F30316FFA23100DB85C4 /* AVFoundation.framework */; };
+		9466103917C6A9CF004C3EEE /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9466103817C6A9CF004C3EEE /* dsa_pub.pem */; };
 		9471F53217C4FF7C00604963 /* SongsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9471F53017C4FF7C00604963 /* SongsDataModel.xcdatamodeld */; };
 		9496D43A17C56F2E00EFD43C /* SDUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43917C56F2E00EFD43C /* SDUserData.m */; };
 		9496D44017C56F2F00EFD43C /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43F17C56F2F00EFD43C /* SDPlaylist.m */; };
@@ -92,6 +93,7 @@
 		9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SDAppDelegate.m; sourceTree = "<group>"; };
 		9460F2F016FF781100DB85C4 /* en */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = en; path = en.lproj/MainMenu.xib; sourceTree = "<group>"; };
 		9460F30316FFA23100DB85C4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		9466103817C6A9CF004C3EEE /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = AutoUpdating/dsa_pub.pem; sourceTree = SOURCE_ROOT; };
 		9471F53117C4FF7C00604963 /* SongsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SongsDataModel.xcdatamodel; sourceTree = "<group>"; };
 		9496D43817C56F2E00EFD43C /* SDUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserData.h; sourceTree = "<group>"; };
 		9496D43917C56F2E00EFD43C /* SDUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDUserData.m; sourceTree = "<group>"; };
@@ -286,6 +288,7 @@
 			children = (
 				94AFF27817C446AF005C30AE /* Licenses */,
 				9460F2E316FF781100DB85C4 /* InfoPlist.strings */,
+				9466103817C6A9CF004C3EEE /* dsa_pub.pem */,
 				9460F2E616FF781100DB85C4 /* main.m */,
 				9460F2E816FF781100DB85C4 /* Bahamut-Prefix.pch */,
 			);
@@ -396,6 +399,7 @@
 				9460F2F116FF781100DB85C4 /* MainMenu.xib in Resources */,
 				9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */,
 				94AFF27917C446AF005C30AE /* Licenses in Resources */,
+				9466103917C6A9CF004C3EEE /* dsa_pub.pem in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

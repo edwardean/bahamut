@@ -15,11 +15,13 @@
 #import "SDImporter.h"
 #import "SDCoreData.h"
 #import "SDCachedDrawing.h"
+#import <Sparkle/Sparkle.h>
 
 @interface SDAppDelegate ()
 
 @property NSMutableArray* playerWindowControllers;
 @property SDMediaKeyHijacker* mediaKeyHijacker;
+@property IBOutlet SUUpdater* updater;
 
 @end
 
@@ -83,6 +85,10 @@
     
     
     [NSApp sendAction:@selector(playPause:) to:nil from:nil];
+}
+
+- (IBAction) showPreferencesWindow:(id)sender {
+    // TODO
 }
 
 - (void) mediaKeyPressedNext:(NSNotification*)note {
