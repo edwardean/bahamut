@@ -10,6 +10,7 @@
 
 - Hope someone makes a really pretty icon for it :)
 - Optional Menu bar interface (TunesBar port)
+- Make isCurrentSong/Playlist and isPaused **not** undo-able.
 
 #### To do after 1.0
 
