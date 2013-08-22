@@ -246,7 +246,7 @@
 								</object>
 								<object class="NSMenuItem" id="911397018">
 									<reference key="NSMenu" ref="714887771"/>
-									<string key="NSTitle">Jump to Bahamut</string>
+									<string key="NSTitle">Jump to Songs</string>
 									<string key="NSKeyEquiv">]</string>
 									<int key="NSKeyEquivModMask">1179648</int>
 									<int key="NSMnemonicLoc">2147483647</int>
