@@ -128,7 +128,10 @@
 #pragma mark - Deleting stuff
 
 - (BOOL) respondsToSelector:(SEL)aSelector {
-    if (aSelector == @selector(severelyDeleteSomething:)) {
+    if (aSelector == @selector(jumpToCurrentSong:)) {
+        return ![SDMusicPlayer sharedPlayer].stopped;
+    }
+    else if (aSelector == @selector(severelyDeleteSomething:)) {
         if ([[self.songsTable window] firstResponder] != self.songsTable)
             return NO;
         
