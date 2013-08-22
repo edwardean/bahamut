@@ -15,7 +15,6 @@
 
 #import "SDMusicPlayer.h"
 
-#define SDSongDragType @"SDSongDragType"
 
 
 
@@ -23,142 +22,14 @@
 
 
 
-@interface SDTextFieldCell : NSTextFieldCell
-@end
-@implementation SDTextFieldCell
 
-- (void)drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-    NSBezierPath* path = [NSBezierPath bezierPathWithRect:cellFrame];
-    
-    [[NSColor whiteColor] setFill];
-    [path fill];
-    
-    if ([[controlView window] firstResponder] == [[controlView window] fieldEditor:NO forObject:controlView]) {
-        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0] setStroke];
-        
-        cellFrame = NSInsetRect(cellFrame, 0.5, 0.5);
-        NSBezierPath* path = [NSBezierPath bezierPathWithRect:cellFrame];
-        [path setLineWidth:2.0];
-        [path stroke];
-    }
-    
-    [self drawInteriorWithFrame:cellFrame inView:controlView];
-}
 
-@end
+#import "SDSongsTableHeaderCell.h"
+#import "SDSongsTableView.h"
 
 
 
 
-
-
-@interface SDSongsTableHeaderCell : NSTableHeaderCell
-@end
-@implementation SDSongsTableHeaderCell
-
-- (NSRect)drawingRectForBounds:(NSRect)theRect {
-    theRect.origin.y += 7;
-    return theRect;
-}
-
-- (void)drawWithFrame:(CGRect)cellFrame inView:(NSView *)view {
-    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [NSBezierPath fillRect:cellFrame];
-    
-    [self drawInteriorWithFrame:cellFrame inView:view];
-}
-
-@end
-
-
-
-
-
-
-
-@interface SDSongsTableView : NSTableView
-@end
-@implementation SDSongsTableView
-
-- (void)highlightSelectionInClipRect:(NSRect)clipRect {
-    NSRange aVisibleRowIndexes = [self rowsInRect:clipRect];
-    NSIndexSet* aSelectedRowIndexes = [self selectedRowIndexes];
-    
-    NSUInteger aRow = aVisibleRowIndexes.location;
-    NSUInteger anEndRow = aRow + aVisibleRowIndexes.length;
-    
-    if (self == [[self window] firstResponder] && [[self window] isMainWindow] && [[self window] isKeyWindow]) {
-        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0] setFill];
-    }
-    else {
-        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:0.5] setFill];
-    }
-    
-    for (; aRow < anEndRow; aRow++) {
-        if ([aSelectedRowIndexes containsIndex:aRow]) {
-            [[NSBezierPath bezierPathWithRect:[self rectOfRow:aRow]] fill];
-        }
-    }
-}
-
-- (void) keyDown:(NSEvent *)theEvent {
-    NSString* chars = [theEvent charactersIgnoringModifiers];
-    NSString* lowerChars = [chars lowercaseString];
-    
-    if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"n"]) {
-        [self moveDownAndExtend:[chars isEqualToString: @"N"]];
-    }
-    else if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"p"]) {
-        [self moveUpAndExtend:[chars isEqualToString: @"P"]];
-    }
-    else if ([chars isEqualToString: @"\r"]) {
-        [NSApp sendAction:@selector(startPlayingSong:) to:nil from:nil];
-    }
-    else {
-//        NSLog(@"%@", theEvent);
-        [super keyDown:theEvent];
-    }
-}
-
-- (void) moveDownAndExtend:(BOOL)extend {
-    NSUInteger nextIndex;
-    
-    NSUInteger idx = [[self selectedRowIndexes] lastIndex];
-    if (idx == NSNotFound)
-        nextIndex = 0;
-    else
-        nextIndex = idx + 1;
-    
-    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:nextIndex] byExtendingSelection: extend];
-    [self scrollRowToVisible:[self selectedRow]];
-}
-
-- (void) moveUpAndExtend:(BOOL)extend {
-    NSUInteger nextIndex;
-    
-    NSUInteger idx = [[self selectedRowIndexes] firstIndex];
-    if (idx == NSNotFound || idx == 0)
-        nextIndex = 0;
-    else
-        nextIndex = idx - 1;
-    
-    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:nextIndex] byExtendingSelection: extend];
-    [self scrollRowToVisible:[self selectedRow]];
-}
-
-@end
-
-
-
-@interface SDSongCell : NSTextFieldCell
-@end
-@implementation SDSongCell
-
-- (NSColor *)highlightColorWithFrame:(NSRect)cellFrame inView: (NSView *)controlView {
-    return nil;
-}
-
-@end
 
 
 @interface SDSongTableDelegate ()
@@ -210,7 +81,7 @@
     
     [self toggleSearchBar:NO];
     
-    [self.songsTable registerForDraggedTypes:@[SDSongDragType]];
+    [self.songsTable registerForDraggedTypes:@[@"Song"]];
 }
 
 
@@ -355,6 +226,11 @@
             self.filterString = nil;
             return YES;
         }
+        if (command == @selector(insertNewline:)) {
+//            [[self.songsTable window] makeFirstResponder: self.songsTable];
+            [self startPlayingSong: nil];
+            return YES;
+        }
         if (command == @selector(moveUp:)) {
             [self.songsTable moveUpAndExtend:NO];
             return YES;
@@ -441,7 +317,7 @@
     NSData* data = [NSKeyedArchiver archivedDataWithRootObject:@{@"uuids": uuids, @"playlist": @(playlistIndex)}];
     
     [pboard setData:data
-            forType:SDSongDragType];
+            forType:@"Song"];
     
     return YES;
 }
@@ -454,7 +330,7 @@
 }
 
 - (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
-    NSData* rawData = [[info draggingPasteboard] dataForType:SDSongDragType];
+    NSData* rawData = [[info draggingPasteboard] dataForType:@"Song"];
     NSDictionary* data = [NSKeyedUnarchiver unarchiveObjectWithData:rawData];
     
     NSArray* uuids = [data objectForKey:@"uuids"];

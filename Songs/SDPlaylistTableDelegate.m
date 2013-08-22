@@ -13,97 +13,8 @@
 
 #import "SDCoreData.h"
 #import "SDUserData.h"
-#import "SDPlaylist.h"
 
-
-
-
-
-static NSString* SDSongDragType = @"SDSongDragType";
-static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
-
-
-
-@interface SDTableRowView : NSTableRowView
-@end
-
-@implementation SDTableRowView
-
-- (void)drawSelectionInRect:(NSRect)dirtyRect {
-    if ([[self window] firstResponder] == [self superview] && [[self window] isKeyWindow]) {
-        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0] setFill];
-        [[NSBezierPath bezierPathWithRect:self.bounds] fill];
-    }
-    else {
-        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:0.5] setFill];
-        [[NSBezierPath bezierPathWithRect:self.bounds] fill];
-    }
-}
-
-@end
-
-
-
-
-
-
-
-
-@interface SDPlaylistsTableView : NSTableView
-@end
-
-@implementation SDPlaylistsTableView
-
-- (void) keyDown:(NSEvent *)theEvent {
-    NSString* chars = [theEvent charactersIgnoringModifiers];
-    NSString* lowerChars = [chars lowercaseString];
-    
-    if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"n"]) {
-        [self moveDownAndExtend:[chars isEqualToString: @"N"]];
-    }
-    else if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"p"]) {
-        [self moveUpAndExtend:[chars isEqualToString: @"P"]];
-    }
-    else if ([chars isEqualToString: @"\r"]) {
-        [NSApp sendAction:@selector(startPlayingSong:) to:nil from:nil];
-    }
-    else {
-//        NSLog(@"%@", theEvent);
-        [super keyDown:theEvent];
-    }
-}
-
-- (void) moveDownAndExtend:(BOOL)extend {
-    NSUInteger nextIndex;
-    
-    NSUInteger idx = [[self selectedRowIndexes] lastIndex];
-    if (idx == NSNotFound)
-        nextIndex = 0;
-    else
-        nextIndex = idx + 1;
-    
-    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:nextIndex] byExtendingSelection: extend];
-    [self scrollRowToVisible:[self selectedRow]];
-}
-
-- (void) moveUpAndExtend:(BOOL)extend {
-    NSUInteger nextIndex;
-    
-    NSUInteger idx = [[self selectedRowIndexes] firstIndex];
-    if (idx == NSNotFound || idx == 0)
-        nextIndex = 0;
-    else
-        nextIndex = idx - 1;
-    
-    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:nextIndex] byExtendingSelection: extend];
-    [self scrollRowToVisible:[self selectedRow]];
-}
-
-
-@end
-
-
-
+#import "SDTableRowView.h"
 
 
 
@@ -121,8 +32,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 - (void) awakeFromNib {
     [super awakeFromNib];
     
-    [self.playlistsTable registerForDraggedTypes:@[SDPlaylistDragType]];
-    [self.playlistsTable registerForDraggedTypes:@[SDSongDragType]];
+    [self.playlistsTable registerForDraggedTypes:@[@"Playlist"]];
+    [self.playlistsTable registerForDraggedTypes:@[@"Song"]];
     
     [self.playlistsTable setTarget:self];
     [self.playlistsTable setDoubleAction:@selector(doubleClickedThing:)];
@@ -170,6 +81,11 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 }
 
 
+
+
+- (IBAction) startPlayingPlaylist:(id)sender {
+    [[SDMusicPlayer sharedPlayer] playPlaylist: [self selectedPlaylist]];
+}
 
 
 
@@ -234,13 +150,13 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
     [pboard setPropertyList:@([rowIndexes firstIndex])
-                    forType:SDPlaylistDragType];
+                    forType:@"Playlist"];
     
     return YES;
 }
 
 - (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
-    if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
+    if ([[[info draggingPasteboard] types] containsObject: @"Playlist"]) {
         if (operation == NSTableViewDropAbove)
             return NSDragOperationMove;
         else
@@ -256,8 +172,8 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 }
 
 - (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
-    if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
-        NSUInteger playlistIndex = [[[info draggingPasteboard] propertyListForType:SDPlaylistDragType] unsignedIntegerValue];
+    if ([[[info draggingPasteboard] types] containsObject: @"Playlist"]) {
+        NSUInteger playlistIndex = [[[info draggingPasteboard] propertyListForType:@"Playlist"] unsignedIntegerValue];
         
         NSDictionary* bindingInfo = [self.playlistsArrayController infoForBinding:@"contentArray"];
         NSMutableOrderedSet* s = [[bindingInfo objectForKey:NSObservedObjectKey] mutableOrderedSetValueForKeyPath:[bindingInfo objectForKey:NSObservedKeyPathKey]];
@@ -270,7 +186,7 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
         return YES;
     }
     else {
-        NSData* rawData = [[info draggingPasteboard] dataForType:SDSongDragType];
+        NSData* rawData = [[info draggingPasteboard] dataForType:@"Song"];
         NSDictionary* data = [NSKeyedUnarchiver unarchiveObjectWithData:rawData];
         
         NSArray* uuids = [data objectForKey:@"uuids"];

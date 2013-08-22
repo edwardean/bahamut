@@ -14,6 +14,7 @@
 		941B114717C40A25008F8A79 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941B114617C40A25008F8A79 /* Carbon.framework */; };
 		941B114A17C40F12008F8A79 /* SDMediaKeyHijacker.m in Sources */ = {isa = PBXBuildFile; fileRef = 941B114917C40F12008F8A79 /* SDMediaKeyHijacker.m */; };
 		94229B2417BE8EE900FE5A88 /* SDMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94229B2317BE8EE900FE5A88 /* SDMusicPlayer.m */; };
+		9426F7F917C624460029650B /* SDValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9426F7F817C624460029650B /* SDValueTransformers.m */; };
 		9427376217C529D500715D18 /* SDCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9427376117C529D500715D18 /* SDCoreData.m */; };
 		945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C295F17C1F3EE0045BA94 /* SDSplitView.m */; };
 		945C296317C1F50C0045BA94 /* SDButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296217C1F50C0045BA94 /* SDButtons.m */; };
@@ -27,6 +28,12 @@
 		9496D43A17C56F2E00EFD43C /* SDUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43917C56F2E00EFD43C /* SDUserData.m */; };
 		9496D44017C56F2F00EFD43C /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43F17C56F2F00EFD43C /* SDPlaylist.m */; };
 		9496D44517C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D44417C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
+		9498576317C6203800DBA33E /* SDPlaylistsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498576217C6203800DBA33E /* SDPlaylistsTableView.m */; };
+		9498576617C6206D00DBA33E /* SDSongsTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498576517C6206D00DBA33E /* SDSongsTableView.m */; };
+		9498576917C6208E00DBA33E /* SDSongCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498576817C6208E00DBA33E /* SDSongCell.m */; };
+		9498576C17C620E300DBA33E /* SDSongsTableHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498576B17C620E300DBA33E /* SDSongsTableHeaderCell.m */; };
+		9498577217C6216D00DBA33E /* SDTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498577117C6216D00DBA33E /* SDTableRowView.m */; };
+		9498577517C6223600DBA33E /* SDKeyNavigableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498577417C6223600DBA33E /* SDKeyNavigableTableView.m */; };
 		94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A811921701E0A900B400C8 /* SDTrackPositionView.m */; };
 		94AFF27917C446AF005C30AE /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 94AFF27817C446AF005C30AE /* Licenses */; };
 		94AFF27B17C446F8005C30AE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AFF27A17C446F8005C30AE /* Sparkle.framework */; };
@@ -65,6 +72,7 @@
 		941B114917C40F12008F8A79 /* SDMediaKeyHijacker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMediaKeyHijacker.m; sourceTree = "<group>"; };
 		94229B2217BE8EE900FE5A88 /* SDMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMusicPlayer.h; sourceTree = "<group>"; };
 		94229B2317BE8EE900FE5A88 /* SDMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMusicPlayer.m; sourceTree = "<group>"; };
+		9426F7F817C624460029650B /* SDValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDValueTransformers.m; sourceTree = "<group>"; };
 		9427376017C529D500715D18 /* SDCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCoreData.h; sourceTree = "<group>"; };
 		9427376117C529D500715D18 /* SDCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCoreData.m; sourceTree = "<group>"; };
 		945C295E17C1F3EE0045BA94 /* SDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSplitView.h; sourceTree = "<group>"; };
@@ -90,6 +98,18 @@
 		9496D43F17C56F2F00EFD43C /* SDPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylist.m; sourceTree = "<group>"; };
 		9496D44317C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSManagedObjectModel+KCOrderedAccessorFix.h"; sourceTree = "<group>"; };
 		9496D44417C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+KCOrderedAccessorFix.m"; sourceTree = "<group>"; };
+		9498576117C6203800DBA33E /* SDPlaylistsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylistsTableView.h; sourceTree = "<group>"; };
+		9498576217C6203800DBA33E /* SDPlaylistsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlaylistsTableView.m; sourceTree = "<group>"; };
+		9498576417C6206D00DBA33E /* SDSongsTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSongsTableView.h; sourceTree = "<group>"; };
+		9498576517C6206D00DBA33E /* SDSongsTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSongsTableView.m; sourceTree = "<group>"; };
+		9498576717C6208E00DBA33E /* SDSongCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSongCell.h; sourceTree = "<group>"; };
+		9498576817C6208E00DBA33E /* SDSongCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSongCell.m; sourceTree = "<group>"; };
+		9498576A17C620E200DBA33E /* SDSongsTableHeaderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSongsTableHeaderCell.h; sourceTree = "<group>"; };
+		9498576B17C620E300DBA33E /* SDSongsTableHeaderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSongsTableHeaderCell.m; sourceTree = "<group>"; };
+		9498577017C6216C00DBA33E /* SDTableRowView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTableRowView.h; sourceTree = "<group>"; };
+		9498577117C6216D00DBA33E /* SDTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTableRowView.m; sourceTree = "<group>"; };
+		9498577317C6223600DBA33E /* SDKeyNavigableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKeyNavigableTableView.h; sourceTree = "<group>"; };
+		9498577417C6223600DBA33E /* SDKeyNavigableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKeyNavigableTableView.m; sourceTree = "<group>"; };
 		94A811911701E0A900B400C8 /* SDTrackPositionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTrackPositionView.h; sourceTree = "<group>"; };
 		94A811921701E0A900B400C8 /* SDTrackPositionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTrackPositionView.m; sourceTree = "<group>"; };
 		94AFF27817C446AF005C30AE /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Licenses; sourceTree = SOURCE_ROOT; };
@@ -146,6 +166,17 @@
 			name = Player;
 			sourceTree = "<group>";
 		};
+		9426F7F617C623730029650B /* Common */ = {
+			isa = PBXGroup;
+			children = (
+				945C296217C1F50C0045BA94 /* SDButtons.m */,
+				9426F7F817C624460029650B /* SDValueTransformers.m */,
+				9498577317C6223600DBA33E /* SDKeyNavigableTableView.h */,
+				9498577417C6223600DBA33E /* SDKeyNavigableTableView.m */,
+			);
+			name = Common;
+			sourceTree = "<group>";
+		};
 		9427376617C52B1700715D18 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
@@ -164,16 +195,19 @@
 			name = "Core Data";
 			sourceTree = "<group>";
 		};
-		945C296617C1FAF10045BA94 /* View */ = {
+		945C296617C1FAF10045BA94 /* Songs */ = {
 			isa = PBXGroup;
 			children = (
-				945C295E17C1F3EE0045BA94 /* SDSplitView.h */,
-				945C295F17C1F3EE0045BA94 /* SDSplitView.m */,
-				94A811911701E0A900B400C8 /* SDTrackPositionView.h */,
-				94A811921701E0A900B400C8 /* SDTrackPositionView.m */,
-				945C296217C1F50C0045BA94 /* SDButtons.m */,
+				94BEB65617C5CECF007723F3 /* SDSongTableDelegate.h */,
+				94BEB65717C5CECF007723F3 /* SDSongTableDelegate.m */,
+				9498576417C6206D00DBA33E /* SDSongsTableView.h */,
+				9498576517C6206D00DBA33E /* SDSongsTableView.m */,
+				9498576717C6208E00DBA33E /* SDSongCell.h */,
+				9498576817C6208E00DBA33E /* SDSongCell.m */,
+				9498576A17C620E200DBA33E /* SDSongsTableHeaderCell.h */,
+				9498576B17C620E300DBA33E /* SDSongsTableHeaderCell.m */,
 			);
-			name = View;
+			name = Songs;
 			sourceTree = "<group>";
 		};
 		9460F2CE16FF781100DB85C4 = {
@@ -252,10 +286,23 @@
 				9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */,
 				9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */,
 				9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */,
-				94BEB65C17C5E74B007723F3 /* Delegates */,
-				945C296617C1FAF10045BA94 /* View */,
+				9498577617C6235000DBA33E /* Top Level */,
+				94BEB65C17C5E74B007723F3 /* Playlists */,
+				945C296617C1FAF10045BA94 /* Songs */,
+				9426F7F617C623730029650B /* Common */,
 			);
 			name = "Player Window";
+			sourceTree = "<group>";
+		};
+		9498577617C6235000DBA33E /* Top Level */ = {
+			isa = PBXGroup;
+			children = (
+				945C295E17C1F3EE0045BA94 /* SDSplitView.h */,
+				945C295F17C1F3EE0045BA94 /* SDSplitView.m */,
+				94A811911701E0A900B400C8 /* SDTrackPositionView.h */,
+				94A811921701E0A900B400C8 /* SDTrackPositionView.m */,
+			);
+			name = "Top Level";
 			sourceTree = "<group>";
 		};
 		94AD9DE317BD56C100D678E1 /* Importing */ = {
@@ -267,15 +314,17 @@
 			name = Importing;
 			sourceTree = "<group>";
 		};
-		94BEB65C17C5E74B007723F3 /* Delegates */ = {
+		94BEB65C17C5E74B007723F3 /* Playlists */ = {
 			isa = PBXGroup;
 			children = (
 				94BEB65317C5CEC5007723F3 /* SDPlaylistTableDelegate.h */,
 				94BEB65417C5CEC5007723F3 /* SDPlaylistTableDelegate.m */,
-				94BEB65617C5CECF007723F3 /* SDSongTableDelegate.h */,
-				94BEB65717C5CECF007723F3 /* SDSongTableDelegate.m */,
+				9498576117C6203800DBA33E /* SDPlaylistsTableView.h */,
+				9498576217C6203800DBA33E /* SDPlaylistsTableView.m */,
+				9498577017C6216C00DBA33E /* SDTableRowView.h */,
+				9498577117C6216D00DBA33E /* SDTableRowView.m */,
 			);
-			name = Delegates;
+			name = Playlists;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -364,6 +413,13 @@
 				94BEB65517C5CEC5007723F3 /* SDPlaylistTableDelegate.m in Sources */,
 				94BEB65817C5CECF007723F3 /* SDSongTableDelegate.m in Sources */,
 				94BEB65B17C5D66C007723F3 /* SDImporter.m in Sources */,
+				9498576317C6203800DBA33E /* SDPlaylistsTableView.m in Sources */,
+				9498576617C6206D00DBA33E /* SDSongsTableView.m in Sources */,
+				9498576917C6208E00DBA33E /* SDSongCell.m in Sources */,
+				9498576C17C620E300DBA33E /* SDSongsTableHeaderCell.m in Sources */,
+				9498577217C6216D00DBA33E /* SDTableRowView.m in Sources */,
+				9498577517C6223600DBA33E /* SDKeyNavigableTableView.m in Sources */,
+				9426F7F917C624460029650B /* SDValueTransformers.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

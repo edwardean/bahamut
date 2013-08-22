@@ -74,7 +74,7 @@
 //    NSLog(@"pretend saving");
 //    return;
     
-    NSLog(@"really saving");
+//    NSLog(@"really saving");
     
     if (![[self managedObjectContext] commitEditing])
         NSLog(@"%@:%@ unable to commit editing before saving", [self class], NSStringFromSelector(_cmd));

@@ -11,7 +11,6 @@
 - Pick a better (and unique) app name. "Songs" is lame.
 - Hope someone makes a really pretty icon for it :)
 - Steal Sparkle and the auto-build stuff from Zephyros
-- Keyboard shortcuts for *everything*
 
 #### To do after 1.0
 
