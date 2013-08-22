@@ -47,10 +47,10 @@
 - (void) drawThings {
     self.pauseImage = [self makePauseIcon];
     
-    self.playButtonImage = [self makePlayButtonImage:@"SDPlayButtonImage" playing:NO pressed:NO];
-    self.playButtonImagePressed = [self makePlayButtonImage:@"SDPressedPlayButtonImage" playing:NO pressed:YES];
-    self.pauseButtonImage = [self makePlayButtonImage:@"SDPauseButtonImage" playing:YES pressed:NO];
-    self.pauseButtonImagePressed = [self makePlayButtonImage:@"SDPressedPauseButtonImage" playing:YES pressed:YES];
+    self.playButtonImage = [self makePlayButtonImage:@"SDPlayButtonImage" playing:YES pressed:NO];
+    self.playButtonImagePressed = [self makePlayButtonImage:@"SDPressedPlayButtonImage" playing:YES pressed:YES];
+    self.pauseButtonImage = [self makePlayButtonImage:@"SDPauseButtonImage" playing:NO pressed:NO];
+    self.pauseButtonImagePressed = [self makePlayButtonImage:@"SDPressedPauseButtonImage" playing:NO pressed:YES];
     
     self.enabledPrevButtonImage = [self makeNavButtonImage:@"SDEnabledPrevButtonImage" sel:@selector(drawPrevButton:inFrame:) enabled:YES pressed:NO];
     self.enabledPrevButtonImagePressed = [self makeNavButtonImage:@"SDPressedEnabledPrevButtonImage" sel:@selector(drawPrevButton:inFrame:) enabled:YES pressed:YES];
