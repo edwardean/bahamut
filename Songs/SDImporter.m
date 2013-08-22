@@ -22,67 +22,75 @@
 
 + (void) importSongsUnderURLs:(NSArray*)urls {
     [self filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
-        NSSet* existingURLs = [self existingSongURLs];
-        
-        for (NSURL* url in urls) {
-            if ([existingURLs containsObject: url])
-                continue;
+        @autoreleasepool {
+            NSSet* existingURLs = [self existingSongURLs];
             
-            SDPlaylist* allSongsPlaylist = [[SDUserData sharedUserData] masterPlaylist];
-            
-            SDSong* song = [[SDSong alloc] initWithEntity:[NSEntityDescription entityForName:@"SDSong"
-                                                                      inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
-                           insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
-            song.path = [url path];
-            [song prefetchData];
-            
-            [allSongsPlaylist addSongsObject: song];
+            for (NSURL* url in urls) {
+                if ([existingURLs containsObject: url])
+                    continue;
+                
+                @autoreleasepool {
+                    SDPlaylist* allSongsPlaylist = [[SDUserData sharedUserData] masterPlaylist];
+                    
+                    SDSong* song = [[SDSong alloc] initWithEntity:[NSEntityDescription entityForName:@"SDSong"
+                                                                              inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
+                                   insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
+                    song.path = [url path];
+                    [song prefetchData];
+                    
+                    [allSongsPlaylist addSongsObject: song];
+                }
+            }
         }
     }];
 }
 
 + (void) filterOnlyPlayableURLs:(NSArray*)urls completionHandler:(void(^)(NSArray* urls))handler {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        NSMutableArray* list = [NSMutableArray array];
-        
-        NSFileManager* fileManager = [[NSFileManager alloc] init];
-        
-        for (NSURL* url in urls) {
-            BOOL isDir;
-            BOOL exists = [fileManager fileExistsAtPath:[url path] isDirectory:&isDir];
-            if (!exists)
-                continue;
+        @autoreleasepool {
+            NSMutableArray* list = [NSMutableArray array];
             
-            if (isDir) {
-                NSDirectoryEnumerator* dirEnum = [fileManager enumeratorAtURL:url
-                                                   includingPropertiesForKeys:@[]
-                                                                      options:NSDirectoryEnumerationSkipsPackageDescendants & NSDirectoryEnumerationSkipsHiddenFiles
-                                                                 errorHandler:^BOOL(NSURL *url, NSError *error) {
-                                                                     NSLog(@"error for [%@]! %@", url, error);
-                                                                     return YES;
-                                                                 }];
-                
-                for (NSURL* file in dirEnum) {
-                    AVURLAsset* asset = [AVURLAsset assetWithURL:file];
-                    if ([asset isPlayable]) {
-                        [list addObject:file];
+            NSFileManager* fileManager = [[NSFileManager alloc] init];
+            
+            for (NSURL* url in urls) {
+                @autoreleasepool {
+                    BOOL isDir;
+                    BOOL exists = [fileManager fileExistsAtPath:[url path] isDirectory:&isDir];
+                    if (!exists)
+                        continue;
+                    
+                    if (isDir) {
+                        NSDirectoryEnumerator* dirEnum = [fileManager enumeratorAtURL:url
+                                                           includingPropertiesForKeys:@[]
+                                                                              options:NSDirectoryEnumerationSkipsPackageDescendants & NSDirectoryEnumerationSkipsHiddenFiles
+                                                                         errorHandler:^BOOL(NSURL *url, NSError *error) {
+                                                                             NSLog(@"error for [%@]! %@", url, error);
+                                                                             return YES;
+                                                                         }];
+                        
+                        for (NSURL* file in dirEnum) {
+                            AVURLAsset* asset = [AVURLAsset assetWithURL:file];
+                            if ([asset isPlayable]) {
+                                [list addObject:file];
+                            }
+                        }
+                    }
+                    else {
+                        AVURLAsset* asset = [AVURLAsset assetWithURL:url];
+                        if ([asset isPlayable]) {
+                            [list addObject:url];
+                        }
                     }
                 }
             }
-            else {
-                AVURLAsset* asset = [AVURLAsset assetWithURL:url];
-                if ([asset isPlayable]) {
-                    [list addObject:url];
-                }
-            }
+            
+            NSArray* urls = list;
+//            urls = [urls valueForKeyPath:@"fileReferenceURL"];
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                handler(urls);
+            });
         }
-        
-        NSArray* urls = list;
-//        urls = [urls valueForKeyPath:@"fileReferenceURL"];
-        
-        dispatch_async(dispatch_get_main_queue(), ^{
-            handler(urls);
-        });
     });
 }
 
