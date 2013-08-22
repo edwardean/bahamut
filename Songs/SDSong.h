@@ -31,6 +31,15 @@
 - (void) prefetchData;
 - (AVPlayerItem*) playerItem;
 
+
+
+
+
+
+
+
+@property (nonatomic, readonly) int playerStatus;
+
 @end
 
 @interface SDSong (CoreDataGeneratedAccessors)

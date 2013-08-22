@@ -54,11 +54,15 @@
 }
 
 - (void) playSong:(SDSong*)song inPlaylist:(SDPlaylist*)playlist {
-    self.stopped = NO;
-    
     self.currentPlaylist.isCurrentPlaylist = NO;
+    self.currentSong.isCurrentSong = NO;
+    
     self.currentPlaylist = playlist;
+    
     self.currentPlaylist.isCurrentPlaylist = YES;
+    self.currentPlaylist.paused = NO;
+    
+    self.stopped = NO;
     
     [self.songsPlaying removeAllObjects];
     [self.songsPlaying addObjectsFromArray: [[playlist songs] array]];
@@ -87,6 +91,9 @@
 }
 
 - (void) actuallyPlaySong {
+    self.currentSong.isCurrentSong = YES;
+    self.currentSong.paused = NO;
+    
     [self.player pause];
     [self.player removeTimeObserver:self.timeObserver];
     
@@ -134,11 +141,15 @@
 - (void) pause {
     [self.player pause];
     [[NSNotificationCenter defaultCenter] postNotificationName:SDPlayerStatusDidChangeNotification object:nil];
+    self.currentPlaylist.paused = YES;
+    self.currentSong.paused = YES;
 }
 
 - (void) resume {
     [self.player play];
     [[NSNotificationCenter defaultCenter] postNotificationName:SDPlayerStatusDidChangeNotification object:nil];
+    self.currentPlaylist.paused = NO;
+    self.currentSong.paused = NO;
 }
 
 - (BOOL) isPlaying {
@@ -146,6 +157,8 @@
 }
 
 - (void) nextSong {
+    self.currentSong.isCurrentSong = NO;
+    
     self.currentSongIndex++;
     
     if (self.currentSongIndex == [self.songsPlaying count]) {
@@ -165,6 +178,8 @@
 }
 
 - (void) previousSong {
+    self.currentSong.isCurrentSong = NO;
+    
     self.currentSongIndex--;
     
     if (self.currentSongIndex == -1) {

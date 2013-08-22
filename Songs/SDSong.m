@@ -53,4 +53,22 @@ static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
     return [AVPlayerItem playerItemWithAsset:[AVURLAsset assetWithURL:[self url]]];
 }
 
+
+
+
+
+
++ (NSSet*) keyPathsForValuesAffectingPlayerStatus {
+    return [NSSet setWithArray:@[@"isCurrentSong", @"paused"]];
+}
+
+- (int) playerStatus {
+    if (!self.isCurrentSong)
+        return 0;
+    else if (self.paused)
+        return 1;
+    else
+        return 2;
+}
+
 @end

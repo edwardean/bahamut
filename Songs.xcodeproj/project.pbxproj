@@ -226,7 +226,7 @@
 				9460F2EC16FF781100DB85C4 /* SDAppDelegate.h */,
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
 				941B113F17C409D8008F8A79 /* Hacking Media Keys */,
-				94AD9DE317BD56C100D678E1 /* Persistence */,
+				94AD9DE317BD56C100D678E1 /* Importing */,
 				9427376617C52B1700715D18 /* Core Data */,
 				94229B2117BE8EDC00FE5A88 /* Player */,
 				9460F2F816FF782C00DB85C4 /* Player Window */,
@@ -258,13 +258,13 @@
 			name = "Player Window";
 			sourceTree = "<group>";
 		};
-		94AD9DE317BD56C100D678E1 /* Persistence */ = {
+		94AD9DE317BD56C100D678E1 /* Importing */ = {
 			isa = PBXGroup;
 			children = (
 				94BEB65917C5D66C007723F3 /* SDImporter.h */,
 				94BEB65A17C5D66C007723F3 /* SDImporter.m */,
 			);
-			name = Persistence;
+			name = Importing;
 			sourceTree = "<group>";
 		};
 		94BEB65C17C5E74B007723F3 /* Delegates */ = {

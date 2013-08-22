@@ -28,6 +28,13 @@
 - (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex;
 - (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex;
 
+
+
+
+
+
+@property (nonatomic, readonly) int playerStatus;
+
 @end
 
 @interface SDPlaylist (CoreDataGeneratedAccessors)

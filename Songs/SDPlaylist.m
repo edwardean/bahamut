@@ -41,4 +41,19 @@
     [set moveObjectsAtIndexes:indices toIndex:moveToIndex];
 }
 
+
+
++ (NSSet*) keyPathsForValuesAffectingPlayerStatus {
+    return [NSSet setWithArray:@[@"isCurrentPlaylist", @"paused"]];
+}
+
+- (int) playerStatus {
+    if (!self.isCurrentPlaylist)
+        return 0;
+    else if (self.paused)
+        return 1;
+    else
+        return 2;
+}
+
 @end
