@@ -257,6 +257,11 @@
 
 
 
+- (IBAction) closeSearchBar:(id)sender {
+    [self toggleSearchBar:NO];
+    [self.searchField setStringValue:@""];
+    self.filterString = nil;
+}
 
 
 - (IBAction) performFindPanelAction:(id)sender {

@@ -177,6 +177,17 @@
 
 
 
+- (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
+    [NSApp sendAction:@selector(closeSearchBar:) to:nil from:nil];
+}
+
+
+
+
+
+
+
+
 #pragma mark - Playlists, Drag / Drop
 
 - (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
