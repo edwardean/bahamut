@@ -134,12 +134,6 @@
     [self updatePlayerViews];
 }
 
-NSString* timeForSeconds(CGFloat seconds) {
-    CGFloat mins = seconds / 60.0;
-    CGFloat secs = fmod(seconds, 60.0);
-    return [NSString stringWithFormat:@"%d:%02d", (int)mins, (int)secs];
-}
-
 - (void) currentSongTimeDidChange:(NSNotification*)note {
     [self updatePlayerViews];
 }
@@ -171,6 +165,12 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 
 
+NS_INLINE NSString* SDTimeForSeconds(CGFloat seconds) {
+    CGFloat mins = seconds / 60.0;
+    CGFloat secs = fmod(seconds, 60.0);
+    return [NSString stringWithFormat:@"%d:%02d", (int)mins, (int)secs];
+}
+
 
 - (void) updatePlayerViews {
     [self.nowPlayingControlsView setHidden: [[SDMusicPlayer sharedPlayer] stopped]];
@@ -190,8 +190,8 @@ NSString* timeForSeconds(CGFloat seconds) {
         CGFloat max = currentSong.duration;
         CGFloat left = max - current;
         
-        [self.timeElapsedField setStringValue: timeForSeconds(current)];
-        [self.timeRemainingField setStringValue: timeForSeconds(left)];
+        [self.timeElapsedField setStringValue: SDTimeForSeconds(current)];
+        [self.timeRemainingField setStringValue: SDTimeForSeconds(left)];
         
         self.songPositionSlider.maxValue = currentSong.duration;
         self.songPositionSlider.currentValue = current;

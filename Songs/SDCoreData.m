@@ -27,10 +27,8 @@
     self.managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"SongsDataModel" withExtension:@"momd"]];
     self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     
-    NSURL *url = [NSURL fileURLWithPath:[self dataFile]];
-    
     NSError *error;
-    if (![self.persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:url options:nil error:&error]) {
+    if (![self.persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:[self dataFile] options:nil error:&error]) {
         [NSApp presentError:error];
         return;
     }
@@ -44,6 +42,8 @@
     [SDUserData sharedUserData]; // force it to load.
 //    [[self.managedObjectContext undoManager] enableUndoRegistration];
     
+    [[SDUserData sharedUserData] masterPlaylist];
+    
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveSoon:) name:NSManagedObjectContextObjectsDidChangeNotification object:self.managedObjectContext];
 }
 
@@ -52,7 +52,7 @@
     [self performSelector:@selector(save) withObject:nil afterDelay:3.0];
 }
 
-- (NSString*) dataFile {
+- (NSURL*) dataFile {
     NSError *error;
     NSURL *appSupportDir = [[NSFileManager defaultManager] URLForDirectory:NSApplicationSupportDirectory
                                                                   inDomain:NSUserDomainMask
@@ -67,7 +67,7 @@
                                               attributes:nil
                                                    error:NULL];
     
-    return [[dataDirURL URLByAppendingPathComponent:@"data"] path];
+    return [dataDirURL URLByAppendingPathComponent:@"data"];
 }
 
 - (void) save {

@@ -40,4 +40,9 @@
     return [results lastObject];
 }
 
+- (SDPlaylist*) masterPlaylist {
+    NSArray* thereCanOnlyBeOne = [[self.playlists array] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"SELF.isMaster = YES"]];
+    return [thereCanOnlyBeOne lastObject];
+}
+
 @end

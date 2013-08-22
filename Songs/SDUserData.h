@@ -9,12 +9,15 @@
 #import <Foundation/Foundation.h>
 #import <CoreData/CoreData.h>
 
+#import "SDPlaylist.h"
 
 @interface SDUserData : NSManagedObject
 
 @property (nonatomic, retain) NSOrderedSet *playlists;
 
 + (SDUserData*) sharedUserData;
+
+- (SDPlaylist*) masterPlaylist;
 
 @end
 

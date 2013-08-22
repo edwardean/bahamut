@@ -136,15 +136,6 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 
-// TODO: selectPlaylist:
-
-
-
-
-// TODO: update "right triangle" icon when song playing-status changes
-
-
-
 
 
 - (void) doubleClickedThing:(id)sender {
