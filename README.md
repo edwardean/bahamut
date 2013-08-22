@@ -1,6 +1,6 @@
 ## Songs
 
-*For those of us who are tired of iTunes's crap*
+*The OS X music player I always wanted*
 
 * Current version: **0.1**
 * Requires: OS X 10.8 and up
