@@ -7,18 +7,20 @@
 //
 
 #import "SDSong.h"
+#import "SDPlaylist.h"
 
 #import <AVFoundation/AVFoundation.h>
 
 @implementation SDSong
 
-@dynamic title;
-@dynamic duration;
 @dynamic album;
 @dynamic artist;
+@dynamic duration;
 @dynamic path;
+@dynamic title;
+@dynamic currentSong;
+@dynamic paused;
 @dynamic playlists;
-
 
 static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
     NSArray* metadataItems = [AVMetadataItem metadataItemsFromArray:[asset commonMetadata]

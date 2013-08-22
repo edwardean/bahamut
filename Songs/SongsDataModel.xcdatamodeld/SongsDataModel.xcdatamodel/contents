@@ -11,8 +11,10 @@
     <entity name="SDSong" representedClassName="SDSong" syncable="YES">
         <attribute name="album" optional="YES" attributeType="String" syncable="YES"/>
         <attribute name="artist" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="currentSong" optional="YES" transient="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="duration" optional="YES" attributeType="Double" defaultValueString="0.0" syncable="YES"/>
         <attribute name="path" optional="YES" attributeType="String" syncable="YES"/>
+        <attribute name="paused" optional="YES" attributeType="Boolean" syncable="YES"/>
         <attribute name="title" optional="YES" attributeType="String" syncable="YES"/>
         <relationship name="playlists" optional="YES" toMany="YES" deletionRule="Nullify" destinationEntity="SDPlaylist" inverseName="songs" inverseEntity="SDPlaylist" syncable="YES"/>
     </entity>
@@ -20,8 +22,8 @@
         <relationship name="playlists" optional="YES" toMany="YES" deletionRule="Nullify" ordered="YES" destinationEntity="SDPlaylist" inverseName="userData" inverseEntity="SDPlaylist" syncable="YES"/>
     </entity>
     <elements>
-        <element name="SDSong" positionX="160" positionY="192" width="128" height="135"/>
         <element name="SDPlaylist" positionX="160" positionY="192" width="128" height="135"/>
+        <element name="SDSong" positionX="160" positionY="192" width="128" height="165"/>
         <element name="SDUserData" positionX="160" positionY="192" width="128" height="60"/>
     </elements>
 </model>

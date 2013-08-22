@@ -27,9 +27,11 @@
         SDUserData* userData = [[SDUserData alloc] initWithEntity:[NSEntityDescription entityForName:@"SDUserData" inManagedObjectContext:ctx]
                                    insertIntoManagedObjectContext:ctx];
         
-        SDPlaylist* masterPlaylist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist" inManagedObjectContext:ctx]
+        SDPlaylist* masterPlaylist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist"
+                                                                                    inManagedObjectContext:ctx]
                                          insertIntoManagedObjectContext:ctx];
-        
+        masterPlaylist.title = @"All Songs";
+        masterPlaylist.isMaster = YES;
         [userData addPlaylistsObject: masterPlaylist];
         
         return userData;

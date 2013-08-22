@@ -17,10 +17,52 @@
 #import "SDSourceListViewController.h"
 
 
+
+#import "SDCoreData.h"
+#import "SDPlaylist.h"
+#import "SDUserData.h"
+
+
+
+
+
+@interface SDOrderedSetTransformer : NSValueTransformer
+
+@end
+
+@implementation SDOrderedSetTransformer
+
++ (Class)transformedValueClass {
+    return [NSArray class];
+}
+
++ (BOOL)allowsReverseTransformation {
+    return YES;
+}
+
+- (id)transformedValue:(id)value {
+    return [(NSOrderedSet *)value array];
+}
+
+- (id)reverseTransformedValue:(id)value {
+	return [NSOrderedSet orderedSetWithArray:value];
+}
+
+@end
+
+
+
+#import "SDPlaylistTableDelegate.h"
+#import "SDSongTableDelegate.h"
+
+
 @interface SDPlayerWindowController ()
 
+@property IBOutlet SDPlaylistTableDelegate* playlistTableDelegate;
+@property IBOutlet SDSongTableDelegate* songTableDelegate;
+
 @property (weak) IBOutlet NSView* playlistsViewHouser;
-//@property SDSourceListViewController* playlistsViewController;
+@property SDSourceListViewController* playlistsViewController;
 //@property SDOldPlaylist* selectedPlaylist;
 
 @property (weak) IBOutlet NSView* songListViewHouser;
@@ -51,15 +93,17 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
-    
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistAddedNotification:) name:SDPlaylistAddedNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRemovedNotification:) name:SDPlaylistRemovedNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playlistRenamedNotification:) name:SDPlaylistRenamedNotification object:nil];
+//    
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
     
     self.songListViewControllers = [NSMutableArray array];
+    
+//    return;
     
 //    for (SDOldPlaylist* playlist in [SDSharedData() playlists]) {
 //        SDSongListViewController* vc = [[SDSongListViewController alloc] init];
@@ -68,19 +112,28 @@
 //    }
     
     
+    
+    
+    
+    [self setNextResponder: self.playlistTableDelegate];
+    [self.playlistTableDelegate setNextResponder: self.songTableDelegate];
+    
+    
+    
+    
     [[self window] setBackgroundColor:[NSColor colorWithDeviceWhite:0.92 alpha:1.0]];
     
 //    self.playlistsViewController = [[SDSourceListViewController alloc] init];
 //    self.playlistsViewController.playlistsViewDelegate = self;
 //    [[self.playlistsViewController view] setFrame:[self.playlistsViewHouser frame]];
 //    [self.playlistsViewHouser addSubview:[self.playlistsViewController view]];
-//    
+    
 //    [self setNextResponder:self.playlistsViewController];
-//    
+    
 //    self.selectedPlaylist = [[SDSharedData() playlists] objectAtIndex:0];
 //    [self.playlistsViewController selectPlaylist: self.selectedPlaylist];
     
-    [self updatePlayerViews];
+//    [self updatePlayerViews];
     
 //    self.window.styleMask = NSBorderlessWindowMask;
 //    [self.window setMovableByWindowBackground:YES];
@@ -90,9 +143,18 @@
     [self.killedDelegate playerWindowKilled:self];
 }
 
-//- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
-//    return [SDSharedData() undoManager];
-//}
+- (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
+    return [[SDCoreData sharedCoreData].managedObjectContext undoManager];
+}
+
+
+
+
+
+- (NSManagedObjectContext*) managedObjectContext {
+    return [SDCoreData sharedCoreData].managedObjectContext;
+}
+
 
 
 
@@ -280,15 +342,19 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 
 
-- (IBAction) makeNewPlaylist:(id)sender {
-//    NSMutableArray* playlists = [SDSharedData() playlists];
+//- (IBAction) makeNewPlaylist:(id)sender {
+////    NSMutableArray* playlists = [SDSharedData() playlists];
 //    
-//    SDOldPlaylist* newPlaylist = [[SDOldPlaylist alloc] init];
-//    [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
+////    SDPlaylist* playlist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist" inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext] insertIntoManagedObjectContext:nil];
 //    
-//    [self.playlistsViewController selectPlaylist:newPlaylist];
-//    [self.playlistsViewController editPlaylistTitle];
-}
+////    [self.playlistsViewController insertPlaylist: playlist];
+//    
+////    SDOldPlaylist* newPlaylist = [[SDOldPlaylist alloc] init];
+////    [SDSharedData() insertPlaylist:newPlaylist atIndex:[playlists count]];
+//    
+////    [self.playlistsViewController selectPlaylist:newPlaylist];
+////    [self.playlistsViewController editPlaylistTitle];
+//}
 
 
 

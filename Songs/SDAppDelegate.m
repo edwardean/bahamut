@@ -16,6 +16,11 @@
 
 
 
+#import "SDImporter.h"
+
+
+
+
 #import "SDCoreData.h"
 #import "SDUserData.h"
 #import "SDPlaylist.h"
@@ -33,6 +38,11 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification {
     [[SDCoreData sharedCoreData] setup];
+    
+//    SDPlaylist* playlist = [[[SDUserData sharedUserData] playlists] firstObject];
+//    playlist.title = @"haha";
+    
+//    NSLog(@"%@", playlist);
     
 //    {
 //        NSUInteger count = [[SDCoreData sharedCoreData].managedObjectContext countForFetchRequest:[NSFetchRequest fetchRequestWithEntityName:@"SDUserData"] error:NULL];
@@ -152,11 +162,11 @@
 }
 
 - (void) playerWindowKilled:(id)controller {
-    [self.playerWindowControllers removeObject:controller];
+//    [self.playerWindowControllers removeObject:controller];
 }
 
 - (IBAction) importFromiTunes:(id)sender {
-//    [SDSharedData() importFromiTunes];
+//    [SDImporter importFromiTunes];
 }
 
 - (IBAction) newPlayerWindow:(id)sender {
@@ -175,7 +185,7 @@
     
     [openPanel beginWithCompletionHandler:^(NSInteger result) {
         if (result == NSFileHandlingPanelOKButton) {
-//            [[SDUserDataManager sharedMusicManager] importSongsUnderURLs:[openPanel URLs]];
+            [SDImporter importSongsUnderURLs:[openPanel URLs]];
         }
     }];
 }
