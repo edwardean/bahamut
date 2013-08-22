@@ -439,6 +439,8 @@
     
     [self.playlistsArrayController setSelectedObjects: @[[SDMusicPlayer sharedPlayer].currentPlaylist]];
     [self.songsArrayController setSelectedObjects: @[[SDMusicPlayer sharedPlayer].currentSong]];
+    [self.songsTable scrollRowToVisible: [self.songsArrayController selectionIndex]];
+    [[self.songsTable window] makeFirstResponder: self.songsTable];
 }
 
 
