@@ -10,7 +10,6 @@
 
 - Hope someone makes a really pretty icon for it :)
 - Optional Menu bar interface (TunesBar port)
-- Only display track info parts that exist! ("album" sometimes doesn't, I think)
 
 #### To do after 1.0
 
