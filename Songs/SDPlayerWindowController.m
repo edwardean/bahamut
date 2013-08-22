@@ -11,20 +11,12 @@
 #import "SDMusicPlayer.h"
 #import "SDTrackPositionView.h"
 
-
-
 #import "SDCoreData.h"
-#import "SDPlaylist.h"
-#import "SDUserData.h"
-
-
-
-
-
-
 
 #import "SDPlaylistTableDelegate.h"
 #import "SDSongTableDelegate.h"
+
+
 
 
 @interface SDPlayerWindowController ()
@@ -56,21 +48,16 @@
 - (void)windowDidLoad {
     [super windowDidLoad];
     
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongTimeDidChange:) name:SDCurrentSongTimeDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(currentSongDidChange:) name:SDCurrentSongDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(playerStatusDidChange:) name:SDPlayerStatusDidChangeNotification object:nil];
-    
     [self setNextResponder: self.playlistTableDelegate];
     [self.playlistTableDelegate setNextResponder: self.songTableDelegate];
     
     [[self window] setBackgroundColor:[NSColor colorWithDeviceWhite:0.92 alpha:1.0]];
     
-    [self updatePlayerViews];
-    
-//    [self.window setMovableByWindowBackground:YES];
+    [self bindViews];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
+    [self unbindViews];
     [self.killedDelegate playerWindowKilled:self];
 }
 
@@ -91,106 +78,39 @@
 
 
 
-
-
-
-
-#pragma mark - Notifications
-
-
-
-
-
-- (void) playerStatusDidChange:(NSNotification*)note {
-    [self updatePlayerViews];
-}
-
-- (void) currentSongDidChange:(NSNotification*)note {
-    [self updatePlayerViews];
-}
-
-- (void) currentSongTimeDidChange:(NSNotification*)note {
-    [self updatePlayerViews];
-}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-NS_INLINE NSString* SDTimeForSeconds(CGFloat seconds) {
-    CGFloat mins = seconds / 60.0;
-    CGFloat secs = fmod(seconds, 60.0);
-    return [NSString stringWithFormat:@"%d:%02d", (int)mins, (int)secs];
-}
-
-
-- (void) updatePlayerViews {
-    [self.nowPlayingControlsView setHidden: [[SDMusicPlayer sharedPlayer] stopped]];
+- (void) bindViews {
+    [self.nowPlayingControlsView bind:@"hidden" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:nil];
     
-    [self.prevButton setEnabled: ![[SDMusicPlayer sharedPlayer] stopped]];
-    [self.nextButton setEnabled: ![[SDMusicPlayer sharedPlayer] stopped]];
+    [self.prevButton bind:@"enabled" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: NSNegateBooleanTransformerName}];
+    [self.nextButton bind:@"enabled" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: NSNegateBooleanTransformerName}];
     
-    [self.playButton setTitle: [[SDMusicPlayer sharedPlayer] isPlaying] ? @"Pause" : @"Play"];
+    [self.songPositionSlider bind:@"maxValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong.duration" options:nil];
+    [self.songPositionSlider bind:@"currentValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:nil];
     
-    SDSong* currentSong = [[SDMusicPlayer sharedPlayer] currentSong];
+    [self.timeElapsedField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:@{NSValueTransformerNameBindingOption: @"SDTimeForSeconds"}];
+    [self.timeRemainingField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"remainingTime" options:@{NSValueTransformerNameBindingOption: @"SDTimeForSeconds"}];
     
-    if (currentSong) {
-        NSString* trackInfo = [NSString stringWithFormat:@"%@  -  %@  -  %@", currentSong.title, currentSong.artist, currentSong.album];
-        [self.currentSongInfoField setStringValue:trackInfo];
-        
-        CGFloat current = [SDMusicPlayer sharedPlayer].currentTime;
-        CGFloat max = currentSong.duration;
-        CGFloat left = max - current;
-        
-        [self.timeElapsedField setStringValue: SDTimeForSeconds(current)];
-        [self.timeRemainingField setStringValue: SDTimeForSeconds(left)];
-        
-        self.songPositionSlider.maxValue = currentSong.duration;
-        self.songPositionSlider.currentValue = current;
-    }
+    [self.currentSongInfoField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong" options:@{NSValueTransformerNameBindingOption: @"SDSongInfoTransformer"}];
+    
+    [self.playButton bind:@"title" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"isPlaying" options:@{NSValueTransformerNameBindingOption: @"SDPlayingTitleTransformer"}];
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+- (void) unbindViews {
+    [self.nowPlayingControlsView unbind:@"hidden"];
+    
+    [self.prevButton unbind:@"enabled"];
+    [self.nextButton unbind:@"enabled"];
+    
+    [self.songPositionSlider unbind:@"maxValue"];
+    [self.songPositionSlider unbind:@"currentValue"];
+    
+    [self.timeElapsedField unbind:@"value"];
+    [self.timeRemainingField unbind:@"value"];
+    
+    [self.currentSongInfoField unbind:@"value"];
+    
+    [self.playButton unbind:@"title"];
+}
 
 
 

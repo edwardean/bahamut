@@ -11,10 +11,6 @@
 #import "SDSong.h"
 #import "SDPlaylist.h"
 
-#define SDCurrentSongDidChangeNotification @"SDCurrentSongDidChangeNotification"
-#define SDCurrentSongTimeDidChangeNotification @"SDCurrentSongTimeDidChangeNotification"
-#define SDPlayerStatusDidChangeNotification @"SDPlayerStatusDidChangeNotification"
-
 @interface SDMusicPlayer : NSObject
 
 + (SDMusicPlayer*) sharedPlayer;
@@ -33,9 +29,11 @@
 - (void) nextSong;
 - (void) previousSong;
 
-- (SDSong*) currentSong;
+@property (readonly) SDSong* currentSong;
+
 - (SDPlaylist*) currentPlaylist;
 @property (readonly) CGFloat currentTime;
+@property (readonly) CGFloat remainingTime;
 @property (readonly) BOOL stopped;
 
 @end

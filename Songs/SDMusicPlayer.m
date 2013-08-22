@@ -15,6 +15,7 @@
 @property SDPlaylist* currentPlaylist;
 @property NSMutableArray* songsPlaying;
 
+@property SDSong* currentSong;
 @property NSUInteger currentSongIndex;
 @property CGFloat currentTime;
 
@@ -75,19 +76,18 @@
 
 - (void) stop {
     self.stopped = YES;
+    self.currentSong = nil;
     
     [self.player pause];
     [self.player removeTimeObserver:self.timeObserver];
     
     self.player = nil;
     self.currentTime = 0.0;
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDCurrentSongDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDCurrentSongTimeDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlayerStatusDidChangeNotification object:nil];
 }
 
 - (void) actuallyPlaySong {
+    self.currentSong = [self.songsPlaying objectAtIndex: self.currentSongIndex];
+    
     self.currentSong.isCurrentSong = YES;
     self.currentSong.paused = NO;
     
@@ -106,21 +106,9 @@
                                                                   queue:NULL
                                                              usingBlock:^(CMTime time) {
                                                                  weakSelf.currentTime = CMTimeGetSeconds(time);
-                                                                 [[NSNotificationCenter defaultCenter] postNotificationName:SDCurrentSongTimeDidChangeNotification object:nil];
                                                              }];
     
     [self.player play];
-    
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDCurrentSongDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDCurrentSongTimeDidChangeNotification object:nil];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlayerStatusDidChangeNotification object:nil];
-}
-
-- (SDSong*) currentSong {
-    if (self.stopped)
-        return nil;
-    else
-        return [self.songsPlaying objectAtIndex: self.currentSongIndex];
 }
 
 - (void) shuffleSongs {
@@ -134,13 +122,20 @@
     [self nextSong];
 }
 
++ (NSSet*) keyPathsForValuesAffectingRemainingTime {
+    return [NSSet setWithArray:@[@"currentSong.duration", @"currentTime"]];
+}
+
+- (CGFloat) remainingTime {
+    return self.currentSong.duration - self.currentTime;
+}
+
 - (void) seekToTime:(CGFloat)percent {
     [self.player seekToTime:CMTimeMakeWithSeconds(percent, 1)];
 }
 
 - (void) pause {
     [self.player pause];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlayerStatusDidChangeNotification object:nil];
     
     self.currentPlaylist.paused = YES;
     self.currentSong.paused = YES;
@@ -148,7 +143,6 @@
 
 - (void) resume {
     [self.player play];
-    [[NSNotificationCenter defaultCenter] postNotificationName:SDPlayerStatusDidChangeNotification object:nil];
     
     self.currentPlaylist.paused = NO;
     self.currentSong.paused = NO;
