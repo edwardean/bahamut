@@ -217,6 +217,10 @@
         [[self.searchField window] makeFirstResponder: self.searchField];
 }
 
+
+
+
+
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
 //    NSLog(@"%@", NSStringFromSelector(command));
     if (control == self.searchField) {
@@ -224,6 +228,8 @@
             [self toggleSearchBar:NO];
             [self.searchField setStringValue:@""];
             self.filterString = nil;
+            [[self.songsTable window] makeFirstResponder: self.songsTable];
+            [self.songsTable scrollRowToVisible: [self.songsArrayController selectionIndex]];
             return YES;
         }
         if (command == @selector(insertNewline:)) {
