@@ -14,7 +14,6 @@
 #import "SDTrackPositionView.h"
 
 #import "SDSongListViewController.h"
-#import "SDSourceListViewController.h"
 
 
 
@@ -62,7 +61,6 @@
 @property IBOutlet SDSongTableDelegate* songTableDelegate;
 
 @property (weak) IBOutlet NSView* playlistsViewHouser;
-@property SDSourceListViewController* playlistsViewController;
 //@property SDOldPlaylist* selectedPlaylist;
 
 @property (weak) IBOutlet NSView* songListViewHouser;
@@ -160,7 +158,7 @@
 
 
 - (void) updateWindowTitle {
-//    self.window.title = [NSString stringWithFormat:@"%@ - %@", @"Songs", self.selectedPlaylist.title];
+//    self.window.title = [NSString stringWithFormat:@"%@ - %@", @"Songs", [self selectedPlaylist].title];
 }
 
 
@@ -184,10 +182,6 @@
 //    [self.playlistsViewController setNextResponder: vc];
 //    
 ////    NSLog(@"%@", self.selectedPlaylist);
-//}
-//
-//- (void) playPlaylist:(SDOldPlaylist*)playlist {
-//    [[SDMusicPlayer sharedPlayer] playPlaylist: playlist];
 //}
 
 

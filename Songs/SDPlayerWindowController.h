@@ -8,8 +8,6 @@
 
 #import <Cocoa/Cocoa.h>
 
-#import "SDSourceListViewController.h"
-
 @protocol MUPlayerWindowKilledDelegate <NSObject>
 
 - (void) playerWindowKilled:(id)controller;

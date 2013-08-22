@@ -9,10 +9,18 @@
 #import "SDPlaylistTableDelegate.h"
 
 
-
+#import "SDMusicPlayer.h"
 
 #import "SDUserData.h"
 #import "SDPlaylist.h"
+
+
+
+
+
+static NSString* SDSongDragType = @"SDSongDragType";
+static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
+
 
 
 @interface SDTableRowView : NSTableRowView
@@ -40,7 +48,8 @@
 
 @interface SDPlaylistTableDelegate ()
 
-@property IBOutlet NSArrayController* playlistsArrayController;
+@property (weak) IBOutlet NSTableView* playlistsTable;
+@property (weak) IBOutlet NSArrayController* playlistsArrayController;
 
 @end
 
@@ -48,10 +57,21 @@
 @implementation SDPlaylistTableDelegate
 
 
+- (void) awakeFromNib {
+    [super awakeFromNib];
+    
+    [self.playlistsTable registerForDraggedTypes:@[SDPlaylistDragType]];
+    [self.playlistsTable registerForDraggedTypes:@[SDSongDragType]];
+    
+    [self.playlistsTable setTarget:self];
+    [self.playlistsTable setDoubleAction:@selector(doubleClickedThing:)];
+}
+
+
 
 - (IBAction) severelyDeleteSomething:(id)sender {
-    //    SDPlaylist* playlist = [[self.playlistsArrayController selectedObjects] lastObject];
-    //    [[playlist managedObjectContext] deleteObject: playlist];
+    SDPlaylist* playlist = [[self.playlistsArrayController selectedObjects] lastObject];
+    [[playlist managedObjectContext] deleteObject: playlist];
 }
 
 
@@ -68,28 +88,144 @@
     return [[SDTableRowView alloc] init];
 }
 
-//- (void)tableViewSelectionDidChange:(NSNotification *)aNotification {
-////    NSLog(@"%@", [self.playlistsArrayController selectedObjects]);
-//    //    [self.playlistsViewDelegate selectPlaylist: [self selectedPlaylist]];
-//}
 
 
-
-
-- (IBAction) makePlaylist:(id)sender {
-//    return;
-    
+- (IBAction) makeNewPlaylist:(id)sender {
     SDPlaylist* playlist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist"
                                                                           inManagedObjectContext:[SDUserData sharedUserData].managedObjectContext]
                                insertIntoManagedObjectContext:[SDUserData sharedUserData].managedObjectContext];
     
     [[SDUserData sharedUserData] addPlaylistsObject: playlist];
     
-    NSLog(@"%@", [SDUserData sharedUserData].playlists);
-//    [self.playlistsArrayController rearrangeObjects];
-    
-//    NSLog(@"%@", [self.playlistsArrayController selectedObjects]);
-//    [self.playlistsArrayController add: self];
+    [self.playlistsArrayController setSelectedObjects: @[playlist]];
+    [self.playlistsTable editColumn:0
+                                row:[self.playlistsTable selectedRow]
+                          withEvent:nil
+                             select:YES];
 }
+
+
+
+
+
+
+- (SDPlaylist*) selectedPlaylist {
+    return [[self.playlistsArrayController selectedObjects] lastObject];
+}
+
+
+
+- (BOOL) respondsToSelector:(SEL)aSelector {
+    if (aSelector == @selector(severelyDeleteSomething:)) {
+        if ([[self.playlistsTable window] firstResponder] != self.playlistsTable)
+            return NO;
+        
+        if ([self selectedPlaylist] == nil)
+            return NO;
+        
+        if ([[self selectedPlaylist] isMaster])
+            return NO;
+        
+        return YES;
+    }
+    else {
+        return [super respondsToSelector:aSelector];
+    }
+}
+
+
+
+// TODO: selectPlaylist:
+
+
+
+
+// TODO: update "right triangle" icon when song playing-status changes
+
+
+
+
+
+- (void) doubleClickedThing:(id)sender {
+    NSInteger row = [self.playlistsTable clickedRow];
+    
+    if (row < 0)
+        return;
+    
+//    SDPlaylist* playlist = [[self.playlistsArrayController arrangedObjects] objectAtIndex:row];
+//    [[SDMusicPlayer sharedPlayer] playPlaylist: playlist];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Playlists, Drag / Drop
+
+- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+    [pboard setPropertyList:@([rowIndexes firstIndex])
+                    forType:SDPlaylistDragType];
+    
+    return YES;
+}
+
+- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
+    if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
+        if (operation == NSTableViewDropAbove)
+            return NSDragOperationMove;
+        else
+            return NSDragOperationNone;
+    }
+    else {
+//        if (operation == NSTableViewDropOn && ![[[SDSharedData() playlists] objectAtIndex: row] isMasterPlaylist]) {
+//            return NSDragOperationCopy;
+//        }
+//        else
+            return NSDragOperationNone;
+    }
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
+    if ([[[info draggingPasteboard] types] containsObject: SDPlaylistDragType]) {
+        NSUInteger playlistIndex = [[[info draggingPasteboard] propertyListForType:SDPlaylistDragType] unsignedIntegerValue];
+        
+        NSDictionary* bindingInfo = [self.playlistsArrayController infoForBinding:@"contentArray"];
+        NSMutableOrderedSet* s = [[bindingInfo objectForKey:NSObservedObjectKey] mutableOrderedSetValueForKeyPath:[bindingInfo objectForKey:NSObservedKeyPathKey]];
+        
+        if (playlistIndex <= row)
+            row--;
+        
+        [s moveObjectsAtIndexes:[NSIndexSet indexSetWithIndex:playlistIndex] toIndex:row];
+        
+        return YES;
+    }
+    else {
+//        NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
+//        NSArray* uuids = [data objectForKey:@"uuids"];
+//        NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
+//        
+//        SDOldPlaylist* toPlaylist = [[SDSharedData() playlists] objectAtIndex: row];
+//        [toPlaylist addSongs:songs];
+        
+        return YES;
+    }
+}
+
+
+
+
+
 
 @end

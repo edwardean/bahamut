@@ -10,6 +10,18 @@
 
 
 
+#import "SDPlaylist.h"
+
+
+#import "SDMusicPlayer.h"
+
+#define SDSongDragType @"SDSongDragType"
+
+
+
+
+
+
 
 @interface SDTextFieldCell : NSTextFieldCell
 @end
@@ -106,7 +118,23 @@
 
 @interface SDSongTableDelegate ()
 
-@property IBOutlet NSTableView* songsTable;
+@property (weak) IBOutlet NSTableView* songsTable;
+@property (weak) IBOutlet NSArrayController* playlistsArrayController;
+@property (weak) IBOutlet NSArrayController* songsArrayController;
+
+
+
+
+@property (readonly) NSPredicate* filterPredicate;
+@property NSString* filterString;
+
+
+@property (weak) IBOutlet NSView* songsHousingView;
+
+//@property (weak) IBOutlet NSTableView* songsTable;
+@property (weak) IBOutlet NSView* searchContainerView;
+@property (weak) IBOutlet NSSearchField* searchField;
+@property (weak) IBOutlet NSScrollView* songsScrollView;
 
 @end
 
@@ -139,10 +167,208 @@
     [self.songsTable setTarget:self];
     [self.songsTable setDoubleAction:@selector(startPlayingSong:)];
     
-//    [self toggleSearchBar:NO];
+    [self toggleSearchBar:NO];
     
-//    [self.songsTable registerForDraggedTypes:@[SDSongDragType]];
+    [self.songsTable registerForDraggedTypes:@[SDSongDragType]];
 }
+
+
+
+
+
+
+
+
+
+
+- (IBAction) startPlayingSong:(id)sender {
+    NSArray* songs = [self selectedSongs];
+    
+    if ([songs count] != 1)
+        return;
+    
+//    [[SDMusicPlayer sharedPlayer] playSong:[songs lastObject]
+//                                inPlaylist:[self selectedPlaylist]];
+}
+
+
+
+
+
+
+
+
+
+- (SDPlaylist*) selectedPlaylist {
+    return [[self.playlistsArrayController selectedObjects] lastObject];
+}
+
+- (NSArray*) selectedSongs {
+    return [self.songsArrayController selectedObjects];
+}
+
+
+
+
+
+
+
+#pragma mark - Deleting stuff
+
+- (BOOL) respondsToSelector:(SEL)aSelector {
+    if (aSelector == @selector(severelyDeleteSomething:)) {
+        if ([[self.songsTable window] firstResponder] != self.songsTable)
+            return NO;
+        
+        if ([[self selectedPlaylist] isMaster])
+            return NO;
+        
+        if ([[self.songsTable selectedRowIndexes] count] < 1)
+            return NO;
+        
+        return YES;
+    }
+    
+    return [super respondsToSelector:aSelector];
+}
+
+- (IBAction) severelyDeleteSomething:(id)sender {
+    [[self selectedPlaylist] removeSongs: [NSOrderedSet orderedSetWithArray:[self selectedSongs]]];
+}
+
+
+
+
+
+
+
+
++ (NSSet*) keyPathsForValuesAffectingFilterPredicate {
+    return [NSSet setWithArray:@[@"filterString"]];
+}
+
+- (NSPredicate*) filterPredicate {
+    if ([self.filterString length] == 0)
+        return nil;
+    else
+        return [NSPredicate predicateWithFormat:@"(title CONTAINS[cd] %@) OR (artist CONTAINS[cd] %@) OR (album CONTAINS[cd] %@)",
+                self.filterString,
+                self.filterString,
+                self.filterString
+                ];
+}
+
+
+
+
+
+
+
+
+
+- (IBAction) performFindPanelAction:(id)sender {
+    [self toggleSearchBar:YES];
+}
+
+- (void) toggleSearchBar:(BOOL)shouldShow {
+    BOOL isShowing = ![self.searchContainerView isHidden];
+    
+    if (shouldShow != isShowing) {
+        NSRect songsTableFrame = [self.songsHousingView bounds];
+        
+        if (shouldShow) {
+            NSRect searchSectionFrame = [self.searchContainerView frame];
+            NSDivideRect(songsTableFrame, &searchSectionFrame, &songsTableFrame, searchSectionFrame.size.height, NSMinYEdge);
+        }
+        
+        [self.searchContainerView setHidden: !shouldShow];
+        [self.songsScrollView setFrame:songsTableFrame];
+    }
+    
+    if (shouldShow)
+        [[self.searchField window] makeFirstResponder: self.searchField];
+}
+
+- (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
+    if (control == self.searchField && command == @selector(cancelOperation:)) {
+        [self toggleSearchBar:NO];
+        [self.searchField setStringValue:@""];
+        self.filterString = nil;
+        return YES;
+    }
+    
+    return NO;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+#pragma mark - Songs table, Drag / Drop
+
+
+//- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+//    NSArray* songs = [[self visibleSongs] objectsAtIndexes:rowIndexes];
+//    NSArray* uuids = [songs valueForKey:@"uuid"];
+//    NSUInteger playlistIndex = [[SDSharedData() playlists] indexOfObject:self.playlist];
+//    
+//    [pboard setPropertyList:@{@"uuids": uuids, @"playlist": @(playlistIndex)}
+//                    forType:SDSongDragType];
+//    
+//    return YES;
+//}
+//
+//- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
+//    if (operation == NSTableViewDropAbove && ![self.playlist isMasterPlaylist])
+//        return NSDragOperationCopy;
+//    else
+//        return NSDragOperationNone;
+//}
+//
+//- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
+//    NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
+//    
+//    NSArray* uuids = [data objectForKey:@"uuids"];
+//    NSArray* draggingSongs = [SDUserDataManager songsForUUIDs:uuids];
+//    
+//    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
+//    SDOldPlaylist* fromPlaylist = [[SDSharedData() playlists] objectAtIndex:playlistIndex];
+//    
+//    if (fromPlaylist == self.playlist) {
+//        [self.playlist moveSongs:draggingSongs
+//                         toIndex:row];
+//    }
+//    else {
+//        [self.playlist addSongs:draggingSongs
+//                        atIndex:row];
+//    }
+//    
+//    return YES;
+//}
+//
+//- (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
+//    [aTableView reloadData];
+//}
+
+
+
+
+
+
 
 
 @end
