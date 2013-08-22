@@ -40,9 +40,9 @@
     
     [self.managedObjectModel kc_generateOrderedSetAccessors];
     
-    [[self.managedObjectContext undoManager] disableUndoRegistration]; // this barely seems to help.
+//    [[self.managedObjectContext undoManager] disableUndoRegistration]; // this barely seems to help.
     [SDUserData sharedUserData]; // force it to load.
-    [[self.managedObjectContext undoManager] enableUndoRegistration];
+//    [[self.managedObjectContext undoManager] enableUndoRegistration];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveSoon:) name:NSManagedObjectContextObjectsDidChangeNotification object:self.managedObjectContext];
 }

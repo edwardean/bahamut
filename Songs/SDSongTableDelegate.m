@@ -11,7 +11,7 @@
 
 
 #import "SDPlaylist.h"
-
+#import "SDCoreData.h"
 
 #import "SDMusicPlayer.h"
 
@@ -348,48 +348,58 @@
 #pragma mark - Songs table, Drag / Drop
 
 
-//- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
-//    NSArray* songs = [[self visibleSongs] objectsAtIndexes:rowIndexes];
-//    NSArray* uuids = [songs valueForKey:@"uuid"];
-//    NSUInteger playlistIndex = [[SDSharedData() playlists] indexOfObject:self.playlist];
-//    
-//    [pboard setPropertyList:@{@"uuids": uuids, @"playlist": @(playlistIndex)}
-//                    forType:SDSongDragType];
-//    
-//    return YES;
-//}
-//
-//- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
-//    if (operation == NSTableViewDropAbove && ![self.playlist isMasterPlaylist])
-//        return NSDragOperationCopy;
-//    else
-//        return NSDragOperationNone;
-//}
-//
-//- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
-//    NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
-//    
-//    NSArray* uuids = [data objectForKey:@"uuids"];
-//    NSArray* draggingSongs = [SDUserDataManager songsForUUIDs:uuids];
-//    
-//    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
-//    SDOldPlaylist* fromPlaylist = [[SDSharedData() playlists] objectAtIndex:playlistIndex];
-//    
-//    if (fromPlaylist == self.playlist) {
-//        [self.playlist moveSongs:draggingSongs
-//                         toIndex:row];
-//    }
-//    else {
-//        [self.playlist addSongs:draggingSongs
-//                        atIndex:row];
-//    }
-//    
-//    return YES;
-//}
-//
-//- (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
-//    [aTableView reloadData];
-//}
+- (BOOL)tableView:(NSTableView *)aTableView writeRowsWithIndexes:(NSIndexSet *)rowIndexes toPasteboard:(NSPasteboard *)pboard {
+    NSArray* songs = [[self.songsArrayController arrangedObjects] objectsAtIndexes:rowIndexes];
+    NSArray* uuids = [songs valueForKeyPath:@"objectID.URIRepresentation"];
+    
+    NSUInteger playlistIndex = [[self.playlistsArrayController arrangedObjects] indexOfObject:[self selectedPlaylist]];
+    
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:@{@"uuids": uuids, @"playlist": @(playlistIndex)}];
+    
+    [pboard setData:data
+            forType:SDSongDragType];
+    
+    return YES;
+}
+
+- (NSDragOperation)tableView:(NSTableView *)aTableView validateDrop:(id < NSDraggingInfo >)info proposedRow:(NSInteger)row proposedDropOperation:(NSTableViewDropOperation)operation {
+    if (operation == NSTableViewDropAbove && ![[self selectedPlaylist] isMaster])
+        return NSDragOperationCopy;
+    else
+        return NSDragOperationNone;
+}
+
+- (BOOL)tableView:(NSTableView *)aTableView acceptDrop:(id < NSDraggingInfo >)info row:(NSInteger)row dropOperation:(NSTableViewDropOperation)operation {
+    NSData* rawData = [[info draggingPasteboard] dataForType:SDSongDragType];
+    NSDictionary* data = [NSKeyedUnarchiver unarchiveObjectWithData:rawData];
+    
+    NSArray* uuids = [data objectForKey:@"uuids"];
+    
+    NSMutableArray* draggingSongs = [NSMutableArray array];
+    for (NSURL* uri in uuids) {
+        NSManagedObjectID* mid = [[SDCoreData sharedCoreData].persistentStoreCoordinator managedObjectIDForURIRepresentation:uri];
+        NSManagedObject* obj = [[SDCoreData sharedCoreData].managedObjectContext objectWithID:mid];
+        [draggingSongs addObject:obj];
+    }
+    
+    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
+    SDPlaylist* fromPlaylist = [[self.playlistsArrayController arrangedObjects] objectAtIndex:playlistIndex];
+    
+    if (fromPlaylist == [self selectedPlaylist]) {
+        [[self selectedPlaylist] moveSongs:draggingSongs
+                                   toIndex:row];
+    }
+    else {
+        [[self selectedPlaylist] addSongs:draggingSongs
+                                  atIndex:row];
+    }
+    
+    return YES;
+}
+
+- (void)tableView:(NSTableView *)aTableView sortDescriptorsDidChange:(NSArray *)oldDescriptors {
+    [aTableView reloadData];
+}
 
 
 

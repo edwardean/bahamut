@@ -23,17 +23,16 @@
 @dynamic paused;
 
 
-//- (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex {
-//    NSMutableArray* songsToAdd = [songs mutableCopy];
-//    [songsToAdd removeObjectsInArray: self.songs];
-//    songs = songsToAdd;
-//    
-//    NSRange indexRange = NSMakeRange(atIndex, [songs count]);
-//    NSIndexSet* indexes = [NSIndexSet indexSetWithIndexesInRange:indexRange];
-//    [self addSongs:songs atIndexes:indexes];
-//}
-//
-//- (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex {
+- (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex {
+    NSRange indexRange = NSMakeRange(atIndex, [songs count]);
+    NSIndexSet* indexes = [NSIndexSet indexSetWithIndexesInRange:indexRange];
+    [self insertSongs:songs atIndexes:indexes];
+}
+
+- (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex {
+    
+    NSLog(@"%@", self);
+    
 //    NSIndexSet* indices = [self.songs indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
 //        return [songs containsObject:obj];
 //    }];
@@ -44,6 +43,6 @@
 //    [self removeSongs:songs];
 //    [self addSongs:songs
 //           atIndex:moveToIndex];
-//}
+}
 
 @end

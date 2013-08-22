@@ -25,6 +25,9 @@
 
 @property (nonatomic, retain) SDUserData *userData;
 
+- (void) addSongs:(NSArray*)songs atIndex:(NSInteger)atIndex;
+- (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex;
+
 @end
 
 @interface SDPlaylist (CoreDataGeneratedAccessors)

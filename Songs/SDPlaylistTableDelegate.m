@@ -11,6 +11,7 @@
 
 #import "SDMusicPlayer.h"
 
+#import "SDCoreData.h"
 #import "SDUserData.h"
 #import "SDPlaylist.h"
 
@@ -189,10 +190,10 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
             return NSDragOperationNone;
     }
     else {
-//        if (operation == NSTableViewDropOn && ![[[SDSharedData() playlists] objectAtIndex: row] isMasterPlaylist]) {
-//            return NSDragOperationCopy;
-//        }
-//        else
+        if (operation == NSTableViewDropOn && ![[[self.playlistsArrayController arrangedObjects] objectAtIndex: row] isMaster]) {
+            return NSDragOperationCopy;
+        }
+        else
             return NSDragOperationNone;
     }
 }
@@ -212,12 +213,19 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
         return YES;
     }
     else {
-//        NSDictionary* data = [[info draggingPasteboard] propertyListForType:SDSongDragType];
-//        NSArray* uuids = [data objectForKey:@"uuids"];
-//        NSArray* songs = [SDUserDataManager songsForUUIDs:uuids];
-//        
-//        SDOldPlaylist* toPlaylist = [[SDSharedData() playlists] objectAtIndex: row];
-//        [toPlaylist addSongs:songs];
+        NSData* rawData = [[info draggingPasteboard] dataForType:SDSongDragType];
+        NSDictionary* data = [NSKeyedUnarchiver unarchiveObjectWithData:rawData];
+        
+        NSArray* uuids = [data objectForKey:@"uuids"];
+        NSMutableArray* songs = [NSMutableArray array];
+        for (NSURL* uri in uuids) {
+            NSManagedObjectID* mid = [[SDCoreData sharedCoreData].persistentStoreCoordinator managedObjectIDForURIRepresentation:uri];
+            NSManagedObject* obj = [[SDCoreData sharedCoreData].managedObjectContext objectWithID:mid];
+            [songs addObject:obj];
+        }
+        
+        SDPlaylist* toPlaylist = [[self.playlistsArrayController arrangedObjects] objectAtIndex: row];
+        [toPlaylist addSongs: [NSOrderedSet orderedSetWithArray:songs]];
         
         return YES;
     }
