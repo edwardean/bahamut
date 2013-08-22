@@ -28,7 +28,6 @@
 		9496D44017C56F2F00EFD43C /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43F17C56F2F00EFD43C /* SDPlaylist.m */; };
 		9496D44517C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D44417C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
 		94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A811921701E0A900B400C8 /* SDTrackPositionView.m */; };
-		94AD9DE217BD556700D678E1 /* SDOldPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 94AD9DE117BD556700D678E1 /* SDOldPlaylist.m */; };
 		94AFF27917C446AF005C30AE /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 94AFF27817C446AF005C30AE /* Licenses */; };
 		94AFF27B17C446F8005C30AE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AFF27A17C446F8005C30AE /* Sparkle.framework */; };
 		94AFF27D17C44706005C30AE /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94AFF27A17C446F8005C30AE /* Sparkle.framework */; };
@@ -54,7 +53,6 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		9404AB421700F4EF00E0D3AF /* SDUserDataManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserDataManager.h; sourceTree = "<group>"; };
 		9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlayerWindowController.h; sourceTree = "<group>"; };
 		9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlayerWindowController.m; sourceTree = "<group>"; };
 		9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
@@ -94,8 +92,6 @@
 		9496D44417C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSManagedObjectModel+KCOrderedAccessorFix.m"; sourceTree = "<group>"; };
 		94A811911701E0A900B400C8 /* SDTrackPositionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTrackPositionView.h; sourceTree = "<group>"; };
 		94A811921701E0A900B400C8 /* SDTrackPositionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTrackPositionView.m; sourceTree = "<group>"; };
-		94AD9DE017BD556700D678E1 /* SDOldPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDOldPlaylist.h; sourceTree = "<group>"; };
-		94AD9DE117BD556700D678E1 /* SDOldPlaylist.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDOldPlaylist.m; sourceTree = "<group>"; };
 		94AFF27817C446AF005C30AE /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Licenses; sourceTree = SOURCE_ROOT; };
 		94AFF27A17C446F8005C30AE /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = ThirdParty/Sparkle.framework; sourceTree = "<group>"; };
 		94B8589C1701D5410012165F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -233,7 +229,6 @@
 				94AD9DE317BD56C100D678E1 /* Persistence */,
 				9427376617C52B1700715D18 /* Core Data */,
 				94229B2117BE8EDC00FE5A88 /* Player */,
-				9460F2FF16FFA19B00DB85C4 /* Songs */,
 				9460F2F816FF782C00DB85C4 /* Player Window */,
 				9460F2E116FF781100DB85C4 /* Supporting Files */,
 			);
@@ -263,19 +258,9 @@
 			name = "Player Window";
 			sourceTree = "<group>";
 		};
-		9460F2FF16FFA19B00DB85C4 /* Songs */ = {
-			isa = PBXGroup;
-			children = (
-				94AD9DE017BD556700D678E1 /* SDOldPlaylist.h */,
-				94AD9DE117BD556700D678E1 /* SDOldPlaylist.m */,
-			);
-			name = Songs;
-			sourceTree = "<group>";
-		};
 		94AD9DE317BD56C100D678E1 /* Persistence */ = {
 			isa = PBXGroup;
 			children = (
-				9404AB421700F4EF00E0D3AF /* SDUserDataManager.h */,
 				94BEB65917C5D66C007723F3 /* SDImporter.h */,
 				94BEB65A17C5D66C007723F3 /* SDImporter.m */,
 			);
@@ -364,7 +349,6 @@
 				9460F2EE16FF781100DB85C4 /* SDAppDelegate.m in Sources */,
 				9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */,
 				94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */,
-				94AD9DE217BD556700D678E1 /* SDOldPlaylist.m in Sources */,
 				94229B2417BE8EE900FE5A88 /* SDMusicPlayer.m in Sources */,
 				945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */,
 				945C296317C1F50C0045BA94 /* SDButtons.m in Sources */,

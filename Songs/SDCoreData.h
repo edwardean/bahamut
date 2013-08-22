@@ -8,6 +8,13 @@
 
 #import <Foundation/Foundation.h>
 
+#define SDAllSongsDidChangeNotification @"SDAllSongsDidChangeNotification"
+#define SDPlaylistSongsDidChangeNotification @"SDPlaylistSongsDidChangeNotification"
+#define SDPlaylistAddedNotification @"SDPlaylistAddedNotification"
+#define SDPlaylistRenamedNotification @"SDPlaylistRenamedNotification"
+#define SDPlaylistRemovedNotification @"SDPlaylistRemovedNotification"
+#define SDPlaylistOptionsChangedNotification @"SDPlaylistOptionsChangedNotification"
+
 @interface SDCoreData : NSObject
 
 + (SDCoreData*) sharedCoreData;

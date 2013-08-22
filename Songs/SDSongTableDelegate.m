@@ -408,4 +408,28 @@
 
 
 
+
+
+
+
+
+
+
+
+
+- (IBAction) jumpToCurrentSong:(id)sender {
+    if ([SDMusicPlayer sharedPlayer].stopped)
+        return;
+    
+    [self.playlistsArrayController setSelectedObjects: @[[SDMusicPlayer sharedPlayer].currentPlaylist]];
+    [self.songsArrayController setSelectedObjects: @[[SDMusicPlayer sharedPlayer].currentSong]];
+}
+
+
+
+
+
+
+
+
 @end

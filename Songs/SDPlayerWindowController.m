@@ -8,8 +8,6 @@
 
 #import "SDPlayerWindowController.h"
 
-#import "SDUserDataManager.h"
-#import "SDOldPlaylist.h"
 #import "SDMusicPlayer.h"
 #import "SDTrackPositionView.h"
 
@@ -215,17 +213,6 @@ NSString* timeForSeconds(CGFloat seconds) {
 
 
 
-
-
-
-
-- (IBAction) jumpToCurrentSong:(id)sender {
-    if ([SDMusicPlayer sharedPlayer].stopped)
-        return;
-    
-//    [self.playlistsViewController selectPlaylist: [SDMusicPlayer sharedPlayer].currentPlaylist];
-//    [self.currentSongListViewController selectSongs: @[[SDMusicPlayer sharedPlayer].currentSong]];
-}
 
 
 

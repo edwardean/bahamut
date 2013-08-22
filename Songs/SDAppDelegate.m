@@ -8,7 +8,6 @@
 
 #import "SDAppDelegate.h"
 
-#import "SDUserDataManager.h"
 #import "SDPlayerWindowController.h"
 
 #import "SDMediaKeyHijacker.h"

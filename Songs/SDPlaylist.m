@@ -30,19 +30,15 @@
 }
 
 - (void) moveSongs:(NSArray*)songs toIndex:(NSInteger)atIndex {
+    NSIndexSet* indices = [self.songs indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+        return [songs containsObject: obj];
+    }];
     
-    NSLog(@"%@", self);
+    NSUInteger knockDownBy = [indices countOfIndexesInRange:NSMakeRange(0, atIndex)];
+    NSInteger moveToIndex = atIndex - knockDownBy;
     
-//    NSIndexSet* indices = [self.songs indexesOfObjectsPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-//        return [songs containsObject:obj];
-//    }];
-//    
-//    NSUInteger knockDownBy = [indices countOfIndexesInRange:NSMakeRange(0, atIndex)];
-//    NSInteger moveToIndex = atIndex - knockDownBy;
-//    
-//    [self removeSongs:songs];
-//    [self addSongs:songs
-//           atIndex:moveToIndex];
+    NSMutableOrderedSet* set = [self mutableOrderedSetValueForKeyPath:@"songs"];
+    [set moveObjectsAtIndexes:indices toIndex:moveToIndex];
 }
 
 @end
