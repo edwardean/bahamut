@@ -70,10 +70,10 @@
 @interface SDPrevButtonCell : SDButtonCell @end
 @implementation SDPrevButtonCell
 - (void) sd_drawPath:(NSBezierPath*)path inFrame:(NSRect)cellFrame {
-//    [NSGraphicsContext saveGraphicsState];
-//    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-//    [NSBezierPath fillRect:NSInsetRect(cellFrame, 5.0, 3.0)];
-//    [NSGraphicsContext restoreGraphicsState];
+    [NSGraphicsContext saveGraphicsState];
+    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
+    [NSBezierPath fillRect:cellFrame];
+    [NSGraphicsContext restoreGraphicsState];
     
     cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
     cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
@@ -91,10 +91,10 @@
 @interface SDNextButtonCell : SDButtonCell @end
 @implementation SDNextButtonCell
 - (void) sd_drawPath:(NSBezierPath*)path inFrame:(NSRect)cellFrame {
-//    [NSGraphicsContext saveGraphicsState];
-//    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-//    [NSBezierPath fillRect:NSInsetRect(cellFrame, 5.0, 3.0)];
-//    [NSGraphicsContext restoreGraphicsState];
+    [NSGraphicsContext saveGraphicsState];
+    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
+    [NSBezierPath fillRect:cellFrame];
+    [NSGraphicsContext restoreGraphicsState];
     
     cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
     cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
@@ -112,10 +112,10 @@
 @interface SDPlayButtonCell : SDButtonCell @end
 @implementation SDPlayButtonCell
 - (void) sd_drawPath:(NSBezierPath*)path inFrame:(NSRect)cellFrame {
-//    [NSGraphicsContext saveGraphicsState];
-//    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-//    [NSBezierPath fillRect:cellFrame];
-//    [NSGraphicsContext restoreGraphicsState];
+    [NSGraphicsContext saveGraphicsState];
+    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
+    [NSBezierPath fillRect:cellFrame];
+    [NSGraphicsContext restoreGraphicsState];
     
     cellFrame = NSInsetRect(cellFrame, 8.0, 5.0);
     cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
@@ -125,7 +125,7 @@
     [path setLineJoinStyle:NSMiterLineJoinStyle];
     
     if ([[[self title] lowercaseString] isEqualToString: @"pause"]) {
-        cellFrame = NSInsetRect(cellFrame, 5.0, 1.0);
+        cellFrame = NSInsetRect(cellFrame, 4.0, 1.0);
         
         [path setLineWidth:4.0];
         
