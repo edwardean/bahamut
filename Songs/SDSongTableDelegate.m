@@ -111,6 +111,9 @@
     else if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"p"]) {
         [self moveUpAndExtend:[chars isEqualToString: @"P"]];
     }
+    else if ([chars isEqualToString: @"\r"]) {
+        [NSApp sendAction:@selector(startPlayingSong:) to:nil from:nil];
+    }
     else {
 //        NSLog(@"%@", theEvent);
         [super keyDown:theEvent];
