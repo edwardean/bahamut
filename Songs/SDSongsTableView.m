@@ -35,6 +35,9 @@
     if ([[theEvent characters] isEqualToString: @"\r"]) {
         [NSApp sendAction:@selector(startPlayingSong:) to:nil from:nil];
     }
+    else if ([[theEvent characters] characterAtIndex:0] == NSLeftArrowFunctionKey) {
+        [NSApp sendAction:@selector(jumpToPlaylists:) to:nil from:nil];
+    }
     else if ([[theEvent characters] isEqualToString: @" "]) {
         [NSApp sendAction:@selector(playPause:) to:nil from:nil];
     }

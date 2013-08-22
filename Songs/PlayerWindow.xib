@@ -366,7 +366,7 @@
 																	<string key="NSFrameSize">{544, 451}</string>
 																	<reference key="NSSuperview" ref="545839721"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="892125705"/>
+																	<reference key="NSNextKeyView" ref="16303684"/>
 																	<string key="NSReuseIdentifierKey">_NS:13</string>
 																	<bool key="NSEnabled">YES</bool>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -528,7 +528,7 @@
 																	<reference key="NSBackgroundColor" ref="329126522"/>
 																	<reference key="NSGridColor" ref="1059875312"/>
 																	<double key="NSRowHeight">20</double>
-																	<int key="NSTvFlags">-884998144</int>
+																	<int key="NSTvFlags">-616562688</int>
 																	<reference key="NSDelegate"/>
 																	<reference key="NSDataSource"/>
 																	<string key="NSAutosaveName">songsCols</string>
@@ -596,7 +596,7 @@
 													<string key="NSFrame">{{0, 29}, {544, 468}}</string>
 													<reference key="NSSuperview" ref="981714129"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="16303684"/>
+													<reference key="NSNextKeyView" ref="545839721"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<int key="NSsFlags">133680</int>
 													<reference key="NSVScroller" ref="892125705"/>
@@ -626,7 +626,6 @@
 													<string key="NSFrame">{{454, 9}, {72, 18}}</string>
 													<reference key="NSSuperview" ref="674655831"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSButtonCell" key="NSCell" id="246202201">
@@ -2260,6 +2259,50 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SDSongTableDelegate</string>
 					<string key="superclassName">NSResponder</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="copy:">id</string>
+						<string key="jumpToCurrentSong:">id</string>
+						<string key="jumpToSongs:">id</string>
+						<string key="paste:">id</string>
+						<string key="performFindPanelAction:">id</string>
+						<string key="playPause:">id</string>
+						<string key="severelyDeleteSomething:">id</string>
+						<string key="startPlayingSong:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="copy:">
+							<string key="name">copy:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="jumpToCurrentSong:">
+							<string key="name">jumpToCurrentSong:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="jumpToSongs:">
+							<string key="name">jumpToSongs:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="paste:">
+							<string key="name">paste:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="performFindPanelAction:">
+							<string key="name">performFindPanelAction:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="playPause:">
+							<string key="name">playPause:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="severelyDeleteSomething:">
+							<string key="name">severelyDeleteSomething:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="startPlayingSong:">
+							<string key="name">startPlayingSong:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="playlistsArrayController">NSArrayController</string>
 						<string key="searchContainerView">NSView</string>

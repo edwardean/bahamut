@@ -99,7 +99,10 @@
 
 
 - (BOOL) respondsToSelector:(SEL)aSelector {
-    if (aSelector == @selector(severelyDeleteSomething:)) {
+    if (aSelector == @selector(paste:)) {
+        return ([[self.playlistsTable window] firstResponder] == self.playlistsTable) && ([[NSPasteboard generalPasteboard] availableTypeFromArray:@[@"Song"]] != nil);
+    }
+    else if (aSelector == @selector(severelyDeleteSomething:)) {
         if ([[self.playlistsTable window] firstResponder] != self.playlistsTable)
             return NO;
         
@@ -141,6 +144,32 @@
 }
 
 
+
+
+
+
+
+
+- (IBAction) paste:(id)sender {
+    NSData* rawData = [[NSPasteboard generalPasteboard] dataForType:@"Song"];
+    NSDictionary* data = [NSKeyedUnarchiver unarchiveObjectWithData:rawData];
+    
+    NSArray* uuids = [data objectForKey:@"uuids"];
+    
+    NSMutableArray* draggingSongs = [NSMutableArray array];
+    for (NSURL* uri in uuids) {
+        NSManagedObjectID* mid = [[SDCoreData sharedCoreData].persistentStoreCoordinator managedObjectIDForURIRepresentation:uri];
+        NSManagedObject* obj = [[SDCoreData sharedCoreData].managedObjectContext objectWithID:mid];
+        [draggingSongs addObject:obj];
+    }
+    
+    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
+    SDPlaylist* fromPlaylist = [[self.playlistsArrayController arrangedObjects] objectAtIndex:playlistIndex];
+    
+    if (fromPlaylist != [self selectedPlaylist]) {
+        [[self selectedPlaylist] addSongs:[NSOrderedSet orderedSetWithArray:draggingSongs]];
+    }
+}
 
 
 

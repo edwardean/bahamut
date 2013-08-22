@@ -128,7 +128,13 @@
 #pragma mark - Deleting stuff
 
 - (BOOL) respondsToSelector:(SEL)aSelector {
-    if (aSelector == @selector(jumpToCurrentSong:)) {
+    if (aSelector == @selector(copy:)) {
+        return ([[self.songsTable window] firstResponder] == self.songsTable) && [[self selectedSongs] count] > 0;
+    }
+    else if (aSelector == @selector(paste:)) {
+        return ([[self.songsTable window] firstResponder] == self.songsTable) && ([[NSPasteboard generalPasteboard] availableTypeFromArray:@[@"Song"]] != nil);
+    }
+    else if (aSelector == @selector(jumpToCurrentSong:)) {
         return ![SDMusicPlayer sharedPlayer].stopped;
     }
     else if (aSelector == @selector(severelyDeleteSomething:)) {
@@ -166,6 +172,62 @@
     }
     
 }
+
+
+
+
+
+
+
+
+
+
+- (IBAction) copy:(id)sender {
+    NSArray* songs = [self selectedSongs];
+    NSArray* uuids = [songs valueForKeyPath:@"objectID.URIRepresentation"];
+    
+    NSUInteger playlistIndex = [[self.playlistsArrayController arrangedObjects] indexOfObject:[self selectedPlaylist]];
+    
+    NSData* data = [NSKeyedArchiver archivedDataWithRootObject:@{@"uuids": uuids, @"playlist": @(playlistIndex)}];
+    
+    [[NSPasteboard generalPasteboard] declareTypes:@[@"Song"] owner:nil];
+    [[NSPasteboard generalPasteboard] setData:data
+                                      forType:@"Song"];
+}
+
+- (IBAction) paste:(id)sender {
+    NSData* rawData = [[NSPasteboard generalPasteboard] dataForType:@"Song"];
+    NSDictionary* data = [NSKeyedUnarchiver unarchiveObjectWithData:rawData];
+    
+    NSArray* uuids = [data objectForKey:@"uuids"];
+    
+    NSMutableArray* draggingSongs = [NSMutableArray array];
+    for (NSURL* uri in uuids) {
+        NSManagedObjectID* mid = [[SDCoreData sharedCoreData].persistentStoreCoordinator managedObjectIDForURIRepresentation:uri];
+        NSManagedObject* obj = [[SDCoreData sharedCoreData].managedObjectContext objectWithID:mid];
+        [draggingSongs addObject:obj];
+    }
+    
+    NSUInteger playlistIndex = [[data objectForKey:@"playlist"] unsignedIntegerValue];
+    SDPlaylist* fromPlaylist = [[self.playlistsArrayController arrangedObjects] objectAtIndex:playlistIndex];
+    
+    if (fromPlaylist != [self selectedPlaylist]) {
+        NSIndexSet* indices = [self.songsTable selectedRowIndexes];
+        
+        NSUInteger toIndex = [indices lastIndex] + 1;
+        
+        if ([indices count] == 0) {
+            [[self selectedPlaylist] addSongs:[NSOrderedSet orderedSetWithArray:draggingSongs]];
+        }
+        else {
+            [[self selectedPlaylist] addSongs:draggingSongs
+                                      atIndex:toIndex];
+        }
+        
+        [self.songsArrayController setSelectedObjects: draggingSongs];
+    }
+}
+
 
 
 

@@ -67,7 +67,6 @@
     
     [self updatePlayerViews];
     
-//    self.window.styleMask = NSBorderlessWindowMask;
 //    [self.window setMovableByWindowBackground:YES];
 }
 

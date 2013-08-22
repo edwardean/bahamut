@@ -11,10 +11,11 @@
 @implementation SDPlaylistsTableView
 
 - (void) keyDown:(NSEvent *)theEvent {
-    NSString* chars = [theEvent charactersIgnoringModifiers];
-    
-    if ([chars isEqualToString: @"\r"]) {
+    if ([[theEvent characters] isEqualToString: @"\r"]) {
         [NSApp sendAction:@selector(startPlayingPlaylist:) to:nil from:nil];
+    }
+    else if ([[theEvent characters] characterAtIndex:0] == NSRightArrowFunctionKey) {
+        [NSApp sendAction:@selector(jumpToSongs:) to:nil from:nil];
     }
     else {
 //        NSLog(@"%@", theEvent);
