@@ -148,6 +148,10 @@
     self.currentSong.paused = NO;
 }
 
++ (NSSet*) keyPathsForValuesAffectingIsPlaying {
+    return [NSSet setWithArray:@[@"player.rate"]];
+}
+
 - (BOOL) isPlaying {
     return (self.player.rate > 0.5);
 }

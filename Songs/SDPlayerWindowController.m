@@ -78,6 +78,7 @@
 
 
 
+
 - (void) bindViews {
     [self.nowPlayingControlsView bind:@"hidden" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:nil];
     
@@ -92,7 +93,14 @@
     
     [self.currentSongInfoField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong" options:@{NSValueTransformerNameBindingOption: @"SDSongInfoTransformer"}];
     
-    [self.playButton bind:@"title" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"isPlaying" options:@{NSValueTransformerNameBindingOption: @"SDPlayingTitleTransformer"}];
+    [self.playButton bind:@"image" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"isPlaying" options:@{NSValueTransformerNameBindingOption: @"SDPlayingImageTransformer"}];
+    [self.playButton bind:@"alternateImage" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"isPlaying" options:@{NSValueTransformerNameBindingOption: @"SDPlayingAlternateImageTransformer"}];
+    
+    [self.prevButton bind:@"image" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: @"SDCanGoPrevImageTransformer"}];
+    [self.prevButton bind:@"alternateImage" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: @"SDCanGoPrevAlternateImageTransformer"}];
+    
+    [self.nextButton bind:@"image" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: @"SDCanGoNextImageTransformer"}];
+    [self.nextButton bind:@"alternateImage" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: @"SDCanGoNextAlternateImageTransformer"}];
 }
 
 - (void) unbindViews {
@@ -109,7 +117,14 @@
     
     [self.currentSongInfoField unbind:@"value"];
     
-    [self.playButton unbind:@"title"];
+    [self.playButton unbind:@"image"];
+    [self.playButton unbind:@"alternateImage"];
+    
+    [self.prevButton unbind:@"image"];
+    [self.prevButton unbind:@"alternateImage"];
+    
+    [self.nextButton unbind:@"image"];
+    [self.nextButton unbind:@"alternateImage"];
 }
 
 

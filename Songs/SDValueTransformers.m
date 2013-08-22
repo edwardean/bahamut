@@ -104,15 +104,122 @@
 
 
 
-@interface SDPlayingTitleTransformer : NSValueTransformer
+@interface SDPlayingImageTransformer : NSValueTransformer
 @end
 
-@implementation SDPlayingTitleTransformer
+@implementation SDPlayingImageTransformer
 
-+ (Class)transformedValueClass { return [NSString self]; }
++ (Class)transformedValueClass { return [NSImage self]; }
 + (BOOL)allowsReverseTransformation { return NO; }
 - (id)transformedValue:(id)value {
-    return [value boolValue] ? @"Pause" : @"Play";
+    return [value boolValue] ? [NSImage imageNamed:@"SDPauseButtonImage"] : [NSImage imageNamed:@"SDPlayButtonImage"];
+}
+
+@end
+
+
+
+
+
+
+@interface SDPlayingAlternateImageTransformer : NSValueTransformer
+@end
+
+@implementation SDPlayingAlternateImageTransformer
+
++ (Class)transformedValueClass { return [NSImage self]; }
++ (BOOL)allowsReverseTransformation { return NO; }
+- (id)transformedValue:(id)value {
+    return [value boolValue] ? [NSImage imageNamed:@"SDPressedPauseButtonImage"] : [NSImage imageNamed:@"SDPressedPlayButtonImage"];
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+@interface SDCanGoPrevImageTransformer : NSValueTransformer
+@end
+
+@implementation SDCanGoPrevImageTransformer
+
++ (Class)transformedValueClass { return [NSImage self]; }
++ (BOOL)allowsReverseTransformation { return NO; }
+- (id)transformedValue:(id)value {
+    return [value boolValue] ? [NSImage imageNamed:@"SDDisabledPrevButtonImage"] : [NSImage imageNamed:@"SDEnabledPrevButtonImage"];
+}
+
+@end
+
+
+
+
+
+
+
+@interface SDCanGoPrevAlternateImageTransformer : NSValueTransformer
+@end
+
+@implementation SDCanGoPrevAlternateImageTransformer
+
++ (Class)transformedValueClass { return [NSImage self]; }
++ (BOOL)allowsReverseTransformation { return NO; }
+- (id)transformedValue:(id)value {
+    return [value boolValue] ? [NSImage imageNamed:@"SDPressedDisabledPrevButtonImage"] : [NSImage imageNamed:@"SDPressedEnabledPrevButtonImage"];
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+@interface SDCanGoNextImageTransformer : NSValueTransformer
+@end
+
+@implementation SDCanGoNextImageTransformer
+
++ (Class)transformedValueClass { return [NSImage self]; }
++ (BOOL)allowsReverseTransformation { return NO; }
+- (id)transformedValue:(id)value {
+    return [value boolValue] ? [NSImage imageNamed:@"SDDisabledNextButtonImage"] : [NSImage imageNamed:@"SDEnabledNextButtonImage"];
+}
+
+@end
+
+
+
+
+
+
+
+@interface SDCanGoNextAlternateImageTransformer : NSValueTransformer
+@end
+
+@implementation SDCanGoNextAlternateImageTransformer
+
++ (Class)transformedValueClass { return [NSImage self]; }
++ (BOOL)allowsReverseTransformation { return NO; }
+- (id)transformedValue:(id)value {
+    return [value boolValue] ? [NSImage imageNamed:@"SDPressedDisabledNextButtonImage"] : [NSImage imageNamed:@"SDPressedEnabledNextButtonImage"];
 }
 
 @end

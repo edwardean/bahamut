@@ -22,7 +22,8 @@
 
 - (void) pause;
 - (void) resume;
-- (BOOL) isPlaying;
+
+@property (readonly) BOOL isPlaying;
 
 - (void) stop;
 

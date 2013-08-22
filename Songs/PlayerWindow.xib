@@ -366,7 +366,7 @@
 																	<string key="NSFrameSize">{544, 451}</string>
 																	<reference key="NSSuperview" ref="545839721"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="16303684"/>
+																	<reference key="NSNextKeyView" ref="892125705"/>
 																	<string key="NSReuseIdentifierKey">_NS:13</string>
 																	<bool key="NSEnabled">YES</bool>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -596,7 +596,7 @@
 													<string key="NSFrame">{{0, 29}, {544, 468}}</string>
 													<reference key="NSSuperview" ref="981714129"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="545839721"/>
+													<reference key="NSNextKeyView" ref="16303684"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<int key="NSsFlags">133680</int>
 													<reference key="NSVScroller" ref="892125705"/>
@@ -626,6 +626,7 @@
 													<string key="NSFrame">{{454, 9}, {72, 18}}</string>
 													<reference key="NSSuperview" ref="674655831"/>
 													<reference key="NSWindow"/>
+													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSButtonCell" key="NSCell" id="246202201">
@@ -715,11 +716,11 @@
 							<object class="NSButtonCell" key="NSCell" id="330438607">
 								<int key="NSCellFlags">-2080374784</int>
 								<int key="NSCellFlags2">134250496</int>
-								<string key="NSContents">Play</string>
+								<string key="NSContents"/>
 								<reference key="NSSupport" ref="881032564"/>
 								<string key="NSCellIdentifier">_NS:22</string>
 								<reference key="NSControlView" ref="618337653"/>
-								<int key="NSButtonFlags">147603456</int>
+								<int key="NSButtonFlags">139214848</int>
 								<int key="NSButtonFlags2">160</int>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -740,11 +741,11 @@
 							<object class="NSButtonCell" key="NSCell" id="195603635">
 								<int key="NSCellFlags">-2080374784</int>
 								<int key="NSCellFlags2">134250496</int>
-								<string key="NSContents">&lt;</string>
+								<string key="NSContents"/>
 								<reference key="NSSupport" ref="881032564"/>
 								<string key="NSCellIdentifier">_NS:22</string>
 								<reference key="NSControlView" ref="143507510"/>
-								<int key="NSButtonFlags">-2033434624</int>
+								<int key="NSButtonFlags">139214848</int>
 								<int key="NSButtonFlags2">160</int>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -765,11 +766,11 @@
 							<object class="NSButtonCell" key="NSCell" id="1052373436">
 								<int key="NSCellFlags">-2080374784</int>
 								<int key="NSCellFlags2">134250496</int>
-								<string key="NSContents">&gt;</string>
+								<string key="NSContents"/>
 								<reference key="NSSupport" ref="881032564"/>
 								<string key="NSCellIdentifier">_NS:22</string>
 								<reference key="NSControlView" ref="663099415"/>
-								<int key="NSButtonFlags">147603456</int>
+								<int key="NSButtonFlags">139214848</int>
 								<int key="NSButtonFlags2">160</int>
 								<string key="NSAlternateContents"/>
 								<string key="NSKeyEquivalent"/>
@@ -2013,13 +2014,10 @@
 				<string key="218.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="220.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="256.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="257.CustomClassName">SDPlayButtonCell</string>
 				<string key="257.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="258.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="259.CustomClassName">SDPrevButtonCell</string>
 				<string key="259.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="260.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="261.CustomClassName">SDNextButtonCell</string>
 				<string key="261.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="264.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="268.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2101,14 +2099,6 @@
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
 				<object class="IBPartialClassDescription">
-					<string key="className">SDButtonCell</string>
-					<string key="superclassName">NSButtonCell</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SDButtonCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">SDCreatePlaylistButtonCell</string>
 					<string key="superclassName">NSButtonCell</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -2122,22 +2112,6 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/SDKeyNavigableTableView.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SDNextButtonCell</string>
-					<string key="superclassName">SDButtonCell</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SDNextButtonCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
-					<string key="className">SDPlayButtonCell</string>
-					<string key="superclassName">SDButtonCell</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SDPlayButtonCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2233,14 +2207,6 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">SDPrevButtonCell</string>
-					<string key="superclassName">SDButtonCell</string>
-					<object class="IBClassDescriptionSource" key="sourceIdentifier">
-						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SDPrevButtonCell.h</string>
-					</object>
-				</object>
-				<object class="IBPartialClassDescription">
 					<string key="className">SDScroller</string>
 					<string key="superclassName">NSScroller</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
@@ -2259,50 +2225,6 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SDSongTableDelegate</string>
 					<string key="superclassName">NSResponder</string>
-					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="copy:">id</string>
-						<string key="jumpToCurrentSong:">id</string>
-						<string key="jumpToSongs:">id</string>
-						<string key="paste:">id</string>
-						<string key="performFindPanelAction:">id</string>
-						<string key="playPause:">id</string>
-						<string key="severelyDeleteSomething:">id</string>
-						<string key="startPlayingSong:">id</string>
-					</dictionary>
-					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="copy:">
-							<string key="name">copy:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="jumpToCurrentSong:">
-							<string key="name">jumpToCurrentSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="jumpToSongs:">
-							<string key="name">jumpToSongs:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="paste:">
-							<string key="name">paste:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="performFindPanelAction:">
-							<string key="name">performFindPanelAction:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="playPause:">
-							<string key="name">playPause:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="severelyDeleteSomething:">
-							<string key="name">severelyDeleteSomething:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-						<object class="IBActionInfo" key="startPlayingSong:">
-							<string key="name">startPlayingSong:</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="playlistsArrayController">NSArrayController</string>
 						<string key="searchContainerView">NSView</string>

@@ -14,13 +14,12 @@
 #import "SDMusicPlayer.h"
 #import "SDImporter.h"
 #import "SDCoreData.h"
-
+#import "SDCachedDrawing.h"
 
 @interface SDAppDelegate ()
 
 @property NSMutableArray* playerWindowControllers;
 @property SDMediaKeyHijacker* mediaKeyHijacker;
-@property NSImage* pauseImage;
 
 @end
 
@@ -28,7 +27,7 @@
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification {
     [[SDCoreData sharedCoreData] setup];
-    [self makePauseIcon];
+    [SDCachedDrawing drawThings];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedPlayPause:) name:SDMediaKeyPressedPlayPause object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedNext:) name:SDMediaKeyPressedNext object:nil];
@@ -40,19 +39,6 @@
     self.playerWindowControllers = [NSMutableArray array];
     
     [self newPlayerWindow:nil];
-}
-
-- (void) makePauseIcon {
-    self.pauseImage = [[NSImage alloc] initWithSize:NSMakeSize(10, 10)];
-    [self.pauseImage lockFocus];
-    
-    [[NSColor colorWithDeviceWhite:0.0 alpha:1.0] setFill];
-    [NSBezierPath fillRect:NSMakeRect(1, 0, 3, 10)];
-    [NSBezierPath fillRect:NSMakeRect(6, 0, 3, 10)];
-    
-    [self.pauseImage unlockFocus];
-    [self.pauseImage setTemplate:YES];
-    [self.pauseImage setName:@"SDPause"];
 }
 
 - (void) applicationWillTerminate:(NSNotification *)notification {

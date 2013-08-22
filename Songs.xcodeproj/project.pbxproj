@@ -17,7 +17,6 @@
 		9426F7F917C624460029650B /* SDValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9426F7F817C624460029650B /* SDValueTransformers.m */; };
 		9427376217C529D500715D18 /* SDCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9427376117C529D500715D18 /* SDCoreData.m */; };
 		945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C295F17C1F3EE0045BA94 /* SDSplitView.m */; };
-		945C296317C1F50C0045BA94 /* SDButtons.m in Sources */ = {isa = PBXBuildFile; fileRef = 945C296217C1F50C0045BA94 /* SDButtons.m */; };
 		9460F2DB16FF781100DB85C4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F2DA16FF781100DB85C4 /* Cocoa.framework */; };
 		9460F2E516FF781100DB85C4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 9460F2E316FF781100DB85C4 /* InfoPlist.strings */; };
 		9460F2E716FF781100DB85C4 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 9460F2E616FF781100DB85C4 /* main.m */; };
@@ -44,6 +43,9 @@
 		94BEB65817C5CECF007723F3 /* SDSongTableDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEB65717C5CECF007723F3 /* SDSongTableDelegate.m */; };
 		94BEB65B17C5D66C007723F3 /* SDImporter.m in Sources */ = {isa = PBXBuildFile; fileRef = 94BEB65A17C5D66C007723F3 /* SDImporter.m */; };
 		94C2E7D617C3AE1400AC90A3 /* ScriptingBridge.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94C2E7D517C3AE1400AC90A3 /* ScriptingBridge.framework */; };
+		94CC495017C6730200DA064A /* SDScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC494F17C6730200DA064A /* SDScroller.m */; };
+		94CC495317C6731B00DA064A /* SDCreatePlaylistButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */; };
+		94CC495617C6736500DA064A /* SDCachedDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC495517C6736500DA064A /* SDCachedDrawing.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -77,7 +79,6 @@
 		9427376117C529D500715D18 /* SDCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCoreData.m; sourceTree = "<group>"; };
 		945C295E17C1F3EE0045BA94 /* SDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSplitView.h; sourceTree = "<group>"; };
 		945C295F17C1F3EE0045BA94 /* SDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSplitView.m; sourceTree = "<group>"; };
-		945C296217C1F50C0045BA94 /* SDButtons.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDButtons.m; sourceTree = "<group>"; };
 		9460F2D716FF781100DB85C4 /* Songs.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Songs.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		9460F2DA16FF781100DB85C4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		9460F2DD16FF781100DB85C4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -125,6 +126,12 @@
 		94BEB65A17C5D66C007723F3 /* SDImporter.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImporter.m; sourceTree = "<group>"; };
 		94C2E7D417C3AD8F00AC90A3 /* iTunes.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = iTunes.h; sourceTree = "<group>"; };
 		94C2E7D517C3AE1400AC90A3 /* ScriptingBridge.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ScriptingBridge.framework; path = System/Library/Frameworks/ScriptingBridge.framework; sourceTree = SDKROOT; };
+		94CC494E17C6730200DA064A /* SDScroller.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDScroller.h; sourceTree = "<group>"; };
+		94CC494F17C6730200DA064A /* SDScroller.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDScroller.m; sourceTree = "<group>"; };
+		94CC495117C6731B00DA064A /* SDCreatePlaylistButtonCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCreatePlaylistButtonCell.h; sourceTree = "<group>"; };
+		94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCreatePlaylistButtonCell.m; sourceTree = "<group>"; };
+		94CC495417C6736400DA064A /* SDCachedDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCachedDrawing.h; sourceTree = "<group>"; };
+		94CC495517C6736500DA064A /* SDCachedDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCachedDrawing.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -169,10 +176,15 @@
 		9426F7F617C623730029650B /* Common */ = {
 			isa = PBXGroup;
 			children = (
-				945C296217C1F50C0045BA94 /* SDButtons.m */,
 				9426F7F817C624460029650B /* SDValueTransformers.m */,
+				94CC494E17C6730200DA064A /* SDScroller.h */,
+				94CC494F17C6730200DA064A /* SDScroller.m */,
+				94CC495117C6731B00DA064A /* SDCreatePlaylistButtonCell.h */,
+				94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */,
 				9498577317C6223600DBA33E /* SDKeyNavigableTableView.h */,
 				9498577417C6223600DBA33E /* SDKeyNavigableTableView.m */,
+				94CC495417C6736400DA064A /* SDCachedDrawing.h */,
+				94CC495517C6736500DA064A /* SDCachedDrawing.m */,
 			);
 			name = Common;
 			sourceTree = "<group>";
@@ -400,7 +412,6 @@
 				94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */,
 				94229B2417BE8EE900FE5A88 /* SDMusicPlayer.m in Sources */,
 				945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */,
-				945C296317C1F50C0045BA94 /* SDButtons.m in Sources */,
 				941B114417C409E7008F8A79 /* SPMediaKeyTap.m in Sources */,
 				941B114517C409E7008F8A79 /* NSObject+SPInvocationGrabbing.m in Sources */,
 				941B114A17C40F12008F8A79 /* SDMediaKeyHijacker.m in Sources */,
@@ -420,6 +431,9 @@
 				9498577217C6216D00DBA33E /* SDTableRowView.m in Sources */,
 				9498577517C6223600DBA33E /* SDKeyNavigableTableView.m in Sources */,
 				9426F7F917C624460029650B /* SDValueTransformers.m in Sources */,
+				94CC495017C6730200DA064A /* SDScroller.m in Sources */,
+				94CC495317C6731B00DA064A /* SDCreatePlaylistButtonCell.m in Sources */,
+				94CC495617C6736500DA064A /* SDCachedDrawing.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
