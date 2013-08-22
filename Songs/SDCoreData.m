@@ -38,7 +38,7 @@
     
     [self.managedObjectModel kc_generateOrderedSetAccessors];
     
-//    [[self.managedObjectContext undoManager] disableUndoRegistration]; // this barely seems to help.
+//    [[self.managedObjectContext undoManager] disableUndoRegistration]; // this just makes things worse!
     [SDUserData sharedUserData]; // force it to load.
 //    [[self.managedObjectContext undoManager] enableUndoRegistration];
     
