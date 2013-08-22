@@ -162,69 +162,18 @@
 
 
 
-
-
-@interface SDCreatePlaylistButton : NSButton
-@property NSTrackingArea* trackingArea;
-@property BOOL hovered;
-@end
-
-@implementation SDCreatePlaylistButton
-
-- (void) dealloc {
-    [self removeTrackingArea:self.trackingArea];
-    // im pretty sure this isnt sufficient, but i cant figure out what is.
-}
-
-- (void) viewDidMoveToSuperview {
-    [super viewDidMoveToSuperview];
-    
-    self.trackingArea = [[NSTrackingArea alloc] initWithRect:NSZeroRect
-                                                     options:NSTrackingInVisibleRect | NSTrackingActiveInKeyWindow | NSTrackingMouseEnteredAndExited
-                                                       owner:self
-                                                    userInfo:nil];
-    [self addTrackingArea:self.trackingArea];
-}
-
-- (void) drawRect:(NSRect)dirtyRect {
-    if (self.hovered) {
-        [[NSColor colorWithDeviceWhite:0.89 alpha:1.0] setFill];
-        [NSBezierPath fillRect:dirtyRect];
-    }
-    [super drawRect:dirtyRect];
-}
-
-- (void) mouseEntered:(NSEvent *)theEvent {
-    self.hovered = YES;
-    [self setNeedsDisplay:YES];
-}
-
-- (void) mouseExited:(NSEvent *)theEvent {
-    self.hovered = NO;
-    [self setNeedsDisplay:YES];
-}
-
-@end
-
-
-
-
-
-
 @interface SDCreatePlaylistButtonCell : NSButtonCell
 @end
 
 @implementation SDCreatePlaylistButtonCell
 
-- (void)drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
-    frame.origin.x += 7.0;
-    [super drawImage:image withFrame:frame inView:controlView];
-}
-
-- (NSRect)drawTitle:(NSAttributedString *)title withFrame:(NSRect)frame inView:(NSView *)controlView {
-    frame.origin.x += 8;
-    frame.size.width -= 8;
-    return [super drawTitle:title withFrame:frame inView:controlView];
+- (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    if ([self isHighlighted]) {
+        [[NSColor colorWithDeviceWhite:0.88 alpha:1.0] setFill];
+        [NSBezierPath fillRect:cellFrame];
+    }
+    
+    [super drawWithFrame:cellFrame inView:controlView];
 }
 
 @end

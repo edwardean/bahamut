@@ -37,6 +37,8 @@
     
     [self.playlistsTable setTarget:self];
     [self.playlistsTable setDoubleAction:@selector(doubleClickedThing:)];
+    
+    [[self.playlistsTable window] makeFirstResponder: self.playlistsTable];
 }
 
 
