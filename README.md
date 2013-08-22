@@ -21,6 +21,7 @@
 #### Screenshot
 
 ![bahamutapp.png](bahamutapp.png)
+(Don't judge me.)
 
 #### License
 
