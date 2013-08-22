@@ -419,6 +419,10 @@
 
 
 
+- (IBAction) jumpToSongs:(id)sender {
+    [[self.songsTable window] makeFirstResponder: self.songsTable];
+}
+
 
 
 

@@ -205,7 +205,7 @@
 																</object>
 															</object>
 															<double key="NSRowHeight">25</double>
-															<int key="NSTvFlags">-1035993088</int>
+															<int key="NSTvFlags">-901775360</int>
 															<reference key="NSDelegate"/>
 															<reference key="NSDataSource"/>
 															<int key="NSColumnAutoresizingStyle">4</int>
@@ -880,7 +880,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="77949746"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
+				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
 				<string key="NSMinSize">{400, 322}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">songswindow</string>
@@ -1238,6 +1238,26 @@
 						</object>
 					</object>
 					<int key="connectionID">345</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">editable: objectValue.isMaster</string>
+						<reference key="source" ref="1050118366"/>
+						<reference key="destination" ref="1072545850"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1050118366"/>
+							<reference key="NSDestination" ref="1072545850"/>
+							<string key="NSLabel">editable: objectValue.isMaster</string>
+							<string key="NSBinding">editable</string>
+							<string key="NSKeyPath">objectValue.isMaster</string>
+							<object class="NSDictionary" key="NSOptions">
+								<string key="NS.key.0">NSValueTransformerName</string>
+								<string key="NS.object.0">NSNegateBoolean</string>
+							</object>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">436</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBBindingConnection" key="connection">
@@ -2015,6 +2035,7 @@
 				<string key="291.CustomClassName">SDCreatePlaylistButton</string>
 				<string key="291.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="292.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="293.CustomClassName">SDPlaylistsTableView</string>
 				<string key="293.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<boolean value="YES" key="293.ibExternalAutomaticallyCalculatesRowSizeFromViewHeight"/>
 				<string key="294.CustomClassName">SDScroller</string>
@@ -2079,7 +2100,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">400</int>
+			<int key="maxID">436</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2089,6 +2110,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/SDButtonCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SDCreatePlaylistButton</string>
+					<string key="superclassName">NSButton</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SDCreatePlaylistButton.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2180,6 +2209,25 @@
 				<object class="IBPartialClassDescription">
 					<string key="className">SDPlaylistTableDelegate</string>
 					<string key="superclassName">NSResponder</string>
+					<dictionary class="NSMutableDictionary" key="actions">
+						<string key="jumpToPlaylists:">id</string>
+						<string key="makeNewPlaylist:">id</string>
+						<string key="severelyDeleteSomething:">id</string>
+					</dictionary>
+					<dictionary class="NSMutableDictionary" key="actionInfosByName">
+						<object class="IBActionInfo" key="jumpToPlaylists:">
+							<string key="name">jumpToPlaylists:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="makeNewPlaylist:">
+							<string key="name">makeNewPlaylist:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+						<object class="IBActionInfo" key="severelyDeleteSomething:">
+							<string key="name">severelyDeleteSomething:</string>
+							<string key="candidateClassName">id</string>
+						</object>
+					</dictionary>
 					<dictionary class="NSMutableDictionary" key="outlets">
 						<string key="playlistsArrayController">NSArrayController</string>
 						<string key="playlistsTable">NSTableView</string>
@@ -2197,6 +2245,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/SDPlaylistTableDelegate.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SDPlaylistsTableView</string>
+					<string key="superclassName">NSTableView</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SDPlaylistsTableView.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
@@ -2233,7 +2289,7 @@
 						<string key="songsArrayController">NSArrayController</string>
 						<string key="songsHousingView">NSView</string>
 						<string key="songsScrollView">NSScrollView</string>
-						<string key="songsTable">NSTableView</string>
+						<string key="songsTable">SDSongsTableView</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="toOneOutletInfosByName">
 						<object class="IBToOneOutletInfo" key="playlistsArrayController">
@@ -2262,7 +2318,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="songsTable">
 							<string key="name">songsTable</string>
-							<string key="candidateClassName">NSTableView</string>
+							<string key="candidateClassName">SDSongsTableView</string>
 						</object>
 					</dictionary>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">

@@ -47,6 +47,66 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 
+
+
+@interface SDPlaylistsTableView : NSTableView
+@end
+
+@implementation SDPlaylistsTableView
+
+- (void) keyDown:(NSEvent *)theEvent {
+    NSString* chars = [theEvent charactersIgnoringModifiers];
+    NSString* lowerChars = [chars lowercaseString];
+    
+    if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"n"]) {
+        [self moveDownAndExtend:[chars isEqualToString: @"N"]];
+    }
+    else if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"p"]) {
+        [self moveUpAndExtend:[chars isEqualToString: @"P"]];
+    }
+    else if ([chars isEqualToString: @"\r"]) {
+        [NSApp sendAction:@selector(startPlayingSong:) to:nil from:nil];
+    }
+    else {
+//        NSLog(@"%@", theEvent);
+        [super keyDown:theEvent];
+    }
+}
+
+- (void) moveDownAndExtend:(BOOL)extend {
+    NSUInteger nextIndex;
+    
+    NSUInteger idx = [[self selectedRowIndexes] lastIndex];
+    if (idx == NSNotFound)
+        nextIndex = 0;
+    else
+        nextIndex = idx + 1;
+    
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:nextIndex] byExtendingSelection: extend];
+    [self scrollRowToVisible:[self selectedRow]];
+}
+
+- (void) moveUpAndExtend:(BOOL)extend {
+    NSUInteger nextIndex;
+    
+    NSUInteger idx = [[self selectedRowIndexes] firstIndex];
+    if (idx == NSNotFound || idx == 0)
+        nextIndex = 0;
+    else
+        nextIndex = idx - 1;
+    
+    [self selectRowIndexes:[NSIndexSet indexSetWithIndex:nextIndex] byExtendingSelection: extend];
+    [self scrollRowToVisible:[self selectedRow]];
+}
+
+
+@end
+
+
+
+
+
+
 @interface SDPlaylistTableDelegate ()
 
 @property (weak) IBOutlet NSTableView* playlistsTable;
@@ -71,8 +131,12 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 - (IBAction) severelyDeleteSomething:(id)sender {
-    SDPlaylist* playlist = [[self.playlistsArrayController selectedObjects] lastObject];
-    [[playlist managedObjectContext] deleteObject: playlist];
+    for (SDPlaylist* playlist in [self.playlistsArrayController selectedObjects]) {
+        if ([playlist isMaster])
+            continue;
+        
+        [[playlist managedObjectContext] deleteObject: playlist];
+    }
 }
 
 
@@ -154,7 +218,9 @@ static NSString* SDPlaylistDragType = @"SDPlaylistDragType";
 
 
 
-
+- (IBAction) jumpToPlaylists:(id)sender {
+    [[self.playlistsTable window] makeFirstResponder: self.playlistsTable];
+}
 
 
 
