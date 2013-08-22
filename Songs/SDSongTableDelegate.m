@@ -347,7 +347,7 @@
 }
 
 - (BOOL)control:(NSControl *)control textView:(NSTextView *)textView doCommandBySelector:(SEL)command {
-    NSLog(@"%@", NSStringFromSelector(command));
+//    NSLog(@"%@", NSStringFromSelector(command));
     if (control == self.searchField) {
         if (command == @selector(cancelOperation:)) {
             [self toggleSearchBar:NO];
