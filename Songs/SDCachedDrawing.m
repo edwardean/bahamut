@@ -12,21 +12,6 @@
 
 @property NSImage* pauseImage;
 
-@property NSImage* playButtonImage;
-@property NSImage* playButtonImagePressed;
-@property NSImage* pauseButtonImage;
-@property NSImage* pauseButtonImagePressed;
-
-@property NSImage* enabledPrevButtonImage;
-@property NSImage* enabledPrevButtonImagePressed;
-@property NSImage* disabledPrevButtonImage;
-@property NSImage* disabledPrevButtonImagePressed;
-
-@property NSImage* enabledNextButtonImage;
-@property NSImage* enabledNextButtonImagePressed;
-@property NSImage* disabledNextButtonImage;
-@property NSImage* disabledNextButtonImagePressed;
-
 @end
 
 @implementation SDCachedDrawing
@@ -41,29 +26,10 @@
 }
 
 + (void) drawThings {
-    [[self singleton] drawThings];
+    [self singleton].pauseImage = [self makePauseIcon];
 }
 
-- (void) drawThings {
-    self.pauseImage = [self makePauseIcon];
-    
-    self.playButtonImage = [self makePlayButtonImage:@"SDPlayButtonImage" playing:YES pressed:NO];
-    self.playButtonImagePressed = [self makePlayButtonImage:@"SDPressedPlayButtonImage" playing:YES pressed:YES];
-    self.pauseButtonImage = [self makePlayButtonImage:@"SDPauseButtonImage" playing:NO pressed:NO];
-    self.pauseButtonImagePressed = [self makePlayButtonImage:@"SDPressedPauseButtonImage" playing:NO pressed:YES];
-    
-    self.enabledPrevButtonImage = [self makeNavButtonImage:@"SDEnabledPrevButtonImage" sel:@selector(drawPrevButton:inFrame:) enabled:YES pressed:NO];
-    self.enabledPrevButtonImagePressed = [self makeNavButtonImage:@"SDPressedEnabledPrevButtonImage" sel:@selector(drawPrevButton:inFrame:) enabled:YES pressed:YES];
-    self.disabledPrevButtonImage = [self makeNavButtonImage:@"SDDisabledPrevButtonImage" sel:@selector(drawPrevButton:inFrame:) enabled:NO pressed:NO];
-    self.disabledPrevButtonImagePressed = [self makeNavButtonImage:@"SDPressedDisabledPrevButtonImage" sel:@selector(drawPrevButton:inFrame:) enabled:NO pressed:YES];
-    
-    self.enabledNextButtonImage = [self makeNavButtonImage:@"SDEnabledNextButtonImage" sel:@selector(drawNextButton:inFrame:) enabled:YES pressed:NO];
-    self.enabledNextButtonImagePressed = [self makeNavButtonImage:@"SDPressedEnabledNextButtonImage" sel:@selector(drawNextButton:inFrame:) enabled:YES pressed:YES];
-    self.disabledNextButtonImage = [self makeNavButtonImage:@"SDDisabledNextButtonImage" sel:@selector(drawNextButton:inFrame:) enabled:NO pressed:NO];
-    self.disabledNextButtonImagePressed = [self makeNavButtonImage:@"SDPressedDisabledNextButtonImage" sel:@selector(drawNextButton:inFrame:) enabled:NO pressed:YES];
-}
-
-- (NSImage*) makePauseIcon {
++ (NSImage*) makePauseIcon {
     NSImage* image = [[NSImage alloc] initWithSize:NSMakeSize(10, 10)];
     [image lockFocus];
     
@@ -77,55 +43,85 @@
     return image;
 }
 
-- (NSImage*) makePlayButtonImage:(NSString*)name playing:(BOOL)isPlaying pressed:(BOOL)isPressed {
-    NSImage* image = [[NSImage alloc] initWithSize:NSMakeSize(40, 40)];
-    [image lockFocus];
-    
-    NSBezierPath* path = [NSBezierPath bezierPath];
-    
-    NSColor* color = (isPressed ? [NSColor lightGrayColor] : [NSColor grayColor]);
-    [color set];
-    
-    [self drawPlayButton:path inFrame:NSMakeRect(0, 0, 40, 40) isPlaying:isPlaying];
-    
-    [path stroke];
-    
-    [image unlockFocus];
-    [image setName:name];
-    return image;
-}
+@end
 
-- (NSImage*) makeNavButtonImage:(NSString*)name sel:(SEL)sel enabled:(BOOL)isEnabled pressed:(BOOL)isPressed {
-    NSImage* image = [[NSImage alloc] initWithSize:NSMakeSize(40, 40)];
-    [image lockFocus];
+
+
+
+
+
+
+
+
+
+
+
+@interface SDPrevButtonCell : NSButtonCell
+@end
+
+@implementation SDPrevButtonCell
+
+- (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+    NSRect cellFrame = [controlView bounds];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     
     NSColor* color;
-    if (!isEnabled)
+    if (![self isEnabled])
         color = [NSColor colorWithDeviceWhite:0.85 alpha:1.0];
-    else if (isPressed)
+    else if ([self isHighlighted])
         color = [NSColor lightGrayColor];
     else
         color = [NSColor grayColor];
     [color set];
     
-    IMP meth = [self methodForSelector:sel];
-    meth(self, sel, path, NSMakeRect(0, 0, 40, 40));
-    
-    [path stroke];
-    
-    [image unlockFocus];
-    [image setName:name];
-    return image;
-}
-
-
-
-- (void) drawPlayButton:(NSBezierPath*)path inFrame:(NSRect)cellFrame isPlaying:(BOOL)isPlaying {
     [NSGraphicsContext saveGraphicsState];
     [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:2 yRadius:2] fill];
+    [[NSBezierPath bezierPathWithRect:cellFrame] fill];
+    [NSGraphicsContext restoreGraphicsState];
+    
+    cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
+    cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
+    
+    [path setLineWidth:3.0];
+    [path setLineCapStyle:NSSquareLineCapStyle];
+    [path setLineJoinStyle:NSMiterLineJoinStyle];
+    
+    [path moveToPoint:NSMakePoint(NSMaxX(cellFrame), NSMaxY(cellFrame))];
+    [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMidY(cellFrame))];
+    [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMinY(cellFrame))];
+    
+    [path stroke];
+}
+
+@end
+
+
+
+
+
+
+
+
+
+@interface SDPlayButtonCell : NSButtonCell
+@end
+
+@implementation SDPlayButtonCell
+
+- (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+    NSRect cellFrame = [controlView bounds];
+    
+    BOOL isPlaying = ([image name] == NSImageNameRightFacingTriangleTemplate);
+    
+    NSBezierPath* path = [NSBezierPath bezierPath];
+    
+    NSColor* color = ([self isHighlighted] ? [NSColor lightGrayColor] : [NSColor grayColor]);
+    [color set];
+    
+    [NSGraphicsContext saveGraphicsState];
+    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
+    [[NSBezierPath bezierPathWithRect:cellFrame] fill];
     [NSGraphicsContext restoreGraphicsState];
     
     cellFrame = NSInsetRect(cellFrame, 8.0, 5.0);
@@ -154,30 +150,40 @@
         [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
         [path closePath];
     }
+    
+    [path stroke];
 }
 
-- (void) drawPrevButton:(NSBezierPath*)path inFrame:(NSRect)cellFrame {
-    [NSGraphicsContext saveGraphicsState];
-    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:2 yRadius:2] fill];
-    [NSGraphicsContext restoreGraphicsState];
-    
-    cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
-    cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
-    
-    [path setLineWidth:3.0];
-    [path setLineCapStyle:NSSquareLineCapStyle];
-    [path setLineJoinStyle:NSMiterLineJoinStyle];
-    
-    [path moveToPoint:NSMakePoint(NSMaxX(cellFrame), NSMaxY(cellFrame))];
-    [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMidY(cellFrame))];
-    [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMinY(cellFrame))];
-}
+@end
 
-- (void) drawNextButton:(NSBezierPath*)path inFrame:(NSRect)cellFrame {
+
+
+
+
+
+
+@interface SDNextButtonCell : NSButtonCell
+@end
+
+@implementation SDNextButtonCell
+
+- (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+    NSRect cellFrame = [controlView bounds];
+    
+    NSBezierPath* path = [NSBezierPath bezierPath];
+    
+    NSColor* color;
+    if (![self isEnabled])
+        color = [NSColor colorWithDeviceWhite:0.85 alpha:1.0];
+    else if ([self isHighlighted])
+        color = [NSColor lightGrayColor];
+    else
+        color = [NSColor grayColor];
+    [color set];
+    
     [NSGraphicsContext saveGraphicsState];
     [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:2 yRadius:2] fill];
+    [[NSBezierPath bezierPathWithRect:cellFrame] fill];
     [NSGraphicsContext restoreGraphicsState];
     
     cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
@@ -190,6 +196,8 @@
     [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
     [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMidY(cellFrame))];
     [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
+    
+    [path stroke];
 }
 
 @end
