@@ -26,8 +26,8 @@
 
 
 #define SDButtonBackgroundColor [NSColor colorWithDeviceWhite:0.97 alpha:1.0]
-#define SDButtonNormalColor SDDarkBlue
-#define SDButtonHighlightColor SDMediumBlue
+#define SDButtonNormalColor [NSColor grayColor]
+#define SDButtonHighlightColor [NSColor lightGrayColor]
 #define SDButtonDisabledColor [NSColor colorWithDeviceWhite:0.85 alpha:1.0]
 
 

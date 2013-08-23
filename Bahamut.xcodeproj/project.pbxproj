@@ -189,8 +189,6 @@
 				9426F7F817C624460029650B /* SDValueTransformers.m */,
 				94CC494E17C6730200DA064A /* SDScroller.h */,
 				94CC494F17C6730200DA064A /* SDScroller.m */,
-				94CC495117C6731B00DA064A /* SDCreatePlaylistButtonCell.h */,
-				94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */,
 				9498577317C6223600DBA33E /* SDKeyNavigableTableView.h */,
 				9498577417C6223600DBA33E /* SDKeyNavigableTableView.m */,
 				9428F16E17C7BCDD0094C044 /* SDColors.h */,
@@ -349,6 +347,8 @@
 				9498576217C6203800DBA33E /* SDPlaylistsTableView.m */,
 				9498577017C6216C00DBA33E /* SDTableRowView.h */,
 				9498577117C6216D00DBA33E /* SDTableRowView.m */,
+				94CC495117C6731B00DA064A /* SDCreatePlaylistButtonCell.h */,
+				94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */,
 			);
 			name = Playlists;
 			sourceTree = "<group>";
