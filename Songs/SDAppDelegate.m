@@ -15,6 +15,7 @@
 #import "SDImporter.h"
 #import "SDCoreData.h"
 #import "SDCachedDrawing.h"
+#import "SDPreferencesWindowController.h"
 #import <Sparkle/Sparkle.h>
 
 @interface SDAppDelegate ()
@@ -22,6 +23,8 @@
 @property NSMutableArray* playerWindowControllers;
 @property SDMediaKeyHijacker* mediaKeyHijacker;
 @property IBOutlet SUUpdater* updater;
+
+@property SDPreferencesWindowController* preferencesWindowController;
 
 @end
 
@@ -88,7 +91,10 @@
 }
 
 - (IBAction) showPreferencesWindow:(id)sender {
-    // TODO
+    if (self.preferencesWindowController == nil)
+        self.preferencesWindowController = [[SDPreferencesWindowController alloc] init];
+    
+    [self.preferencesWindowController showWindow:self];
 }
 
 - (void) mediaKeyPressedNext:(NSNotification*)note {

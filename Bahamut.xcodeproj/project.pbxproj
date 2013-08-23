@@ -48,6 +48,8 @@
 		94CC495017C6730200DA064A /* SDScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC494F17C6730200DA064A /* SDScroller.m */; };
 		94CC495317C6731B00DA064A /* SDCreatePlaylistButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */; };
 		94CC495617C6736500DA064A /* SDCachedDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC495517C6736500DA064A /* SDCachedDrawing.m */; };
+		94DF1A6117C6FFDD009702A8 /* SDPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF1A5F17C6FFDD009702A8 /* SDPreferencesWindowController.m */; };
+		94DF1A6217C6FFDD009702A8 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94DF1A6017C6FFDD009702A8 /* PreferencesWindow.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -136,6 +138,9 @@
 		94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCreatePlaylistButtonCell.m; sourceTree = "<group>"; };
 		94CC495417C6736400DA064A /* SDCachedDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCachedDrawing.h; sourceTree = "<group>"; };
 		94CC495517C6736500DA064A /* SDCachedDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCachedDrawing.m; sourceTree = "<group>"; };
+		94DF1A5E17C6FFDD009702A8 /* SDPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPreferencesWindowController.h; sourceTree = "<group>"; };
+		94DF1A5F17C6FFDD009702A8 /* SDPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPreferencesWindowController.m; sourceTree = "<group>"; };
+		94DF1A6017C6FFDD009702A8 /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -272,9 +277,9 @@
 			children = (
 				9460F2E216FF781100DB85C4 /* Bahamut-Info.plist */,
 				9460F2EF16FF781100DB85C4 /* MainMenu.xib */,
-				94C2E7D417C3AD8F00AC90A3 /* iTunes.h */,
 				9460F2EC16FF781100DB85C4 /* SDAppDelegate.h */,
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
+				94DF1A5D17C6FFCE009702A8 /* Preferences */,
 				941B113F17C409D8008F8A79 /* Hacking Media Keys */,
 				94AD9DE317BD56C100D678E1 /* Importing */,
 				9427376617C52B1700715D18 /* Core Data */,
@@ -326,6 +331,7 @@
 		94AD9DE317BD56C100D678E1 /* Importing */ = {
 			isa = PBXGroup;
 			children = (
+				94C2E7D417C3AD8F00AC90A3 /* iTunes.h */,
 				94BEB65917C5D66C007723F3 /* SDImporter.h */,
 				94BEB65A17C5D66C007723F3 /* SDImporter.m */,
 			);
@@ -343,6 +349,16 @@
 				9498577117C6216D00DBA33E /* SDTableRowView.m */,
 			);
 			name = Playlists;
+			sourceTree = "<group>";
+		};
+		94DF1A5D17C6FFCE009702A8 /* Preferences */ = {
+			isa = PBXGroup;
+			children = (
+				94DF1A6017C6FFDD009702A8 /* PreferencesWindow.xib */,
+				94DF1A5E17C6FFDD009702A8 /* SDPreferencesWindowController.h */,
+				94DF1A5F17C6FFDD009702A8 /* SDPreferencesWindowController.m */,
+			);
+			name = Preferences;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -404,6 +420,7 @@
 				94AFF27917C446AF005C30AE /* Licenses in Resources */,
 				9466103917C6A9CF004C3EEE /* dsa_pub.pem in Resources */,
 				9466103B17C6AB3B004C3EEE /* Credits.rtf in Resources */,
+				94DF1A6217C6FFDD009702A8 /* PreferencesWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -442,6 +459,7 @@
 				94CC495017C6730200DA064A /* SDScroller.m in Sources */,
 				94CC495317C6731B00DA064A /* SDCreatePlaylistButtonCell.m in Sources */,
 				94CC495617C6736500DA064A /* SDCachedDrawing.m in Sources */,
+				94DF1A6117C6FFDD009702A8 /* SDPreferencesWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
