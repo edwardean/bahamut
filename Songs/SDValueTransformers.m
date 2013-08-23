@@ -91,6 +91,9 @@
 + (Class)transformedValueClass { return [NSString self]; }
 + (BOOL)allowsReverseTransformation { return NO; }
 - (id)transformedValue:(SDSong*)currentSong {
+    if (currentSong == nil)
+        return @"Bahamut";
+    
     NSArray* parts = @[currentSong.title ?: @"", currentSong.artist ?: @"", currentSong.album ?: @""];
     parts = [parts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"length > 0"]];
     return [parts componentsJoinedByString:@"  -  "];

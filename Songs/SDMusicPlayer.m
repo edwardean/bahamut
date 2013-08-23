@@ -75,8 +75,13 @@
 }
 
 - (void) stop {
+    self.currentSong.isCurrentSong = NO;
+    self.currentPlaylist.isCurrentPlaylist = NO;
+    
     self.stopped = YES;
     self.currentSong = nil;
+    
+    self.currentPlaylist = nil;
     
     [self.player pause];
     [self.player removeTimeObserver:self.timeObserver];

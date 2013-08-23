@@ -125,7 +125,7 @@
 - (void) drawPlayButton:(NSBezierPath*)path inFrame:(NSRect)cellFrame isPlaying:(BOOL)isPlaying {
     [NSGraphicsContext saveGraphicsState];
     [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [NSBezierPath fillRect:cellFrame];
+    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:2 yRadius:2] fill];
     [NSGraphicsContext restoreGraphicsState];
     
     cellFrame = NSInsetRect(cellFrame, 8.0, 5.0);
@@ -159,7 +159,7 @@
 - (void) drawPrevButton:(NSBezierPath*)path inFrame:(NSRect)cellFrame {
     [NSGraphicsContext saveGraphicsState];
     [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [NSBezierPath fillRect:cellFrame];
+    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:2 yRadius:2] fill];
     [NSGraphicsContext restoreGraphicsState];
     
     cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
@@ -177,7 +177,7 @@
 - (void) drawNextButton:(NSBezierPath*)path inFrame:(NSRect)cellFrame {
     [NSGraphicsContext saveGraphicsState];
     [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [NSBezierPath fillRect:cellFrame];
+    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:2 yRadius:2] fill];
     [NSGraphicsContext restoreGraphicsState];
     
     cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);

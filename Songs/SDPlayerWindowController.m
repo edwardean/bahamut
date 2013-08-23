@@ -80,7 +80,7 @@
 
 
 - (void) bindViews {
-    [self.nowPlayingControlsView bind:@"hidden" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:nil];
+//    [self.nowPlayingControlsView bind:@"hidden" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:nil];
     
     [self.prevButton bind:@"enabled" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: NSNegateBooleanTransformerName}];
     [self.nextButton bind:@"enabled" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: NSNegateBooleanTransformerName}];
@@ -104,7 +104,7 @@
 }
 
 - (void) unbindViews {
-    [self.nowPlayingControlsView unbind:@"hidden"];
+//    [self.nowPlayingControlsView unbind:@"hidden"];
     
     [self.prevButton unbind:@"enabled"];
     [self.nextButton unbind:@"enabled"];

@@ -11,6 +11,8 @@
 - Hope someone makes a really pretty icon for it :)
 - Optional menu-bar interface (TunesBar port) and optional hide dock icon
 - Make isCurrentSong/Playlist and isPaused **not** undo-able.
+- Rewrite SDMusicPlayer, that thing is horrible
+- Stop using NSImages for caching drawing, it breaks with retina
 - Add video player
 
 #### To do after 1.0
