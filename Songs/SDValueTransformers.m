@@ -40,12 +40,12 @@
 + (Class)transformedValueClass { return [NSArray class]; }
 + (BOOL)allowsReverseTransformation { return YES; }
 
-- (id)transformedValue:(id)value {
-    return [(NSOrderedSet *)value array];
+- (id)transformedValue:(NSOrderedSet*)set {
+    return [set array];
 }
 
-- (id)reverseTransformedValue:(id)value {
-	return [NSOrderedSet orderedSetWithArray:value];
+- (id)reverseTransformedValue:(NSArray*)array {
+	return [NSOrderedSet orderedSetWithArray:array];
 }
 
 @end
