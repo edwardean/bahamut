@@ -8,6 +8,8 @@
 
 #import "SDSongsTableView.h"
 
+#import "SDColors.h"
+
 @implementation SDSongsTableView
 
 - (void)highlightSelectionInClipRect:(NSRect)clipRect {
@@ -18,10 +20,10 @@
     NSUInteger anEndRow = aRow + aVisibleRowIndexes.length;
     
     if (self == [[self window] firstResponder] && [[self window] isMainWindow] && [[self window] isKeyWindow]) {
-        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0] setFill];
+        [SDTableRowSelectionColor setFill];
     }
     else {
-        [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:0.5] setFill];
+        [SDTableRowSelectionUnfocusedColor setFill];
     }
     
     for (; aRow < anEndRow; aRow++) {

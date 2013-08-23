@@ -81,6 +81,7 @@
 		9426F7F817C624460029650B /* SDValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDValueTransformers.m; sourceTree = "<group>"; };
 		9427376017C529D500715D18 /* SDCoreData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCoreData.h; sourceTree = "<group>"; };
 		9427376117C529D500715D18 /* SDCoreData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCoreData.m; sourceTree = "<group>"; };
+		9428F16E17C7BCDD0094C044 /* SDColors.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SDColors.h; sourceTree = "<group>"; };
 		945C295E17C1F3EE0045BA94 /* SDSplitView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSplitView.h; sourceTree = "<group>"; };
 		945C295F17C1F3EE0045BA94 /* SDSplitView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSplitView.m; sourceTree = "<group>"; };
 		9460F2D716FF781100DB85C4 /* Bahamut.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Bahamut.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -192,6 +193,7 @@
 				94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */,
 				9498577317C6223600DBA33E /* SDKeyNavigableTableView.h */,
 				9498577417C6223600DBA33E /* SDKeyNavigableTableView.m */,
+				9428F16E17C7BCDD0094C044 /* SDColors.h */,
 				94CC495417C6736400DA064A /* SDCachedDrawing.h */,
 				94CC495517C6736500DA064A /* SDCachedDrawing.m */,
 			);

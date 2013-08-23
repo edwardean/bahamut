@@ -623,7 +623,7 @@
 												<object class="NSTextField" id="557480371">
 													<reference key="NSNextResponder" ref="674655831"/>
 													<int key="NSvFlags">265</int>
-													<string key="NSFrame">{{275, 10}, {92, 17}}</string>
+													<string key="NSFrame">{{259, 10}, {92, 17}}</string>
 													<reference key="NSSuperview" ref="674655831"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="727550297"/>
@@ -681,7 +681,7 @@
 												<object class="NSButton" id="727550297">
 													<reference key="NSNextResponder" ref="674655831"/>
 													<int key="NSvFlags">265</int>
-													<string key="NSFrame">{{378, 9}, {72, 18}}</string>
+													<string key="NSFrame">{{366, 9}, {72, 18}}</string>
 													<reference key="NSSuperview" ref="674655831"/>
 													<reference key="NSWindow"/>
 													<reference key="NSNextKeyView" ref="721256335"/>
@@ -1599,12 +1599,12 @@
 							<string key="NSKeyPath">arrangedObjects.@count</string>
 							<object class="NSDictionary" key="NSOptions">
 								<string key="NS.key.0">NSDisplayPattern</string>
-								<string key="NS.object.0">%{value1}@</string>
+								<string key="NS.object.0">%{value1}@ songs</string>
 							</object>
 							<int key="NSNibBindingConnectorVersion">2</int>
 						</object>
 					</object>
-					<int key="connectionID">442</int>
+					<int key="connectionID">443</int>
 				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
@@ -2112,7 +2112,9 @@
 				<string key="309.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="310.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="311.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="312.CustomClassName">SDCheckboxCell</string>
 				<string key="312.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="313.CustomClassName">SDCheckboxCell</string>
 				<string key="313.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="314.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="315.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2154,10 +2156,18 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">442</int>
+			<int key="maxID">443</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
+				<object class="IBPartialClassDescription">
+					<string key="className">SDCheckboxCell</string>
+					<string key="superclassName">NSButtonCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SDCheckboxCell.h</string>
+					</object>
+				</object>
 				<object class="IBPartialClassDescription">
 					<string key="className">SDCreatePlaylistButtonCell</string>
 					<string key="superclassName">NSButtonCell</string>
@@ -2180,6 +2190,14 @@
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
 						<string key="minorKey">./Classes/SDNextButtonCell.h</string>
+					</object>
+				</object>
+				<object class="IBPartialClassDescription">
+					<string key="className">SDPlayButtonCell</string>
+					<string key="superclassName">NSButtonCell</string>
+					<object class="IBClassDescriptionSource" key="sourceIdentifier">
+						<string key="majorKey">IBProjectSource</string>
+						<string key="minorKey">./Classes/SDPlayButtonCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

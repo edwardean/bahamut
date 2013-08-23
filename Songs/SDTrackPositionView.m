@@ -8,6 +8,8 @@
 
 #import "SDTrackPositionView.h"
 
+#import "SDColors.h"
+
 @interface SDTrackPositionView ()
 
 @property CGFloat _currentValue;
@@ -59,11 +61,14 @@
     bounds = NSIntegralRect(bounds);
     bounds = NSInsetRect(bounds, 0.5, 0.5);
     
+    CGFloat outerRadius = 2.0;
     [[NSColor colorWithCalibratedWhite:1.0 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRect:bounds] fill];
+    [[NSBezierPath bezierPathWithRoundedRect:bounds xRadius:outerRadius yRadius:outerRadius] fill];
     
     
     
+    
+    CGFloat innerRadius = 1.0;
     
     NSRect box = bounds;
     box.size.width = 10.0;
@@ -76,8 +81,8 @@
     box = NSIntegralRect(box);
     box = NSInsetRect(box, 1.0, 2.5);
     
-    [[NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:0.75] setFill];
-    [[NSBezierPath bezierPathWithRect:box] fill];
+    [SDDarkBlue setFill];
+    [[NSBezierPath bezierPathWithRoundedRect:box xRadius:innerRadius yRadius:innerRadius] fill];
     
     [NSGraphicsContext restoreGraphicsState];
 }

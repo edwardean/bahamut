@@ -8,6 +8,10 @@
 
 #import "SDCachedDrawing.h"
 
+
+
+#import "SDColors.h"
+
 @interface SDCachedDrawing ()
 
 @property NSImage* pauseImage;
@@ -50,10 +54,6 @@
 
 
 #define SDButtonRadius 2.0
-#define SDButtonBackgroundColor [NSColor colorWithDeviceWhite:0.97 alpha:1.0]
-#define SDButtonNormalColor [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0]
-#define SDButtonHighlightColor [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.27 brightness:0.92 alpha:1.0]
-#define SDButtonDisabledColor [NSColor colorWithDeviceWhite:0.85 alpha:1.0]
 
 
 
@@ -186,6 +186,75 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
                     [self isHighlighted],
                     [self isEnabled],
                     YES);
+}
+
+@end
+
+
+
+
+
+
+
+
+
+
+
+
+@interface SDCheckboxCell : NSButtonCell
+@end
+
+@implementation SDCheckboxCell
+
+- (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+    BOOL ticked = [self intValue];
+    
+    CGFloat d = 2.0;
+    frame = NSInsetRect(frame, d, d);
+    
+    NSColor* backgroundColor;
+    NSColor* backgroundColorPressed;
+    
+    NSColor* checkmarkColor = [NSColor colorWithDeviceWhite:0.96 alpha:1.0];
+    NSColor* checkmarkColorPressed = [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
+    
+    if (ticked) {
+        backgroundColor = SDDarkBlue;
+        backgroundColorPressed = SDMediumBlue;
+    }
+    else {
+        backgroundColor = [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
+        backgroundColorPressed = [NSColor colorWithDeviceWhite:0.97 alpha:1.0];
+    }
+    
+    [([self isHighlighted] ? backgroundColorPressed : backgroundColor) setFill];
+    
+    CGFloat r = 2.0;
+    NSBezierPath* backgroundPath = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:r yRadius:r];
+    [backgroundPath fill];
+    
+    if (ticked) {
+        d = 4.0;
+        frame = NSInsetRect(frame, d, d);
+        
+        NSBezierPath* checkPath = [NSBezierPath bezierPath];
+        
+        [checkPath setLineWidth:3.0];
+        [checkPath setLineCapStyle:NSRoundLineCapStyle];
+        [checkPath setLineJoinStyle:NSRoundLineJoinStyle];
+        
+//        [checkPath moveToPoint:NSMakePoint(NSMinX(frame), NSMaxY(frame))];
+//        [checkPath lineToPoint:NSMakePoint(NSMaxX(frame), NSMinY(frame))];
+//        [checkPath moveToPoint:NSMakePoint(NSMinX(frame), NSMinY(frame))];
+//        [checkPath lineToPoint:NSMakePoint(NSMaxX(frame), NSMaxY(frame))];
+        
+        [checkPath moveToPoint:NSMakePoint(NSMinX(frame), NSMidY(frame) + 1.0)];
+        [checkPath lineToPoint:NSMakePoint(NSMidX(frame) - 1.0, NSMaxY(frame))];
+        [checkPath lineToPoint:NSMakePoint(NSMaxX(frame), NSMinY(frame))];
+        
+        [([self isHighlighted] ? checkmarkColorPressed : checkmarkColor) setStroke];
+        [checkPath stroke];
+    }
 }
 
 @end
