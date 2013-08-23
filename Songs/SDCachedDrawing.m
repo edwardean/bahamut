@@ -131,7 +131,7 @@
     [path setLineCapStyle:NSSquareLineCapStyle];
     [path setLineJoinStyle:NSMiterLineJoinStyle];
     
-    if (!isPlaying) {
+    if (isPlaying) {
         cellFrame = NSInsetRect(cellFrame, 4.0, 1.0);
         
         [path setLineWidth:4.0];
