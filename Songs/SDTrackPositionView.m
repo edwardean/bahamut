@@ -57,9 +57,7 @@
     [NSGraphicsContext saveGraphicsState];
     
     NSRect bounds = [self bounds];
-    
     bounds = NSIntegralRect(bounds);
-    bounds = NSInsetRect(bounds, 0.5, 0.5);
     
     CGFloat outerRadius = 2.0;
     [[NSColor colorWithCalibratedWhite:1.0 alpha:1.0] setFill];
@@ -79,7 +77,7 @@
     box.origin.x += (percentage * (maxWidth - minWidth)) + minWidth;
     
     box = NSIntegralRect(box);
-    box = NSInsetRect(box, 1.0, 2.5);
+    box = NSInsetRect(box, 1.0, 2.0);
     
     [SDDarkBlue setFill];
     [[NSBezierPath bezierPathWithRoundedRect:box xRadius:innerRadius yRadius:innerRadius] fill];
