@@ -49,56 +49,31 @@
 
 
 
+#define SDButtonRadius 2.0
+#define SDButtonBackgroundColor [NSColor colorWithDeviceWhite:0.97 alpha:1.0]
+#define SDButtonNormalColor [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0]
+#define SDButtonHighlightColor [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.27 brightness:0.92 alpha:1.0]
+#define SDButtonDisabledColor [NSColor colorWithDeviceWhite:0.85 alpha:1.0]
 
 
 
 
-
-
-
-@interface SDPrevButtonCell : NSButtonCell
-@end
-
-@implementation SDPrevButtonCell
-
-- (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
-    NSRect cellFrame = [controlView bounds];
-    
-    NSBezierPath* path = [NSBezierPath bezierPath];
-    
-    NSColor* color;
-    if (![self isEnabled])
-        color = [NSColor colorWithDeviceWhite:0.85 alpha:1.0];
-    else if ([self isHighlighted])
-        color = [NSColor lightGrayColor];
-    else
-        color = [NSColor grayColor];
-    [color set];
-    
+static void SDDrawButtonBackground(NSBezierPath* path, NSRect cellFrame) {
     [NSGraphicsContext saveGraphicsState];
-    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRect:cellFrame] fill];
+    [SDButtonBackgroundColor setFill];
+//    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
     [NSGraphicsContext restoreGraphicsState];
-    
-    cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
-    cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
-    
-    [path setLineWidth:3.0];
-    [path setLineCapStyle:NSSquareLineCapStyle];
-    [path setLineJoinStyle:NSMiterLineJoinStyle];
-    
-    [path moveToPoint:NSMakePoint(NSMaxX(cellFrame), NSMaxY(cellFrame))];
-    [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMidY(cellFrame))];
-    [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMinY(cellFrame))];
-    
-    [path stroke];
 }
 
-@end
+static void SDSetupButtonLine(NSBezierPath* path) {
+    [path setLineWidth:3.0];
+    [path setLineCapStyle:NSRoundLineCapStyle];
+    [path setLineJoinStyle:NSRoundLineJoinStyle];
+}
 
-
-
-
+static NSRect SDButtonInset(NSRect cellFrame) {
+    return NSInsetRect(cellFrame, 14.0, 11.0);
+}
 
 
 
@@ -112,29 +87,20 @@
 - (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
     NSRect cellFrame = [controlView bounds];
     
-    BOOL isPlaying = ([image name] == NSImageNameRightFacingTriangleTemplate);
+    [([self isHighlighted] ? SDButtonHighlightColor : SDButtonNormalColor) set];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
+    SDSetupButtonLine(path);
+    SDDrawButtonBackground(path, cellFrame);
+    cellFrame = SDButtonInset(cellFrame);
     
-    NSColor* color = ([self isHighlighted] ? [NSColor lightGrayColor] : [NSColor grayColor]);
-    [color set];
-    
-    [NSGraphicsContext saveGraphicsState];
-    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRect:cellFrame] fill];
-    [NSGraphicsContext restoreGraphicsState];
-    
-    cellFrame = NSInsetRect(cellFrame, 8.0, 5.0);
-    cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
-    
-    [path setLineWidth:3.0];
-    [path setLineCapStyle:NSSquareLineCapStyle];
-    [path setLineJoinStyle:NSMiterLineJoinStyle];
-    
+    BOOL isPlaying = ([image name] == NSImageNameRightFacingTriangleTemplate);
     if (isPlaying) {
-        cellFrame = NSInsetRect(cellFrame, 4.0, 1.0);
+        // pause button
         
-        [path setLineWidth:4.0];
+        cellFrame = NSInsetRect(cellFrame, 2.0, 0.0);
+        
+        [path setLineWidth: [path lineWidth] + 1];
         
         [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
         [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
@@ -143,12 +109,16 @@
         [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMinY(cellFrame))];
     }
     else {
-        cellFrame.origin.x += 2.0;
+        // play button
+        
+        cellFrame.origin.x += 1.0;
         
         [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
         [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMidY(cellFrame))];
         [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
         [path closePath];
+        
+        [path fill];
     }
     
     [path stroke];
@@ -162,42 +132,60 @@
 
 
 
-@interface SDNextButtonCell : NSButtonCell
+
+
+
+
+static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BOOL isNext) {
+    if (!isEnabled)
+        [SDButtonDisabledColor set];
+    else if (isPressed)
+        [SDButtonHighlightColor set];
+    else
+        [SDButtonNormalColor set];
+    
+    NSBezierPath* path = [NSBezierPath bezierPath];
+    SDSetupButtonLine(path);
+    SDDrawButtonBackground(path, cellFrame);
+    cellFrame = SDButtonInset(cellFrame);
+    cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
+    
+    if (isNext) {
+        [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
+        [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMidY(cellFrame))];
+        [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
+    }
+    else {
+        [path moveToPoint:NSMakePoint(NSMaxX(cellFrame), NSMaxY(cellFrame))];
+        [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMidY(cellFrame))];
+        [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMinY(cellFrame))];
+    }
+    
+    [path stroke];
+}
+
+@interface SDPrevButtonCell : NSButtonCell
+@end
+@implementation SDPrevButtonCell
+
+- (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+    SDDrawNavButton([controlView bounds],
+                    [self isHighlighted],
+                    [self isEnabled],
+                    NO);
+}
+
 @end
 
+@interface SDNextButtonCell : NSButtonCell
+@end
 @implementation SDNextButtonCell
 
 - (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
-    NSRect cellFrame = [controlView bounds];
-    
-    NSBezierPath* path = [NSBezierPath bezierPath];
-    
-    NSColor* color;
-    if (![self isEnabled])
-        color = [NSColor colorWithDeviceWhite:0.85 alpha:1.0];
-    else if ([self isHighlighted])
-        color = [NSColor lightGrayColor];
-    else
-        color = [NSColor grayColor];
-    [color set];
-    
-    [NSGraphicsContext saveGraphicsState];
-    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRect:cellFrame] fill];
-    [NSGraphicsContext restoreGraphicsState];
-    
-    cellFrame = NSInsetRect(cellFrame, 12.0, 8.0);
-    cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
-    
-    [path setLineWidth:3.0];
-    [path setLineCapStyle:NSSquareLineCapStyle];
-    [path setLineJoinStyle:NSMiterLineJoinStyle];
-    
-    [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
-    [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMidY(cellFrame))];
-    [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
-    
-    [path stroke];
+    SDDrawNavButton([controlView bounds],
+                    [self isHighlighted],
+                    [self isEnabled],
+                    YES);
 }
 
 @end
