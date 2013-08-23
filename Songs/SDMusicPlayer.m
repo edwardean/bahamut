@@ -9,20 +9,25 @@
 #import "SDMusicPlayer.h"
 
 #import <AVFoundation/AVFoundation.h>
+#import "SDCoreData.h"
 
 @interface SDMusicPlayer ()
 
 @property SDPlaylist* currentPlaylist;
-@property NSMutableArray* songsPlaying;
-
 @property SDSong* currentSong;
-@property NSUInteger currentSongIndex;
+
 @property CGFloat currentTime;
+@property BOOL stopped;
+
+
+
+
+
+@property NSMutableOrderedSet* songsPlaying;
+@property NSUInteger currentSongIndex;
 
 @property AVPlayer* player;
 @property id timeObserver;
-
-@property BOOL stopped;
 
 @end
 
@@ -40,38 +45,167 @@
 - (id) init {
     if (self = [super init]) {
         self.stopped = YES;
-        self.songsPlaying = [NSMutableArray array];
+        self.player = [[AVPlayer alloc] init];
+        
+        [self useFastHeartBeat:YES];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidBecomeActive:) name:NSApplicationDidBecomeActiveNotification object:nil];
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(appDidResignActive:) name:NSApplicationDidResignActiveNotification object:nil];
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(songDidFinish:) name:AVPlayerItemDidPlayToEndTimeNotification object:nil];
     }
     return self;
 }
 
-- (void) playPlaylist:(SDPlaylist*)playlist {
-    if ([[playlist songs] count] == 0)
-        return;
-    
-    [self playSong:[[playlist songs] objectAtIndex:0]
-        inPlaylist:playlist];
+- (void) songDidFinish:(NSNotification*)note {
+    [self nextSong];
 }
+
+- (void) appDidBecomeActive:(NSNotification*)note {
+    [self useFastHeartBeat:YES];
+}
+
+- (void) appDidResignActive:(NSNotification*)note {
+    [self useFastHeartBeat:NO];
+}
+
+- (void) useFastHeartBeat:(BOOL)shouldBeFast {
+    if (self.timeObserver)
+        [self.player removeTimeObserver: self.timeObserver];
+    
+    SDMusicPlayer* __weak weakSelf = self;
+    self.timeObserver = [self.player addPeriodicTimeObserverForInterval:shouldBeFast ? CMTimeMake(1,2) : CMTimeMake(1,1)
+                                                                  queue:NULL
+                                                             usingBlock:^(CMTime time) {
+                                                                 weakSelf.currentTime = CMTimeGetSeconds(time);
+                                                             }];
+}
+
+
+
+
+
+
+
+
 
 - (void) playSong:(SDSong*)song inPlaylist:(SDPlaylist*)playlist {
     self.currentPlaylist.isCurrentPlaylist = NO;
     self.currentSong.isCurrentSong = NO;
     
     self.currentPlaylist = playlist;
+    self.currentPlaylist.isCurrentPlaylist = YES;
+    self.currentPlaylist.paused = NO;
     
-    self.stopped = NO;
+    self.currentSong = song;
+    self.currentSong.isCurrentSong = YES;
+    self.currentSong.paused = NO;
     
-    [self.songsPlaying removeAllObjects];
-    [self.songsPlaying addObjectsFromArray: [[playlist songs] array]];
+    self.songsPlaying = [[self.currentPlaylist songs] mutableCopy];
+    
     if (self.currentPlaylist.shuffles) {
-        [self shuffleSongs];
-        [self.songsPlaying removeObject:song];
-        [self.songsPlaying insertObject:song atIndex:0];
+        SDShuffleOrderedSet(self.songsPlaying);
+        NSUInteger idx = [self.songsPlaying indexOfObject: self.currentSong];
+        [self.songsPlaying moveObjectsAtIndexes:[NSIndexSet indexSetWithIndex:idx] toIndex:0];
     }
     
-    self.currentSongIndex = [self.songsPlaying indexOfObject: song];
-    [self actuallyPlaySong];
+    [self startPlayingCurrentSong];
+}
+
+- (void) playPlaylist:(SDPlaylist*)playlist {
+    if ([[playlist songs] count] == 0)
+        return;
+    
+    NSUInteger idx = 0;
+    if (playlist.shuffles)
+        idx = arc4random_uniform((int32_t)[[playlist songs] count]);
+    
+    [self playSong:[[playlist songs] objectAtIndex:idx]
+        inPlaylist:playlist];
+}
+
+
+- (void) startPlayingCurrentSong {
+    self.stopped = NO;
+    self.currentTime = 0.0;
+    [self.player replaceCurrentItemWithPlayerItem: [self.currentSong playerItem]];
+    [self.player play];
+}
+
+
+
+
+
+
+
+
+- (void) moveToSongInDirection:(int)dir {
+    self.currentSong.isCurrentSong = NO;
+    
+    BOOL forward = (dir == 1);
+    NSUInteger idx = dir + [self.songsPlaying indexOfObject: self.currentSong];
+    NSUInteger endMarker = (forward ? [self.songsPlaying count] : -1);
+    
+    if (idx == endMarker) {
+        if (self.currentPlaylist.repeats == NO) {
+            [self stop];
+            return;
+        }
+        
+        idx = (forward ? 0 : [self.songsPlaying count] - 1);
+        
+        if (self.currentPlaylist.shuffles) {
+            SDShuffleOrderedSet(self.songsPlaying);
+        }
+    }
+    
+    SDSong* nextSong = [self.songsPlaying objectAtIndex:idx];
+    
+    self.currentSong = nextSong;
+    self.currentSong.isCurrentSong = YES;
+    self.currentSong.paused = NO;
+    
+    [self startPlayingCurrentSong];
+}
+
+- (void) nextSong {
+    [self moveToSongInDirection: +1];
+}
+
+- (void) previousSong {
+    [self moveToSongInDirection: -1];
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+- (void) pause {
+    [self.player pause];
+    
+//    [[SDCoreData sharedCoreData].managedObjectContext processPendingChanges];
+//    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] disableUndoRegistration];
+    self.currentPlaylist.paused = YES;
+    self.currentSong.paused = YES;
+//    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] enableUndoRegistration];
+}
+
+- (void) resume {
+    [self.player play];
+    
+//    [[SDCoreData sharedCoreData].managedObjectContext processPendingChanges];
+//    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] disableUndoRegistration];
+    self.currentPlaylist.paused = NO;
+    self.currentSong.paused = NO;
+//    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] enableUndoRegistration];
 }
 
 - (void) stop {
@@ -79,79 +213,38 @@
     self.currentPlaylist.isCurrentPlaylist = NO;
     
     self.stopped = YES;
-    self.currentSong = nil;
+    self.currentTime = 0.0;
     
+    self.currentSong = nil;
     self.currentPlaylist = nil;
     
     [self.player pause];
-    [self.player removeTimeObserver:self.timeObserver];
-    
-    self.player = nil;
-    self.currentTime = 0.0;
 }
 
-- (void) actuallyPlaySong {
-    self.currentSong = [self.songsPlaying objectAtIndex: self.currentSongIndex];
-    
-    self.currentSong.isCurrentSong = YES;
-    self.currentSong.paused = NO;
-    
-    self.currentPlaylist.isCurrentPlaylist = YES;
-    self.currentPlaylist.paused = NO;
-    
-    [self.player pause];
-    [self.player removeTimeObserver:self.timeObserver];
-    
-    self.player = [AVPlayer playerWithPlayerItem: [[self currentSong] playerItem]];
-    
-    self.currentTime = 0.0;
-    
-    SDMusicPlayer* __weak weakSelf = self;
-    self.timeObserver = [self.player addPeriodicTimeObserverForInterval:CMTimeMake(1,2)
-                                                                  queue:NULL
-                                                             usingBlock:^(CMTime time) {
-                                                                 weakSelf.currentTime = CMTimeGetSeconds(time);
-                                                             }];
-    
-    [self.player play];
-}
 
-- (void) shuffleSongs {
-    for (NSUInteger i = [self.songsPlaying count]; i > 1; i--) {
-        u_int32_t j = arc4random_uniform((u_int32_t)i);
-        [self.songsPlaying exchangeObjectAtIndex:i-1 withObjectAtIndex:j];
-    }
-}
 
-- (void) songDidFinish:(NSNotification*)note {
-    [self nextSong];
-}
 
-+ (NSSet*) keyPathsForValuesAffectingRemainingTime {
-    return [NSSet setWithArray:@[@"currentSong.duration", @"currentTime"]];
-}
 
-- (CGFloat) remainingTime {
-    return self.currentSong.duration - self.currentTime;
-}
+
+
+
+
 
 - (void) seekToTime:(CGFloat)percent {
     [self.player seekToTime:CMTimeMakeWithSeconds(percent, 1)];
 }
 
-- (void) pause {
-    [self.player pause];
-    
-    self.currentPlaylist.paused = YES;
-    self.currentSong.paused = YES;
-}
 
-- (void) resume {
-    [self.player play];
-    
-    self.currentPlaylist.paused = NO;
-    self.currentSong.paused = NO;
-}
+
+
+
+
+
+
+
+
+
+
 
 + (NSSet*) keyPathsForValuesAffectingIsPlaying {
     return [NSSet setWithArray:@[@"player.rate"]];
@@ -161,48 +254,47 @@
     return (self.player.rate > 0.5);
 }
 
-- (void) nextSong {
-    self.currentPlaylist.isCurrentPlaylist = NO;
-    self.currentSong.isCurrentSong = NO;
-    
-    self.currentSongIndex++;
-    
-    if (self.currentSongIndex == [self.songsPlaying count]) {
-        if (self.currentPlaylist.repeats) {
-            self.currentSongIndex = 0;
-            
-            if (self.currentPlaylist.shuffles)
-                [self shuffleSongs];
-        }
-        else {
-            [self stop];
-            return;
-        }
-    }
-    
-    [self actuallyPlaySong];
+
+
+
+
+
+
+
+
++ (NSSet*) keyPathsForValuesAffectingRemainingTime {
+    return [NSSet setWithArray:@[@"currentSong.duration", @"currentTime"]];
 }
 
-- (void) previousSong {
-    self.currentPlaylist.isCurrentPlaylist = NO;
-    self.currentSong.isCurrentSong = NO;
-    
-    self.currentSongIndex--;
-    
-    if (self.currentSongIndex == -1) {
-        if (self.currentPlaylist.repeats) {
-            self.currentSongIndex = [self.songsPlaying count] - 1;
-            
-            if (self.currentPlaylist.shuffles)
-                [self shuffleSongs];
-        }
-        else {
-            [self stop];
-            return;
-        }
+- (CGFloat) remainingTime {
+    return self.currentSong.duration - self.currentTime;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+void SDShuffleOrderedSet(NSMutableOrderedSet* orderedSet) {
+    for (NSUInteger i = [orderedSet count]; i > 1; i--) {
+        u_int32_t j = arc4random_uniform((u_int32_t)i);
+        [orderedSet exchangeObjectAtIndex:i-1 withObjectAtIndex:j];
     }
-    
-    [self actuallyPlaySong];
 }
 
 @end

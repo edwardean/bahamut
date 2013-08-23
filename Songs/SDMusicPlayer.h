@@ -18,21 +18,19 @@
 - (void) playSong:(SDSong*)song inPlaylist:(SDPlaylist*)playlist;
 - (void) playPlaylist:(SDPlaylist*)playlist;
 
-- (void) seekToTime:(CGFloat)percent;
-
-- (void) pause;
-- (void) resume;
-
-@property (readonly) BOOL isPlaying;
-
-- (void) stop;
-
 - (void) nextSong;
 - (void) previousSong;
 
-@property (readonly) SDSong* currentSong;
+- (void) pause;
+- (void) resume;
+- (void) stop;
 
-- (SDPlaylist*) currentPlaylist;
+- (void) seekToTime:(CGFloat)percent;
+
+@property (readonly) BOOL isPlaying;
+@property (readonly) SDSong* currentSong;
+@property (readonly) SDPlaylist* currentPlaylist;
+
 @property (readonly) CGFloat currentTime;
 @property (readonly) CGFloat remainingTime;
 @property (readonly) BOOL stopped;
