@@ -54,6 +54,14 @@
     [[self window] setBackgroundColor:[NSColor colorWithDeviceWhite:0.92 alpha:1.0]];
     
     [self bindViews];
+    
+    if (![SDMusicPlayer sharedPlayer].stopped) {
+        double delayInSeconds = 0.05;
+        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
+        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
+            [NSApp sendAction:@selector(jumpToCurrentSong:) to:nil from:nil];
+        });
+    }
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
