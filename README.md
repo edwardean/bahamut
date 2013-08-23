@@ -2,7 +2,7 @@
 
 *The OS X music player I always wanted*
 
-* Current version: **0.1**
+* Current version: **0.8**
 * Requires: OS X 10.8 and up
 * Download: coming soon
 
@@ -10,8 +10,7 @@
 
 - Hope someone makes a really pretty icon for it :)
 - Optional menu-bar interface (TunesBar port) and optional hide dock icon
-- Make isCurrentSong/Playlist and isPaused **not** undo-able.
-- Rewrite SDMusicPlayer, that thing is horrible
+- Make isCurrentSong/Playlist and isPaused **not** undo-able
 - Add video player
 
 #### To do after 1.0
