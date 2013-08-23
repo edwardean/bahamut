@@ -61,7 +61,7 @@
 static void SDDrawButtonBackground(NSBezierPath* path, NSRect cellFrame) {
     [NSGraphicsContext saveGraphicsState];
     [SDButtonBackgroundColor setFill];
-//    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
     [NSGraphicsContext restoreGraphicsState];
 }
 
