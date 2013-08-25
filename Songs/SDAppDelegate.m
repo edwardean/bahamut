@@ -89,7 +89,13 @@
 }
 
 - (IBAction) showVideoWindow:(id)sender {
+    self.videoWindowController = [[SDVideoWindowController alloc] init];
+    __weak SDAppDelegate* _self = self;
+    self.videoWindowController.died = ^{
+        _self.videoWindowController = nil;
+    };
     
+    [self.videoWindowController showWindow:sender];
 }
 
 - (IBAction) showAboutWindow:(id)sender {

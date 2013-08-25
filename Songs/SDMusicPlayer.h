@@ -37,4 +37,6 @@ NSString* SDGetTimeForSeconds(CGFloat seconds);
 @property (readonly) CGFloat remainingTime;
 @property (readonly) BOOL stopped;
 
+@property (readonly) AVPlayer* player;
+
 @end

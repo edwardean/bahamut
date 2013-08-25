@@ -8,6 +8,8 @@
 
 #import <Cocoa/Cocoa.h>
 
-@interface SDVideoWindowController : NSWindowController
+@interface SDVideoWindowController : NSWindowController <NSWindowDelegate>
+
+@property (copy) void(^died)();
 
 @end
