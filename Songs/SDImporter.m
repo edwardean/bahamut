@@ -149,73 +149,104 @@
 + (void) importFromiTunes {
     SDImporterWindowController* windowController = [[SDImporterWindowController alloc] init];
     [windowController showWindow:self];
-    [windowController.progressBar startAnimation:nil];
+    [windowController.progressBar setIndeterminate:NO];
     
-    @autoreleasepool {
-        iTunesApplication* iTunesApp = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
-        iTunesSource* library;
-        
-        for (iTunesSource* source in [iTunesApp.sources get]) {
-            if (source.kind == iTunesESrcLibrary) {
-                library = source;
-                break;
-            }
-        }
-        
-        NSArray* playlists = [library.playlists get];
-        
-        // we can assume iTunes doesn't have duplicates
+    [self getItunesStuffWithCompletionHandler:^(NSArray *playlistInfos) {
+        // we can safely assume both iTunes and our library doesn't have duplicates
         NSSet* currentSongFileURLs = [self existingSongURLs];
         
-        for (iTunesPlaylist* playlist in playlists) {
-            @autoreleasepool {
-                if ([[playlist className] isEqualToString: @"ITunesUserPlaylist"]) {
-                    SDPlaylist* newPlaylist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist"
-                                                                                             inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
-                                                  insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
-                    newPlaylist.title = playlist.name;
-                    newPlaylist.repeats = (playlist.songRepeat == iTunesERptAll);
-                    newPlaylist.shuffles = playlist.shuffle;
+        NSUInteger totalNumSongs = [[playlistInfos valueForKeyPath:@"songs.@unionOfArrays.self"] count];
+        [windowController.progressBar setMaxValue:totalNumSongs];
+        
+        int i = 0;
+        for (NSDictionary* playlistInfo in playlistInfos) {
+            SDPlaylist* newPlaylist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist"
+                                                                                     inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
+                                          insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
+            
+            newPlaylist.title = [playlistInfo objectForKey:@"title"];
+            newPlaylist.repeats = [[playlistInfo objectForKey:@"repeats"] boolValue];
+            newPlaylist.shuffles = [[playlistInfo objectForKey:@"shuffles"] boolValue];
+            
+            for (NSString* trackFilePath in [playlistInfo objectForKey:@"songs"]) {
+                SDSong* song;
+                
+                if (![currentSongFileURLs containsObject: trackFilePath]) {
+                    song = [[SDSong alloc] initWithEntity:[NSEntityDescription entityForName:@"SDSong"
+                                                                      inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
+                           insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
+                    song.path = trackFilePath;
+                    [song prefetchData];
                     
-                    NSMutableArray* songsToAdd = [NSMutableArray array];
-                    
-                    for (iTunesFileTrack* track in [playlist.tracks get]) {
-                        @autoreleasepool {
-                            if ([NSStringFromClass([track class]) isEqualToString: @"ITunesFileTrack"]) {
-                                NSString* trackFilePath = [[track location] path];
-                                BOOL real = [[NSFileManager defaultManager] fileExistsAtPath:trackFilePath];
-                                
-                                if (real) {
-                                    SDSong* song;
+                    [[[SDUserData sharedUserData] masterPlaylist] addSongsObject: song];
+                }
+                else {
+                    song = [self songForPath: trackFilePath];
+                }
+                
+                [newPlaylist addSongsObject: song];
+                [[SDUserData sharedUserData] addPlaylistsObject: newPlaylist];
+                
+                [windowController.progressBar setDoubleValue:++i];
+            }
+            
+        }
+        
+        [windowController close];
+    }];
+}
+
++ (void) getItunesStuffWithCompletionHandler:(void(^)(NSArray* playlistInfos))handler {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        @autoreleasepool {
+            iTunesApplication* iTunesApp = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
+            iTunesSource* library;
+            
+            for (iTunesSource* source in [iTunesApp.sources get]) {
+                if (source.kind == iTunesESrcLibrary) {
+                    library = source;
+                    break;
+                }
+            }
+            
+            NSMutableArray* playlistInfos = [NSMutableArray array];
+            
+            for (iTunesPlaylist* playlist in [library.playlists get]) {
+                @autoreleasepool {
+                    if ([[playlist className] isEqualToString: @"ITunesUserPlaylist"]) {
+                        NSMutableDictionary* playlistInfo = [@{@"title": playlist.name,
+                                                             @"repeats": @(playlist.songRepeat == iTunesERptAll),
+                                                             @"shuffles": @(playlist.shuffle),
+                                                             } mutableCopy];
+                        
+                        NSMutableArray* songsToAdd = [NSMutableArray array];
+                        
+                        for (iTunesFileTrack* track in [playlist.tracks get]) {
+                            @autoreleasepool {
+                                if ([NSStringFromClass([track class]) isEqualToString: @"ITunesFileTrack"]) {
+                                    NSString* trackFilePath = [[track location] path];
+                                    BOOL real = [[NSFileManager defaultManager] fileExistsAtPath:trackFilePath];
                                     
-                                    if (![currentSongFileURLs containsObject: trackFilePath]) {
-                                        song = [[SDSong alloc] initWithEntity:[NSEntityDescription entityForName:@"SDSong"
-                                                                                          inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
-                                               insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
-                                        song.path = trackFilePath;
-                                        [song prefetchData];
-                                        
-                                        [[[SDUserData sharedUserData] masterPlaylist] addSongsObject: song];
+                                    if (real) {
+                                        [songsToAdd addObject: trackFilePath];
                                     }
-                                    else {
-                                        song = [self songForPath: trackFilePath];
-                                    }
-                                    
-                                    [songsToAdd addObject: song];
                                 }
                             }
                         }
+                        
+                        [playlistInfo setObject:songsToAdd forKey:@"songs"];
+                        [playlistInfos addObject: playlistInfo];
                     }
-                    
-                    [newPlaylist addSongs: [NSOrderedSet orderedSetWithArray: songsToAdd]];
-                    [[SDUserData sharedUserData] addPlaylistsObject: newPlaylist];
                 }
             }
+            
+            dispatch_async(dispatch_get_main_queue(), ^{
+                handler(playlistInfos);
+            });
         }
-    }
-    
-    [windowController close];
+    });
 }
+
 
 
 
