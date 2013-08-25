@@ -9,7 +9,6 @@
 #### What's left for 1.0
 
 - Make isCurrentSong/Playlist and isPaused **not** undo-able
-- Add video player
 - Make importing happen in the background, and show a hotdog spinner during it
 - Add volume slider maybe?
 
