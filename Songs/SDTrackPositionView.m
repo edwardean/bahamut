@@ -60,7 +60,7 @@
     bounds = NSIntegralRect(bounds);
     
     CGFloat outerRadius = 2.0;
-    [[NSColor colorWithCalibratedWhite:1.0 alpha:1.0] setFill];
+    [SDTrackBackgroundColor setFill];
     [[NSBezierPath bezierPathWithRoundedRect:bounds xRadius:outerRadius yRadius:outerRadius] fill];
     
     

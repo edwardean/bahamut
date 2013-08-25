@@ -18,6 +18,13 @@
 
 
 
+#define SDVolumeSliderBackColor [NSColor colorWithDeviceWhite:0.87 alpha:1.0]
+#define SDVolumeSliderForeColor [NSColor colorWithDeviceWhite:1.00 alpha:1.0]
+
+
+#define SDTrackBackgroundColor [NSColor colorWithCalibratedWhite:1.0 alpha:1.0]
+
+
 
 #define SDTableRowSelectionColor SDDarkBlue
 #define SDTableRowSelectionUnfocusedColor SDLightBlue
@@ -25,9 +32,10 @@
 
 
 
-#define SDButtonBackgroundColor [NSColor colorWithDeviceWhite:0.97 alpha:1.0]
+#define SDButtonBackgroundColor [NSColor colorWithDeviceWhite:1.0 alpha:1.0]
+#define SDButtonBackgroundColorPressed [NSColor colorWithDeviceWhite:0.97 alpha:1.0]
 #define SDButtonNormalColor [NSColor grayColor]
-#define SDButtonHighlightColor [NSColor lightGrayColor]
+#define SDButtonHighlightColor [NSColor colorWithDeviceWhite:0.44 alpha:1.0]
 #define SDButtonDisabledColor [NSColor colorWithDeviceWhite:0.85 alpha:1.0]
 
 

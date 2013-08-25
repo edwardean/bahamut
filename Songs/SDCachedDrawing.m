@@ -58,9 +58,9 @@
 
 
 
-static void SDDrawButtonBackground(NSBezierPath* path, NSRect cellFrame) {
+static void SDDrawButtonBackground(NSBezierPath* path, NSRect cellFrame, BOOL isPressed) {
     [NSGraphicsContext saveGraphicsState];
-    [SDButtonBackgroundColor setFill];
+    [isPressed ? SDButtonBackgroundColorPressed : SDButtonBackgroundColor setFill];
     [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
     [NSGraphicsContext restoreGraphicsState];
 }
@@ -91,7 +91,7 @@ static NSRect SDButtonInset(NSRect cellFrame) {
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
-    SDDrawButtonBackground(path, cellFrame);
+    SDDrawButtonBackground(path, cellFrame, [self isHighlighted]);
     cellFrame = SDButtonInset(cellFrame);
     
     BOOL isPlaying = ([[image name] isEqualToString: NSImageNameRightFacingTriangleTemplate]);
@@ -146,7 +146,7 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
-    SDDrawButtonBackground(path, cellFrame);
+    SDDrawButtonBackground(path, cellFrame, isPressed);
     cellFrame = SDButtonInset(cellFrame);
     cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
     
