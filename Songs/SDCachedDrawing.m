@@ -94,7 +94,7 @@ static NSRect SDButtonInset(NSRect cellFrame) {
     SDDrawButtonBackground(path, cellFrame);
     cellFrame = SDButtonInset(cellFrame);
     
-    BOOL isPlaying = ([image name] == NSImageNameRightFacingTriangleTemplate);
+    BOOL isPlaying = ([[image name] isEqualToString: NSImageNameRightFacingTriangleTemplate]);
     if (isPlaying) {
         // pause button
         
