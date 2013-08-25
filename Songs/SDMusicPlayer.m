@@ -19,6 +19,14 @@ NSString* SDGetTimeForSeconds(CGFloat seconds) {
 }
 
 
+void SDWithoutUndos(void(^blk)()) {
+    [[SDCoreData sharedCoreData].managedObjectContext processPendingChanges];
+    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] disableUndoRegistration];
+    blk();
+    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] enableUndoRegistration];
+}
+
+
 
 @interface SDMusicPlayer ()
 
@@ -98,46 +106,52 @@ NSString* SDGetTimeForSeconds(CGFloat seconds) {
 
 
 - (void) playSong:(SDSong*)song inPlaylist:(SDPlaylist*)playlist {
-    self.currentPlaylist.isCurrentPlaylist = NO;
-    self.currentSong.isCurrentSong = NO;
-    
-    self.currentPlaylist = playlist;
-    self.currentPlaylist.isCurrentPlaylist = YES;
-    self.currentPlaylist.paused = NO;
-    
-    self.currentSong = song;
-    self.currentSong.isCurrentSong = YES;
-    self.currentSong.paused = NO;
-    
-    self.songsPlaying = [[self.currentPlaylist songs] mutableCopy];
-    
-    if (self.currentPlaylist.shuffles) {
-        SDShuffleOrderedSet(self.songsPlaying);
-        NSUInteger idx = [self.songsPlaying indexOfObject: self.currentSong];
-        [self.songsPlaying moveObjectsAtIndexes:[NSIndexSet indexSetWithIndex:idx] toIndex:0];
-    }
-    
-    [self startPlayingCurrentSong];
+    SDWithoutUndos(^{
+        self.currentPlaylist.isCurrentPlaylist = NO;
+        self.currentSong.isCurrentSong = NO;
+        
+        self.currentPlaylist = playlist;
+        self.currentPlaylist.isCurrentPlaylist = YES;
+        self.currentPlaylist.paused = NO;
+        
+        self.currentSong = song;
+        self.currentSong.isCurrentSong = YES;
+        self.currentSong.paused = NO;
+        
+        self.songsPlaying = [[self.currentPlaylist songs] mutableCopy];
+        
+        if (self.currentPlaylist.shuffles) {
+            SDShuffleOrderedSet(self.songsPlaying);
+            NSUInteger idx = [self.songsPlaying indexOfObject: self.currentSong];
+            [self.songsPlaying moveObjectsAtIndexes:[NSIndexSet indexSetWithIndex:idx] toIndex:0];
+        }
+        
+        [self startPlayingCurrentSong];
+    });
 }
 
 - (void) playPlaylist:(SDPlaylist*)playlist {
-    if ([[playlist songs] count] == 0)
-        return;
-    
-    NSUInteger idx = 0;
-    if (playlist.shuffles)
-        idx = arc4random_uniform((int32_t)[[playlist songs] count]);
-    
-    [self playSong:[[playlist songs] objectAtIndex:idx]
-        inPlaylist:playlist];
+    SDWithoutUndos(^{
+        if ([[playlist songs] count] == 0)
+            return;
+        
+        NSUInteger idx = 0;
+        if (playlist.shuffles)
+            idx = arc4random_uniform((int32_t)[[playlist songs] count]);
+        
+        [self playSong:[[playlist songs] objectAtIndex:idx]
+            inPlaylist:playlist];
+    });
 }
 
 
 - (void) startPlayingCurrentSong {
-    self.stopped = NO;
-    self.currentTime = 0.0;
-    [self.player replaceCurrentItemWithPlayerItem: [self.currentSong playerItem]];
-    [self.player play];
+    SDWithoutUndos(^{
+        self.stopped = NO;
+        self.currentTime = 0.0;
+        [self.player replaceCurrentItemWithPlayerItem: [self.currentSong playerItem]];
+        [self.player play];
+    });
 }
 
 
@@ -148,32 +162,37 @@ NSString* SDGetTimeForSeconds(CGFloat seconds) {
 
 
 - (void) moveToSongInDirection:(int)dir {
-    self.currentSong.isCurrentSong = NO;
+    if (self.stopped)
+        return;
     
-    BOOL forward = (dir == 1);
-    NSUInteger idx = dir + [self.songsPlaying indexOfObject: self.currentSong];
-    NSUInteger endMarker = (forward ? [self.songsPlaying count] : -1);
-    
-    if (idx == endMarker) {
-        if (self.currentPlaylist.repeats == NO) {
-            [self stop];
-            return;
+    SDWithoutUndos(^{
+        self.currentSong.isCurrentSong = NO;
+        
+        BOOL forward = (dir == 1);
+        NSUInteger idx = dir + [self.songsPlaying indexOfObject: self.currentSong];
+        NSUInteger endMarker = (forward ? [self.songsPlaying count] : -1);
+        
+        if (idx == endMarker) {
+            if (self.currentPlaylist.repeats == NO) {
+                [self stop];
+                return;
+            }
+            
+            idx = (forward ? 0 : [self.songsPlaying count] - 1);
+            
+            if (self.currentPlaylist.shuffles) {
+                SDShuffleOrderedSet(self.songsPlaying);
+            }
         }
         
-        idx = (forward ? 0 : [self.songsPlaying count] - 1);
+        SDSong* nextSong = [self.songsPlaying objectAtIndex:idx];
         
-        if (self.currentPlaylist.shuffles) {
-            SDShuffleOrderedSet(self.songsPlaying);
-        }
-    }
-    
-    SDSong* nextSong = [self.songsPlaying objectAtIndex:idx];
-    
-    self.currentSong = nextSong;
-    self.currentSong.isCurrentSong = YES;
-    self.currentSong.paused = NO;
-    
-    [self startPlayingCurrentSong];
+        self.currentSong = nextSong;
+        self.currentSong.isCurrentSong = YES;
+        self.currentSong.paused = NO;
+        
+        [self startPlayingCurrentSong];
+    });
 }
 
 - (void) nextSong {
@@ -198,36 +217,36 @@ NSString* SDGetTimeForSeconds(CGFloat seconds) {
 
 
 - (void) pause {
-    [self.player pause];
-    
-//    [[SDCoreData sharedCoreData].managedObjectContext processPendingChanges];
-//    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] disableUndoRegistration];
-    self.currentPlaylist.paused = YES;
-    self.currentSong.paused = YES;
-//    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] enableUndoRegistration];
+    SDWithoutUndos(^{
+        [self.player pause];
+        
+        self.currentPlaylist.paused = YES;
+        self.currentSong.paused = YES;
+    });
 }
 
 - (void) resume {
-    [self.player play];
-    
-//    [[SDCoreData sharedCoreData].managedObjectContext processPendingChanges];
-//    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] disableUndoRegistration];
-    self.currentPlaylist.paused = NO;
-    self.currentSong.paused = NO;
-//    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] enableUndoRegistration];
+    SDWithoutUndos(^{
+        [self.player play];
+        
+        self.currentPlaylist.paused = NO;
+        self.currentSong.paused = NO;
+    });
 }
 
 - (void) stop {
-    self.currentSong.isCurrentSong = NO;
-    self.currentPlaylist.isCurrentPlaylist = NO;
-    
-    self.stopped = YES;
-    self.currentTime = 0.0;
-    
-    self.currentSong = nil;
-    self.currentPlaylist = nil;
-    
-    [self.player pause];
+    SDWithoutUndos(^{
+        self.currentSong.isCurrentSong = NO;
+        self.currentPlaylist.isCurrentPlaylist = NO;
+        
+        self.stopped = YES;
+        self.currentTime = 0.0;
+        
+        self.currentSong = nil;
+        self.currentPlaylist = nil;
+        
+        [self.player pause];
+    });
 }
 
 

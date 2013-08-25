@@ -8,7 +8,6 @@
 
 #### What's left for 1.0
 
-- Make isCurrentSong/Playlist and isPaused **not** undo-able
 - Add volume slider maybe?
 - Use NSURLs instead of paths
 
