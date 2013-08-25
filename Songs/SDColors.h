@@ -18,8 +18,8 @@
 
 
 
-#define SDVolumeSliderBackColor [NSColor colorWithDeviceWhite:0.87 alpha:1.0]
-#define SDVolumeSliderForeColor [NSColor colorWithDeviceWhite:1.00 alpha:1.0]
+#define SDVolumeSliderBackColor [NSColor colorWithDeviceWhite:1.00 alpha:1.0]
+#define SDVolumeSliderForeColor SDLightBlue
 
 
 #define SDTrackBackgroundColor [NSColor colorWithCalibratedWhite:1.0 alpha:1.0]
