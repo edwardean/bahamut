@@ -32,6 +32,7 @@
 		9475B25D17C96ECA00899272 /* RSRTVArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B25C17C96ECA00899272 /* RSRTVArrayController.m */; };
 		9475B25F17C96EFE00899272 /* DefaultValues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9475B25E17C96EFE00899272 /* DefaultValues.plist */; };
 		9475B26317C9787E00899272 /* SDDockIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B26217C9787E00899272 /* SDDockIconController.m */; };
+		9475B26717C9919F00899272 /* SDInsetHorizontalLine.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B26617C9919F00899272 /* SDInsetHorizontalLine.m */; };
 		9496D43A17C56F2E00EFD43C /* SDUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43917C56F2E00EFD43C /* SDUserData.m */; };
 		9496D44017C56F2F00EFD43C /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43F17C56F2F00EFD43C /* SDPlaylist.m */; };
 		9496D44517C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D44417C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
@@ -117,6 +118,8 @@
 		9475B25E17C96EFE00899272 /* DefaultValues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultValues.plist; sourceTree = "<group>"; };
 		9475B26117C9787E00899272 /* SDDockIconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDockIconController.h; sourceTree = "<group>"; };
 		9475B26217C9787E00899272 /* SDDockIconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDockIconController.m; sourceTree = "<group>"; };
+		9475B26517C9919F00899272 /* SDInsetHorizontalLine.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDInsetHorizontalLine.h; sourceTree = "<group>"; };
+		9475B26617C9919F00899272 /* SDInsetHorizontalLine.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDInsetHorizontalLine.m; sourceTree = "<group>"; };
 		9496D43817C56F2E00EFD43C /* SDUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserData.h; sourceTree = "<group>"; };
 		9496D43917C56F2E00EFD43C /* SDUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDUserData.m; sourceTree = "<group>"; };
 		9496D43E17C56F2F00EFD43C /* SDPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylist.h; sourceTree = "<group>"; };
@@ -403,6 +406,8 @@
 				9475B25C17C96ECA00899272 /* RSRTVArrayController.m */,
 				9475B25617C96D1C00899272 /* SDFontSizeSliderCell.h */,
 				9475B25717C96D1C00899272 /* SDFontSizeSliderCell.m */,
+				9475B26517C9919F00899272 /* SDInsetHorizontalLine.h */,
+				9475B26617C9919F00899272 /* SDInsetHorizontalLine.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -512,6 +517,7 @@
 				9475B25817C96D1C00899272 /* SDFontSizeSliderCell.m in Sources */,
 				9475B25D17C96ECA00899272 /* RSRTVArrayController.m in Sources */,
 				9475B26317C9787E00899272 /* SDDockIconController.m in Sources */,
+				9475B26717C9919F00899272 /* SDInsetHorizontalLine.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
