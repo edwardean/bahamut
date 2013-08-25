@@ -8,7 +8,7 @@
 
 #### What's left for 1.0
 
-- Use NSURLs instead of paths
+- Add 'show in finder' menu for songs
 
 #### To do after 1.0
 

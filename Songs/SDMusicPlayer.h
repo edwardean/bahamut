@@ -8,6 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
+#import <AVFoundation/AVFoundation.h>
+
 #import "SDSong.h"
 #import "SDPlaylist.h"
 

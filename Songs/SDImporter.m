@@ -49,7 +49,7 @@
                     SDSong* song = [[SDSong alloc] initWithEntity:[NSEntityDescription entityForName:@"SDSong"
                                                                               inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
                                    insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
-                    song.path = [url path];
+                    song.url = url;
                     [song prefetchData];
                     
                     [allSongsPlaylist addSongsObject: song];
@@ -64,14 +64,14 @@
     }];
 }
 
-+ (void) filterOnlyPlayableURLs:(NSArray*)urls completionHandler:(void(^)(NSArray* urls))handler {
++ (void) filterOnlyPlayableURLs:(NSArray*)lookInURLs completionHandler:(void(^)(NSArray* urls))handler {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         @autoreleasepool {
-            NSMutableArray* list = [NSMutableArray array];
+            NSMutableArray* foundURLs = [NSMutableArray array];
             
             NSFileManager* fileManager = [[NSFileManager alloc] init];
             
-            for (NSURL* url in urls) {
+            for (NSURL* url in lookInURLs) {
                 @autoreleasepool {
                     BOOL isDir;
                     BOOL exists = [fileManager fileExistsAtPath:[url path] isDirectory:&isDir];
@@ -87,21 +87,18 @@
                                                                              return YES;
                                                                          }];
                         
-                        for (NSURL* file in dirEnum) {
-                            [list addObject:file];
+                        for (NSURL* fileURL in dirEnum) {
+                            [foundURLs addObject:[fileURL fileReferenceURL]];
                         }
                     }
                     else {
-                        [list addObject:url];
+                        [foundURLs addObject:[url fileReferenceURL]];
                     }
                 }
             }
             
-            NSArray* urls = list;
-//            urls = [urls valueForKeyPath:@"fileReferenceURL"];
-            
             dispatch_async(dispatch_get_main_queue(), ^{
-                handler(urls);
+                handler(foundURLs);
             });
         }
     });
@@ -121,7 +118,7 @@
     NSMutableSet* set = [NSMutableSet set];
     
     for (SDSong* song in allSongs) {
-        [set addObject: [NSURL fileURLWithPath:[song path]]];
+        [set addObject: song.url];
     }
     
     return set;
@@ -130,11 +127,11 @@
 
 
 
-+ (SDSong*) songForPath:(NSString*)path {
++ (SDSong*) songForURL:(NSURL*)url {
     NSManagedObjectContext* ctx = [SDCoreData sharedCoreData].managedObjectContext;
     
     NSFetchRequest* req = [NSFetchRequest fetchRequestWithEntityName:@"SDSong"];
-    [req setPredicate:[NSPredicate predicateWithFormat:@"path = %@", path]];
+    [req setPredicate:[NSPredicate predicateWithFormat:@"URL = %@", url]];
     
     NSError* __autoreleasing error;
     NSArray* matchingSongs = [ctx executeFetchRequest:req error:&error];
@@ -168,20 +165,20 @@
             newPlaylist.repeats = [[playlistInfo objectForKey:@"repeats"] boolValue];
             newPlaylist.shuffles = [[playlistInfo objectForKey:@"shuffles"] boolValue];
             
-            for (NSString* trackFilePath in [playlistInfo objectForKey:@"songs"]) {
+            for (NSURL* trackFileURL in [playlistInfo objectForKey:@"songs"]) {
                 SDSong* song;
                 
-                if (![currentSongFileURLs containsObject: trackFilePath]) {
+                if (![currentSongFileURLs containsObject: trackFileURL]) {
                     song = [[SDSong alloc] initWithEntity:[NSEntityDescription entityForName:@"SDSong"
                                                                       inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
                            insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
-                    song.path = trackFilePath;
+                    song.url = trackFileURL;
                     [song prefetchData];
                     
                     [[[SDUserData sharedUserData] masterPlaylist] addSongsObject: song];
                 }
                 else {
-                    song = [self songForPath: trackFilePath];
+                    song = [self songForURL: trackFileURL];
                 }
                 
                 [newPlaylist addSongsObject: song];
@@ -228,7 +225,7 @@
                                     BOOL real = [[NSFileManager defaultManager] fileExistsAtPath:trackFilePath];
                                     
                                     if (real) {
-                                        [songsToAdd addObject: trackFilePath];
+                                        [songsToAdd addObject: [[NSURL fileURLWithPath:trackFilePath] fileReferenceURL]];
                                     }
                                 }
                             }

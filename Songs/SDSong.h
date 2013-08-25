@@ -1,8 +1,8 @@
 //
 //  SDSong.h
-//  Songs
+//  Bahamut
 //
-//  Created by Steven on 8/21/13.
+//  Created by Steven on 8/25/13.
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
@@ -15,30 +15,17 @@
 
 @interface SDSong : NSManagedObject
 
-@property (nonatomic, retain) NSString * path;
-
-@property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) NSString * album;
 @property (nonatomic, retain) NSString * artist;
-
 @property (nonatomic) double duration;
-
 @property (nonatomic) BOOL isCurrentSong;
 @property (nonatomic) BOOL paused;
-
+@property (nonatomic, retain) NSString * title;
+@property (nonatomic, retain) id url;
 @property (nonatomic, retain) NSSet *playlists;
 
 - (void) prefetchData;
 - (AVPlayerItem*) playerItem;
-
-
-
-
-
-
-
-
-@property (nonatomic, readonly) int playerStatus;
 
 @end
 

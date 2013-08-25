@@ -1,24 +1,26 @@
 //
 //  SDSong.m
-//  Songs
+//  Bahamut
 //
-//  Created by Steven on 8/21/13.
+//  Created by Steven on 8/25/13.
 //  Copyright (c) 2013 Steven Degutis. All rights reserved.
 //
 
 #import "SDSong.h"
 #import "SDPlaylist.h"
 
+
 @implementation SDSong
 
 @dynamic album;
 @dynamic artist;
 @dynamic duration;
-@dynamic path;
-@dynamic title;
 @dynamic isCurrentSong;
 @dynamic paused;
+@dynamic title;
+@dynamic url;
 @dynamic playlists;
+
 
 static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
     NSArray* metadataItems = [AVMetadataItem metadataItemsFromArray:[asset commonMetadata]
@@ -36,10 +38,6 @@ static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
     return (id)[firstMatchingMetadataItem value];
 }
 
-- (NSURL*) url {
-    return [NSURL fileURLWithPath:self.path];
-}
-
 - (void) prefetchData {
     AVURLAsset* asset = [AVURLAsset assetWithURL:[self url]];
     
@@ -54,10 +52,6 @@ static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
 }
 
 
-
-
-
-
 + (NSSet*) keyPathsForValuesAffectingPlayerStatus {
     return [NSSet setWithArray:@[@"isCurrentSong", @"paused"]];
 }
@@ -69,6 +63,42 @@ static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
         return 1;
     else
         return 2;
+}
+
+@end
+
+
+
+
+
+@interface SDURLTransformer : NSValueTransformer
+@end
+
+@implementation SDURLTransformer
+
++ (Class)transformedValueClass { return [NSURL class]; }
++ (BOOL)allowsReverseTransformation { return YES; }
+
+- (id)transformedValue:(NSURL*)url {
+    NSError* error;
+    
+    NSData* urlData = [url bookmarkDataWithOptions:0
+                    includingResourceValuesForKeys:@[]
+                                     relativeToURL:nil
+                                             error:&error];
+    
+    return urlData;
+}
+
+- (id)reverseTransformedValue:(NSData*)urlData {
+    NSError* __autoreleasing error;
+    BOOL stale;
+    
+    return [NSURL URLByResolvingBookmarkData:urlData
+                                     options:0
+                               relativeToURL:nil
+                         bookmarkDataIsStale:&stale
+                                       error:&error];
 }
 
 @end
