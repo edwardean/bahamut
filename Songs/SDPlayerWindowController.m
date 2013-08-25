@@ -32,6 +32,7 @@
 @property (weak) IBOutlet NSTextField* currentSongInfoField;
 @property (weak) IBOutlet NSTextField* timeElapsedField;
 @property (weak) IBOutlet NSTextField* timeRemainingField;
+@property (weak) IBOutlet NSSlider* volumeSlider;
 
 @end
 
@@ -92,6 +93,9 @@
     [self.nextButton bind:@"enabled" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: NSNegateBooleanTransformerName}];
     [self.playButton bind:@"image" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"isPlaying" options:@{NSValueTransformerNameBindingOption: @"SDPlayingImageTransformer"}];
     
+    [self.volumeSlider bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"player.volume" options:nil];
+    [self.volumeSlider bind:@"enabled" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"stopped" options:@{NSValueTransformerNameBindingOption: NSNegateBooleanTransformerName}];
+    
     [self.songPositionSlider bind:@"maxValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong.duration" options:nil];
     [self.songPositionSlider bind:@"currentValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:nil];
     
@@ -105,6 +109,9 @@
     [self.prevButton unbind:@"enabled"];
     [self.nextButton unbind:@"enabled"];
     [self.playButton unbind:@"image"];
+    
+    [self.volumeSlider unbind:@"value"];
+    [self.volumeSlider unbind:@"enabled"];
     
     [self.songPositionSlider unbind:@"maxValue"];
     [self.songPositionSlider unbind:@"currentValue"];

@@ -8,7 +8,6 @@
 
 #### What's left for 1.0
 
-- Add volume slider maybe?
 - Use NSURLs instead of paths
 
 #### To do after 1.0

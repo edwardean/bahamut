@@ -63,6 +63,7 @@ void SDWithoutUndos(void(^blk)()) {
     if (self = [super init]) {
         self.stopped = YES;
         self.player = [[AVPlayer alloc] init];
+        self.player.volume = 1.0;
         
         [self useFastHeartBeat:YES];
         
