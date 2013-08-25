@@ -20,39 +20,30 @@
     
     [SDVolumeSliderBackColor setFill];
     [wholePath fill];
+}
+
+- (void)drawKnob:(NSRect)knobRect {
+    knobRect = NSInsetRect(knobRect, 4.0, 0.0);
+    knobRect = NSInsetRect(knobRect, 2.0, 2.0);
     
-    CGFloat inset = 1.0;
-    NSRect knobRect = NSInsetRect(aRect, inset, inset);
-    
-    NSRect bla;
-    NSDivideRect(knobRect, &knobRect, &bla, NSHeight(knobRect) * ([self doubleValue]), NSMaxYEdge);
-    
-//    CGFloat h = ;
-//    CGFloat y = ;
-    
-//    knobRect.origin.y = h - y;
-//    knobRect.size.height = h;
-    
-    r = 1.0;
+    CGFloat r = 1.0;
     NSBezierPath* knobPath = [NSBezierPath bezierPathWithRoundedRect:knobRect xRadius:r yRadius:r];
     
     [SDVolumeSliderForeColor setFill];
     [knobPath fill];
 }
 
-- (void)drawKnob:(NSRect)knobRect {
-}
+//- (CGFloat)knobThickness {
+//    NSLog(@"%f", [super knobThickness]);
+//    return 1.0;
+//    return [super knobThickness];
+//}
 
-- (CGFloat)knobThickness {
-    return 1.0;
-}
-
-- (NSRect)knobRectFlipped:(BOOL)flipped {
-    [[self controlView] setNeedsDisplay:YES];
-    
-    NSRect r = [super knobRectFlipped:flipped];
-    r.size.height = 1.0;
-    return r;
-}
+//- (NSRect)knobRectFlipped:(BOOL)flipped {
+//    NSRect r = [super knobRectFlipped:flipped];
+//    r.size.height /= 2.0;
+//    r.origin.y += r.size.height / 2.0;
+//    return r;
+//}
 
 @end
