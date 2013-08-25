@@ -21,7 +21,6 @@
 @property BOOL isShown;
 
 @property (readonly) NSImage* image;
-@property (readonly) NSImage* altImage;
 
 @end
 
@@ -38,7 +37,6 @@
 	[self.statusItem setMenu:self.statusItemMenu];
     
     [self.statusItem bind:@"image" toObject:self withKeyPath:@"image" options:nil];
-    [self.statusItem bind:@"alternateImage" toObject:self withKeyPath:@"altImage" options:nil];
 }
 
 - (void) hideItem {
@@ -48,7 +46,6 @@
     self.isShown = NO;
     
     [self.statusItem unbind:@"image"];
-    [self.statusItem unbind:@"alternateImage"];
     
     [[NSStatusBar systemStatusBar] removeStatusItem:self.statusItem];
     self.statusItem = nil;
@@ -80,24 +77,12 @@
             ]];
 }
 
-+ (NSSet*) keyPathsForValuesAffectingAltImage {
-    return [self keyPathsForValuesAffectingImage];
-}
-
-- (NSImage*) image {
-    return [self imageWithHighlighted:NO];
-}
-
-- (NSImage*) altImage {
-    return [self imageWithHighlighted:YES];
-}
-
 - (SDMusicPlayer*) player {
     return [SDMusicPlayer sharedPlayer];
 }
 
-- (NSImage*) imageWithHighlighted:(BOOL)isHighlighed {
-	NSString *songInfoTitle = nil;
+- (NSImage*) image {
+    NSString* theTitle;
     
     SDSong* song = [SDMusicPlayer sharedPlayer].currentSong;
 	
@@ -136,8 +121,8 @@
 		}
         
         if ([stringsToDisplay count] > 0) {
-            songInfoTitle = [stringsToDisplay componentsJoinedByString:[NSString stringWithFormat:@"  %@  ", midSeparator ]];
-            songInfoTitle = [NSString stringWithFormat:@"%@  %@  %@", leftSeparator, songInfoTitle, rightSeparator ];
+            theTitle = [stringsToDisplay componentsJoinedByString:[NSString stringWithFormat:@"  %@  ", midSeparator ]];
+            theTitle = [NSString stringWithFormat:@"%@  %@  %@", leftSeparator, theTitle, rightSeparator ];
         }
 	}
 	else {
@@ -156,13 +141,15 @@
         NSEnableScreenUpdates();
     });
     
-    NSString* theTitle = @"♫";
-    
-    if (songInfoTitle) {
-        theTitle = songInfoTitle;
+    if (theTitle == nil) {
+        theTitle = @"♪";
+        font = [NSFont boldSystemFontOfSize:15];
+        foreColor = [NSColor blackColor];
     }
     
-    return [SDTextImageHelper imageWithTitle:theTitle font:font foreColor:foreColor isHighlighted:isHighlighed];
+    return [SDTextImageHelper imageWithTitle:theTitle
+                                        font:font
+                                   foreColor:foreColor];
 }
 
 - (void) menuNeedsUpdate:(NSMenu *)menu {

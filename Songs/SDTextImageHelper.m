@@ -13,33 +13,12 @@
 + (NSImage*) imageWithTitle:(NSString*)title
                        font:(NSFont*)font
                   foreColor:(NSColor*)foreColor
-              isHighlighted:(BOOL)isHighlighted
 {
-	NSShadow *shadow = [[NSShadow alloc] init];
-	[shadow setShadowBlurRadius:1.0];
-	[shadow setShadowColor:[NSColor colorWithCalibratedWhite:1.0 alpha:0.7]];
-	[shadow setShadowOffset:NSMakeSize(0, -1)];
+    NSDictionary *attributes = @{
+                                 NSFontAttributeName: font,
+                                 NSForegroundColorAttributeName: foreColor,
+                                 };
 	
-    NSDictionary *attributes;
-    
-    if (isHighlighted == NO) {
-        attributes = @{
-                       NSFontAttributeName: font,
-                       NSForegroundColorAttributeName: foreColor,
-                       NSShadowAttributeName: shadow,
-                       };
-    }
-    else {
-        attributes = @{
-                       NSFontAttributeName: font,
-                       NSForegroundColorAttributeName: [NSColor whiteColor],
-                       };
-    }
-	
-	return [self imageFromString:title attributes:attributes];
-}
-
-+ (NSImage*) imageFromString:(NSString*)title attributes:(NSDictionary*)attributes {
 	NSAttributedString *attributedTitle = [[NSAttributedString alloc] initWithString:title attributes:attributes];
 	
 	NSSize frameSize = [title sizeWithAttributes:attributes];
@@ -47,6 +26,9 @@
 	[image lockFocus];
 	[attributedTitle drawAtPoint:NSMakePoint(0, 0)];
 	[image unlockFocus];
+    
+    [image setTemplate:YES];
+    
 	return image;
 }
 

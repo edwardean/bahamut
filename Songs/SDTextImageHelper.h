@@ -12,9 +12,6 @@
 
 + (NSImage*) imageWithTitle:(NSString*)title
                        font:(NSFont*)font
-                  foreColor:(NSColor*)foreColor
-              isHighlighted:(BOOL)isHighlighted;
-
-+ (NSImage*) imageFromString:(NSString*)title attributes:(NSDictionary*)attributes;
+                  foreColor:(NSColor*)foreColor;
 
 @end
