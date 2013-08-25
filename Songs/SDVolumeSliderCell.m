@@ -33,9 +33,16 @@
     [knobPath fill];
 }
 
+//- (CGFloat)knobThickness {
+//    NSLog(@"%f", [super knobThickness]);
+//    return 1.0;
+//    return [super knobThickness];
+//}
+
 //- (NSRect)knobRectFlipped:(BOOL)flipped {
 //    NSRect r = [super knobRectFlipped:flipped];
-//    r.size.height = 1.0;
+//    r.size.height /= 2.0;
+//    r.origin.y += r.size.height / 2.0;
 //    return r;
 //}
 
