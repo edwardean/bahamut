@@ -17,20 +17,34 @@
 
 #import "iTunes.h"
 
+#import "SDImporterWindowController.h"
+
 @implementation SDImporter
 
 
 + (void) importSongsUnderURLs:(NSArray*)urls {
+    SDImporterWindowController* windowController = [[SDImporterWindowController alloc] init];
+    
+    [windowController showWindow:self];
+    [windowController.progressBar setIndeterminate:NO];
+    
     [self filterOnlyPlayableURLs:urls completionHandler:^(NSArray *urls) {
+        SDPlaylist* allSongsPlaylist = [[SDUserData sharedUserData] masterPlaylist];
+        
         @autoreleasepool {
+            NSMutableArray* importingURLs = [urls mutableCopy];
             NSSet* existingURLs = [self existingSongURLs];
+            [importingURLs removeObjectsInArray: [existingURLs allObjects]];
             
-            for (NSURL* url in urls) {
-                if ([existingURLs containsObject: url])
-                    continue;
-                
+            NSUInteger count = [importingURLs count];
+            [windowController.progressBar setMaxValue:count];
+            
+            int i = 0;
+            for (NSURL* url in importingURLs) {
                 @autoreleasepool {
-                    SDPlaylist* allSongsPlaylist = [[SDUserData sharedUserData] masterPlaylist];
+                    AVURLAsset* asset = [AVURLAsset assetWithURL:url];
+                    if (![asset isPlayable])
+                        continue;
                     
                     SDSong* song = [[SDSong alloc] initWithEntity:[NSEntityDescription entityForName:@"SDSong"
                                                                               inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
@@ -40,8 +54,13 @@
                     
                     [allSongsPlaylist addSongsObject: song];
                 }
+                
+                i++;
+                [windowController.progressBar setDoubleValue: i];
             }
         }
+        
+        [windowController close];
     }];
 }
 
@@ -69,17 +88,11 @@
                                                                          }];
                         
                         for (NSURL* file in dirEnum) {
-                            AVURLAsset* asset = [AVURLAsset assetWithURL:file];
-                            if ([asset isPlayable]) {
-                                [list addObject:file];
-                            }
+                            [list addObject:file];
                         }
                     }
                     else {
-                        AVURLAsset* asset = [AVURLAsset assetWithURL:url];
-                        if ([asset isPlayable]) {
-                            [list addObject:url];
-                        }
+                        [list addObject:url];
                     }
                 }
             }
@@ -134,6 +147,10 @@
 
 
 + (void) importFromiTunes {
+    SDImporterWindowController* windowController = [[SDImporterWindowController alloc] init];
+    [windowController showWindow:self];
+    [windowController.progressBar startAnimation:nil];
+    
     @autoreleasepool {
         iTunesApplication* iTunesApp = [SBApplication applicationWithBundleIdentifier:@"com.apple.iTunes"];
         iTunesSource* library;
@@ -196,6 +213,8 @@
             }
         }
     }
+    
+    [windowController close];
 }
 
 

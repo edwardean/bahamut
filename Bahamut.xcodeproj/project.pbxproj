@@ -9,6 +9,8 @@
 /* Begin PBXBuildFile section */
 		9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */; };
 		9404AB491700F5AC00E0D3AF /* PlayerWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */; };
+		941864F217C9CDA500CE16B7 /* SDImporterWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 941864F017C9CDA500CE16B7 /* SDImporterWindowController.m */; };
+		941864F317C9CDA600CE16B7 /* ImporterWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 941864F117C9CDA500CE16B7 /* ImporterWindow.xib */; };
 		941B114417C409E7008F8A79 /* SPMediaKeyTap.m in Sources */ = {isa = PBXBuildFile; fileRef = 941B114117C409E7008F8A79 /* SPMediaKeyTap.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		941B114517C409E7008F8A79 /* NSObject+SPInvocationGrabbing.m in Sources */ = {isa = PBXBuildFile; fileRef = 941B114317C409E7008F8A79 /* NSObject+SPInvocationGrabbing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		941B114717C40A25008F8A79 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941B114617C40A25008F8A79 /* Carbon.framework */; };
@@ -78,6 +80,9 @@
 		9404AB451700F5AC00E0D3AF /* SDPlayerWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlayerWindowController.h; sourceTree = "<group>"; };
 		9404AB461700F5AC00E0D3AF /* SDPlayerWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPlayerWindowController.m; sourceTree = "<group>"; };
 		9404AB471700F5AC00E0D3AF /* PlayerWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PlayerWindow.xib; sourceTree = "<group>"; };
+		941864EF17C9CDA500CE16B7 /* SDImporterWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDImporterWindowController.h; sourceTree = "<group>"; };
+		941864F017C9CDA500CE16B7 /* SDImporterWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDImporterWindowController.m; sourceTree = "<group>"; };
+		941864F117C9CDA500CE16B7 /* ImporterWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = ImporterWindow.xib; sourceTree = "<group>"; };
 		941B114017C409E7008F8A79 /* SPMediaKeyTap.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SPMediaKeyTap.h; sourceTree = "<group>"; };
 		941B114117C409E7008F8A79 /* SPMediaKeyTap.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SPMediaKeyTap.m; sourceTree = "<group>"; };
 		941B114217C409E7008F8A79 /* NSObject+SPInvocationGrabbing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSObject+SPInvocationGrabbing.h"; sourceTree = "<group>"; };
@@ -393,6 +398,9 @@
 				94C2E7D417C3AD8F00AC90A3 /* iTunes.h */,
 				94BEB65917C5D66C007723F3 /* SDImporter.h */,
 				94BEB65A17C5D66C007723F3 /* SDImporter.m */,
+				941864F117C9CDA500CE16B7 /* ImporterWindow.xib */,
+				941864EF17C9CDA500CE16B7 /* SDImporterWindowController.h */,
+				941864F017C9CDA500CE16B7 /* SDImporterWindowController.m */,
 			);
 			name = Importing;
 			sourceTree = "<group>";
@@ -490,6 +498,7 @@
 				94DF1A6217C6FFDD009702A8 /* PreferencesWindow.xib in Resources */,
 				9475B25F17C96EFE00899272 /* DefaultValues.plist in Resources */,
 				9421E19717C9A9F700115F14 /* VideoWindow.xib in Resources */,
+				941864F317C9CDA600CE16B7 /* ImporterWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -536,6 +545,7 @@
 				9475B26317C9787E00899272 /* SDDockIconController.m in Sources */,
 				9475B26717C9919F00899272 /* SDInsetHorizontalLine.m in Sources */,
 				9421E19617C9A9F700115F14 /* SDVideoWindowController.m in Sources */,
+				941864F217C9CDA500CE16B7 /* SDImporterWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
