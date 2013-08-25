@@ -61,7 +61,7 @@
 						<object class="NSButton" id="521154352">
 							<reference key="NSNextResponder" ref="1006"/>
 							<int key="NSvFlags">268</int>
-							<string key="NSFrame">{{190, 241}, {150, 18}}</string>
+							<string key="NSFrame">{{190, 241}, {136, 18}}</string>
 							<reference key="NSSuperview" ref="1006"/>
 							<reference key="NSWindow"/>
 							<reference key="NSNextKeyView" ref="481268120"/>
@@ -70,7 +70,7 @@
 							<object class="NSButtonCell" key="NSCell" id="191048718">
 								<int key="NSCellFlags">-2080374784</int>
 								<int key="NSCellFlags2">268435456</int>
-								<string key="NSContents">Show menu bar icon</string>
+								<string key="NSContents">Show in menu bar</string>
 								<object class="NSFont" key="NSSupport" id="309737848">
 									<string key="NSName">LucidaGrande</string>
 									<double key="NSSize">13</double>
