@@ -8,6 +8,7 @@
 
 
 
+#import "SDMusicPlayer.h"
 #import "SDSong.h"
 
 @interface SDPlayerStatusImageTransformer : NSValueTransformer
@@ -67,9 +68,7 @@
 + (BOOL)allowsReverseTransformation { return NO; }
 - (id)transformedValue:(id)value {
     CGFloat seconds = [value doubleValue];
-    CGFloat mins = seconds / 60.0;
-    CGFloat secs = fmod(seconds, 60.0);
-    return [NSString stringWithFormat:@"%d:%02d", (int)mins, (int)secs];
+    return SDGetTimeForSeconds(seconds);
 }
 
 @end

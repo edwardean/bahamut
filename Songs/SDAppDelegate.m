@@ -18,6 +18,9 @@
 #import "SDPreferencesWindowController.h"
 #import <Sparkle/Sparkle.h>
 
+#import "SDStatusItemController.h"
+#import "SDDockIconController.h"
+
 @interface SDAppDelegate ()
 
 @property NSMutableArray* playerWindowControllers;
@@ -26,13 +29,21 @@
 
 @property SDPreferencesWindowController* preferencesWindowController;
 
+@property IBOutlet SDStatusItemController* statusItemController;
+@property SDDockIconController* dockIconController;
+
 @end
 
 @implementation SDAppDelegate
 
 - (void) applicationDidFinishLaunching:(NSNotification *)notification {
+    [self registerDefaults];
+    
     [[SDCoreData sharedCoreData] setup];
     [SDCachedDrawing drawThings];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(prefShowMenuItemChanged:) name:SDPrefShowMenuItemChangedNotification object:nil];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(prefShowDockIconChanged:) name:SDPrefShowDockIconChangedNotification object:nil];
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedPlayPause:) name:SDMediaKeyPressedPlayPause object:nil];
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(mediaKeyPressedNext:) name:SDMediaKeyPressedNext object:nil];
@@ -43,7 +54,26 @@
     
     self.playerWindowControllers = [NSMutableArray array];
     
+    self.dockIconController = [[SDDockIconController alloc] init];
+    [self.dockIconController toggleDockIcon];
+    
+    [self.statusItemController toggleItem];
+    
     [self newPlayerWindow:nil];
+}
+
+- (void) registerDefaults {
+	NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DefaultValues" ofType:@"plist"];
+	NSDictionary *initialValues = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+	[[NSUserDefaults standardUserDefaults] registerDefaults:initialValues];
+}
+
+- (void) prefShowDockIconChanged:(NSNotification*)note {
+    [self.dockIconController toggleDockIcon];
+}
+
+- (void) prefShowMenuItemChanged:(NSNotification*)note {
+    [self.statusItemController toggleItem];
 }
 
 - (void) applicationWillTerminate:(NSNotification *)notification {
@@ -51,49 +81,19 @@
 }
 
 - (void) mediaKeyPressedPlayPause:(NSNotification*)note {
-    
-    
-//    static BOOL wut;
-//    
-//    if (wut) {
-//        ProcessSerialNumber psn = { 0, kCurrentProcess };
-//        TransformProcessType(&psn, kProcessTransformToForegroundApplication);
-//        ShowHideProcess(&psn, 1);
-//        SetFrontProcess(&psn);
-//    }
-//    else {
-//        NSArray* wins = [[NSApp windows] filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"isVisible = YES"]];
-//        
-//        for (NSWindow* win in wins) {
-//            [win setCanHide: NO];
-//        }
-//        
-//        ProcessSerialNumber psn = { 0, kCurrentProcess };
-//        TransformProcessType(&psn, kProcessTransformToUIElementApplication);
-//        ShowHideProcess(&psn, 1);
-//        SetFrontProcess(&psn);
-//        
-//        double delayInSeconds = 0.25;
-//        dispatch_time_t popTime = dispatch_time(DISPATCH_TIME_NOW, (int64_t)(delayInSeconds * NSEC_PER_SEC));
-//        dispatch_after(popTime, dispatch_get_main_queue(), ^(void){
-//            for (NSWindow* win in wins) {
-//                [win setCanHide: YES];
-//            }
-//        });
-//    }
-//    
-//    wut = !wut;
-    
-    
-    
-    
     [NSApp sendAction:@selector(playPause:) to:nil from:nil];
+}
+
+- (IBAction) showAboutWindow:(id)sender {
+    [NSApp activateIgnoringOtherApps:YES];
+    [NSApp orderFrontStandardAboutPanel:sender];
 }
 
 - (IBAction) showPreferencesWindow:(id)sender {
     if (self.preferencesWindowController == nil)
         self.preferencesWindowController = [[SDPreferencesWindowController alloc] init];
     
+    [NSApp activateIgnoringOtherApps:YES];
     [self.preferencesWindowController showWindow:self];
 }
 

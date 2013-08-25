@@ -22,4 +22,25 @@
     [[self window] center];
 }
 
+- (IBAction) showDockIconChanged:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPrefShowDockIconChangedNotification object:nil];
+}
+
+- (IBAction) showMenuItemChanged:(id)sender {
+    [[NSNotificationCenter defaultCenter] postNotificationName:SDPrefShowMenuItemChangedNotification object:nil];
+}
+
+- (IBAction) restoreSeparatorDefaults:(id)sender {
+	NSString *plistPath = [[NSBundle mainBundle] pathForResource:@"DefaultValues" ofType:@"plist"];
+	NSDictionary *initialValues = [NSDictionary dictionaryWithContentsOfFile:plistPath];
+    
+	NSString *leftSeparator = [initialValues objectForKey:SDPrefStatusItemLeftSepKey];
+	NSString *midSeparator = [initialValues objectForKey:SDPrefStatusItemMiddleSepKey];
+	NSString *rightSeparator = [initialValues objectForKey:SDPrefStatusItemRightSepKey];
+	
+	[[NSUserDefaults standardUserDefaults] setObject:leftSeparator forKey:SDPrefStatusItemLeftSepKey];
+	[[NSUserDefaults standardUserDefaults] setObject:midSeparator forKey:SDPrefStatusItemMiddleSepKey];
+	[[NSUserDefaults standardUserDefaults] setObject:rightSeparator forKey:SDPrefStatusItemRightSepKey];
+}
+
 @end

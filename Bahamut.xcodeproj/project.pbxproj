@@ -26,6 +26,12 @@
 		9466103917C6A9CF004C3EEE /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9466103817C6A9CF004C3EEE /* dsa_pub.pem */; };
 		9466103B17C6AB3B004C3EEE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9466103A17C6AB3B004C3EEE /* Credits.rtf */; };
 		9471F53217C4FF7C00604963 /* SongsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9471F53017C4FF7C00604963 /* SongsDataModel.xcdatamodeld */; };
+		9475B25117C968AA00899272 /* SDTextImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B25017C968AA00899272 /* SDTextImageHelper.m */; };
+		9475B25417C968E700899272 /* SDStatusItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B25317C968E700899272 /* SDStatusItemController.m */; };
+		9475B25817C96D1C00899272 /* SDFontSizeSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B25717C96D1C00899272 /* SDFontSizeSliderCell.m */; };
+		9475B25D17C96ECA00899272 /* RSRTVArrayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B25C17C96ECA00899272 /* RSRTVArrayController.m */; };
+		9475B25F17C96EFE00899272 /* DefaultValues.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9475B25E17C96EFE00899272 /* DefaultValues.plist */; };
+		9475B26317C9787E00899272 /* SDDockIconController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B26217C9787E00899272 /* SDDockIconController.m */; };
 		9496D43A17C56F2E00EFD43C /* SDUserData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43917C56F2E00EFD43C /* SDUserData.m */; };
 		9496D44017C56F2F00EFD43C /* SDPlaylist.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D43F17C56F2F00EFD43C /* SDPlaylist.m */; };
 		9496D44517C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m in Sources */ = {isa = PBXBuildFile; fileRef = 9496D44417C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m */; };
@@ -100,6 +106,17 @@
 		9466103817C6A9CF004C3EEE /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = AutoUpdating/dsa_pub.pem; sourceTree = SOURCE_ROOT; };
 		9466103A17C6AB3B004C3EEE /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
 		9471F53117C4FF7C00604963 /* SongsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SongsDataModel.xcdatamodel; sourceTree = "<group>"; };
+		9475B24F17C968AA00899272 /* SDTextImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTextImageHelper.h; sourceTree = "<group>"; };
+		9475B25017C968AA00899272 /* SDTextImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTextImageHelper.m; sourceTree = "<group>"; };
+		9475B25217C968E700899272 /* SDStatusItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDStatusItemController.h; sourceTree = "<group>"; };
+		9475B25317C968E700899272 /* SDStatusItemController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDStatusItemController.m; sourceTree = "<group>"; };
+		9475B25617C96D1C00899272 /* SDFontSizeSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDFontSizeSliderCell.h; sourceTree = "<group>"; };
+		9475B25717C96D1C00899272 /* SDFontSizeSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDFontSizeSliderCell.m; sourceTree = "<group>"; };
+		9475B25B17C96ECA00899272 /* RSRTVArrayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = RSRTVArrayController.h; sourceTree = "<group>"; };
+		9475B25C17C96ECA00899272 /* RSRTVArrayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = RSRTVArrayController.m; sourceTree = "<group>"; };
+		9475B25E17C96EFE00899272 /* DefaultValues.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = DefaultValues.plist; sourceTree = "<group>"; };
+		9475B26117C9787E00899272 /* SDDockIconController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDDockIconController.h; sourceTree = "<group>"; };
+		9475B26217C9787E00899272 /* SDDockIconController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDDockIconController.m; sourceTree = "<group>"; };
 		9496D43817C56F2E00EFD43C /* SDUserData.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDUserData.h; sourceTree = "<group>"; };
 		9496D43917C56F2E00EFD43C /* SDUserData.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDUserData.m; sourceTree = "<group>"; };
 		9496D43E17C56F2F00EFD43C /* SDPlaylist.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPlaylist.h; sourceTree = "<group>"; };
@@ -276,9 +293,12 @@
 			isa = PBXGroup;
 			children = (
 				9460F2E216FF781100DB85C4 /* Bahamut-Info.plist */,
+				9475B25E17C96EFE00899272 /* DefaultValues.plist */,
 				9460F2EF16FF781100DB85C4 /* MainMenu.xib */,
 				9460F2EC16FF781100DB85C4 /* SDAppDelegate.h */,
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
+				9475B26017C9787100899272 /* Dock Icon */,
+				9475B24E17C968A000899272 /* Status Bar Icon */,
 				94DF1A5D17C6FFCE009702A8 /* Preferences */,
 				941B113F17C409D8008F8A79 /* Hacking Media Keys */,
 				94AD9DE317BD56C100D678E1 /* Importing */,
@@ -315,6 +335,26 @@
 				9426F7F617C623730029650B /* Common */,
 			);
 			name = "Player Window";
+			sourceTree = "<group>";
+		};
+		9475B24E17C968A000899272 /* Status Bar Icon */ = {
+			isa = PBXGroup;
+			children = (
+				9475B25217C968E700899272 /* SDStatusItemController.h */,
+				9475B25317C968E700899272 /* SDStatusItemController.m */,
+				9475B24F17C968AA00899272 /* SDTextImageHelper.h */,
+				9475B25017C968AA00899272 /* SDTextImageHelper.m */,
+			);
+			name = "Status Bar Icon";
+			sourceTree = "<group>";
+		};
+		9475B26017C9787100899272 /* Dock Icon */ = {
+			isa = PBXGroup;
+			children = (
+				9475B26117C9787E00899272 /* SDDockIconController.h */,
+				9475B26217C9787E00899272 /* SDDockIconController.m */,
+			);
+			name = "Dock Icon";
 			sourceTree = "<group>";
 		};
 		9498577617C6235000DBA33E /* Top Level */ = {
@@ -359,6 +399,10 @@
 				94DF1A6017C6FFDD009702A8 /* PreferencesWindow.xib */,
 				94DF1A5E17C6FFDD009702A8 /* SDPreferencesWindowController.h */,
 				94DF1A5F17C6FFDD009702A8 /* SDPreferencesWindowController.m */,
+				9475B25B17C96ECA00899272 /* RSRTVArrayController.h */,
+				9475B25C17C96ECA00899272 /* RSRTVArrayController.m */,
+				9475B25617C96D1C00899272 /* SDFontSizeSliderCell.h */,
+				9475B25717C96D1C00899272 /* SDFontSizeSliderCell.m */,
 			);
 			name = Preferences;
 			sourceTree = "<group>";
@@ -423,6 +467,7 @@
 				9466103917C6A9CF004C3EEE /* dsa_pub.pem in Resources */,
 				9466103B17C6AB3B004C3EEE /* Credits.rtf in Resources */,
 				94DF1A6217C6FFDD009702A8 /* PreferencesWindow.xib in Resources */,
+				9475B25F17C96EFE00899272 /* DefaultValues.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -462,6 +507,11 @@
 				94CC495317C6731B00DA064A /* SDCreatePlaylistButtonCell.m in Sources */,
 				94CC495617C6736500DA064A /* SDCachedDrawing.m in Sources */,
 				94DF1A6117C6FFDD009702A8 /* SDPreferencesWindowController.m in Sources */,
+				9475B25117C968AA00899272 /* SDTextImageHelper.m in Sources */,
+				9475B25417C968E700899272 /* SDStatusItemController.m in Sources */,
+				9475B25817C96D1C00899272 /* SDFontSizeSliderCell.m in Sources */,
+				9475B25D17C96ECA00899272 /* RSRTVArrayController.m in Sources */,
+				9475B26317C9787E00899272 /* SDDockIconController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

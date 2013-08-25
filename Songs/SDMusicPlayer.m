@@ -11,6 +11,15 @@
 #import <AVFoundation/AVFoundation.h>
 #import "SDCoreData.h"
 
+
+NSString* SDGetTimeForSeconds(CGFloat seconds) {
+    CGFloat mins = seconds / 60.0;
+    CGFloat secs = fmod(seconds, 60.0);
+    return [NSString stringWithFormat:@"%d:%02d", (int)mins, (int)secs];
+}
+
+
+
 @interface SDMusicPlayer ()
 
 @property SDPlaylist* currentPlaylist;

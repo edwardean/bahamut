@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>statusItemFontSize</key>
+	<integer>12</integer>
+	<key>statusItemLeftSeparatorSymbol</key>
+	<string>•</string>
+	<key>statusItemMiddleSeparatorSymbol</key>
+	<string>•</string>
+	<key>SDPrefShowDockIconKey</key>
+	<true/>
+	<key>statusItemRightSeparatorSymbol</key>
+	<string>•</string>
+	<key>statusItemTitleOptions</key>
+	<array>
+		<dict>
+			<key>SongKey</key>
+			<string>title</string>
+			<key>Title</key>
+			<string>Song Title</string>
+			<key>Enabled</key>
+			<true/>
+		</dict>
+		<dict>
+			<key>SongKey</key>
+			<string>artist</string>
+			<key>Title</key>
+			<string>Artist</string>
+			<key>Enabled</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>SongKey</key>
+			<string>album</string>
+			<key>Title</key>
+			<string>Album</string>
+			<key>Enabled</key>
+			<false/>
+		</dict>
+		<dict>
+			<key>SongKey</key>
+			<string>duration</string>
+			<key>Title</key>
+			<string>Duration</string>
+			<key>Enabled</key>
+			<false/>
+		</dict>
+	</array>
+</dict>
+</plist>

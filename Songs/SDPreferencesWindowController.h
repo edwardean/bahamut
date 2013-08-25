@@ -8,6 +8,19 @@
 
 #import <Cocoa/Cocoa.h>
 
+#define SDPrefShowMenuItemChangedNotification @"SDPrefShowMenuItemChangedNotification"
+#define SDPrefShowMenuItemKey @"SDPrefShowMenuItemKey"
+
+#define SDPrefShowDockIconChangedNotification @"SDPrefShowDockIconChangedNotification"
+#define SDPrefShowDockIconKey @"SDPrefShowDockIconKey"
+
+#define SDPrefStatusItemLeftSepKey @"statusItemLeftSeparatorSymbol"
+#define SDPrefStatusItemMiddleSepKey @"statusItemMiddleSeparatorSymbol"
+#define SDPrefStatusItemRightSepKey @"statusItemRightSeparatorSymbol"
+
+#define SDPrefStatusItemFontSizeKey @"statusItemFontSize"
+#define SDPrefStatusItemTitleOptionsKey @"statusItemTitleOptions"
+
 @interface SDPreferencesWindowController : NSWindowController
 
 @end

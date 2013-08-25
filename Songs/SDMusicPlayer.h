@@ -11,6 +11,8 @@
 #import "SDSong.h"
 #import "SDPlaylist.h"
 
+NSString* SDGetTimeForSeconds(CGFloat seconds);
+
 @interface SDMusicPlayer : NSObject
 
 + (SDMusicPlayer*) sharedPlayer;
