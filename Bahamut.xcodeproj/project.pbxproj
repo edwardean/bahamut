@@ -13,6 +13,8 @@
 		941B114517C409E7008F8A79 /* NSObject+SPInvocationGrabbing.m in Sources */ = {isa = PBXBuildFile; fileRef = 941B114317C409E7008F8A79 /* NSObject+SPInvocationGrabbing.m */; settings = {COMPILER_FLAGS = "-fno-objc-arc"; }; };
 		941B114717C40A25008F8A79 /* Carbon.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 941B114617C40A25008F8A79 /* Carbon.framework */; };
 		941B114A17C40F12008F8A79 /* SDMediaKeyHijacker.m in Sources */ = {isa = PBXBuildFile; fileRef = 941B114917C40F12008F8A79 /* SDMediaKeyHijacker.m */; };
+		9421E19617C9A9F700115F14 /* SDVideoWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9421E19417C9A9F700115F14 /* SDVideoWindowController.m */; };
+		9421E19717C9A9F700115F14 /* VideoWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9421E19517C9A9F700115F14 /* VideoWindow.xib */; };
 		94229B2417BE8EE900FE5A88 /* SDMusicPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 94229B2317BE8EE900FE5A88 /* SDMusicPlayer.m */; };
 		9426F7F917C624460029650B /* SDValueTransformers.m in Sources */ = {isa = PBXBuildFile; fileRef = 9426F7F817C624460029650B /* SDValueTransformers.m */; };
 		9427376217C529D500715D18 /* SDCoreData.m in Sources */ = {isa = PBXBuildFile; fileRef = 9427376117C529D500715D18 /* SDCoreData.m */; };
@@ -83,6 +85,9 @@
 		941B114617C40A25008F8A79 /* Carbon.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Carbon.framework; path = System/Library/Frameworks/Carbon.framework; sourceTree = SDKROOT; };
 		941B114817C40F12008F8A79 /* SDMediaKeyHijacker.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMediaKeyHijacker.h; sourceTree = "<group>"; };
 		941B114917C40F12008F8A79 /* SDMediaKeyHijacker.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMediaKeyHijacker.m; sourceTree = "<group>"; };
+		9421E19317C9A9F700115F14 /* SDVideoWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDVideoWindowController.h; sourceTree = "<group>"; };
+		9421E19417C9A9F700115F14 /* SDVideoWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDVideoWindowController.m; sourceTree = "<group>"; };
+		9421E19517C9A9F700115F14 /* VideoWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = VideoWindow.xib; sourceTree = "<group>"; };
 		94229B2217BE8EE900FE5A88 /* SDMusicPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDMusicPlayer.h; sourceTree = "<group>"; };
 		94229B2317BE8EE900FE5A88 /* SDMusicPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDMusicPlayer.m; sourceTree = "<group>"; };
 		9426F7F817C624460029650B /* SDValueTransformers.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDValueTransformers.m; sourceTree = "<group>"; };
@@ -194,6 +199,16 @@
 			name = "Hacking Media Keys";
 			sourceTree = "<group>";
 		};
+		9421E19217C9A26E00115F14 /* Videos */ = {
+			isa = PBXGroup;
+			children = (
+				9421E19517C9A9F700115F14 /* VideoWindow.xib */,
+				9421E19317C9A9F700115F14 /* SDVideoWindowController.h */,
+				9421E19417C9A9F700115F14 /* SDVideoWindowController.m */,
+			);
+			name = Videos;
+			sourceTree = "<group>";
+		};
 		94229B2117BE8EDC00FE5A88 /* Player */ = {
 			isa = PBXGroup;
 			children = (
@@ -302,6 +317,7 @@
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
 				9475B26017C9787100899272 /* Dock Icon */,
 				9475B24E17C968A000899272 /* Status Bar Icon */,
+				9421E19217C9A26E00115F14 /* Videos */,
 				94DF1A5D17C6FFCE009702A8 /* Preferences */,
 				941B113F17C409D8008F8A79 /* Hacking Media Keys */,
 				94AD9DE317BD56C100D678E1 /* Importing */,
@@ -473,6 +489,7 @@
 				9466103B17C6AB3B004C3EEE /* Credits.rtf in Resources */,
 				94DF1A6217C6FFDD009702A8 /* PreferencesWindow.xib in Resources */,
 				9475B25F17C96EFE00899272 /* DefaultValues.plist in Resources */,
+				9421E19717C9A9F700115F14 /* VideoWindow.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -518,6 +535,7 @@
 				9475B25D17C96ECA00899272 /* RSRTVArrayController.m in Sources */,
 				9475B26317C9787E00899272 /* SDDockIconController.m in Sources */,
 				9475B26717C9919F00899272 /* SDInsetHorizontalLine.m in Sources */,
+				9421E19617C9A9F700115F14 /* SDVideoWindowController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,6 +21,8 @@
 #import "SDStatusItemController.h"
 #import "SDDockIconController.h"
 
+#import "SDVideoWindowController.h"
+
 @interface SDAppDelegate ()
 
 @property NSMutableArray* playerWindowControllers;
@@ -31,6 +33,8 @@
 
 @property IBOutlet SDStatusItemController* statusItemController;
 @property SDDockIconController* dockIconController;
+
+@property SDVideoWindowController* videoWindowController;
 
 @end
 
@@ -82,6 +86,10 @@
 
 - (void) mediaKeyPressedPlayPause:(NSNotification*)note {
     [NSApp sendAction:@selector(playPause:) to:nil from:nil];
+}
+
+- (IBAction) showVideoWindow:(id)sender {
+    
 }
 
 - (IBAction) showAboutWindow:(id)sender {
