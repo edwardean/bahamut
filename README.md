@@ -8,8 +8,6 @@
 
 #### What's left for 1.0
 
-- Hope someone makes a really pretty icon for it :)
-- Optional menu-bar interface (TunesBar port) and optional hide dock icon
 - Make isCurrentSong/Playlist and isPaused **not** undo-able
 - Add video player
 - Make importing happen in the background, and show a hotdog spinner during it
