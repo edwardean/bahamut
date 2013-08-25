@@ -199,7 +199,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="580814052">
+								<object class="NSMenuItem" id="340116748">
 									<reference key="NSMenu" ref="714887771"/>
 									<string key="NSTitle">Video Window</string>
 									<string key="NSKeyEquiv">2</string>
@@ -268,6 +268,15 @@
 									<string key="NSTitle">Jump to Playlists</string>
 									<string key="NSKeyEquiv">[</string>
 									<int key="NSKeyEquivModMask">1179648</int>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="187534491">
+									<reference key="NSMenu" ref="714887771"/>
+									<string key="NSTitle">Jump to "All Songs" Playlist</string>
+									<string key="NSKeyEquiv">L</string>
+									<int key="NSKeyEquivModMask">1048576</int>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -1338,6 +1347,14 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
+						<string key="label">jumpToAllSongsPlaylist:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="187534491"/>
+					</object>
+					<int key="connectionID">638</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
 						<string key="label">newPlayerWindow:</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="998247710"/>
@@ -1404,7 +1421,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">showVideoWindow:</string>
 						<reference key="source" ref="976324537"/>
-						<reference key="destination" ref="580814052"/>
+						<reference key="destination" ref="340116748"/>
 					</object>
 					<int key="connectionID">635</int>
 				</object>
@@ -2016,7 +2033,8 @@
 							<reference ref="911397018"/>
 							<reference ref="687242737"/>
 							<reference ref="399769221"/>
-							<reference ref="580814052"/>
+							<reference ref="340116748"/>
+							<reference ref="187534491"/>
 						</array>
 						<reference key="parent" ref="664275912"/>
 					</object>
@@ -2168,7 +2186,12 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">633</int>
-						<reference key="object" ref="580814052"/>
+						<reference key="object" ref="340116748"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">636</int>
+						<reference key="object" ref="187534491"/>
 						<reference key="parent" ref="714887771"/>
 					</object>
 				</array>
@@ -2280,13 +2303,14 @@
 				<string key="612.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="621.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="633.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="636.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">635</int>
+			<int key="maxID">638</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

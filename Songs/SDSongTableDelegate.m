@@ -12,6 +12,7 @@
 
 #import "SDPlaylist.h"
 #import "SDCoreData.h"
+#import "SDUserData.h"
 
 #import "SDMusicPlayer.h"
 
@@ -380,6 +381,10 @@
     [[self.songsTable window] makeFirstResponder: self.songsTable];
 }
 
+- (IBAction) jumpToAllSongsPlaylist:(id)sender {
+    [self.playlistsArrayController setSelectedObjects:@[[SDUserData sharedUserData].masterPlaylist]];
+    [[self.songsTable window] makeFirstResponder: self.songsTable];
+}
 
 
 
