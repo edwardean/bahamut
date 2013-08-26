@@ -10,11 +10,16 @@
 
 #import "SDMusicPlayer.h"
 
+
+#define SD_TRACKER_HIDE_DELAY (1.0)
+
 @interface SDVideoWindowController ()
 
 @property (weak) IBOutlet NSSlider* playerTrackSlider;
 
 @property (readonly) NSSize ratio;
+
+@property NSTrackingArea* area;
 
 @end
 
@@ -51,9 +56,39 @@
     playerLayer.zPosition = -1.0;
     
     [superlayer addSublayer:playerLayer];
+    
+    [self hideTracker];
+    
+    [self performSelector:@selector(hideTracker) withObject:nil afterDelay:SD_TRACKER_HIDE_DELAY];
+    
+    self.area = [[NSTrackingArea alloc] initWithRect:NSZeroRect
+                                             options:NSTrackingMouseMoved | NSTrackingActiveInKeyWindow | NSTrackingInVisibleRect
+                                               owner:self
+                                            userInfo:nil];
+    [[[self window] contentView] addTrackingArea:self.area];
+}
+
+- (void) hideTracker {
+    [[self.playerTrackSlider animator] setHidden:YES];
+}
+
+- (void) mouseMoved:(NSEvent *)theEvent {
+    [[self.playerTrackSlider animator] setHidden:NO];
+    
+    NSPoint pointRelativeToTracker = [[[self window] contentView] convertPoint:[theEvent locationInWindow]
+                                                                      fromView:nil];
+    
+    [[self class] cancelPreviousPerformRequestsWithTarget:self selector:@selector(hideTracker) object:nil];
+    
+    BOOL mouseOverTracker = NSPointInRect(pointRelativeToTracker, [self.playerTrackSlider frame]);
+    if (!mouseOverTracker) {
+        [self performSelector:@selector(hideTracker) withObject:nil afterDelay:SD_TRACKER_HIDE_DELAY];
+    }
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
+    [[[self window] contentView] removeTrackingArea:self.area];
+    
     [self.playerTrackSlider unbind:@"maxValue"];
     [self.playerTrackSlider unbind:@"doubleValue"];
     
