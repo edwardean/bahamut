@@ -24,17 +24,19 @@
     NSArray* results = [ctx executeFetchRequest:req error:&error];
     
     if ([results count] < 1) {
-        SDUserData* userData = [[SDUserData alloc] initWithEntity:[NSEntityDescription entityForName:@"SDUserData" inManagedObjectContext:ctx]
-                                   insertIntoManagedObjectContext:ctx];
+        SDWithoutUndos(^{
+            SDUserData* userData = [[SDUserData alloc] initWithEntity:[NSEntityDescription entityForName:@"SDUserData" inManagedObjectContext:ctx]
+                                       insertIntoManagedObjectContext:ctx];
+            
+            SDPlaylist* masterPlaylist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist"
+                                                                                        inManagedObjectContext:ctx]
+                                             insertIntoManagedObjectContext:ctx];
+            masterPlaylist.title = @"All Songs";
+            masterPlaylist.isMaster = YES;
+            [userData addPlaylistsObject: masterPlaylist];
+        });
         
-        SDPlaylist* masterPlaylist = [[SDPlaylist alloc] initWithEntity:[NSEntityDescription entityForName:@"SDPlaylist"
-                                                                                    inManagedObjectContext:ctx]
-                                         insertIntoManagedObjectContext:ctx];
-        masterPlaylist.title = @"All Songs";
-        masterPlaylist.isMaster = YES;
-        [userData addPlaylistsObject: masterPlaylist];
-        
-        return userData;
+        return [self sharedUserData];
     }
     
     return [results lastObject];

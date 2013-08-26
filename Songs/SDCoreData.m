@@ -85,3 +85,12 @@
 }
 
 @end
+
+
+
+void SDWithoutUndos(void(^blk)()) {
+    [[SDCoreData sharedCoreData].managedObjectContext processPendingChanges];
+    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] disableUndoRegistration];
+    blk();
+    [[[SDCoreData sharedCoreData].managedObjectContext undoManager] enableUndoRegistration];
+}

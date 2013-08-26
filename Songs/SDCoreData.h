@@ -20,3 +20,5 @@
 - (void) save;
 
 @end
+
+void SDWithoutUndos(void(^blk)());
