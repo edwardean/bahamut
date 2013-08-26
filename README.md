@@ -8,7 +8,7 @@
 
 #### What's left for 1.0
 
-- Add track scroller to video window
+- Make video window's track scroller auto-hide
 - Add stuff to status menu?
 
 #### To do after 1.0

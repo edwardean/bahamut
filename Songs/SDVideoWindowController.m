@@ -12,6 +12,8 @@
 
 @interface SDVideoWindowController ()
 
+@property (weak) IBOutlet NSSlider* playerTrackSlider;
+
 @property (readonly) NSSize ratio;
 
 @end
@@ -43,10 +45,18 @@
     [playerLayer setFrame:superlayer.bounds];
     playerLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
     
+    [self.playerTrackSlider bind:@"maxValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong.duration" options:nil];
+    [self.playerTrackSlider bind:@"doubleValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:nil];
+    
+    playerLayer.zPosition = -1.0;
+    
     [superlayer addSublayer:playerLayer];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
+    [self.playerTrackSlider unbind:@"maxValue"];
+    [self.playerTrackSlider unbind:@"doubleValue"];
+    
     self.died();
 }
 
@@ -56,6 +66,10 @@
 
 + (NSSet*) keyPathsForValuesAffectingRatio {
     return [NSSet setWithArray:@[@"player.currentItem"]];
+}
+
+- (IBAction) manuallyChangeSongPosition:(id)sender {
+    [[SDMusicPlayer sharedPlayer] seekToTime:[self.playerTrackSlider doubleValue]];
 }
 
 @end
