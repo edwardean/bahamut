@@ -132,7 +132,10 @@
     if (aSelector == @selector(copy:)) {
         return ([[self.songsTable window] firstResponder] == self.songsTable) && [[self selectedSongs] count] > 0;
     }
-    if (aSelector == @selector(cut:)) {
+    else if (aSelector == @selector(showSongsInFinder:)) {
+        return (![[self.songsTable window] isVisible]) || ([self clickedIndices] != nil);
+    }
+    else if (aSelector == @selector(cut:)) {
         return ![[self selectedPlaylist] isMaster] && ([[self.songsTable window] firstResponder] == self.songsTable) && [[self selectedSongs] count] > 0;
     }
     else if (aSelector == @selector(paste:)) {
@@ -179,7 +182,33 @@
 
 
 
+- (NSIndexSet*) clickedIndices {
+    NSInteger clicked = [self.songsTable clickedRow];
+    
+    if (clicked == -1)
+        return nil;
+    
+    NSIndexSet* indices = [self.songsTable selectedRowIndexes];
+    if (![indices containsIndex:clicked]) {
+        indices = [NSIndexSet indexSetWithIndex:clicked];
+    }
+    
+    return indices;
+}
 
+
+
+- (IBAction) showSongsInFinder:(id)sender {
+    NSIndexSet* indices = [self clickedIndices];
+    
+    if (indices == nil)
+        return;
+    
+    NSArray* songs = [[self.songsArrayController arrangedObjects] objectsAtIndexes:indices];
+    
+    NSArray* urls = [songs valueForKey:@"url"];
+    [[NSWorkspace sharedWorkspace] activateFileViewerSelectingURLs:urls];
+}
 
 
 

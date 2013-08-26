@@ -8,7 +8,8 @@
 
 #### What's left for 1.0
 
-- Add 'show in finder' menu for songs
+- Make video window less buggy
+- Add stuff to status menu?
 
 #### To do after 1.0
 

@@ -153,7 +153,7 @@
 }
 
 - (void) menuNeedsUpdate:(NSMenu *)menu {
-    NSMenuItem* item = [[menu itemArray] objectAtIndex:0];
+    NSMenuItem* item = [[menu itemArray] objectAtIndex:2];
     
     if ([SDMusicPlayer sharedPlayer].isPlaying) {
         [item setImage:[NSImage imageNamed: @"SDPause"]];

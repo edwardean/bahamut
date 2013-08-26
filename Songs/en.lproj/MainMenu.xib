@@ -857,6 +857,24 @@
 			<object class="NSMenu" id="3193815">
 				<string key="NSTitle"/>
 				<array class="NSMutableArray" key="NSMenuItems">
+					<object class="NSMenuItem" id="594197472">
+						<reference key="NSMenu" ref="3193815"/>
+						<string key="NSTitle">New Player Window</string>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
+					<object class="NSMenuItem" id="198109477">
+						<reference key="NSMenu" ref="3193815"/>
+						<bool key="NSIsDisabled">YES</bool>
+						<bool key="NSIsSeparator">YES</bool>
+						<string key="NSTitle"/>
+						<string key="NSKeyEquiv"/>
+						<int key="NSMnemonicLoc">2147483647</int>
+						<reference key="NSOnImage" ref="35465992"/>
+						<reference key="NSMixedImage" ref="502551668"/>
+					</object>
 					<object class="NSMenuItem" id="903389370">
 						<reference key="NSMenu" ref="3193815"/>
 						<string key="NSTitle">Play</string>
@@ -885,7 +903,7 @@
 						<reference key="NSOnImage" ref="35465992"/>
 						<reference key="NSMixedImage" ref="502551668"/>
 					</object>
-					<object class="NSMenuItem" id="198109477">
+					<object class="NSMenuItem" id="387110375">
 						<reference key="NSMenu" ref="3193815"/>
 						<bool key="NSIsDisabled">YES</bool>
 						<bool key="NSIsSeparator">YES</bool>
@@ -915,7 +933,7 @@
 					</object>
 					<object class="NSMenuItem" id="411699247">
 						<reference key="NSMenu" ref="3193815"/>
-						<string key="NSTitle">About TunesBar</string>
+						<string key="NSTitle">About Bahamut</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -1424,6 +1442,14 @@
 						<reference key="destination" ref="340116748"/>
 					</object>
 					<int key="connectionID">635</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">newPlayerWindow:</string>
+						<reference key="source" ref="976324537"/>
+						<reference key="destination" ref="594197472"/>
+					</object>
+					<int key="connectionID">640</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2134,7 +2160,9 @@
 							<reference ref="47960969"/>
 							<reference ref="1044038444"/>
 							<reference ref="829223998"/>
+							<reference ref="594197472"/>
 							<reference ref="198109477"/>
+							<reference ref="387110375"/>
 						</array>
 						<reference key="parent" ref="0"/>
 						<string key="objectName">Status Menu</string>
@@ -2193,6 +2221,16 @@
 						<int key="objectID">636</int>
 						<reference key="object" ref="187534491"/>
 						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">639</int>
+						<reference key="object" ref="594197472"/>
+						<reference key="parent" ref="3193815"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">641</int>
+						<reference key="object" ref="387110375"/>
+						<reference key="parent" ref="3193815"/>
 					</object>
 				</array>
 			</object>
@@ -2304,13 +2342,15 @@
 				<string key="621.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="633.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="636.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="639.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="641.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">638</int>
+			<int key="maxID">641</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
