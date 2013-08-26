@@ -462,7 +462,7 @@
 																			</object>
 																		</object>
 																		<object class="NSTableColumn" id="1053109769">
-																			<string key="NSIdentifier">artist</string>
+																			<string key="NSIdentifier">duration</string>
 																			<double key="NSWidth">59</double>
 																			<double key="NSMinWidth">40</double>
 																			<double key="NSMaxWidth">1000</double>
@@ -976,7 +976,7 @@
 					<reference key="NSWindow"/>
 					<reference key="NSNextKeyView" ref="240440432"/>
 				</object>
-				<string key="NSScreenRect">{{0, 0}, {1920, 1178}}</string>
+				<string key="NSScreenRect">{{0, 0}, {2560, 1418}}</string>
 				<string key="NSMinSize">{400, 322}</string>
 				<string key="NSMaxSize">{10000000000000, 10000000000000}</string>
 				<string key="NSFrameAutosaveName">songswindow</string>
