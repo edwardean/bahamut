@@ -62,13 +62,21 @@
     [self performSelector:@selector(hideTracker) withObject:nil afterDelay:SD_TRACKER_HIDE_DELAY];
     
     self.area = [[NSTrackingArea alloc] initWithRect:NSZeroRect
-                                             options:NSTrackingMouseMoved | NSTrackingActiveInKeyWindow | NSTrackingInVisibleRect
+                                             options:NSTrackingMouseMoved | NSTrackingMouseEnteredAndExited | NSTrackingActiveInKeyWindow | NSTrackingInVisibleRect
                                                owner:self
                                             userInfo:nil];
     [[[self window] contentView] addTrackingArea:self.area];
 }
 
 - (void) hideTracker {
+    [[self.playerTrackSlider animator] setHidden:YES];
+}
+
+- (void) mouseEntered:(NSEvent *)theEvent {
+    [self mouseMoved:theEvent];
+}
+
+- (void) mouseExited:(NSEvent *)theEvent {
     [[self.playerTrackSlider animator] setHidden:YES];
 }
 

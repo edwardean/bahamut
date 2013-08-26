@@ -120,3 +120,24 @@
 }
 
 @end
+
+
+
+
+
+
+
+
+
+@interface SDHasVideoIconTransformer : NSValueTransformer
+@end
+
+@implementation SDHasVideoIconTransformer
+
++ (Class)transformedValueClass { return [NSImage self]; }
++ (BOOL)allowsReverseTransformation { return NO; }
+- (id)transformedValue:(id)value {
+    return [NSImage imageNamed: ([value boolValue] ? NSImageNameStatusAvailable : NSImageNameStatusNone)];
+}
+
+@end

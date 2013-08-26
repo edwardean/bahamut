@@ -461,6 +461,40 @@
 																				<string key="NSSelector">compare:</string>
 																			</object>
 																		</object>
+																		<object class="NSTableColumn" id="1053109769">
+																			<string key="NSIdentifier">artist</string>
+																			<double key="NSWidth">59</double>
+																			<double key="NSMinWidth">40</double>
+																			<double key="NSMaxWidth">1000</double>
+																			<object class="NSTableHeaderCell" key="NSHeaderCell">
+																				<int key="NSCellFlags">75497536</int>
+																				<int key="NSCellFlags2">67110912</int>
+																				<string key="NSContents">Time</string>
+																				<reference key="NSSupport" ref="26"/>
+																				<object class="NSColor" key="NSBackgroundColor">
+																					<int key="NSColorSpace">3</int>
+																					<bytes key="NSWhite">MC4zMzMzMzI5ODU2AA</bytes>
+																				</object>
+																				<reference key="NSTextColor" ref="231569463"/>
+																			</object>
+																			<object class="NSTextFieldCell" key="NSDataCell" id="920893332">
+																				<int key="NSCellFlags">337641536</int>
+																				<int key="NSCellFlags2">2048</int>
+																				<string key="NSContents">Text Cell</string>
+																				<reference key="NSSupport" ref="881032564"/>
+																				<reference key="NSControlView" ref="256994342"/>
+																				<reference key="NSBackgroundColor" ref="942663320"/>
+																				<reference key="NSTextColor" ref="155564097"/>
+																			</object>
+																			<int key="NSResizingMask">3</int>
+																			<bool key="NSIsResizeable">YES</bool>
+																			<reference key="NSTableView" ref="256994342"/>
+																			<object class="NSSortDescriptor" key="NSSortDescriptorPrototype">
+																				<string key="NSKey">duration</string>
+																				<bool key="NSAscending">YES</bool>
+																				<string key="NSSelector">compare:</string>
+																			</object>
+																		</object>
 																		<object class="NSTableColumn" id="624866177">
 																			<string key="NSIdentifier">artist</string>
 																			<double key="NSWidth">133</double>
@@ -494,7 +528,7 @@
 																		</object>
 																		<object class="NSTableColumn" id="96833531">
 																			<string key="NSIdentifier">album</string>
-																			<double key="NSWidth">258</double>
+																			<double key="NSWidth">122</double>
 																			<double key="NSMinWidth">40</double>
 																			<double key="NSMaxWidth">1000</double>
 																			<object class="NSTableHeaderCell" key="NSHeaderCell">
@@ -564,7 +598,7 @@
 															<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
 															<reference key="NSTarget" ref="960749962"/>
 															<string key="NSAction">_doScroller:</string>
-															<double key="NSPercent">0.96519721577726214</double>
+															<double key="NSPercent">0.96674057649667411</double>
 														</object>
 														<object class="NSScroller" id="297722421">
 															<reference key="NSNextResponder" ref="960749962"/>
@@ -656,6 +690,7 @@
 													<string key="NSFrame">{{454, 9}, {72, 18}}</string>
 													<reference key="NSSuperview" ref="674655831"/>
 													<reference key="NSWindow"/>
+													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSButtonCell" key="NSCell" id="246202201">
@@ -1694,6 +1729,26 @@
 					</object>
 					<int key="connectionID">443</int>
 				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBBindingConnection" key="connection">
+						<string key="label">value: arrangedObjects.duration</string>
+						<reference key="source" ref="1053109769"/>
+						<reference key="destination" ref="495921523"/>
+						<object class="NSNibBindingConnector" key="connector">
+							<reference key="NSSource" ref="1053109769"/>
+							<reference key="NSDestination" ref="495921523"/>
+							<string key="NSLabel">value: arrangedObjects.duration</string>
+							<string key="NSBinding">value</string>
+							<string key="NSKeyPath">arrangedObjects.duration</string>
+							<dictionary key="NSOptions">
+								<boolean value="YES" key="NSConditionallySetsEditable"/>
+								<string key="NSValueTransformerName">SDTimeForSeconds</string>
+							</dictionary>
+							<int key="NSNibBindingConnectorVersion">2</int>
+						</object>
+					</object>
+					<int key="connectionID">466</int>
+				</object>
 			</array>
 			<object class="IBMutableOrderedSet" key="objectRecords">
 				<array key="orderedObjects">
@@ -2048,6 +2103,7 @@
 							<reference ref="624866177"/>
 							<reference ref="597615780"/>
 							<reference ref="260892425"/>
+							<reference ref="1053109769"/>
 						</array>
 						<reference key="parent" ref="960749962"/>
 					</object>
@@ -2183,6 +2239,19 @@
 						<reference key="object" ref="990137467"/>
 						<reference key="parent" ref="280659075"/>
 					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">462</int>
+						<reference key="object" ref="1053109769"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="920893332"/>
+						</array>
+						<reference key="parent" ref="256994342"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">463</int>
+						<reference key="object" ref="920893332"/>
+						<reference key="parent" ref="1053109769"/>
+					</object>
 				</array>
 			</object>
 			<dictionary class="NSMutableDictionary" key="flattenedProperties">
@@ -2275,6 +2344,9 @@
 				<string key="458.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="459.CustomClassName">SDTrackSliderCell</string>
 				<string key="459.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="462.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="463.CustomClassName">SDSongCell</string>
+				<string key="463.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="59.CustomClassName">SDSplitView</string>
 				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2286,7 +2358,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">461</int>
+			<int key="maxID">466</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
