@@ -9,6 +9,7 @@
 #### What's left for 1.0
 
 - Add stuff to status menu?
+- Add global hotkey to bring it to front
 
 #### To do after 1.0
 
