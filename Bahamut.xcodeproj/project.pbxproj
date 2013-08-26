@@ -48,7 +48,7 @@
 		9498576C17C620E300DBA33E /* SDSongsTableHeaderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498576B17C620E300DBA33E /* SDSongsTableHeaderCell.m */; };
 		9498577217C6216D00DBA33E /* SDTableRowView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498577117C6216D00DBA33E /* SDTableRowView.m */; };
 		9498577517C6223600DBA33E /* SDKeyNavigableTableView.m in Sources */ = {isa = PBXBuildFile; fileRef = 9498577417C6223600DBA33E /* SDKeyNavigableTableView.m */; };
-		94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A811921701E0A900B400C8 /* SDTrackPositionView.m */; };
+		94A811931701E0A900B400C8 /* SDTrackSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94A811921701E0A900B400C8 /* SDTrackSliderCell.m */; };
 		94AFF27917C446AF005C30AE /* Licenses in Resources */ = {isa = PBXBuildFile; fileRef = 94AFF27817C446AF005C30AE /* Licenses */; };
 		94AFF27B17C446F8005C30AE /* Sparkle.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 94AFF27A17C446F8005C30AE /* Sparkle.framework */; };
 		94AFF27D17C44706005C30AE /* Sparkle.framework in CopyFiles */ = {isa = PBXBuildFile; fileRef = 94AFF27A17C446F8005C30AE /* Sparkle.framework */; };
@@ -153,8 +153,8 @@
 		9498577117C6216D00DBA33E /* SDTableRowView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTableRowView.m; sourceTree = "<group>"; };
 		9498577317C6223600DBA33E /* SDKeyNavigableTableView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDKeyNavigableTableView.h; sourceTree = "<group>"; };
 		9498577417C6223600DBA33E /* SDKeyNavigableTableView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDKeyNavigableTableView.m; sourceTree = "<group>"; };
-		94A811911701E0A900B400C8 /* SDTrackPositionView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTrackPositionView.h; sourceTree = "<group>"; };
-		94A811921701E0A900B400C8 /* SDTrackPositionView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTrackPositionView.m; sourceTree = "<group>"; };
+		94A811911701E0A900B400C8 /* SDTrackSliderCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTrackSliderCell.h; sourceTree = "<group>"; };
+		94A811921701E0A900B400C8 /* SDTrackSliderCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTrackSliderCell.m; sourceTree = "<group>"; };
 		94AFF27817C446AF005C30AE /* Licenses */ = {isa = PBXFileReference; lastKnownFileType = folder; path = Licenses; sourceTree = SOURCE_ROOT; };
 		94AFF27A17C446F8005C30AE /* Sparkle.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Sparkle.framework; path = ThirdParty/Sparkle.framework; sourceTree = "<group>"; };
 		94B8589C1701D5410012165F /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
@@ -389,8 +389,8 @@
 			children = (
 				945C295E17C1F3EE0045BA94 /* SDSplitView.h */,
 				945C295F17C1F3EE0045BA94 /* SDSplitView.m */,
-				94A811911701E0A900B400C8 /* SDTrackPositionView.h */,
-				94A811921701E0A900B400C8 /* SDTrackPositionView.m */,
+				94A811911701E0A900B400C8 /* SDTrackSliderCell.h */,
+				94A811921701E0A900B400C8 /* SDTrackSliderCell.m */,
 				941864F417CA9D2E00CE16B7 /* SDVolumeSliderCell.h */,
 				941864F517CA9D2E00CE16B7 /* SDVolumeSliderCell.m */,
 			);
@@ -517,7 +517,7 @@
 				9460F2E716FF781100DB85C4 /* main.m in Sources */,
 				9460F2EE16FF781100DB85C4 /* SDAppDelegate.m in Sources */,
 				9404AB481700F5AC00E0D3AF /* SDPlayerWindowController.m in Sources */,
-				94A811931701E0A900B400C8 /* SDTrackPositionView.m in Sources */,
+				94A811931701E0A900B400C8 /* SDTrackSliderCell.m in Sources */,
 				94229B2417BE8EE900FE5A88 /* SDMusicPlayer.m in Sources */,
 				945C296017C1F3EE0045BA94 /* SDSplitView.m in Sources */,
 				941B114417C409E7008F8A79 /* SPMediaKeyTap.m in Sources */,

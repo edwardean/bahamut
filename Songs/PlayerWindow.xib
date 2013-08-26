@@ -812,6 +812,32 @@
 							<reference key="NSNextResponder" ref="453444170"/>
 							<int key="NSvFlags">266</int>
 							<array class="NSMutableArray" key="NSSubviews">
+								<object class="NSSlider" id="280659075">
+									<reference key="NSNextResponder" ref="77949746"/>
+									<int key="NSvFlags">266</int>
+									<string key="NSFrame">{{46, 10}, {420, 21}}</string>
+									<reference key="NSSuperview" ref="77949746"/>
+									<reference key="NSWindow"/>
+									<reference key="NSNextKeyView" ref="880944352"/>
+									<string key="NSReuseIdentifierKey">_NS:9</string>
+									<bool key="NSEnabled">YES</bool>
+									<object class="NSSliderCell" key="NSCell" id="990137467">
+										<int key="NSCellFlags">-2080112384</int>
+										<int key="NSCellFlags2">0</int>
+										<string key="NSContents"/>
+										<string key="NSCellIdentifier">_NS:9</string>
+										<reference key="NSControlView" ref="280659075"/>
+										<double key="NSMaxValue">0.0</double>
+										<double key="NSMinValue">0.0</double>
+										<double key="NSValue">0.0</double>
+										<double key="NSAltIncValue">0.0</double>
+										<int key="NSNumberOfTickMarks">0</int>
+										<int key="NSTickMarkPosition">1</int>
+										<bool key="NSAllowsTickMarkValuesOnly">NO</bool>
+										<bool key="NSVertical">NO</bool>
+									</object>
+									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
+								</object>
 								<object class="NSTextField" id="880944352">
 									<reference key="NSNextResponder" ref="77949746"/>
 									<int key="NSvFlags">265</int>
@@ -839,7 +865,7 @@
 									<string key="NSFrame">{{3, 13}, {38, 14}}</string>
 									<reference key="NSSuperview" ref="77949746"/>
 									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="1000879875"/>
+									<reference key="NSNextKeyView" ref="280659075"/>
 									<string key="NSReuseIdentifierKey">_NS:1535</string>
 									<bool key="NSEnabled">YES</bool>
 									<object class="NSTextFieldCell" key="NSCell" id="142683502">
@@ -874,16 +900,6 @@
 										<reference key="NSTextColor" ref="155564097"/>
 									</object>
 									<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
-								</object>
-								<object class="NSCustomView" id="1000879875">
-									<reference key="NSNextResponder" ref="77949746"/>
-									<int key="NSvFlags">266</int>
-									<string key="NSFrame">{{46, 10}, {420, 20}}</string>
-									<reference key="NSSuperview" ref="77949746"/>
-									<reference key="NSWindow"/>
-									<reference key="NSNextKeyView" ref="880944352"/>
-									<string key="NSReuseIdentifierKey">_NS:9</string>
-									<string key="NSClassName">SDTrackPositionView</string>
 								</object>
 							</array>
 							<string key="NSFrame">{{43, 541}, {515, 71}}</string>
@@ -969,11 +985,11 @@
 				<bool key="NSFilterRestrictsInsertion">YES</bool>
 				<bool key="NSClearsFilterPredicateOnInsertion">YES</bool>
 			</object>
-			<object class="NSMenu" id="780088272">
+			<object class="NSMenu" id="375842650">
 				<string key="NSTitle"/>
 				<array class="NSMutableArray" key="NSMenuItems">
-					<object class="NSMenuItem" id="626328201">
-						<reference key="NSMenu" ref="780088272"/>
+					<object class="NSMenuItem" id="818398302">
+						<reference key="NSMenu" ref="375842650"/>
 						<string key="NSTitle">Show in Finder</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
@@ -1057,14 +1073,6 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
-						<string key="label">songPositionSlider</string>
-						<reference key="source" ref="1001"/>
-						<reference key="destination" ref="1000879875"/>
-					</object>
-					<int key="connectionID">266</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
 						<string key="label">playlistTableDelegate</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="461089374"/>
@@ -1086,6 +1094,22 @@
 						<reference key="destination" ref="240440432"/>
 					</object>
 					<int key="connectionID">450</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBOutletConnection" key="connection">
+						<string key="label">songPositionSlider</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="280659075"/>
+					</object>
+					<int key="connectionID">460</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">trackPositionMovedTo:</string>
+						<reference key="source" ref="1001"/>
+						<reference key="destination" ref="280659075"/>
+					</object>
+					<int key="connectionID">461</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1146,14 +1170,6 @@
 						<reference key="destination" ref="1001"/>
 					</object>
 					<int key="connectionID">81</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBOutletConnection" key="connection">
-						<string key="label">trackPositionDelegate</string>
-						<reference key="source" ref="1000879875"/>
-						<reference key="destination" ref="1001"/>
-					</object>
-					<int key="connectionID">265</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBOutletConnection" key="connection">
@@ -1386,7 +1402,7 @@
 					<object class="IBOutletConnection" key="connection">
 						<string key="label">menu</string>
 						<reference key="source" ref="256994342"/>
-						<reference key="destination" ref="780088272"/>
+						<reference key="destination" ref="375842650"/>
 					</object>
 					<int key="connectionID">457</int>
 				</object>
@@ -1582,7 +1598,7 @@
 					<object class="IBActionConnection" key="connection">
 						<string key="label">showSongsInFinder:</string>
 						<reference key="source" ref="92232296"/>
-						<reference key="destination" ref="626328201"/>
+						<reference key="destination" ref="818398302"/>
 					</object>
 					<int key="connectionID">456</int>
 				</object>
@@ -1796,17 +1812,12 @@
 						<int key="objectID">275</int>
 						<reference key="object" ref="77949746"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="1000879875"/>
 							<reference ref="586836583"/>
 							<reference ref="580999182"/>
 							<reference ref="880944352"/>
+							<reference ref="280659075"/>
 						</array>
 						<reference key="parent" ref="453444170"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">264</int>
-						<reference key="object" ref="1000879875"/>
-						<reference key="parent" ref="77949746"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">268</int>
@@ -2148,16 +2159,29 @@
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">451</int>
-						<reference key="object" ref="780088272"/>
+						<reference key="object" ref="375842650"/>
 						<array class="NSMutableArray" key="children">
-							<reference ref="626328201"/>
+							<reference ref="818398302"/>
 						</array>
 						<reference key="parent" ref="0"/>
 					</object>
 					<object class="IBObjectRecord">
 						<int key="objectID">452</int>
-						<reference key="object" ref="626328201"/>
-						<reference key="parent" ref="780088272"/>
+						<reference key="object" ref="818398302"/>
+						<reference key="parent" ref="375842650"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">458</int>
+						<reference key="object" ref="280659075"/>
+						<array class="NSMutableArray" key="children">
+							<reference ref="990137467"/>
+						</array>
+						<reference key="parent" ref="77949746"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">459</int>
+						<reference key="object" ref="990137467"/>
+						<reference key="parent" ref="280659075"/>
 					</object>
 				</array>
 			</object>
@@ -2176,7 +2200,6 @@
 				<string key="260.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="261.CustomClassName">SDNextButtonCell</string>
 				<string key="261.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="264.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="268.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="269.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="275.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2249,6 +2272,9 @@
 				<string key="448.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="451.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="452.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="458.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="459.CustomClassName">SDTrackSliderCell</string>
+				<string key="459.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="59.CustomClassName">SDSplitView</string>
 				<string key="59.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="6.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2260,7 +2286,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">457</int>
+			<int key="maxID">461</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2314,7 +2340,7 @@
 						<string key="playButton">NSButton</string>
 						<string key="playlistTableDelegate">SDPlaylistTableDelegate</string>
 						<string key="prevButton">NSButton</string>
-						<string key="songPositionSlider">SDTrackPositionView</string>
+						<string key="songPositionSlider">NSSlider</string>
 						<string key="songTableDelegate">SDSongTableDelegate</string>
 						<string key="timeElapsedField">NSTextField</string>
 						<string key="timeRemainingField">NSTextField</string>
@@ -2347,7 +2373,7 @@
 						</object>
 						<object class="IBToOneOutletInfo" key="songPositionSlider">
 							<string key="name">songPositionSlider</string>
-							<string key="candidateClassName">SDTrackPositionView</string>
+							<string key="candidateClassName">NSSlider</string>
 						</object>
 						<object class="IBToOneOutletInfo" key="songTableDelegate">
 							<string key="name">songTableDelegate</string>
@@ -2489,22 +2515,11 @@
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">
-					<string key="className">SDTrackPositionView</string>
-					<string key="superclassName">NSControl</string>
-					<object class="NSMutableDictionary" key="outlets">
-						<string key="NS.key.0">trackPositionDelegate</string>
-						<string key="NS.object.0">id</string>
-					</object>
-					<object class="NSMutableDictionary" key="toOneOutletInfosByName">
-						<string key="NS.key.0">trackPositionDelegate</string>
-						<object class="IBToOneOutletInfo" key="NS.object.0">
-							<string key="name">trackPositionDelegate</string>
-							<string key="candidateClassName">id</string>
-						</object>
-					</object>
+					<string key="className">SDTrackSliderCell</string>
+					<string key="superclassName">NSSliderCell</string>
 					<object class="IBClassDescriptionSource" key="sourceIdentifier">
 						<string key="majorKey">IBProjectSource</string>
-						<string key="minorKey">./Classes/SDTrackPositionView.h</string>
+						<string key="minorKey">./Classes/SDTrackSliderCell.h</string>
 					</object>
 				</object>
 				<object class="IBPartialClassDescription">

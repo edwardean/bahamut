@@ -9,7 +9,6 @@
 #import "SDPlayerWindowController.h"
 
 #import "SDMusicPlayer.h"
-#import "SDTrackPositionView.h"
 
 #import "SDCoreData.h"
 
@@ -25,7 +24,7 @@
 @property IBOutlet SDSongTableDelegate* songTableDelegate;
 
 @property (weak) IBOutlet NSView* nowPlayingControlsView;
-@property (weak) IBOutlet SDTrackPositionView* songPositionSlider;
+@property (weak) IBOutlet NSSlider* songPositionSlider;
 @property (weak) IBOutlet NSButton* playButton;
 @property (weak) IBOutlet NSButton* prevButton;
 @property (weak) IBOutlet NSButton* nextButton;
@@ -96,7 +95,7 @@
     [self.volumeSlider bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"player.volume" options:nil];
     
     [self.songPositionSlider bind:@"maxValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong.duration" options:nil];
-    [self.songPositionSlider bind:@"currentValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:nil];
+    [self.songPositionSlider bind:@"doubleValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:nil];
     
     [self.timeElapsedField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:@{NSValueTransformerNameBindingOption: @"SDTimeForSeconds"}];
     [self.timeRemainingField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"remainingTime" options:@{NSValueTransformerNameBindingOption: @"SDTimeForSeconds"}];
@@ -112,7 +111,7 @@
     [self.volumeSlider unbind:@"value"];
     
     [self.songPositionSlider unbind:@"maxValue"];
-    [self.songPositionSlider unbind:@"currentValue"];
+    [self.songPositionSlider unbind:@"doubleValue"];
     
     [self.timeElapsedField unbind:@"value"];
     [self.timeRemainingField unbind:@"value"];
@@ -128,8 +127,8 @@
 
 
 
-- (void) trackPositionMovedTo:(CGFloat)newValue {
-    [[SDMusicPlayer sharedPlayer] seekToTime:newValue];
+- (IBAction) trackPositionMovedTo:(id)sender {
+    [[SDMusicPlayer sharedPlayer] seekToTime:[self.songPositionSlider doubleValue]];
 }
 
 @end
