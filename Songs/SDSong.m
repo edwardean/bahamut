@@ -17,36 +17,11 @@
 @dynamic duration;
 @dynamic isCurrentSong;
 @dynamic paused;
+@dynamic hasVideo;
 @dynamic title;
 @dynamic url;
 @dynamic playlists;
 
-
-static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
-    NSArray* metadataItems = [AVMetadataItem metadataItemsFromArray:[asset commonMetadata]
-                                                            withKey:type
-                                                           keySpace:AVMetadataKeySpaceCommon];
-    
-    if ([metadataItems count] == 0) {
-        if (type == AVMetadataCommonKeyTitle)
-            return [[asset URL] lastPathComponent];
-        else
-            return @"";
-    }
-    
-    AVMetadataItem* firstMatchingMetadataItem = [metadataItems objectAtIndex:0];
-    return (id)[firstMatchingMetadataItem value];
-}
-
-- (void) prefetchData {
-    AVURLAsset* asset = [AVURLAsset assetWithURL:[self url]];
-    
-//    BOOL hasVideo = [[asset tracksWithMediaCharacteristic:AVMediaCharacteristicVisual] count] > 0;    self.duration = CMTimeGetSeconds([asset duration]);
-    
-    self.title = SDGetMetadata(asset, AVMetadataCommonKeyTitle);
-    self.artist = SDGetMetadata(asset, AVMetadataCommonKeyArtist);
-    self.album = SDGetMetadata(asset, AVMetadataCommonKeyAlbumName);
-}
 
 - (AVPlayerItem*) playerItem {
     return [AVPlayerItem playerItemWithAsset:[AVURLAsset assetWithURL:[self url]]];

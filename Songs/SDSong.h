@@ -20,11 +20,11 @@
 @property (nonatomic) double duration;
 @property (nonatomic) BOOL isCurrentSong;
 @property (nonatomic) BOOL paused;
+@property (nonatomic) BOOL hasVideo;
 @property (nonatomic, retain) NSString * title;
 @property (nonatomic, retain) id url;
 @property (nonatomic, retain) NSSet *playlists;
 
-- (void) prefetchData;
 - (AVPlayerItem*) playerItem;
 
 @end

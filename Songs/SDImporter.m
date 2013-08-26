@@ -15,6 +15,8 @@
 #import "SDSong.h"
 #import "SDPlaylist.h"
 
+#import "SDSongCacher.h"
+
 #import "iTunes.h"
 
 #import "SDImporterWindowController.h"
@@ -50,7 +52,7 @@
                                                                               inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
                                    insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
                     song.url = url;
-                    [song prefetchData];
+                    [SDSongCacher prefetchDataFor: song];
                     
                     [allSongsPlaylist addSongsObject: song];
                 }
@@ -173,7 +175,7 @@
                                                                       inManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext]
                            insertIntoManagedObjectContext:[SDCoreData sharedCoreData].managedObjectContext];
                     song.url = trackFileURL;
-                    [song prefetchData];
+                    [SDSongCacher prefetchDataFor: song];
                     
                     [[[SDUserData sharedUserData] masterPlaylist] addSongsObject: song];
                 }

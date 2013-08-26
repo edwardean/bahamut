@@ -27,8 +27,11 @@
     self.managedObjectModel = [[NSManagedObjectModel alloc] initWithContentsOfURL:[[NSBundle mainBundle] URLForResource:@"SongsDataModel" withExtension:@"momd"]];
     self.persistentStoreCoordinator = [[NSPersistentStoreCoordinator alloc] initWithManagedObjectModel:self.managedObjectModel];
     
+    NSDictionary* opts = @{NSMigratePersistentStoresAutomaticallyOption: @YES,
+                           NSInferMappingModelAutomaticallyOption: @YES};
+    
     NSError *error;
-    if (![self.persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:[self dataFile] options:nil error:&error]) {
+    if (![self.persistentStoreCoordinator addPersistentStoreWithType:NSXMLStoreType configuration:nil URL:[self dataFile] options:opts error:&error]) {
         [NSApp presentError:error];
         return;
     }
@@ -38,11 +41,7 @@
     
     [self.managedObjectModel kc_generateOrderedSetAccessors];
     
-//    [[self.managedObjectContext undoManager] disableUndoRegistration]; // this just makes things worse!
-    [SDUserData sharedUserData]; // force it to load.
-//    [[self.managedObjectContext undoManager] enableUndoRegistration];
-    
-    [[SDUserData sharedUserData] masterPlaylist];
+    [[SDUserData sharedUserData] masterPlaylist];  // force it to load.
     
     [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(saveSoon:) name:NSManagedObjectContextObjectsDidChangeNotification object:self.managedObjectContext];
 }

@@ -31,7 +31,6 @@
 		9460F30416FFA23100DB85C4 /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9460F30316FFA23100DB85C4 /* AVFoundation.framework */; };
 		9466103917C6A9CF004C3EEE /* dsa_pub.pem in Resources */ = {isa = PBXBuildFile; fileRef = 9466103817C6A9CF004C3EEE /* dsa_pub.pem */; };
 		9466103B17C6AB3B004C3EEE /* Credits.rtf in Resources */ = {isa = PBXBuildFile; fileRef = 9466103A17C6AB3B004C3EEE /* Credits.rtf */; };
-		9471F53217C4FF7C00604963 /* SongsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 9471F53017C4FF7C00604963 /* SongsDataModel.xcdatamodeld */; };
 		9475B25117C968AA00899272 /* SDTextImageHelper.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B25017C968AA00899272 /* SDTextImageHelper.m */; };
 		9475B25417C968E700899272 /* SDStatusItemController.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B25317C968E700899272 /* SDStatusItemController.m */; };
 		9475B25817C96D1C00899272 /* SDFontSizeSliderCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 9475B25717C96D1C00899272 /* SDFontSizeSliderCell.m */; };
@@ -67,6 +66,8 @@
 		94F4032017CAF72800BD437B /* MASShortcut+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031917CAF72800BD437B /* MASShortcut+UserDefaults.m */; };
 		94F4032117CAF72800BD437B /* MASShortcutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031B17CAF72800BD437B /* MASShortcutView.m */; };
 		94F4032217CAF72800BD437B /* MASShortcutView+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031D17CAF72800BD437B /* MASShortcutView+UserDefaults.m */; };
+		94F4032617CAFEA000BD437B /* SDSongCacher.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4032517CAFEA000BD437B /* SDSongCacher.m */; };
+		94F4033017CB04C300BD437B /* SongsDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 94F4032E17CB04C200BD437B /* SongsDataModel.xcdatamodeld */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -126,7 +127,6 @@
 		9460F30316FFA23100DB85C4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
 		9466103817C6A9CF004C3EEE /* dsa_pub.pem */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = dsa_pub.pem; path = AutoUpdating/dsa_pub.pem; sourceTree = SOURCE_ROOT; };
 		9466103A17C6AB3B004C3EEE /* Credits.rtf */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.rtf; path = Credits.rtf; sourceTree = "<group>"; };
-		9471F53117C4FF7C00604963 /* SongsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SongsDataModel.xcdatamodel; sourceTree = "<group>"; };
 		9475B24F17C968AA00899272 /* SDTextImageHelper.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDTextImageHelper.h; sourceTree = "<group>"; };
 		9475B25017C968AA00899272 /* SDTextImageHelper.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDTextImageHelper.m; sourceTree = "<group>"; };
 		9475B25217C968E700899272 /* SDStatusItemController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDStatusItemController.h; sourceTree = "<group>"; };
@@ -190,6 +190,9 @@
 		94F4031B17CAF72800BD437B /* MASShortcutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASShortcutView.m; sourceTree = "<group>"; };
 		94F4031C17CAF72800BD437B /* MASShortcutView+UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASShortcutView+UserDefaults.h"; sourceTree = "<group>"; };
 		94F4031D17CAF72800BD437B /* MASShortcutView+UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MASShortcutView+UserDefaults.m"; sourceTree = "<group>"; };
+		94F4032417CAFEA000BD437B /* SDSongCacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDSongCacher.h; sourceTree = "<group>"; };
+		94F4032517CAFEA000BD437B /* SDSongCacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDSongCacher.m; sourceTree = "<group>"; };
+		94F4032F17CB04C300BD437B /* SongsDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = SongsDataModel.xcdatamodel; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -259,9 +262,7 @@
 		9427376617C52B1700715D18 /* Core Data */ = {
 			isa = PBXGroup;
 			children = (
-				9471F53017C4FF7C00604963 /* SongsDataModel.xcdatamodeld */,
-				941864FA17CAB0B100CE16B7 /* SDSong.h */,
-				941864FB17CAB0B100CE16B7 /* SDSong.m */,
+				94F4032E17CB04C200BD437B /* SongsDataModel.xcdatamodeld */,
 				9496D44317C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.h */,
 				9496D44417C57B9C00EFD43C /* NSManagedObjectModel+KCOrderedAccessorFix.m */,
 				9427376017C529D500715D18 /* SDCoreData.h */,
@@ -270,6 +271,10 @@
 				9496D43917C56F2E00EFD43C /* SDUserData.m */,
 				9496D43E17C56F2F00EFD43C /* SDPlaylist.h */,
 				9496D43F17C56F2F00EFD43C /* SDPlaylist.m */,
+				941864FA17CAB0B100CE16B7 /* SDSong.h */,
+				941864FB17CAB0B100CE16B7 /* SDSong.m */,
+				94F4032417CAFEA000BD437B /* SDSongCacher.h */,
+				94F4032517CAFEA000BD437B /* SDSongCacher.m */,
 			);
 			name = "Core Data";
 			sourceTree = "<group>";
@@ -564,7 +569,6 @@
 				941B114417C409E7008F8A79 /* SPMediaKeyTap.m in Sources */,
 				941B114517C409E7008F8A79 /* NSObject+SPInvocationGrabbing.m in Sources */,
 				941B114A17C40F12008F8A79 /* SDMediaKeyHijacker.m in Sources */,
-				9471F53217C4FF7C00604963 /* SongsDataModel.xcdatamodeld in Sources */,
 				9427376217C529D500715D18 /* SDCoreData.m in Sources */,
 				9496D43A17C56F2E00EFD43C /* SDUserData.m in Sources */,
 				9496D44017C56F2F00EFD43C /* SDPlaylist.m in Sources */,
@@ -598,6 +602,8 @@
 				94F4032017CAF72800BD437B /* MASShortcut+UserDefaults.m in Sources */,
 				94F4032117CAF72800BD437B /* MASShortcutView.m in Sources */,
 				94F4032217CAF72800BD437B /* MASShortcutView+UserDefaults.m in Sources */,
+				94F4032617CAFEA000BD437B /* SDSongCacher.m in Sources */,
+				94F4033017CB04C300BD437B /* SongsDataModel.xcdatamodeld in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -738,12 +744,12 @@
 /* End XCConfigurationList section */
 
 /* Begin XCVersionGroup section */
-		9471F53017C4FF7C00604963 /* SongsDataModel.xcdatamodeld */ = {
+		94F4032E17CB04C200BD437B /* SongsDataModel.xcdatamodeld */ = {
 			isa = XCVersionGroup;
 			children = (
-				9471F53117C4FF7C00604963 /* SongsDataModel.xcdatamodel */,
+				94F4032F17CB04C300BD437B /* SongsDataModel.xcdatamodel */,
 			);
-			currentVersion = 9471F53117C4FF7C00604963 /* SongsDataModel.xcdatamodel */;
+			currentVersion = 94F4032F17CB04C300BD437B /* SongsDataModel.xcdatamodel */;
 			path = SongsDataModel.xcdatamodeld;
 			sourceTree = "<group>";
 			versionGroupType = wrapper.xcdatamodel;
