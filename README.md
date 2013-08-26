@@ -6,16 +6,9 @@
 * Requires: OS X 10.8 and up
 * Download: coming soon
 
-#### What's left for 1.0
-
-- Add stuff to status menu?
-
-#### To do after 1.0
+#### Todo
 
 - Figure out what exactly should happen when you change anything about playlist while it's playing
-- Figure out how to get Track info field to display "..." without tightening at every resize
-- Make it scriptable maybe?
-- Make window tracker visible when in full-screen
 
 #### Screenshot
 
