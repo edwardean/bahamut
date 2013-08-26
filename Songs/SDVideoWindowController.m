@@ -22,8 +22,12 @@
     return @"VideoWindow";
 }
 
-- (void) dealloc {
-    NSLog(@"bye");
+- (void) keyDown:(NSEvent *)theEvent {
+    if ([[theEvent characters] isEqualToString: @" "]) {
+        [NSApp sendAction:@selector(playPause:) to:nil from:nil];
+        return;
+    }
+    [super keyDown:theEvent];
 }
 
 - (void)windowDidLoad {
@@ -37,10 +41,7 @@
     
     AVPlayerLayer *playerLayer = [AVPlayerLayer playerLayerWithPlayer:[SDMusicPlayer sharedPlayer].player];
     [playerLayer setFrame:superlayer.bounds];
-    
     playerLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
-    
-//    BOOL hasVideo = [[asset tracksWithMediaCharacteristic:AVMediaCharacteristicVisual] count] > 0;
     
     [superlayer addSublayer:playerLayer];
 }

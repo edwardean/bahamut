@@ -41,7 +41,8 @@ static NSString* SDGetMetadata(AVURLAsset* asset, NSString* type) {
 - (void) prefetchData {
     AVURLAsset* asset = [AVURLAsset assetWithURL:[self url]];
     
-    self.duration = CMTimeGetSeconds([asset duration]);
+//    BOOL hasVideo = [[asset tracksWithMediaCharacteristic:AVMediaCharacteristicVisual] count] > 0;    self.duration = CMTimeGetSeconds([asset duration]);
+    
     self.title = SDGetMetadata(asset, AVMetadataCommonKeyTitle);
     self.artist = SDGetMetadata(asset, AVMetadataCommonKeyArtist);
     self.album = SDGetMetadata(asset, AVMetadataCommonKeyAlbumName);
