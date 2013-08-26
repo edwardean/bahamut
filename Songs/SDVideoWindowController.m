@@ -30,6 +30,7 @@
     [super windowDidLoad];
     
     [[self window] setMovableByWindowBackground:YES];
+    [[self window] setBackgroundColor:[NSColor blackColor]];
     [[[self window] contentView] setWantsLayer:YES];
     
     CALayer *superlayer = [[[self window] contentView] layer];
@@ -41,14 +42,10 @@
     
 //    BOOL hasVideo = [[asset tracksWithMediaCharacteristic:AVMediaCharacteristicVisual] count] > 0;
     
-    [self.window bind:@"contentAspectRatio" toObject:self withKeyPath:@"ratio" options:nil];
-    
     [superlayer addSublayer:playerLayer];
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
-    [self.window unbind:@"contentAspectRatio"];
-    
     self.died();
 }
 
@@ -58,31 +55,6 @@
 
 + (NSSet*) keyPathsForValuesAffectingRatio {
     return [NSSet setWithArray:@[@"player.currentItem"]];
-}
-
-- (NSSize) ratio {
-    NSLog(@"ratio");
-    
-    AVPlayerItem* item = [[SDMusicPlayer sharedPlayer].player currentItem];
-    
-    if (item) {
-        dispatch_async(dispatch_get_current_queue(), ^{
-            NSDisableScreenUpdates();
-            [[self window] setContentSize: item.presentationSize];
-            NSEnableScreenUpdates();
-        });
-        
-        return item.presentationSize;
-    }
-    else {
-        // TODO: this doesn't help any, it still crashes.
-        
-        dispatch_async(dispatch_get_current_queue(), ^{
-            [[self window] setResizeIncrements:NSMakeSize(1.0, 1.0)];
-        });
-        
-        return NSMakeSize(1.0, 1.0);
-    }
 }
 
 @end
