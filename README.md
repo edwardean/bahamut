@@ -8,7 +8,6 @@
 
 #### What's left for 1.0
 
-- Add pause button to video window
 - Add track scroller to video window
 - Add stuff to status menu?
 
