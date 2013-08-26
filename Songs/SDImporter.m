@@ -74,27 +74,30 @@
             NSFileManager* fileManager = [[NSFileManager alloc] init];
             
             for (NSURL* url in lookInURLs) {
+                NSURL* theUrl = [url URLByResolvingSymlinksInPath];
+                
                 @autoreleasepool {
                     BOOL isDir;
-                    BOOL exists = [fileManager fileExistsAtPath:[url path] isDirectory:&isDir];
+                    BOOL exists = [fileManager fileExistsAtPath:[theUrl path] isDirectory:&isDir];
+                    
                     if (!exists)
                         continue;
                     
                     if (isDir) {
-                        NSDirectoryEnumerator* dirEnum = [fileManager enumeratorAtURL:url
+                        NSDirectoryEnumerator* dirEnum = [fileManager enumeratorAtURL:theUrl
                                                            includingPropertiesForKeys:@[]
-                                                                              options:NSDirectoryEnumerationSkipsPackageDescendants & NSDirectoryEnumerationSkipsHiddenFiles
+                                                                              options:NSDirectoryEnumerationSkipsPackageDescendants | NSDirectoryEnumerationSkipsHiddenFiles
                                                                          errorHandler:^BOOL(NSURL *url, NSError *error) {
                                                                              NSLog(@"error for [%@]! %@", url, error);
                                                                              return YES;
                                                                          }];
                         
                         for (NSURL* fileURL in dirEnum) {
-                            [foundURLs addObject:[fileURL fileReferenceURL]];
+                            [foundURLs addObject:[[fileURL URLByResolvingSymlinksInPath] fileReferenceURL]];
                         }
                     }
                     else {
-                        [foundURLs addObject:[url fileReferenceURL]];
+                        [foundURLs addObject:[theUrl fileReferenceURL]];
                     }
                 }
             }
