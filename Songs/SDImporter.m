@@ -74,7 +74,7 @@
             NSFileManager* fileManager = [[NSFileManager alloc] init];
             
             for (NSURL* url in lookInURLs) {
-                NSURL* theUrl = [url URLByResolvingSymlinksInPath];
+                NSURL* theUrl = url;
                 
                 @autoreleasepool {
                     BOOL isDir;
