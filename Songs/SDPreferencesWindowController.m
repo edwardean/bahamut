@@ -8,7 +8,11 @@
 
 #import "SDPreferencesWindowController.h"
 
+#import "MASShortcutView+UserDefaults.h"
+
 @interface SDPreferencesWindowController ()
+
+@property (weak) IBOutlet MASShortcutView *bringToFrontHotkeyView;
 
 @end
 
@@ -20,6 +24,7 @@
 
 - (void) windowDidLoad {
     [[self window] center];
+    self.bringToFrontHotkeyView.associatedUserDefaultsKey = SDPrefBringToFrontHotkeyKey;
 }
 
 - (IBAction) showDockIconChanged:(id)sender {

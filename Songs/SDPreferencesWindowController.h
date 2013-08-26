@@ -21,6 +21,8 @@
 #define SDPrefStatusItemFontSizeKey @"statusItemFontSize"
 #define SDPrefStatusItemTitleOptionsKey @"statusItemTitleOptions"
 
+#define SDPrefBringToFrontHotkeyKey @"SDPrefBringToFrontHotkeyKey"
+
 @interface SDPreferencesWindowController : NSWindowController
 
 @end

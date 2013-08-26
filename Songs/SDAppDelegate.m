@@ -23,6 +23,8 @@
 
 #import "SDVideoWindowController.h"
 
+#import "MASShortcut+UserDefaults.h"
+
 @interface SDAppDelegate ()
 
 @property NSMutableArray* playerWindowControllers;
@@ -63,7 +65,18 @@
     
     [self.statusItemController toggleItem];
     
+    [self bindGlobalHotkey];
+    
     [self newPlayerWindow:nil];
+}
+
+- (void) bindGlobalHotkey {
+    [MASShortcut registerGlobalShortcutWithUserDefaultsKey:SDPrefBringToFrontHotkeyKey handler:^{
+        dispatch_async(dispatch_get_main_queue(), ^{
+            [NSApp activateIgnoringOtherApps:YES];
+            [self newOrExistingPlayerWindow:nil];
+        });
+    }];
 }
 
 - (void) registerDefaults {
@@ -124,7 +137,7 @@
 - (IBAction) playPause:(id)sender {
     if ([SDMusicPlayer sharedPlayer].stopped) {
         [NSApp activateIgnoringOtherApps:YES];
-        [self newPlayerWindow:nil];
+        [self newOrExistingPlayerWindow:nil];
     }
     else {
         if ([[SDMusicPlayer sharedPlayer] isPlaying])
@@ -160,6 +173,13 @@
 
 - (IBAction) importFromiTunes:(id)sender {
     [SDImporter importFromiTunes];
+}
+
+- (IBAction) newOrExistingPlayerWindow:(id)sender {
+    if ([self.playerWindowControllers count] == 0)
+        [self newPlayerWindow:sender];
+    else
+        [[self.playerWindowControllers lastObject] showWindow:self];
 }
 
 - (IBAction) newPlayerWindow:(id)sender {

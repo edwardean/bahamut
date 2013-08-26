@@ -62,6 +62,11 @@
 		94CC495617C6736500DA064A /* SDCachedDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC495517C6736500DA064A /* SDCachedDrawing.m */; };
 		94DF1A6117C6FFDD009702A8 /* SDPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF1A5F17C6FFDD009702A8 /* SDPreferencesWindowController.m */; };
 		94DF1A6217C6FFDD009702A8 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94DF1A6017C6FFDD009702A8 /* PreferencesWindow.xib */; };
+		94F4031E17CAF72800BD437B /* MASShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031517CAF72800BD437B /* MASShortcut.m */; };
+		94F4031F17CAF72800BD437B /* MASShortcut+Monitoring.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031717CAF72800BD437B /* MASShortcut+Monitoring.m */; };
+		94F4032017CAF72800BD437B /* MASShortcut+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031917CAF72800BD437B /* MASShortcut+UserDefaults.m */; };
+		94F4032117CAF72800BD437B /* MASShortcutView.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031B17CAF72800BD437B /* MASShortcutView.m */; };
+		94F4032217CAF72800BD437B /* MASShortcutView+UserDefaults.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031D17CAF72800BD437B /* MASShortcutView+UserDefaults.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -175,6 +180,16 @@
 		94DF1A5E17C6FFDD009702A8 /* SDPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPreferencesWindowController.h; sourceTree = "<group>"; };
 		94DF1A5F17C6FFDD009702A8 /* SDPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPreferencesWindowController.m; sourceTree = "<group>"; };
 		94DF1A6017C6FFDD009702A8 /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
+		94F4031417CAF72800BD437B /* MASShortcut.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASShortcut.h; sourceTree = "<group>"; };
+		94F4031517CAF72800BD437B /* MASShortcut.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASShortcut.m; sourceTree = "<group>"; };
+		94F4031617CAF72800BD437B /* MASShortcut+Monitoring.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASShortcut+Monitoring.h"; sourceTree = "<group>"; };
+		94F4031717CAF72800BD437B /* MASShortcut+Monitoring.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MASShortcut+Monitoring.m"; sourceTree = "<group>"; };
+		94F4031817CAF72800BD437B /* MASShortcut+UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASShortcut+UserDefaults.h"; sourceTree = "<group>"; };
+		94F4031917CAF72800BD437B /* MASShortcut+UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MASShortcut+UserDefaults.m"; sourceTree = "<group>"; };
+		94F4031A17CAF72800BD437B /* MASShortcutView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = MASShortcutView.h; sourceTree = "<group>"; };
+		94F4031B17CAF72800BD437B /* MASShortcutView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = MASShortcutView.m; sourceTree = "<group>"; };
+		94F4031C17CAF72800BD437B /* MASShortcutView+UserDefaults.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "MASShortcutView+UserDefaults.h"; sourceTree = "<group>"; };
+		94F4031D17CAF72800BD437B /* MASShortcutView+UserDefaults.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "MASShortcutView+UserDefaults.m"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -217,13 +232,13 @@
 			name = Videos;
 			sourceTree = "<group>";
 		};
-		94229B2117BE8EDC00FE5A88 /* Player */ = {
+		94229B2117BE8EDC00FE5A88 /* Music Player */ = {
 			isa = PBXGroup;
 			children = (
 				94229B2217BE8EE900FE5A88 /* SDMusicPlayer.h */,
 				94229B2317BE8EE900FE5A88 /* SDMusicPlayer.m */,
 			);
-			name = Player;
+			name = "Music Player";
 			sourceTree = "<group>";
 		};
 		9426F7F617C623730029650B /* Common */ = {
@@ -323,6 +338,7 @@
 				9460F2EF16FF781100DB85C4 /* MainMenu.xib */,
 				9460F2EC16FF781100DB85C4 /* SDAppDelegate.h */,
 				9460F2ED16FF781100DB85C4 /* SDAppDelegate.m */,
+				94F4031317CAF71800BD437B /* Global Hotkey */,
 				9475B26017C9787100899272 /* Dock Icon */,
 				9475B24E17C968A000899272 /* Status Bar Icon */,
 				9421E19217C9A26E00115F14 /* Videos */,
@@ -330,7 +346,7 @@
 				941B113F17C409D8008F8A79 /* Hacking Media Keys */,
 				94AD9DE317BD56C100D678E1 /* Importing */,
 				9427376617C52B1700715D18 /* Core Data */,
-				94229B2117BE8EDC00FE5A88 /* Player */,
+				94229B2117BE8EDC00FE5A88 /* Music Player */,
 				9460F2F816FF782C00DB85C4 /* Player Window */,
 				9460F2E116FF781100DB85C4 /* Supporting Files */,
 			);
@@ -439,6 +455,31 @@
 				9475B26617C9919F00899272 /* SDInsetHorizontalLine.m */,
 			);
 			name = Preferences;
+			sourceTree = "<group>";
+		};
+		94F4031317CAF71800BD437B /* Global Hotkey */ = {
+			isa = PBXGroup;
+			children = (
+				94F4032317CAF72C00BD437B /* MASShortcut */,
+			);
+			name = "Global Hotkey";
+			sourceTree = "<group>";
+		};
+		94F4032317CAF72C00BD437B /* MASShortcut */ = {
+			isa = PBXGroup;
+			children = (
+				94F4031417CAF72800BD437B /* MASShortcut.h */,
+				94F4031517CAF72800BD437B /* MASShortcut.m */,
+				94F4031617CAF72800BD437B /* MASShortcut+Monitoring.h */,
+				94F4031717CAF72800BD437B /* MASShortcut+Monitoring.m */,
+				94F4031817CAF72800BD437B /* MASShortcut+UserDefaults.h */,
+				94F4031917CAF72800BD437B /* MASShortcut+UserDefaults.m */,
+				94F4031A17CAF72800BD437B /* MASShortcutView.h */,
+				94F4031B17CAF72800BD437B /* MASShortcutView.m */,
+				94F4031C17CAF72800BD437B /* MASShortcutView+UserDefaults.h */,
+				94F4031D17CAF72800BD437B /* MASShortcutView+UserDefaults.m */,
+			);
+			name = MASShortcut;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -552,6 +593,11 @@
 				941864F217C9CDA500CE16B7 /* SDImporterWindowController.m in Sources */,
 				941864F617CA9D2E00CE16B7 /* SDVolumeSliderCell.m in Sources */,
 				941864FC17CAB0B100CE16B7 /* SDSong.m in Sources */,
+				94F4031E17CAF72800BD437B /* MASShortcut.m in Sources */,
+				94F4031F17CAF72800BD437B /* MASShortcut+Monitoring.m in Sources */,
+				94F4032017CAF72800BD437B /* MASShortcut+UserDefaults.m in Sources */,
+				94F4032117CAF72800BD437B /* MASShortcutView.m in Sources */,
+				94F4032217CAF72800BD437B /* MASShortcutView+UserDefaults.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
