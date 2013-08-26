@@ -22,7 +22,9 @@
 @property (nonatomic) BOOL paused;
 @property (nonatomic) BOOL hasVideo;
 @property (nonatomic, retain) NSString * title;
-@property (nonatomic, retain) id url;
+@property (nonatomic, retain) NSURL* url;
+@property (nonatomic, retain) NSString * genre;
+@property (nonatomic, retain) NSImage* artwork;
 @property (nonatomic, retain) NSSet *playlists;
 
 - (AVPlayerItem*) playerItem;

@@ -20,6 +20,8 @@
 @dynamic hasVideo;
 @dynamic title;
 @dynamic url;
+@dynamic genre;
+@dynamic artwork;
 @dynamic playlists;
 
 
