@@ -184,6 +184,8 @@
 }
 
 - (IBAction) newOrExistingPlayerWindow:(id)sender {
+    [NSApp activateIgnoringOtherApps:YES];
+    
     if ([self.playerWindowControllers count] == 0)
         [self newPlayerWindow:sender];
     else
@@ -191,6 +193,8 @@
 }
 
 - (IBAction) newPlayerWindow:(id)sender {
+    [NSApp activateIgnoringOtherApps:YES];
+    
     SDPlayerWindowController* player = [[SDPlayerWindowController alloc] init];
     player.killedDelegate = self;
     [self.playerWindowControllers addObject:player];

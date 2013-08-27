@@ -901,7 +901,7 @@
 				<array class="NSMutableArray" key="NSMenuItems">
 					<object class="NSMenuItem" id="594197472">
 						<reference key="NSMenu" ref="3193815"/>
-						<string key="NSTitle">New Player Window</string>
+						<string key="NSTitle">Player Window</string>
 						<string key="NSKeyEquiv"/>
 						<int key="NSMnemonicLoc">2147483647</int>
 						<reference key="NSOnImage" ref="35465992"/>
@@ -1519,11 +1519,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">newPlayerWindow:</string>
+						<string key="label">newOrExistingPlayerWindow:</string>
 						<reference key="source" ref="976324537"/>
 						<reference key="destination" ref="594197472"/>
 					</object>
-					<int key="connectionID">640</int>
+					<int key="connectionID">675</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2459,7 +2459,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">674</int>
+			<int key="maxID">675</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
