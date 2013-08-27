@@ -10,8 +10,8 @@
 
 - Do you play music files from your computer?
 - Do you like to do most thing with just your keyboard?
-- Are you okay with plain-old playlists?
-- Do you want a robust, fast music player?
+- Do you prefer plain-old playlists?
+- Do you want a simple, robust, fast, memory-efficient music player?
 - Are you getting a bit tired of iTunes too?
 
 Then yep, probably.
