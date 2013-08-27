@@ -5,5 +5,11 @@
     <link>https://raw.github.com/sdegutis/bahamut/master/appcast.xml</link>
     <description>Most recent changes with links to updates.</description>
     <language>en</language>
+    <item>
+      <title>Version 0.9</title>
+      <sparkle:releaseNotesLink>https://github.com/sdegutis/bahamut#change-log</sparkle:releaseNotesLink>
+      <pubDate>Tue Aug 27 01:25:03 CDT 2013</pubDate>
+      <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-0.9.app.tar.gz" sparkle:version="0.9" sparkle:dsaSignature="MCwCFC0JfA51kr9aMlYNGGopA/MU95F/AhRwkAESRki7pTv3QmONm9jvrNyF1Q==" length="833355" type="application/octet-stream"/>
+    </item>
   </channel>
 </rss>
