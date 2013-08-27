@@ -15,6 +15,7 @@
 #import "SDPlaylistTableDelegate.h"
 #import "SDSongTableDelegate.h"
 
+#import "SDImporter.h"
 
 
 
@@ -32,6 +33,8 @@
 @property (weak) IBOutlet NSTextField* timeElapsedField;
 @property (weak) IBOutlet NSTextField* timeRemainingField;
 @property (weak) IBOutlet NSSlider* volumeSlider;
+
+@property NSBox* dragIndicatorBox;
 
 @end
 
@@ -53,6 +56,8 @@
     
     [[self window] setBackgroundColor:[NSColor colorWithDeviceWhite:0.92 alpha:1.0]];
     
+    [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
+    
     [self bindViews];
     
     if (![SDMusicPlayer sharedPlayer].stopped) {
@@ -72,6 +77,45 @@
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
     return [[SDCoreData sharedCoreData].managedObjectContext undoManager];
 }
+
+
+
+
+
+
+
+// import via dragging into window
+
+- (NSDragOperation)draggingEntered:(id < NSDraggingInfo >)sender {
+    self.dragIndicatorBox = [[NSBox alloc] init];
+    self.dragIndicatorBox.boxType = NSBoxCustom;
+    self.dragIndicatorBox.borderWidth = 0.0;
+    self.dragIndicatorBox.fillColor = [[NSColor blackColor] colorWithAlphaComponent:0.2];
+    [self.dragIndicatorBox setFrame: [[[self window] contentView] bounds]];
+    
+    [[[self window] contentView] addSubview: self.dragIndicatorBox];
+    
+    return NSDragOperationLink;
+}
+
+- (void)draggingExited:(id < NSDraggingInfo >)sender {
+    [self.dragIndicatorBox removeFromSuperview];
+    self.dragIndicatorBox = nil;
+}
+
+- (BOOL)performDragOperation:(id < NSDraggingInfo >)sender {
+    NSArray *paths = [[sender draggingPasteboard] propertyListForType:NSFilenamesPboardType];
+    [SDImporter importSongsUnderPaths:paths];
+    
+    return YES;
+}
+
+- (void)concludeDragOperation:(id < NSDraggingInfo >)sender {
+    [self.dragIndicatorBox removeFromSuperview];
+    self.dragIndicatorBox = nil;
+}
+
+
 
 
 

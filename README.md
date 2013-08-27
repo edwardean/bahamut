@@ -8,7 +8,6 @@
 
 #### Todo
 
-- Dragging files onto player window should import them
 - Make sure to handle symlinks properly
 - Figure out what exactly should happen when you change anything about playlist while it's playing
 

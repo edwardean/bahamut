@@ -23,6 +23,13 @@
 
 @implementation SDImporter
 
++ (void) importSongsUnderPaths:(NSArray*)paths {
+    NSMutableArray *urls = [NSMutableArray array];
+    for (NSString* path in paths) {
+        [urls addObject: [NSURL fileURLWithPath:path]];
+    }
+    [SDImporter importSongsUnderURLs:urls];
+}
 
 + (void) importSongsUnderURLs:(NSArray*)urls {
     SDImporterWindowController* windowController = [[SDImporterWindowController alloc] init];

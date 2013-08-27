@@ -10,6 +10,7 @@
 
 @interface SDImporter : NSObject
 
++ (void) importSongsUnderPaths:(NSArray*)paths;
 + (void) importSongsUnderURLs:(NSArray*)urls;
 + (void) importFromiTunes;
 
