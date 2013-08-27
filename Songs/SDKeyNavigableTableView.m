@@ -14,11 +14,11 @@
     NSString* chars = [theEvent charactersIgnoringModifiers];
     NSString* lowerChars = [chars lowercaseString];
     
-    if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"n"]) {
-        [self moveDownAndExtend:[chars isEqualToString: @"N"]];
+    if (([theEvent modifierFlags] & NSControlKeyMask) && ([lowerChars isEqualToString: @"n"] || [lowerChars isEqualToString: @"j"])) {
+        [self moveDownAndExtend:[chars isEqualToString: [chars uppercaseString]]];
     }
-    else if (([theEvent modifierFlags] & NSControlKeyMask) && [lowerChars isEqualToString: @"p"]) {
-        [self moveUpAndExtend:[chars isEqualToString: @"P"]];
+    else if (([theEvent modifierFlags] & NSControlKeyMask) && ([lowerChars isEqualToString: @"p"] || [lowerChars isEqualToString: @"k"])) {
+        [self moveUpAndExtend:[chars isEqualToString: [chars uppercaseString]]];
     }
     else {
         [super keyDown:theEvent];

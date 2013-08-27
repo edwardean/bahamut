@@ -20,6 +20,9 @@
     else if ([[theEvent characters] characterAtIndex:0] == NSRightArrowFunctionKey) {
         [NSApp sendAction:@selector(jumpToSongs:) to:nil from:nil];
     }
+    else if (([theEvent modifierFlags] & NSControlKeyMask) && [[theEvent charactersIgnoringModifiers] isEqualToString: @"l"]) {
+        [NSApp sendAction:@selector(jumpToSongs:) to:nil from:nil];
+    }
     else {
 //        NSLog(@"%@", theEvent);
         [super keyDown:theEvent];

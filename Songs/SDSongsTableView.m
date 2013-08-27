@@ -43,6 +43,9 @@
     else if ([[theEvent characters] isEqualToString: @" "]) {
         [NSApp sendAction:@selector(playPause:) to:nil from:nil];
     }
+    else if (([theEvent modifierFlags] & NSControlKeyMask) && [[theEvent charactersIgnoringModifiers] isEqualToString: @"h"]) {
+        [NSApp sendAction:@selector(jumpToPlaylists:) to:nil from:nil];
+    }
     else {
 //        NSLog(@"%@", theEvent);
         [super keyDown:theEvent];
