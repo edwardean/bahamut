@@ -697,8 +697,8 @@
 					"\"$(SRCROOT)/ThirdParty\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Songs/Bahamut-Prefix.pch";
-				INFOPLIST_FILE = "Songs/Bahamut-Info.plist";
+				GCC_PREFIX_HEADER = "Bahamut/Bahamut-Prefix.pch";
+				INFOPLIST_FILE = "Bahamut/Bahamut-Info.plist";
 				PRODUCT_NAME = Bahamut;
 				WRAPPER_EXTENSION = app;
 			};
@@ -713,8 +713,8 @@
 					"\"$(SRCROOT)/ThirdParty\"",
 				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "Songs/Bahamut-Prefix.pch";
-				INFOPLIST_FILE = "Songs/Bahamut-Info.plist";
+				GCC_PREFIX_HEADER = "Bahamut/Bahamut-Prefix.pch";
+				INFOPLIST_FILE = "Bahamut/Bahamut-Info.plist";
 				PRODUCT_NAME = Bahamut;
 				WRAPPER_EXTENSION = app;
 			};
