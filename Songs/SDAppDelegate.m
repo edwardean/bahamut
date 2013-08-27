@@ -197,6 +197,14 @@
     [player showWindow:self];
 }
 
+- (void) application:(NSApplication *)sender openFiles:(NSArray *)filenames {
+    NSMutableArray *urls = [NSMutableArray array];
+    for (NSString* filename in filenames) {
+        [urls addObject: [NSURL fileURLWithPath:filename]];
+    }
+    [SDImporter importSongsUnderURLs:urls];
+}
+
 - (IBAction) importSongs:(id)sender {
     NSOpenPanel* openPanel = [NSOpenPanel openPanel];
     
