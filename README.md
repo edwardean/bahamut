@@ -2,9 +2,9 @@
 
 *The OS X music player I always wanted*
 
-* Current version: **0.8**
+* Current version: **0.9**
 * Requires: OS X 10.8 and up
-* Download: coming soon
+* Download: get [.zip file](https://raw.github.com/sdegutis/bahamut/master/Builds/Zephyros-LATEST.app.tar.gz), unzip, right-click app, choose "Open"
 
 #### Todo
 
