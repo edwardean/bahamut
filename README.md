@@ -12,7 +12,7 @@
 - Do you prefer plain-old playlists?
 - Do you want your music player to just do The Right Thing™?
 - Do you prefer to get around using the keyboard?
-- Do you like simple/minimalist apps?
+- Do you like simple, minimalist apps?
 
 Then yep, probably.
 
