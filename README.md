@@ -15,7 +15,7 @@
 
 ![bahamutapp.png](bahamutapp.png)
 
-(Don't judge me.)
+(Yes, that's FFVII music. Don't judge me.)
 
 #### License
 
