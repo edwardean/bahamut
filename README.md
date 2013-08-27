@@ -6,10 +6,15 @@
 * Requires: OS X 10.8 and up
 * Download: get [.zip file](https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-LATEST.app.tar.gz), unzip, right-click app, choose "Open"
 
-#### Todo
+#### Is it for me?
 
-- Make sure to handle symlinks properly
-- Figure out what exactly should happen when you change anything about playlist while it's playing
+- Do you play music files from your computer?
+- Do you like to do most thing with just your keyboard?
+- Are you okay with plain-old playlists?
+- Do you want a robust, fast music player?
+- Are you getting a bit tired of iTunes too?
+
+Then yep, probably.
 
 #### Screenshot
 
