@@ -11,7 +11,7 @@
 - Do you play music files from your computer?
 - Do you prefer plain-old playlists?
 - Do you want your music player to just do The Right Thing™?
-- Do you prefer to get around using your keyboard?
+- Do you prefer to get around using the keyboard?
 - Are you getting a bit tired of iTunes too?
 
 Then yep, probably.
