@@ -10,9 +10,8 @@
 
 - Do you play music files from your computer?
 - Do you prefer plain-old playlists?
-- Do you want your music player to just do The Right Thing™?
-- Do you prefer to get around using the keyboard?
 - Do you like simple, minimalist apps?
+- Do you prefer to get around using the keyboard?
 
 Then yep, probably.
 
