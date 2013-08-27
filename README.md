@@ -4,7 +4,7 @@
 
 * Current version: **0.9**
 * Requires: OS X 10.8 and up
-* Download: get [.zip file](https://raw.github.com/sdegutis/bahamut/master/Builds/Zephyros-LATEST.app.tar.gz), unzip, right-click app, choose "Open"
+* Download: get [.zip file](https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-LATEST.app.tar.gz), unzip, right-click app, choose "Open"
 
 #### Todo
 
