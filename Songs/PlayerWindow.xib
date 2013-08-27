@@ -210,7 +210,7 @@
 															<int key="NSColumnAutoresizingStyle">4</int>
 															<int key="NSDraggingSourceMaskForLocal">15</int>
 															<int key="NSDraggingSourceMaskForNonLocal">0</int>
-															<bool key="NSAllowsTypeSelect">YES</bool>
+															<bool key="NSAllowsTypeSelect">NO</bool>
 															<int key="NSTableViewDraggingDestinationStyle">0</int>
 															<int key="NSTableViewGroupRowStyle">1</int>
 														</object>
@@ -370,7 +370,7 @@
 																	<string key="NSFrameSize">{471, 234}</string>
 																	<reference key="NSSuperview" ref="545839721"/>
 																	<reference key="NSWindow"/>
-																	<reference key="NSNextKeyView" ref="16303684"/>
+																	<reference key="NSNextKeyView" ref="892125705"/>
 																	<string key="NSReuseIdentifierKey">_NS:13</string>
 																	<bool key="NSEnabled">YES</bool>
 																	<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -573,7 +573,7 @@
 																	<int key="NSColumnAutoresizingStyle">4</int>
 																	<int key="NSDraggingSourceMaskForLocal">15</int>
 																	<int key="NSDraggingSourceMaskForNonLocal">0</int>
-																	<bool key="NSAllowsTypeSelect">YES</bool>
+																	<bool key="NSAllowsTypeSelect">NO</bool>
 																	<int key="NSTableViewDraggingDestinationStyle">0</int>
 																	<int key="NSTableViewGroupRowStyle">1</int>
 																</object>
@@ -634,7 +634,7 @@
 													<string key="NSFrame">{{0, 29}, {471, 251}}</string>
 													<reference key="NSSuperview" ref="981714129"/>
 													<reference key="NSWindow"/>
-													<reference key="NSNextKeyView" ref="545839721"/>
+													<reference key="NSNextKeyView" ref="16303684"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<int key="NSsFlags">133680</int>
 													<reference key="NSVScroller" ref="892125705"/>
@@ -690,6 +690,7 @@
 													<string key="NSFrame">{{381, 9}, {72, 18}}</string>
 													<reference key="NSSuperview" ref="674655831"/>
 													<reference key="NSWindow"/>
+													<reference key="NSNextKeyView"/>
 													<string key="NSReuseIdentifierKey">_NS:9</string>
 													<bool key="NSEnabled">YES</bool>
 													<object class="NSButtonCell" key="NSCell" id="246202201">
