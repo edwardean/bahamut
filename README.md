@@ -1,6 +1,6 @@
 ## Bahamut
 
-*The OS X music player I always wanted*
+*The tiny OS X music player*
 
 * Current version: **0.9**
 * Requires: OS X 10.8 and up
@@ -9,9 +9,9 @@
 #### Is it for me?
 
 - Do you play music files from your computer?
-- Do you like to do most thing with just your keyboard?
 - Do you prefer plain-old playlists?
-- Do you want a simple, robust, fast, memory-efficient music player?
+- Do you want a fast/efficient music player?
+- Do you prefer to get around using your keyboard?
 - Are you getting a bit tired of iTunes too?
 
 Then yep, probably.
