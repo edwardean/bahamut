@@ -297,7 +297,7 @@
 		9460F2CE16FF781100DB85C4 = {
 			isa = PBXGroup;
 			children = (
-				9460F2E016FF781100DB85C4 /* Songs */,
+				9460F2E016FF781100DB85C4 /* Bahamut */,
 				9460F2D916FF781100DB85C4 /* Frameworks */,
 				9460F2D816FF781100DB85C4 /* Products */,
 			);
@@ -335,7 +335,7 @@
 			name = "Other Frameworks";
 			sourceTree = "<group>";
 		};
-		9460F2E016FF781100DB85C4 /* Songs */ = {
+		9460F2E016FF781100DB85C4 /* Bahamut */ = {
 			isa = PBXGroup;
 			children = (
 				9460F2E216FF781100DB85C4 /* Bahamut-Info.plist */,
@@ -355,7 +355,7 @@
 				9460F2F816FF782C00DB85C4 /* Player Window */,
 				9460F2E116FF781100DB85C4 /* Supporting Files */,
 			);
-			path = Songs;
+			path = Bahamut;
 			sourceTree = "<group>";
 		};
 		9460F2E116FF781100DB85C4 /* Supporting Files */ = {
