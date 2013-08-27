@@ -208,6 +208,24 @@ NSString* SDGetTimeForSeconds(CGFloat seconds) {
 
 
 
+- (void) fastRewind {
+    CMTime now = [self.player currentTime];
+    CMTime earlier = CMTimeSubtract(now, CMTimeMake(5, 1));
+    [self.player seekToTime:earlier];
+}
+
+- (void) fastForward {
+    CMTime now = [self.player currentTime];
+    CMTime later = CMTimeAdd(now, CMTimeMake(5, 1));
+    [self.player seekToTime:later];
+}
+
+
+
+
+
+
+
 - (void) pause {
     SDWithoutUndos(^{
         [self.player pause];

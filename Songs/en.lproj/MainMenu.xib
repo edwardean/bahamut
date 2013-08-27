@@ -208,7 +208,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="93684752">
+								<object class="NSMenuItem" id="315099411">
 									<reference key="NSMenu" ref="714887771"/>
 									<bool key="NSIsDisabled">YES</bool>
 									<bool key="NSIsSeparator">YES</bool>
@@ -218,10 +218,10 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="420241380">
+								<object class="NSMenuItem" id="415480450">
 									<reference key="NSMenu" ref="714887771"/>
-									<string key="NSTitle">Play or Pause</string>
-									<string key="NSKeyEquiv"/>
+									<string key="NSTitle">Play/Pause</string>
+									<string type="base64-UTF8" key="NSKeyEquiv">IA</string>
 									<int key="NSMnemonicLoc">2147483647</int>
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
@@ -235,7 +235,49 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="66302759">
+								<object class="NSMenuItem" id="93684752">
+									<reference key="NSMenu" ref="714887771"/>
+									<bool key="NSIsDisabled">YES</bool>
+									<bool key="NSIsSeparator">YES</bool>
+									<string key="NSTitle"/>
+									<string key="NSKeyEquiv"/>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="420241380">
+									<reference key="NSMenu" ref="714887771"/>
+									<string key="NSTitle">Play Next Song</string>
+									<string key="NSKeyEquiv">j</string>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="700152226">
+									<reference key="NSMenu" ref="714887771"/>
+									<string key="NSTitle">Play Previous Song</string>
+									<string key="NSKeyEquiv">k</string>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="304334013">
+									<reference key="NSMenu" ref="714887771"/>
+									<string key="NSTitle">Fast-forward 5 seconds</string>
+									<string key="NSKeyEquiv">l</string>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="562415064">
+									<reference key="NSMenu" ref="714887771"/>
+									<string key="NSTitle">Rewind 5 seconds</string>
+									<string key="NSKeyEquiv">h</string>
+									<int key="NSMnemonicLoc">2147483647</int>
+									<reference key="NSOnImage" ref="35465992"/>
+									<reference key="NSMixedImage" ref="502551668"/>
+								</object>
+								<object class="NSMenuItem" id="126119594">
 									<reference key="NSMenu" ref="714887771"/>
 									<bool key="NSIsDisabled">YES</bool>
 									<bool key="NSIsSeparator">YES</bool>
@@ -281,7 +323,7 @@
 									<reference key="NSOnImage" ref="35465992"/>
 									<reference key="NSMixedImage" ref="502551668"/>
 								</object>
-								<object class="NSMenuItem" id="315099411">
+								<object class="NSMenuItem" id="66302759">
 									<reference key="NSMenu" ref="714887771"/>
 									<bool key="NSIsDisabled">YES</bool>
 									<bool key="NSIsSeparator">YES</bool>
@@ -1309,19 +1351,67 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">playPause:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="420241380"/>
-					</object>
-					<int key="connectionID">557</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
 						<string key="label">stopSong:</string>
 						<reference key="source" ref="1014"/>
 						<reference key="destination" ref="746696326"/>
 					</object>
 					<int key="connectionID">564</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">nextSong:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="47960969"/>
+					</object>
+					<int key="connectionID">618</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">prevSong:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="1044038444"/>
+					</object>
+					<int key="connectionID">619</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">nextSong:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="420241380"/>
+					</object>
+					<int key="connectionID">667</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">prevSong:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="700152226"/>
+					</object>
+					<int key="connectionID">668</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">forwardFiveSec:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="304334013"/>
+					</object>
+					<int key="connectionID">669</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">rewindFiveSec:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="562415064"/>
+					</object>
+					<int key="connectionID">670</int>
+				</object>
+				<object class="IBConnectionRecord">
+					<object class="IBActionConnection" key="connection">
+						<string key="label">playPause:</string>
+						<reference key="source" ref="1014"/>
+						<reference key="destination" ref="415480450"/>
+					</object>
+					<int key="connectionID">672</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -1346,22 +1436,6 @@
 						<reference key="destination" ref="399769221"/>
 					</object>
 					<int key="connectionID">594</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">nextSong:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="47960969"/>
-					</object>
-					<int key="connectionID">618</int>
-				</object>
-				<object class="IBConnectionRecord">
-					<object class="IBActionConnection" key="connection">
-						<string key="label">prevSong:</string>
-						<reference key="source" ref="1014"/>
-						<reference key="destination" ref="1044038444"/>
-					</object>
-					<int key="connectionID">619</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2047,20 +2121,25 @@
 						<array class="NSMutableArray" key="children">
 							<reference ref="998247710"/>
 							<reference ref="272644688"/>
-							<reference ref="420241380"/>
-							<reference ref="746696326"/>
 							<reference ref="93684752"/>
 							<reference ref="66302759"/>
 							<reference ref="65008844"/>
 							<reference ref="309520939"/>
 							<reference ref="336016729"/>
-							<reference ref="315099411"/>
-							<reference ref="647801780"/>
-							<reference ref="911397018"/>
 							<reference ref="687242737"/>
-							<reference ref="399769221"/>
 							<reference ref="340116748"/>
+							<reference ref="420241380"/>
+							<reference ref="315099411"/>
+							<reference ref="746696326"/>
+							<reference ref="700152226"/>
+							<reference ref="304334013"/>
+							<reference ref="562415064"/>
+							<reference ref="415480450"/>
 							<reference ref="187534491"/>
+							<reference ref="399769221"/>
+							<reference ref="911397018"/>
+							<reference ref="647801780"/>
+							<reference ref="126119594"/>
 						</array>
 						<reference key="parent" ref="664275912"/>
 					</object>
@@ -2112,26 +2191,6 @@
 					<object class="IBObjectRecord">
 						<int key="objectID">582</int>
 						<reference key="object" ref="336016729"/>
-						<reference key="parent" ref="714887771"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">585</int>
-						<reference key="object" ref="315099411"/>
-						<reference key="parent" ref="714887771"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">586</int>
-						<reference key="object" ref="647801780"/>
-						<reference key="parent" ref="714887771"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">589</int>
-						<reference key="object" ref="911397018"/>
-						<reference key="parent" ref="714887771"/>
-					</object>
-					<object class="IBObjectRecord">
-						<int key="objectID">591</int>
-						<reference key="object" ref="399769221"/>
 						<reference key="parent" ref="714887771"/>
 					</object>
 					<object class="IBObjectRecord">
@@ -2218,11 +2277,6 @@
 						<reference key="parent" ref="714887771"/>
 					</object>
 					<object class="IBObjectRecord">
-						<int key="objectID">636</int>
-						<reference key="object" ref="187534491"/>
-						<reference key="parent" ref="714887771"/>
-					</object>
-					<object class="IBObjectRecord">
 						<int key="objectID">639</int>
 						<reference key="object" ref="594197472"/>
 						<reference key="parent" ref="3193815"/>
@@ -2231,6 +2285,56 @@
 						<int key="objectID">641</int>
 						<reference key="object" ref="387110375"/>
 						<reference key="parent" ref="3193815"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">658</int>
+						<reference key="object" ref="315099411"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">661</int>
+						<reference key="object" ref="700152226"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">663</int>
+						<reference key="object" ref="304334013"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">665</int>
+						<reference key="object" ref="562415064"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">671</int>
+						<reference key="object" ref="415480450"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">586</int>
+						<reference key="object" ref="647801780"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">589</int>
+						<reference key="object" ref="911397018"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">591</int>
+						<reference key="object" ref="399769221"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">636</int>
+						<reference key="object" ref="187534491"/>
+						<reference key="parent" ref="714887771"/>
+					</object>
+					<object class="IBObjectRecord">
+						<int key="objectID">674</int>
+						<reference key="object" ref="126119594"/>
+						<reference key="parent" ref="714887771"/>
 					</object>
 				</array>
 			</object>
@@ -2323,7 +2427,6 @@
 				<string key="58.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="580.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="582.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
-				<string key="585.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="586.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="589.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="591.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
@@ -2344,13 +2447,19 @@
 				<string key="636.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="639.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="641.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="658.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="661.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="663.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="665.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="671.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
+				<string key="674.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 				<string key="73.IBPluginDependency">com.apple.InterfaceBuilder.CocoaPlugin</string>
 			</dictionary>
 			<dictionary class="NSMutableDictionary" key="unlocalizedProperties"/>
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">641</int>
+			<int key="maxID">674</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">

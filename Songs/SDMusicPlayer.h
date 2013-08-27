@@ -29,6 +29,9 @@ NSString* SDGetTimeForSeconds(CGFloat seconds);
 - (void) resume;
 - (void) stop;
 
+- (void) fastForward;
+- (void) fastRewind;
+
 - (void) seekToTime:(CGFloat)percent;
 
 @property (readonly) BOOL isPlaying;

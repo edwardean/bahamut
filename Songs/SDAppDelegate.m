@@ -147,6 +147,14 @@
     }
 }
 
+- (IBAction) rewindFiveSec:(id)sender {
+    [[SDMusicPlayer sharedPlayer] fastRewind];
+}
+
+- (IBAction) forwardFiveSec:(id)sender {
+    [[SDMusicPlayer sharedPlayer] fastForward];
+}
+
 - (IBAction) stopSong:(id)sender {
     [[SDMusicPlayer sharedPlayer] stop];
 }
