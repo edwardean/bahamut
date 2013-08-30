@@ -16,7 +16,7 @@
 }
 
 - (void)drawWithFrame:(CGRect)cellFrame inView:(NSView *)view {
-    [[NSColor colorWithDeviceWhite:0.97 alpha:1.0] setFill];
+    [[NSColor colorWithDeviceWhite:0.94 alpha:1.0] setFill];
     [NSBezierPath fillRect:cellFrame];
     
     [self drawInteriorWithFrame:cellFrame inView:view];

@@ -12,7 +12,7 @@
 
 - (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     if ([self isHighlighted]) {
-        [[NSColor colorWithDeviceWhite:0.88 alpha:1.0] setFill];
+        [[NSColor colorWithDeviceWhite:0.84 alpha:1.0] setFill];
         [NSBezierPath fillRect:cellFrame];
     }
     
