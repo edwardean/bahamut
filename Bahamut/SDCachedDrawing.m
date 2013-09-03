@@ -37,7 +37,7 @@
     NSImage* image = [[NSImage alloc] initWithSize:NSMakeSize(10, 10)];
     [image lockFocus];
     
-    [[NSColor colorWithDeviceWhite:0.0 alpha:1.0] setFill];
+    [[NSColor colorWithCalibratedWhite:0.0 alpha:1.0] setFill];
     [NSBezierPath fillRect:NSMakeRect(1, 0, 3, 10)];
     [NSBezierPath fillRect:NSMakeRect(6, 0, 3, 10)];
     
@@ -215,16 +215,16 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
     NSColor* backgroundColor;
     NSColor* backgroundColorPressed;
     
-    NSColor* checkmarkColor = [NSColor colorWithDeviceWhite:0.96 alpha:1.0];
-    NSColor* checkmarkColorPressed = [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
+    NSColor* checkmarkColor = [NSColor colorWithCalibratedWhite:0.96 alpha:1.0];
+    NSColor* checkmarkColorPressed = [NSColor colorWithCalibratedWhite:1.0 alpha:1.0];
     
     if (ticked) {
         backgroundColor = SDDarkBlue;
         backgroundColorPressed = SDMediumBlue;
     }
     else {
-        backgroundColor = [NSColor colorWithDeviceWhite:1.0 alpha:1.0];
-        backgroundColorPressed = [NSColor colorWithDeviceWhite:0.97 alpha:1.0];
+        backgroundColor = [NSColor colorWithCalibratedWhite:1.0 alpha:1.0];
+        backgroundColorPressed = [NSColor colorWithCalibratedWhite:0.97 alpha:1.0];
     }
     
     [([self isHighlighted] ? backgroundColorPressed : backgroundColor) setFill];

@@ -54,7 +54,7 @@
     [self setNextResponder: self.playlistTableDelegate];
     [self.playlistTableDelegate setNextResponder: self.songTableDelegate];
     
-    [[self window] setBackgroundColor:[NSColor colorWithDeviceWhite:0.89 alpha:1.0]];
+    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.89 alpha:1.0]];
     
     [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
     

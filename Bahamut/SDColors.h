@@ -12,13 +12,13 @@
 
 
 
-#define SDDarkBlue [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0]
-#define SDMediumBlue [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.47 brightness:0.92 alpha:1.0]
-#define SDLightBlue [NSColor colorWithDeviceHue:206.0/360.0 saturation:0.16 brightness:0.92 alpha:1.0]
+#define SDDarkBlue [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0]
+#define SDMediumBlue [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.47 brightness:0.92 alpha:1.0]
+#define SDLightBlue [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.16 brightness:0.92 alpha:1.0]
 
 
 
-#define SDVolumeSliderBackColor [NSColor colorWithDeviceWhite:1.00 alpha:1.0]
+#define SDVolumeSliderBackColor [NSColor colorWithCalibratedWhite:1.00 alpha:1.0]
 #define SDVolumeSliderForeColor SDLightBlue
 
 
@@ -32,11 +32,11 @@
 
 
 
-#define SDButtonBackgroundColor [NSColor colorWithDeviceWhite:1.0 alpha:1.0]
-#define SDButtonBackgroundColorPressed [NSColor colorWithDeviceWhite:0.97 alpha:1.0]
+#define SDButtonBackgroundColor [NSColor colorWithCalibratedWhite:1.0 alpha:1.0]
+#define SDButtonBackgroundColorPressed [NSColor colorWithCalibratedWhite:0.97 alpha:1.0]
 #define SDButtonNormalColor [NSColor grayColor]
-#define SDButtonHighlightColor [NSColor colorWithDeviceWhite:0.44 alpha:1.0]
-#define SDButtonDisabledColor [NSColor colorWithDeviceWhite:0.85 alpha:1.0]
+#define SDButtonHighlightColor [NSColor colorWithCalibratedWhite:0.44 alpha:1.0]
+#define SDButtonDisabledColor [NSColor colorWithCalibratedWhite:0.85 alpha:1.0]
 
 
 #endif
