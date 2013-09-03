@@ -17,7 +17,7 @@ Then yep, probably.
 
 #### Screenshot
 
-![bahamutapp.png](bahamutapp.png)
+![bahamut.png](bahamut.png)
 
 (Yes, that's FFVII music. Don't judge me.)
 
