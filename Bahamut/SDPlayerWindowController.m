@@ -18,7 +18,6 @@
 #import "SDImporter.h"
 
 
-
 @interface SDPlayerWindowController ()
 
 @property IBOutlet SDPlaylistTableDelegate* playlistTableDelegate;
@@ -57,6 +56,18 @@
     [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.89 alpha:1.0]];
     
     [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
+    
+    [[self window] setTitle:@""];
+    
+//    {
+//        NSView* windowView = [[[self window] contentView] superview];
+//        
+//        [windowView addSubview:self.nowPlayingControlsView];
+//        [windowView addSubview:self.prevButton];
+//        [windowView addSubview:self.playButton];
+//        [windowView addSubview:self.nextButton];
+//        [windowView addSubview:self.volumeSlider];
+//    }
     
     [self bindViews];
     
@@ -150,7 +161,7 @@
     [self.timeElapsedField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:@{NSValueTransformerNameBindingOption: @"SDTimeForSeconds"}];
     [self.timeRemainingField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"remainingTime" options:@{NSValueTransformerNameBindingOption: @"SDTimeForSeconds"}];
     
-    [self.currentSongInfoField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong" options:@{NSValueTransformerNameBindingOption: @"SDSongInfoTransformer"}];
+    [[self window] bind:@"title" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong" options:@{NSValueTransformerNameBindingOption: @"SDSongInfoTransformer"}];
 }
 
 - (void) unbindViews {
@@ -166,7 +177,7 @@
     [self.timeElapsedField unbind:@"value"];
     [self.timeRemainingField unbind:@"value"];
     
-    [self.currentSongInfoField unbind:@"value"];
+    [[self window] unbind:@"title"];
 }
 
 

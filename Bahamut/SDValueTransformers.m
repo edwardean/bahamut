@@ -93,7 +93,9 @@
     if (currentSong == nil)
         return @"Bahamut";
     
-    NSArray* parts = @[currentSong.title ?: @"", currentSong.artist ?: @"", currentSong.album ?: @""];
+    NSArray* parts = @[currentSong.title ?: @"", currentSong.artist ?: @""
+//                       , currentSong.album ?: @""
+                       ];
     parts = [parts filteredArrayUsingPredicate:[NSPredicate predicateWithFormat:@"length > 0"]];
     return [parts componentsJoinedByString:@"  -  "];
 }
