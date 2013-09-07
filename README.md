@@ -11,7 +11,7 @@
 - Do you play music files from your computer?
 - Do you prefer plain-old playlists?
 - Do you like simple, minimalist apps?
-- Do you prefer to do stuff using the keyboard?
+- Do you prefer the keyboard over the mouse?
 
 Then yep, probably.
 
