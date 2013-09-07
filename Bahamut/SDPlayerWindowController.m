@@ -18,6 +18,19 @@
 #import "SDImporter.h"
 
 
+@interface SDWindowContentView : NSView
+@end
+
+@implementation SDWindowContentView
+
+- (void) drawRect:(NSRect)dirtyRect {
+    [[NSColor colorWithCalibratedWhite:0.89 alpha:1.0] setFill];
+    [NSBezierPath fillRect:dirtyRect];
+}
+
+@end
+
+
 @interface SDPlayerWindowController ()
 
 @property IBOutlet SDPlaylistTableDelegate* playlistTableDelegate;
@@ -53,7 +66,7 @@
     [self setNextResponder: self.playlistTableDelegate];
     [self.playlistTableDelegate setNextResponder: self.songTableDelegate];
     
-    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.89 alpha:1.0]];
+    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.82 alpha:1.0]];
     
     [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
     
