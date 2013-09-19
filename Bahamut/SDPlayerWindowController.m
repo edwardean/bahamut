@@ -18,6 +18,25 @@
 #import "SDImporter.h"
 
 
+
+@interface SDPlayerWindow : NSWindow
+@end
+
+@implementation SDPlayerWindow
+
+- (BOOL) canBecomeKeyWindow { return YES; }
+- (BOOL) canBecomeMainWindow { return YES; }
+
+- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation {
+    return [super initWithContentRect:contentRect
+                            styleMask:(NSBorderlessWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask)
+                              backing:bufferingType
+                                defer:deferCreation];
+}
+
+@end
+
+
 @interface SDWindowContentView : NSView
 @end
 
@@ -45,6 +64,7 @@
 @property (weak) IBOutlet NSTextField* timeElapsedField;
 @property (weak) IBOutlet NSTextField* timeRemainingField;
 @property (weak) IBOutlet NSSlider* volumeSlider;
+@property (weak) IBOutlet NSSlider* rateSlider;
 
 @property NSBox* dragIndicatorBox;
 
@@ -66,21 +86,13 @@
     [self setNextResponder: self.playlistTableDelegate];
     [self.playlistTableDelegate setNextResponder: self.songTableDelegate];
     
-    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.82 alpha:1.0]];
     
     [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
     
-    [[self window] setTitle:@""];
-    
-//    {
-//        NSView* windowView = [[[self window] contentView] superview];
-//        
-//        [windowView addSubview:self.nowPlayingControlsView];
-//        [windowView addSubview:self.prevButton];
-//        [windowView addSubview:self.playButton];
-//        [windowView addSubview:self.nextButton];
-//        [windowView addSubview:self.volumeSlider];
-//    }
+    [[self window] setTitle:@"Bahamut"];
+    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.82 alpha:1.0]];
+    [[self window] setOpaque:YES];
+    [[self window] setMovableByWindowBackground:YES];
     
     [self bindViews];
     
@@ -106,6 +118,10 @@
 
 - (NSUndoManager *)windowWillReturnUndoManager:(NSWindow *)window {
     return [[SDCoreData sharedCoreData].managedObjectContext undoManager];
+}
+
+- (IBAction) customClose:(id)sender {
+    [self close];
 }
 
 
@@ -167,6 +183,7 @@
     [self.playButton bind:@"image" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"isPlaying" options:@{NSValueTransformerNameBindingOption: @"SDPlayingImageTransformer"}];
     
     [self.volumeSlider bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"player.volume" options:nil];
+    [self.rateSlider bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"player.rate" options:nil];
     
     [self.songPositionSlider bind:@"maxValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong.duration" options:nil];
     [self.songPositionSlider bind:@"doubleValue" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:nil];
@@ -174,7 +191,7 @@
     [self.timeElapsedField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentTime" options:@{NSValueTransformerNameBindingOption: @"SDTimeForSeconds"}];
     [self.timeRemainingField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"remainingTime" options:@{NSValueTransformerNameBindingOption: @"SDTimeForSeconds"}];
     
-    [[self window] bind:@"title" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong" options:@{NSValueTransformerNameBindingOption: @"SDSongInfoTransformer"}];
+    [self.currentSongInfoField bind:@"value" toObject:[SDMusicPlayer sharedPlayer] withKeyPath:@"currentSong" options:@{NSValueTransformerNameBindingOption: @"SDSongInfoTransformer"}];
 }
 
 - (void) unbindViews {
@@ -190,7 +207,7 @@
     [self.timeElapsedField unbind:@"value"];
     [self.timeRemainingField unbind:@"value"];
     
-    [[self window] unbind:@"title"];
+    [self.currentSongInfoField unbind:@"value"];
 }
 
 

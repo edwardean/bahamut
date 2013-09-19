@@ -289,7 +289,7 @@ NSString* SDGetTimeForSeconds(CGFloat seconds) {
 }
 
 - (BOOL) isPlaying {
-    return (self.player.rate > 0.5);
+    return (self.player.rate > 0.0001);
 }
 
 

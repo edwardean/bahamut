@@ -58,7 +58,7 @@
 
 
 
-static void SDDrawButtonBackground(NSBezierPath* path, NSRect cellFrame, BOOL isPressed) {
+static void SDDrawButtonBackground(NSRect cellFrame, BOOL isPressed) {
     [NSGraphicsContext saveGraphicsState];
     [isPressed ? SDButtonBackgroundColorPressed : SDButtonBackgroundColor setFill];
     [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
@@ -91,7 +91,7 @@ static NSRect SDButtonInset(NSRect cellFrame) {
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
-    SDDrawButtonBackground(path, cellFrame, [self isHighlighted]);
+    SDDrawButtonBackground(cellFrame, [self isHighlighted]);
     cellFrame = SDButtonInset(cellFrame);
     
     BOOL isPlaying = ([[image name] isEqualToString: NSImageNameRightFacingTriangleTemplate]);
@@ -146,7 +146,7 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
-    SDDrawButtonBackground(path, cellFrame, isPressed);
+    SDDrawButtonBackground(cellFrame, isPressed);
     cellFrame = SDButtonInset(cellFrame);
     cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
     
@@ -255,6 +255,39 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
         [([self isHighlighted] ? checkmarkColorPressed : checkmarkColor) setStroke];
         [checkPath stroke];
     }
+}
+
+@end
+
+
+
+
+@interface SDTitlebarButtonCell : NSButtonCell
+@end
+
+@implementation SDTitlebarButtonCell
+
+- (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    if ([self isHighlighted])
+        [SDButtonHighlightColor set];
+    else
+        [SDButtonNormalColor set];
+    
+    [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
+    [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+    
+    NSBezierPath* path = [NSBezierPath bezierPath];
+    SDSetupButtonLine(path);
+    CGFloat d = 7.0;
+    cellFrame = NSInsetRect(cellFrame, d, d);
+    
+    [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
+    [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMaxY(cellFrame))];
+    
+    [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
+    [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMinY(cellFrame))];
+    
+    [path stroke];
 }
 
 @end
