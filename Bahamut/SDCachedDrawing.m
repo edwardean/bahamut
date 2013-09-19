@@ -269,9 +269,9 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 
 - (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     if ([self isHighlighted])
-        [SDButtonHighlightColor set];
+        [[NSColor colorWithCalibratedWhite:0.65 alpha:1.0] set];
     else
-        [SDButtonNormalColor set];
+        [[NSColor colorWithCalibratedWhite:0.55 alpha:1.0] set];
     
     [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
     [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];

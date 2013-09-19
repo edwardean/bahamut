@@ -374,7 +374,7 @@
 																			<string key="NSFrameSize">{471, 247}</string>
 																			<reference key="NSSuperview" ref="545839721"/>
 																			<reference key="NSWindow"/>
-																			<reference key="NSNextKeyView" ref="892125705"/>
+																			<reference key="NSNextKeyView" ref="16303684"/>
 																			<string key="NSReuseIdentifierKey">_NS:13</string>
 																			<bool key="NSEnabled">YES</bool>
 																			<bool key="NSAllowsLogicalLayoutDirection">NO</bool>
@@ -638,7 +638,7 @@
 															<string key="NSFrame">{{0, 29}, {471, 264}}</string>
 															<reference key="NSSuperview" ref="981714129"/>
 															<reference key="NSWindow"/>
-															<reference key="NSNextKeyView" ref="16303684"/>
+															<reference key="NSNextKeyView" ref="545839721"/>
 															<string key="NSReuseIdentifierKey">_NS:9</string>
 															<int key="NSsFlags">133680</int>
 															<reference key="NSVScroller" ref="892125705"/>
@@ -1187,11 +1187,11 @@
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
-						<string key="label">customClose:</string>
+						<string key="label">performClose:</string>
 						<reference key="source" ref="1001"/>
 						<reference key="destination" ref="175966721"/>
 					</object>
-					<int key="connectionID">656</int>
+					<int key="connectionID">657</int>
 				</object>
 				<object class="IBConnectionRecord">
 					<object class="IBActionConnection" key="connection">
@@ -2412,7 +2412,7 @@
 			<nil key="activeLocalization"/>
 			<dictionary class="NSMutableDictionary" key="localizations"/>
 			<nil key="sourceID"/>
-			<int key="maxID">656</int>
+			<int key="maxID">657</int>
 		</object>
 		<object class="IBClassDescriber" key="IBDocument.Classes">
 			<array class="NSMutableArray" key="referencedPartialClassDescriptions">
@@ -2468,12 +2468,12 @@
 					<string key="className">SDPlayerWindowController</string>
 					<string key="superclassName">NSWindowController</string>
 					<dictionary class="NSMutableDictionary" key="actions">
-						<string key="customClose:">id</string>
+						<string key="performClose:">id</string>
 						<string key="trackPositionMovedTo:">id</string>
 					</dictionary>
 					<dictionary class="NSMutableDictionary" key="actionInfosByName">
-						<object class="IBActionInfo" key="customClose:">
-							<string key="name">customClose:</string>
+						<object class="IBActionInfo" key="performClose:">
+							<string key="name">performClose:</string>
 							<string key="candidateClassName">id</string>
 						</object>
 						<object class="IBActionInfo" key="trackPositionMovedTo:">

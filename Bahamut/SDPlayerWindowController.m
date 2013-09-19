@@ -27,6 +27,13 @@
 - (BOOL) canBecomeKeyWindow { return YES; }
 - (BOOL) canBecomeMainWindow { return YES; }
 
+- (BOOL) respondsToSelector:(SEL)aSelector {
+    if (aSelector == @selector(performClose:))
+        return NO;
+    else
+        return [super respondsToSelector:aSelector];
+}
+
 - (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation {
     return [super initWithContentRect:contentRect
                             styleMask:(NSBorderlessWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask)
@@ -120,7 +127,7 @@
     return [[SDCoreData sharedCoreData].managedObjectContext undoManager];
 }
 
-- (IBAction) customClose:(id)sender {
+- (IBAction) performClose:(id)sender {
     [self close];
 }
 
