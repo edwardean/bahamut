@@ -2,7 +2,7 @@
 
 *The tiny OS X music player*
 
-* Current version: **0.9**
+* Current version: **1.0**
 * Requires: OS X 10.8 and up
 * Download: get [.zip file](https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-LATEST.app.tar.gz), unzip, right-click app, choose "Open"
 
@@ -11,7 +11,7 @@
 - Do you play music files from your computer?
 - Do you prefer plain-old playlists?
 - Do you like simple, minimalist apps?
-- Do you prefer the keyboard over the mouse?
+- Do you prefer using the keyboard over the mouse?
 
 Then yep, probably.
 
