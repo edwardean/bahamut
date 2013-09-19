@@ -59,6 +59,7 @@
 		94CC495017C6730200DA064A /* SDScroller.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC494F17C6730200DA064A /* SDScroller.m */; };
 		94CC495317C6731B00DA064A /* SDCreatePlaylistButtonCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */; };
 		94CC495617C6736500DA064A /* SDCachedDrawing.m in Sources */ = {isa = PBXBuildFile; fileRef = 94CC495517C6736500DA064A /* SDCachedDrawing.m */; };
+		94CE67DD17EB33EB009C9CAD /* Bahamut.icns in Resources */ = {isa = PBXBuildFile; fileRef = 94CE67DC17EB33EB009C9CAD /* Bahamut.icns */; };
 		94DF1A6117C6FFDD009702A8 /* SDPreferencesWindowController.m in Sources */ = {isa = PBXBuildFile; fileRef = 94DF1A5F17C6FFDD009702A8 /* SDPreferencesWindowController.m */; };
 		94DF1A6217C6FFDD009702A8 /* PreferencesWindow.xib in Resources */ = {isa = PBXBuildFile; fileRef = 94DF1A6017C6FFDD009702A8 /* PreferencesWindow.xib */; };
 		94F4031E17CAF72800BD437B /* MASShortcut.m in Sources */ = {isa = PBXBuildFile; fileRef = 94F4031517CAF72800BD437B /* MASShortcut.m */; };
@@ -177,6 +178,7 @@
 		94CC495217C6731B00DA064A /* SDCreatePlaylistButtonCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCreatePlaylistButtonCell.m; sourceTree = "<group>"; };
 		94CC495417C6736400DA064A /* SDCachedDrawing.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDCachedDrawing.h; sourceTree = "<group>"; };
 		94CC495517C6736500DA064A /* SDCachedDrawing.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDCachedDrawing.m; sourceTree = "<group>"; };
+		94CE67DC17EB33EB009C9CAD /* Bahamut.icns */ = {isa = PBXFileReference; lastKnownFileType = image.icns; path = Bahamut.icns; sourceTree = "<group>"; };
 		94DF1A5E17C6FFDD009702A8 /* SDPreferencesWindowController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = SDPreferencesWindowController.h; sourceTree = "<group>"; };
 		94DF1A5F17C6FFDD009702A8 /* SDPreferencesWindowController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = SDPreferencesWindowController.m; sourceTree = "<group>"; };
 		94DF1A6017C6FFDD009702A8 /* PreferencesWindow.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = PreferencesWindow.xib; sourceTree = "<group>"; };
@@ -297,6 +299,7 @@
 		9460F2CE16FF781100DB85C4 = {
 			isa = PBXGroup;
 			children = (
+				94CE67DC17EB33EB009C9CAD /* Bahamut.icns */,
 				9460F2E016FF781100DB85C4 /* Bahamut */,
 				9460F2D916FF781100DB85C4 /* Frameworks */,
 				9460F2D816FF781100DB85C4 /* Products */,
@@ -550,6 +553,7 @@
 				9475B25F17C96EFE00899272 /* DefaultValues.plist in Resources */,
 				9421E19717C9A9F700115F14 /* VideoWindow.xib in Resources */,
 				941864F317C9CDA600CE16B7 /* ImporterWindow.xib in Resources */,
+				94CE67DD17EB33EB009C9CAD /* Bahamut.icns in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -21,6 +21,11 @@ Then yep, probably.
 
 (Yes, that's FFVII music. Don't judge me.)
 
+#### Credits
+
+- Written and designed by [Steven Degutis](https://github.com/sdegutis/)
+- Icon provided by [Iiro Jäppinen](http://iiro.jappinen.me)
+
 #### License
 
 > Released under MIT license.
