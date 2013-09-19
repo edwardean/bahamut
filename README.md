@@ -1,4 +1,4 @@
-## Bahamut
+## Bahamut ![icon](Graphics/Bahamut.iconset/icon_256x256.png)
 
 *The tiny OS X music player*
 
