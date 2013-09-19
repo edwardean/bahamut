@@ -1,6 +1,6 @@
-## Bahamut
-
 <img src="Graphics/Bahamut.iconset/icon_32x32@2x.png" alt="Bahamut logo" title="Bahamut logo" align="right"/>
+
+## Bahamut
 
 *The tiny OS X music player*
 
