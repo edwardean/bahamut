@@ -1,6 +1,6 @@
 <item>
   <title>Version <%version%></title>
-  <sparkle:releaseNotesLink>https://github.com/sdegutis/bahamut#change-log</sparkle:releaseNotesLink>
+  <sparkle:releaseNotesLink>https://raw.github.com/sdegutis/bahamut/master/change-log.txt</sparkle:releaseNotesLink>
   <pubDate><%date%></pubDate>
   <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-<%version%>.app.tar.gz"
              sparkle:version="<%version%>"
