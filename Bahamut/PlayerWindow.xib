@@ -33,6 +33,72 @@
                 <rect key="frame" x="0.0" y="0.0" width="635" height="462"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
+                    <box autoresizesSubviews="NO" transparent="YES" title="Box" boxType="custom" borderType="none" titlePosition="noTitle" id="atl-pt-roO">
+                        <rect key="frame" x="0.0" y="428" width="635" height="34"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <view key="contentView">
+                            <rect key="frame" x="0.0" y="0.0" width="635" height="34"/>
+                            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                            <subviews>
+                                <textField verticalHuggingPriority="750" id="646">
+                                    <rect key="frame" x="81" y="10" width="473" height="17"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                    <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="647">
+                                        <font key="font" metaFont="system"/>
+                                        <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                        <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                    </textFieldCell>
+                                </textField>
+                                <button focusRingType="none" id="652">
+                                    <rect key="frame" x="7" y="6" width="22" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="653" customClass="SDTitlebarCloseButtonCell">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="performClose:" target="-2" id="657"/>
+                                    </connections>
+                                </button>
+                                <button focusRingType="none" id="Nxn-Zi-puI">
+                                    <rect key="frame" x="31" y="6" width="22" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="gfh-Zz-5WH" customClass="SDTitlebarMinButtonCell">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="performMiniaturize:" target="-2" id="pum-VM-Gz6"/>
+                                    </connections>
+                                </button>
+                                <button focusRingType="none" id="hpC-9S-8GW">
+                                    <rect key="frame" x="55" y="6" width="22" height="22"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
+                                    <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="pTt-Ih-Wd2" customClass="SDTitlebarMaxButtonCell">
+                                        <behavior key="behavior" lightByContents="YES"/>
+                                        <font key="font" metaFont="system"/>
+                                    </buttonCell>
+                                    <connections>
+                                        <action selector="performZoom:" target="-2" id="Pi3-FG-zqU"/>
+                                    </connections>
+                                </button>
+                                <slider verticalHuggingPriority="750" id="RRX-em-OhR">
+                                    <rect key="frame" x="561" y="7" width="62" height="21"/>
+                                    <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                    <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="0aw-mt-98P" customClass="SDVolumeSliderCell"/>
+                                </slider>
+                            </subviews>
+                        </view>
+                        <color key="borderColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.88158392137096775" alpha="1" colorSpace="calibratedWhite"/>
+                    </box>
+                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="iZ6-rh-bx9" customClass="SDHorizontalLine">
+                        <rect key="frame" x="12" y="425" width="611" height="5"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
+                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                        <font key="titleFont" metaFont="system"/>
+                    </box>
                     <splitView autosaveName="playlistsSplit" dividerStyle="thin" vertical="YES" id="59" customClass="SDSplitView">
                         <rect key="frame" x="0.0" y="0.0" width="635" height="381"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
@@ -404,7 +470,7 @@
                         </connections>
                     </button>
                     <customView id="275">
-                        <rect key="frame" x="8" y="390" width="502" height="28"/>
+                        <rect key="frame" x="8" y="391" width="502" height="28"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <subviews>
                             <textField verticalHuggingPriority="750" id="279">
@@ -435,60 +501,6 @@
                             </slider>
                         </subviews>
                     </customView>
-                    <textField verticalHuggingPriority="750" id="646">
-                        <rect key="frame" x="81" y="438" width="473" height="17"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="647">
-                            <font key="font" metaFont="system"/>
-                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                        </textFieldCell>
-                    </textField>
-                    <button focusRingType="none" id="652">
-                        <rect key="frame" x="7" y="434" width="22" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="653" customClass="SDTitlebarCloseButtonCell">
-                            <behavior key="behavior" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="performClose:" target="-2" id="657"/>
-                        </connections>
-                    </button>
-                    <button focusRingType="none" id="Nxn-Zi-puI">
-                        <rect key="frame" x="31" y="434" width="22" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="gfh-Zz-5WH" customClass="SDTitlebarMinButtonCell">
-                            <behavior key="behavior" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="performMiniaturize:" target="-2" id="pum-VM-Gz6"/>
-                        </connections>
-                    </button>
-                    <button focusRingType="none" id="hpC-9S-8GW">
-                        <rect key="frame" x="55" y="434" width="22" height="22"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="pTt-Ih-Wd2" customClass="SDTitlebarMaxButtonCell">
-                            <behavior key="behavior" lightByContents="YES"/>
-                            <font key="font" metaFont="system"/>
-                        </buttonCell>
-                        <connections>
-                            <action selector="performZoom:" target="-2" id="Pi3-FG-zqU"/>
-                        </connections>
-                    </button>
-                    <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="9rs-uQ-c06" customClass="SDHorizontalLine">
-                        <rect key="frame" x="12" y="425" width="611" height="5"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                        <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
-                        <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
-                        <font key="titleFont" metaFont="system"/>
-                    </box>
-                    <slider verticalHuggingPriority="750" id="RRX-em-OhR">
-                        <rect key="frame" x="561" y="435" width="62" height="21"/>
-                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                        <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="0aw-mt-98P" customClass="SDVolumeSliderCell"/>
-                    </slider>
                 </subviews>
             </view>
             <connections>
