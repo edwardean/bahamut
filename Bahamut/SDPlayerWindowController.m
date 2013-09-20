@@ -38,6 +38,25 @@
 
 
 
+@interface SDPlayerWindow : NSWindow
+@end
+
+@implementation SDPlayerWindow
+
+- (BOOL) canBecomeKeyWindow { return YES; }
+- (BOOL) canBecomeMainWindow { return YES; }
+
+- (BOOL) respondsToSelector:(SEL)aSelector {
+    if (aSelector == @selector(performClose:) || aSelector == @selector(performZoom:) || aSelector == @selector(performMiniaturize:))
+        return NO;
+    else
+        return [super respondsToSelector:aSelector];
+}
+
+@end
+
+
+
 @interface SDPlayerWindowController ()
 
 @property IBOutlet SDPlaylistTableDelegate* playlistTableDelegate;
@@ -86,8 +105,6 @@
     [[self window] setBackgroundColor:[NSColor clearColor]];
     [[self window] setOpaque:NO];
     
-    [self punchAppleInTheFace];
-    
     
     
     
@@ -117,21 +134,16 @@
     return [[SDCoreData sharedCoreData].managedObjectContext undoManager];
 }
 
+- (IBAction) performClose:(id)sender {
+    [self close];
+}
 
+- (IBAction) performZoom:(id)sender {
+    [[self window] zoom:sender];
+}
 
-- (void) punchAppleInTheFace {
-    NSView* superView = [[[self window] contentView] superview];
-    NSView* contentView = [[self window] contentView];
-    NSView* decoyView = [[NSView alloc] init];
-    
-    [[self window] setContentView:decoyView];
-    
-    [superView addSubview:contentView
-               positioned:NSWindowAbove
-               relativeTo:decoyView];
-    
-    contentView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
-    [contentView setFrame:[superView bounds]];
+- (IBAction) performMiniaturize:(id)sender {
+    [[self window] miniaturize:self];
 }
 
 
