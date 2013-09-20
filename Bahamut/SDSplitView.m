@@ -17,6 +17,11 @@
 }
 
 - (void) drawDividerInRect:(NSRect)rect {
+//    NSRect bla;
+//    NSDivideRect(rect, &bla, &rect, 37.0, NSMaxYEdge);
+//    
+//    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
+//    [[NSBezierPath bezierPathWithRect:rect] fill];
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex {
@@ -33,14 +38,16 @@
     [sender setPosition:w ofDividerAtIndex:0];
 }
 
-//- (CGFloat)dividerThickness {
-//    return 1.0;
-//}
-//
-//- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex {
-//    proposedEffectiveRect.origin.x -= 8.0;
-//    proposedEffectiveRect.size.width += 16.0;
-//    return proposedEffectiveRect;
-//}
+- (CGFloat)dividerThickness {
+    return 5.0;
+}
+
+- (NSRect)splitView:(NSSplitView *)splitView effectiveRect:(NSRect)proposedEffectiveRect forDrawnRect:(NSRect)drawnRect ofDividerAtIndex:(NSInteger)dividerIndex {
+    CGFloat r = 6.0;
+    
+    proposedEffectiveRect.origin.x -= r;
+    proposedEffectiveRect.size.width += (r * 2.0);
+    return proposedEffectiveRect;
+}
 
 @end

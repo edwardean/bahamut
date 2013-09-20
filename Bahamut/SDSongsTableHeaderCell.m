@@ -16,8 +16,14 @@
 }
 
 - (void)drawWithFrame:(CGRect)cellFrame inView:(NSView *)view {
-    [[NSColor colorWithCalibratedWhite:0.94 alpha:1.0] setFill];
+//    NSRect border, bla;
+//    NSDivideRect(cellFrame, &border, &bla, 1.0, NSMaxYEdge);
+    
+    [[NSColor colorWithCalibratedWhite:0.97 alpha:1.0] setFill];
     [NSBezierPath fillRect:cellFrame];
+    
+//    [[NSColor colorWithCalibratedWhite:0.80 alpha:1.0] setFill];
+//    [NSBezierPath fillRect:border];
     
     [self drawInteriorWithFrame:cellFrame inView:view];
 }

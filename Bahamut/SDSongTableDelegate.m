@@ -62,7 +62,7 @@
     }
     
     NSBox* grayBox = [[NSBox alloc] init];
-    grayBox.fillColor = [NSColor colorWithCalibratedWhite:0.94 alpha:1.0];
+    grayBox.fillColor = [NSColor colorWithCalibratedWhite:0.98 alpha:1.0];
     grayBox.borderColor = [NSColor clearColor];
     grayBox.boxType = NSBoxCustom;
     self.songsTable.cornerView = grayBox;

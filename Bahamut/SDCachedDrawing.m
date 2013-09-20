@@ -59,10 +59,10 @@
 
 
 static void SDDrawButtonBackground(NSRect cellFrame, BOOL isPressed) {
-    [NSGraphicsContext saveGraphicsState];
-    [isPressed ? SDButtonBackgroundColorPressed : SDButtonBackgroundColor setFill];
-    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
-    [NSGraphicsContext restoreGraphicsState];
+//    [NSGraphicsContext saveGraphicsState];
+//    [isPressed ? SDButtonBackgroundColorPressed : SDButtonBackgroundColor setFill];
+//    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+//    [NSGraphicsContext restoreGraphicsState];
 }
 
 static void SDSetupButtonLine(NSBezierPath* path) {
@@ -72,7 +72,7 @@ static void SDSetupButtonLine(NSBezierPath* path) {
 }
 
 static NSRect SDButtonInset(NSRect cellFrame) {
-    return NSInsetRect(cellFrame, 14.0, 11.0);
+    return NSInsetRect(cellFrame, 9.0, 6.0);
 }
 
 
@@ -168,7 +168,7 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 @end
 @implementation SDPrevButtonCell
 
-- (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+- (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     SDDrawNavButton([controlView bounds],
                     [self isHighlighted],
                     [self isEnabled],
@@ -181,7 +181,7 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 @end
 @implementation SDNextButtonCell
 
-- (void) drawImage:(NSImage *)image withFrame:(NSRect)frame inView:(NSView *)controlView {
+- (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     SDDrawNavButton([controlView bounds],
                     [self isHighlighted],
                     [self isEnabled],
@@ -262,19 +262,19 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 
 
 
-@interface SDTitlebarButtonCell : NSButtonCell
+@interface SDTitlebarCloseButtonCell : NSButtonCell
 @end
 
-@implementation SDTitlebarButtonCell
+@implementation SDTitlebarCloseButtonCell
 
 - (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
     if ([self isHighlighted])
-        [[NSColor colorWithCalibratedWhite:0.65 alpha:1.0] set];
+        [[NSColor colorWithCalibratedWhite:0.35 alpha:1.0] set];
     else
         [[NSColor colorWithCalibratedWhite:0.55 alpha:1.0] set];
     
-    [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+//    [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
+//    [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
@@ -286,6 +286,68 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
     
     [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
     [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMinY(cellFrame))];
+    
+    [path stroke];
+}
+
+@end
+
+
+
+
+@interface SDTitlebarMaxButtonCell : NSButtonCell
+@end
+
+@implementation SDTitlebarMaxButtonCell
+
+- (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    if ([self isHighlighted])
+        [[NSColor colorWithCalibratedWhite:0.35 alpha:1.0] set];
+    else
+        [[NSColor colorWithCalibratedWhite:0.55 alpha:1.0] set];
+    
+    //    [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
+    //    [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+    
+    NSBezierPath* path = [NSBezierPath bezierPath];
+    SDSetupButtonLine(path);
+    CGFloat d = 7.0;
+    cellFrame = NSInsetRect(cellFrame, d, d);
+    
+    [path moveToPoint:NSMakePoint(NSMidX(cellFrame), NSMinY(cellFrame))];
+    [path lineToPoint:NSMakePoint(NSMidX(cellFrame), NSMaxY(cellFrame))];
+    
+    [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMidY(cellFrame))];
+    [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMidY(cellFrame))];
+    
+    [path stroke];
+}
+
+@end
+
+
+
+@interface SDTitlebarMinButtonCell : NSButtonCell
+@end
+
+@implementation SDTitlebarMinButtonCell
+
+- (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    if ([self isHighlighted])
+        [[NSColor colorWithCalibratedWhite:0.35 alpha:1.0] set];
+    else
+        [[NSColor colorWithCalibratedWhite:0.55 alpha:1.0] set];
+    
+    //    [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
+    //    [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+    
+    NSBezierPath* path = [NSBezierPath bezierPath];
+    SDSetupButtonLine(path);
+    CGFloat d = 7.0;
+    cellFrame = NSInsetRect(cellFrame, d, d);
+    
+    [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMidY(cellFrame))];
+    [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMidY(cellFrame))];
     
     [path stroke];
 }

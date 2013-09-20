@@ -35,7 +35,7 @@
 #define SDButtonBackgroundColor [NSColor colorWithCalibratedWhite:1.0 alpha:1.0]
 #define SDButtonBackgroundColorPressed [NSColor colorWithCalibratedWhite:0.97 alpha:1.0]
 #define SDButtonNormalColor [NSColor grayColor]
-#define SDButtonHighlightColor [NSColor colorWithCalibratedWhite:0.44 alpha:1.0]
+#define SDButtonHighlightColor [NSColor colorWithCalibratedWhite:0.34 alpha:1.0]
 #define SDButtonDisabledColor [NSColor colorWithCalibratedWhite:0.85 alpha:1.0]
 
 

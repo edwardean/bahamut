@@ -19,6 +19,23 @@
 
 
 
+@interface SDHorizontalLine : NSBox
+@end
+
+@implementation SDHorizontalLine
+
+- (void) drawRect:(NSRect)dirtyRect {
+    NSRect border, bla;
+    NSDivideRect([self bounds], &border, &bla, 1.0, NSMaxYEdge);
+    
+    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
+    [NSBezierPath fillRect:NSIntersectionRect(border, dirtyRect)];
+}
+
+@end
+
+
+
 @interface SDPlayerWindow : NSWindow
 @end
 
@@ -28,7 +45,7 @@
 - (BOOL) canBecomeMainWindow { return YES; }
 
 - (BOOL) respondsToSelector:(SEL)aSelector {
-    if (aSelector == @selector(performClose:))
+    if (aSelector == @selector(performClose:) || aSelector == @selector(performZoom:) || aSelector == @selector(performMiniaturize:))
         return NO;
     else
         return [super respondsToSelector:aSelector];
@@ -43,18 +60,6 @@
 
 @end
 
-
-@interface SDWindowContentView : NSView
-@end
-
-@implementation SDWindowContentView
-
-- (void) drawRect:(NSRect)dirtyRect {
-    [[NSColor colorWithCalibratedWhite:0.89 alpha:1.0] setFill];
-    [NSBezierPath fillRect:dirtyRect];
-}
-
-@end
 
 
 @interface SDPlayerWindowController ()
@@ -97,8 +102,6 @@
     [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
     
     [[self window] setTitle:@"Bahamut"];
-    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.82 alpha:1.0]];
-    [[self window] setOpaque:YES];
     [[self window] setMovableByWindowBackground:YES];
     
     [self bindViews];
@@ -131,6 +134,13 @@
     [self close];
 }
 
+- (IBAction) performZoom:(id)sender {
+    [[self window] zoom:sender];
+}
+
+- (IBAction) performMiniaturize:(id)sender {
+    [[self window] miniaturize:self];
+}
 
 
 
