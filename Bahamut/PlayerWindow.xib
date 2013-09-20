@@ -445,7 +445,7 @@
                         </textFieldCell>
                     </textField>
                     <button focusRingType="none" id="652">
-                        <rect key="frame" x="8" y="434" width="20" height="20"/>
+                        <rect key="frame" x="7" y="433" width="22" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="653" customClass="SDTitlebarCloseButtonCell">
                             <behavior key="behavior" lightByContents="YES"/>
@@ -456,7 +456,7 @@
                         </connections>
                     </button>
                     <button focusRingType="none" id="Nxn-Zi-puI">
-                        <rect key="frame" x="32" y="434" width="20" height="20"/>
+                        <rect key="frame" x="31" y="433" width="22" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="gfh-Zz-5WH" customClass="SDTitlebarMinButtonCell">
                             <behavior key="behavior" lightByContents="YES"/>
@@ -467,7 +467,7 @@
                         </connections>
                     </button>
                     <button focusRingType="none" id="hpC-9S-8GW">
-                        <rect key="frame" x="56" y="434" width="20" height="20"/>
+                        <rect key="frame" x="55" y="433" width="22" height="22"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
                         <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" image="NSStopProgressTemplate" imagePosition="overlaps" alignment="center" alternateImage="NSStopProgressTemplate" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="pTt-Ih-Wd2" customClass="SDTitlebarMaxButtonCell">
                             <behavior key="behavior" lightByContents="YES"/>
@@ -478,7 +478,7 @@
                         </connections>
                     </button>
                     <box autoresizesSubviews="NO" verticalHuggingPriority="750" title="Box" boxType="separator" titlePosition="noTitle" id="9rs-uQ-c06" customClass="SDHorizontalLine">
-                        <rect key="frame" x="8" y="423" width="619" height="5"/>
+                        <rect key="frame" x="12" y="423" width="611" height="5"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                         <color key="borderColor" white="0.0" alpha="0.41999999999999998" colorSpace="calibratedWhite"/>
                         <color key="fillColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>

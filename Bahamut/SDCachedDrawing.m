@@ -58,14 +58,13 @@
 
 
 
-static void SDDrawButtonBackground(NSRect cellFrame, BOOL isPressed) {
-//    [NSGraphicsContext saveGraphicsState];
-//    [isPressed ? SDButtonBackgroundColorPressed : SDButtonBackgroundColor setFill];
-//    [[NSBezierPath bezierPathWithRoundedRect:cellFrame xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
-//    [NSGraphicsContext restoreGraphicsState];
+static void SDSetupButtonLine(NSBezierPath* path) {
+    [path setLineWidth:4.0];
+    [path setLineCapStyle:NSSquareLineCapStyle];
+    [path setLineJoinStyle:NSMiterLineJoinStyle];
 }
 
-static void SDSetupButtonLine(NSBezierPath* path) {
+static void SDSetupTitlebarButtonLine(NSBezierPath* path) {
     [path setLineWidth:3.0];
     [path setLineCapStyle:NSSquareLineCapStyle];
     [path setLineJoinStyle:NSMiterLineJoinStyle];
@@ -91,7 +90,6 @@ static NSRect SDButtonInset(NSRect cellFrame) {
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
-    SDDrawButtonBackground(cellFrame, [self isHighlighted]);
     cellFrame = SDButtonInset(cellFrame);
     
     BOOL isPlaying = ([[image name] isEqualToString: NSImageNameRightFacingTriangleTemplate]);
@@ -100,7 +98,7 @@ static NSRect SDButtonInset(NSRect cellFrame) {
         
         cellFrame = NSInsetRect(cellFrame, 2.0, 1.0);
         
-        [path setLineWidth: [path lineWidth] + 1];
+        path.lineWidth += 1;
         
         [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
         [path lineToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
@@ -148,7 +146,6 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
-    SDDrawButtonBackground(cellFrame, isPressed);
     cellFrame = SDButtonInset(cellFrame);
     cellFrame = NSInsetRect(cellFrame, 3.0, 3.0);
     
@@ -278,6 +275,10 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
 
 
 
+
+#define SDTitlebarButtonInset (8.0)
+
+
 @interface SDTitlebarCloseButtonCell : NSButtonCell
 @end
 
@@ -287,8 +288,8 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
     [SDTitlebarButtonColorFor([NSColor redColor], [self isHighlighted]) setStroke];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
-    SDSetupButtonLine(path);
-    CGFloat d = 7.0;
+    SDSetupTitlebarButtonLine(path);
+    CGFloat d = SDTitlebarButtonInset;
     cellFrame = NSInsetRect(cellFrame, d, d);
     
     [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
@@ -314,8 +315,8 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
     [SDTitlebarButtonColorFor([NSColor greenColor], [self isHighlighted]) setStroke];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
-    SDSetupButtonLine(path);
-    CGFloat d = 7.0;
+    SDSetupTitlebarButtonLine(path);
+    CGFloat d = SDTitlebarButtonInset;
     cellFrame = NSInsetRect(cellFrame, d, d);
     
     [path moveToPoint:NSMakePoint(NSMidX(cellFrame), NSMinY(cellFrame))];
@@ -340,8 +341,8 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
     [SDTitlebarButtonColorFor([[NSColor orangeColor] blendedColorWithFraction:0.25 ofColor:[NSColor yellowColor]], [self isHighlighted]) setStroke];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
-    SDSetupButtonLine(path);
-    CGFloat d = 7.0;
+    SDSetupTitlebarButtonLine(path);
+    CGFloat d = SDTitlebarButtonInset;
     cellFrame = NSInsetRect(cellFrame, d, d);
     
     [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMidY(cellFrame))];

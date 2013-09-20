@@ -28,7 +28,7 @@
     NSRect border, bla;
     NSDivideRect([self bounds], &border, &bla, 1.0, NSMaxYEdge);
     
-    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
+    [[NSColor colorWithCalibratedWhite:0.80 alpha:1.0] setFill];
     [NSBezierPath fillRect:NSIntersectionRect(border, dirtyRect)];
 }
 
