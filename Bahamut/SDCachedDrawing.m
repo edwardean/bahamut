@@ -57,6 +57,12 @@
 
 
 
+static void SDTitlebarFixCellFrame(NSRect* f) {
+    *f = NSIntegralRect(*f);
+    f->origin.x += 0.5;
+    f->origin.y += 0.5;
+}
+
 
 static void SDSetupButtonLine(NSBezierPath* path) {
     [path setLineWidth:4.0];
@@ -71,7 +77,9 @@ static void SDSetupTitlebarButtonLine(NSBezierPath* path) {
 }
 
 static NSRect SDButtonInset(NSRect cellFrame) {
-    return NSInsetRect(cellFrame, 9.0, 6.0);
+    NSRect r = NSInsetRect(cellFrame, 9.0, 6.0);
+    SDTitlebarFixCellFrame(&r);
+    return r;
 }
 
 
@@ -111,7 +119,7 @@ static NSRect SDButtonInset(NSRect cellFrame) {
         
         cellFrame = NSInsetRect(cellFrame, 0.0, 1.0);
         
-        cellFrame.origin.x += 1.0;
+        cellFrame.origin.x += 0.5;
         
         [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMaxY(cellFrame))];
         [path lineToPoint:NSMakePoint(NSMaxX(cellFrame), NSMidY(cellFrame))];
@@ -279,6 +287,8 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
 #define SDTitlebarButtonInset (8.0)
 
 
+
+
 @interface SDTitlebarCloseButtonCell : NSButtonCell
 @end
 
@@ -290,6 +300,7 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupTitlebarButtonLine(path);
     CGFloat d = SDTitlebarButtonInset;
+    SDTitlebarFixCellFrame(&cellFrame);
     cellFrame = NSInsetRect(cellFrame, d, d);
     
     [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMinY(cellFrame))];
@@ -304,8 +315,6 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
 @end
 
 
-
-
 @interface SDTitlebarMaxButtonCell : NSButtonCell
 @end
 
@@ -317,6 +326,7 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupTitlebarButtonLine(path);
     CGFloat d = SDTitlebarButtonInset;
+    SDTitlebarFixCellFrame(&cellFrame);
     cellFrame = NSInsetRect(cellFrame, d, d);
     
     [path moveToPoint:NSMakePoint(NSMidX(cellFrame), NSMinY(cellFrame))];
@@ -343,6 +353,7 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupTitlebarButtonLine(path);
     CGFloat d = SDTitlebarButtonInset;
+    SDTitlebarFixCellFrame(&cellFrame);
     cellFrame = NSInsetRect(cellFrame, d, d);
     
     [path moveToPoint:NSMakePoint(NSMinX(cellFrame), NSMidY(cellFrame))];

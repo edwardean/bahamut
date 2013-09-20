@@ -17,6 +17,8 @@
 
 #import "SDImporter.h"
 
+#import <objc/runtime.h>
+
 
 
 @interface SDHorizontalLine : NSBox
@@ -28,34 +30,8 @@
     NSRect border, bla;
     NSDivideRect([self bounds], &border, &bla, 1.0, NSMaxYEdge);
     
-    [[NSColor colorWithCalibratedWhite:0.84 alpha:1.0] setFill];
+    [[NSColor colorWithCalibratedWhite:0.80 alpha:1.0] setFill];
     [NSBezierPath fillRect:NSIntersectionRect(border, dirtyRect)];
-}
-
-@end
-
-
-
-@interface SDPlayerWindow : NSWindow
-@end
-
-@implementation SDPlayerWindow
-
-- (BOOL) canBecomeKeyWindow { return YES; }
-- (BOOL) canBecomeMainWindow { return YES; }
-
-- (BOOL) respondsToSelector:(SEL)aSelector {
-    if (aSelector == @selector(performClose:) || aSelector == @selector(performZoom:) || aSelector == @selector(performMiniaturize:))
-        return NO;
-    else
-        return [super respondsToSelector:aSelector];
-}
-
-- (id)initWithContentRect:(NSRect)contentRect styleMask:(NSUInteger)windowStyle backing:(NSBackingStoreType)bufferingType defer:(BOOL)deferCreation {
-    return [super initWithContentRect:contentRect
-                            styleMask:(NSBorderlessWindowMask | NSResizableWindowMask | NSClosableWindowMask | NSMiniaturizableWindowMask)
-                              backing:bufferingType
-                                defer:deferCreation];
 }
 
 @end
@@ -103,7 +79,17 @@
     
     [[self window] setTitle:@"Bahamut"];
     [[self window] setMovableByWindowBackground:YES];
-    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.94 alpha:1.0]];
+    [[self window] setBackgroundColor:[NSColor colorWithCalibratedHue:0.39
+                                                           saturation:0.02
+                                                           brightness:0.92
+                                                                alpha:1.0]];
+    [[self window] setBackgroundColor:[NSColor clearColor]];
+    [[self window] setOpaque:NO];
+    
+    [self punchAppleInTheFace];
+    
+    
+    
     
     [self bindViews];
     
@@ -131,16 +117,21 @@
     return [[SDCoreData sharedCoreData].managedObjectContext undoManager];
 }
 
-- (IBAction) performClose:(id)sender {
-    [self close];
-}
 
-- (IBAction) performZoom:(id)sender {
-    [[self window] zoom:sender];
-}
 
-- (IBAction) performMiniaturize:(id)sender {
-    [[self window] miniaturize:self];
+- (void) punchAppleInTheFace {
+    NSView* superView = [[[self window] contentView] superview];
+    NSView* contentView = [[self window] contentView];
+    NSView* decoyView = [[NSView alloc] init];
+    
+    [[self window] setContentView:decoyView];
+    
+    [superView addSubview:contentView
+               positioned:NSWindowAbove
+               relativeTo:decoyView];
+    
+    contentView.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+    [contentView setFrame:[superView bounds]];
 }
 
 
