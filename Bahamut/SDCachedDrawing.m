@@ -67,8 +67,8 @@ static void SDDrawButtonBackground(NSRect cellFrame, BOOL isPressed) {
 
 static void SDSetupButtonLine(NSBezierPath* path) {
     [path setLineWidth:3.0];
-    [path setLineCapStyle:NSRoundLineCapStyle];
-    [path setLineJoinStyle:NSRoundLineJoinStyle];
+    [path setLineCapStyle:NSSquareLineCapStyle];
+    [path setLineJoinStyle:NSMiterLineJoinStyle];
 }
 
 static NSRect SDButtonInset(NSRect cellFrame) {
@@ -98,7 +98,7 @@ static NSRect SDButtonInset(NSRect cellFrame) {
     if (isPlaying) {
         // pause button
         
-        cellFrame = NSInsetRect(cellFrame, 2.0, 0.0);
+        cellFrame = NSInsetRect(cellFrame, 2.0, 1.0);
         
         [path setLineWidth: [path lineWidth] + 1];
         
@@ -110,6 +110,8 @@ static NSRect SDButtonInset(NSRect cellFrame) {
     }
     else {
         // play button
+        
+        cellFrame = NSInsetRect(cellFrame, 0.0, 1.0);
         
         cellFrame.origin.x += 1.0;
         
@@ -261,6 +263,20 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 
 
 
+static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlighted) {
+    NSColor* strokeColor = [[initialColor
+                             blendedColorWithFraction:0.50
+                             ofColor:[NSColor blackColor]]
+                            blendedColorWithFraction:0.50
+                            ofColor:[NSColor whiteColor]];
+    
+    if (isHighlighted)
+        strokeColor = [strokeColor blendedColorWithFraction:0.25 ofColor:[NSColor blackColor]];
+    
+    return  strokeColor;
+}
+
+
 
 @interface SDTitlebarCloseButtonCell : NSButtonCell
 @end
@@ -268,13 +284,7 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 @implementation SDTitlebarCloseButtonCell
 
 - (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-    if ([self isHighlighted])
-        [[NSColor colorWithCalibratedWhite:0.35 alpha:1.0] set];
-    else
-        [[NSColor colorWithCalibratedWhite:0.55 alpha:1.0] set];
-    
-//    [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
-//    [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+    [SDTitlebarButtonColorFor([NSColor redColor], [self isHighlighted]) setStroke];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
@@ -301,13 +311,7 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 @implementation SDTitlebarMaxButtonCell
 
 - (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-    if ([self isHighlighted])
-        [[NSColor colorWithCalibratedWhite:0.35 alpha:1.0] set];
-    else
-        [[NSColor colorWithCalibratedWhite:0.55 alpha:1.0] set];
-    
-    //    [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
-    //    [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+    [SDTitlebarButtonColorFor([NSColor greenColor], [self isHighlighted]) setStroke];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);
@@ -333,13 +337,7 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 @implementation SDTitlebarMinButtonCell
 
 - (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
-    if ([self isHighlighted])
-        [[NSColor colorWithCalibratedWhite:0.35 alpha:1.0] set];
-    else
-        [[NSColor colorWithCalibratedWhite:0.55 alpha:1.0] set];
-    
-    //    [[self isHighlighted] ? [NSColor colorWithCalibratedWhite:0.90 alpha:1.0] : [NSColor colorWithCalibratedWhite:0.93 alpha:1.0] setFill];
-    //    [[NSBezierPath bezierPathWithRoundedRect:[controlView bounds] xRadius:SDButtonRadius yRadius:SDButtonRadius] fill];
+    [SDTitlebarButtonColorFor([[NSColor orangeColor] blendedColorWithFraction:0.25 ofColor:[NSColor yellowColor]], [self isHighlighted]) setStroke];
     
     NSBezierPath* path = [NSBezierPath bezierPath];
     SDSetupButtonLine(path);

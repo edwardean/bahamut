@@ -132,9 +132,9 @@
                                     <button id="291">
                                         <rect key="frame" x="0.0" y="0.0" width="131" height="37"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                        <buttonCell key="cell" type="squareTextured" title="+ Create Playlist" bezelStyle="texturedSquare" alignment="center" imageScaling="proportionallyDown" inset="2" id="303" customClass="SDCreatePlaylistButtonCell">
+                                        <buttonCell key="cell" type="squareTextured" title="+ Create Playlist" bezelStyle="texturedSquare" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="303" customClass="SDCreatePlaylistButtonCell">
                                             <behavior key="behavior" lightByContents="YES"/>
-                                            <font key="font" metaFont="system"/>
+                                            <font key="font" metaFont="smallSystem"/>
                                         </buttonCell>
                                         <connections>
                                             <action selector="makeNewPlaylist:" target="330" id="366"/>
@@ -173,10 +173,10 @@
                                                 </connections>
                                             </button>
                                             <textField verticalHuggingPriority="750" id="437">
-                                                <rect key="frame" x="-3" y="10" width="313" height="17"/>
+                                                <rect key="frame" x="-3" y="12" width="313" height="14"/>
                                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
-                                                <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="# Bahamut" id="438">
-                                                    <font key="font" metaFont="system"/>
+                                                <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="# Bahamut" id="438">
+                                                    <font key="font" metaFont="smallSystem"/>
                                                     <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
                                                     <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
                                                 </textFieldCell>
