@@ -28,7 +28,7 @@
     NSRect border, bla;
     NSDivideRect([self bounds], &border, &bla, 1.0, NSMaxYEdge);
     
-    [[NSColor colorWithCalibratedWhite:0.80 alpha:1.0] setFill];
+    [[NSColor colorWithCalibratedWhite:0.84 alpha:1.0] setFill];
     [NSBezierPath fillRect:NSIntersectionRect(border, dirtyRect)];
 }
 
@@ -103,6 +103,7 @@
     
     [[self window] setTitle:@"Bahamut"];
     [[self window] setMovableByWindowBackground:YES];
+    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.94 alpha:1.0]];
     
     [self bindViews];
     
