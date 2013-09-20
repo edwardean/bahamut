@@ -426,7 +426,7 @@
                                 </textFieldCell>
                             </textField>
                             <slider verticalHuggingPriority="750" id="458">
-                                <rect key="frame" x="46" y="3.5" width="407" height="21"/>
+                                <rect key="frame" x="46" y="4" width="407" height="21"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                 <sliderCell key="cell" continuous="YES" state="on" alignment="left" tickMarkPosition="above" sliderType="linear" id="459" customClass="SDTrackSliderCell"/>
                                 <connections>
@@ -546,64 +546,6 @@
                 </menuItem>
             </items>
         </menu>
-        <scrollView autohidesScrollers="YES" horizontalLineScroll="19" horizontalPageScroll="10" verticalLineScroll="19" verticalPageScroll="10" usesPredominantAxisScrolling="NO" id="fgy-fC-pwP">
-            <rect key="frame" x="0.0" y="0.0" width="240" height="135"/>
-            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES"/>
-            <clipView key="contentView" id="w11-xy-y9h">
-                <rect key="frame" x="1" y="17" width="238" height="117"/>
-                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                <subviews>
-                    <tableView verticalHuggingPriority="750" allowsExpansionToolTips="YES" columnAutoresizingStyle="lastColumnOnly" columnSelection="YES" multipleSelection="NO" autosaveColumns="NO" headerView="viq-qQ-vuh" id="uXf-n7-HvC">
-                        <rect key="frame" x="0.0" y="0.0" width="238" height="117"/>
-                        <autoresizingMask key="autoresizingMask"/>
-                        <size key="intercellSpacing" width="3" height="2"/>
-                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <color key="gridColor" name="gridColor" catalog="System" colorSpace="catalog"/>
-                        <tableColumns>
-                            <tableColumn width="116" minWidth="40" maxWidth="1000" id="s25-kn-Jlv">
-                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
-                                </tableHeaderCell>
-                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Fjl-b7-ViI">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                            </tableColumn>
-                            <tableColumn width="116" minWidth="40" maxWidth="1000" id="coK-wY-ogg">
-                                <tableHeaderCell key="headerCell" lineBreakMode="truncatingTail" borderStyle="border" alignment="left">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="headerTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" white="0.33333298560000002" alpha="1" colorSpace="calibratedWhite"/>
-                                </tableHeaderCell>
-                                <textFieldCell key="dataCell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" alignment="left" title="Text Cell" id="Hcm-5W-2Ht">
-                                    <font key="font" metaFont="system"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <tableColumnResizingMask key="resizingMask" resizeWithTable="YES" userResizable="YES"/>
-                            </tableColumn>
-                        </tableColumns>
-                    </tableView>
-                </subviews>
-                <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
-            </clipView>
-            <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="2m6-9b-Opp">
-                <rect key="frame" x="1" y="119" width="223" height="15"/>
-                <autoresizingMask key="autoresizingMask"/>
-            </scroller>
-            <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" doubleValue="1" id="iWe-8q-GZ9">
-                <rect key="frame" x="224" y="17" width="15" height="102"/>
-                <autoresizingMask key="autoresizingMask"/>
-            </scroller>
-            <tableHeaderView key="headerView" id="viq-qQ-vuh">
-                <rect key="frame" x="0.0" y="0.0" width="238" height="17"/>
-                <autoresizingMask key="autoresizingMask"/>
-            </tableHeaderView>
-        </scrollView>
     </objects>
     <resources>
         <image name="NSRightFacingTriangleTemplate" width="9" height="9"/>
