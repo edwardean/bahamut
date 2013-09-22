@@ -47,9 +47,13 @@
     aRect.origin.y += 1.0;
     aRect.size.height -= 1.0;
     
+    aRect = NSInsetRect(aRect, 2.0, 2.0);
+    
     CGFloat outerRadius = 2.0;
     [SDTrackBackgroundColor setFill];
+    [SDDarkBlue setStroke];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] fill];
+    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] stroke];
 }
 
 @end

@@ -13,24 +13,24 @@
 @implementation SDVolumeSliderCell
 
 - (void)drawBarInside:(NSRect)aRect flipped:(BOOL)flipped {
-    aRect = NSInsetRect(aRect, 0.0, 5.0);
+    aRect = NSInsetRect(aRect, 1.0, 6.0);
     
     CGFloat r = 2.0;
-    NSBezierPath* wholePath = [NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r];
     
     [SDVolumeSliderBackColor setFill];
-    [wholePath fill];
+    [SDVolumeSliderForeColor setStroke];
+    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
+    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] stroke];
 }
 
 - (void)drawKnob:(NSRect)knobRect {
     knobRect = NSInsetRect(knobRect, 0.0, 5.0);
-    knobRect = NSInsetRect(knobRect, 2.0, 2.0);
+    knobRect = NSInsetRect(knobRect, 1.0, 1.0);
     
     CGFloat r = 1.0;
-    NSBezierPath* knobPath = [NSBezierPath bezierPathWithRoundedRect:knobRect xRadius:r yRadius:r];
     
     [SDVolumeSliderForeColor setFill];
-    [knobPath fill];
+    [[NSBezierPath bezierPathWithRoundedRect:knobRect xRadius:r yRadius:r] fill];
 }
 
 //- (CGFloat)knobThickness {

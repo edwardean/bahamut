@@ -21,17 +21,44 @@
 
 
 
-@interface SDHorizontalLine : NSBox
+@interface SDBox : NSView
+
+@property CALayer* borderLayer;
+
 @end
+@implementation SDBox
 
-@implementation SDHorizontalLine
 
-- (void) drawRect:(NSRect)dirtyRect {
-    NSRect border, bla;
-    NSDivideRect([self bounds], &border, &bla, 1.0, NSMaxYEdge);
+- (void) awakeFromNib {
+    [self setWantsLayer:YES];
     
-    [[NSColor colorWithCalibratedWhite:0.80 alpha:1.0] setFill];
-    [NSBezierPath fillRect:NSIntersectionRect(border, dirtyRect)];
+    self.borderLayer = [[CALayer alloc] init];
+    self.borderLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
+    self.borderLayer.backgroundColor = [NSColor colorWithCalibratedWhite:0.845 alpha:1.0].CGColor;
+    
+    CGRect r = self.layer.bounds;
+    r.size.height = 1.0;
+    self.borderLayer.frame = r;
+    
+    [self.layer addSublayer:self.borderLayer];
+}
+
+- (void) viewDidMoveToWindow {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:[self window]];
+    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didResignKeyWindow:) name:NSWindowDidResignKeyNotification object:[self window]];
+}
+
+- (void) didBecomeKeyWindow:(NSNotification*)note {
+    self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.967 alpha:1.0].CGColor;
+}
+
+- (void) didResignKeyWindow:(NSNotification*)note {
+    self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.98 alpha:1.0].CGColor;
+}
+
+- (void) dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self];
 }
 
 @end
@@ -98,12 +125,17 @@
     
     [[self window] setTitle:@"Bahamut"];
     [[self window] setMovableByWindowBackground:YES];
-    [[self window] setBackgroundColor:[NSColor colorWithCalibratedHue:0.39
-                                                           saturation:0.02
-                                                           brightness:0.92
-                                                                alpha:1.0]];
-    [[self window] setBackgroundColor:[NSColor clearColor]];
-    [[self window] setOpaque:NO];
+    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.9999 alpha:1.0]];
+//    [[self window] setBackgroundColor:[NSColor clearColor]];
+//    [[self window] setOpaque:NO];
+//    [[self window] setHasShadow:YES];
+    
+//    NSView* sv = [[[[self window] contentView] subviews] lastObject];
+//    [sv setWantsLayer:YES];
+//    sv.layer.backgroundColor = [NSColor yellowColor].CGColor;
+//    sv.layer.cornerRadius = 4.0;
+//    sv.layer.masksToBounds = YES;
+    
     
     
     
