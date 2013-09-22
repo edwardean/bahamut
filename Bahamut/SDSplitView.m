@@ -17,7 +17,7 @@
 }
 
 - (void) drawDividerInRect:(NSRect)rect {
-    [[NSColor colorWithCalibratedWhite:0.845 alpha:1.0] setFill];
+    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
     [[NSBezierPath bezierPathWithRect:rect] fill];
 }
 

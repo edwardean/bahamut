@@ -28,7 +28,7 @@
             <rect key="contentRect" x="947" y="627" width="635" height="462"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
             <value key="minSize" type="size" width="400" height="300"/>
-            <view key="contentView" id="7">
+            <view key="contentView" id="7" customClass="SDClipView">
                 <rect key="frame" x="0.0" y="0.0" width="635" height="462"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
@@ -379,7 +379,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" id="646">
-                                        <rect key="frame" x="81" y="10" width="473" height="17"/>
+                                        <rect key="frame" x="81" y="7" width="473" height="20"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                         <textFieldCell key="cell" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="center" title="Title" id="647">
                                             <font key="font" metaFont="system"/>

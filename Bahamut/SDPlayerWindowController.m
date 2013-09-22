@@ -22,12 +22,20 @@
 
 
 
-#define SDWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.95 alpha:1.0]
-#define SDUnfocusedWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.98 alpha:1.0]
+#define SDWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.91 alpha:1.0]
+#define SDUnfocusedWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.96 alpha:1.0]
 
-#define SDWindowBackgroundColor [NSColor colorWithCalibratedWhite:0.98 alpha:1.0]
+#define SDWindowBackgroundColor [NSColor colorWithCalibratedWhite:0.96 alpha:1.0]
 
-#define SDWindowInsideBordersColor [NSColor colorWithCalibratedWhite:0.77 alpha:1.0]
+#define SDWindowInsideBordersColor [NSColor colorWithCalibratedWhite:0.70 alpha:1.0]
+
+
+
+
+@interface SDClipView : NSView
+@end
+@implementation SDClipView
+@end
 
 
 
