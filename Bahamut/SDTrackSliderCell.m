@@ -22,7 +22,7 @@
         return;
     
     knobRect = [[self controlView] bounds];
-    knobRect = NSInsetRect(knobRect, 2.5, 2.0);
+    knobRect = NSInsetRect(knobRect, 4.5, 4.0);
     
     knobRect.origin.y += 1.0;
     knobRect.size.height -= 1.0;
