@@ -35,6 +35,44 @@
 @interface SDClipView : NSView
 @end
 @implementation SDClipView
+
+- (void)drawRect:(NSRect)dirtyRect {
+    NSRect rect = [self bounds];
+    CGFloat r = 4.0;
+    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:r yRadius:r];
+    [path addClip];
+    
+    CGFloat titleBarHeight = 34.0;
+    CGFloat controlBarHeight = 66.0;
+    CGFloat bottomBarHeight = 37.0;
+    
+    NSRect titleBar, controlBar, bottomBar;
+    NSRect titleBarBorder, controlBarBorder, bottomBarBorder;
+    NSRect bla;
+    
+    NSDivideRect(rect, &bottomBar, &bla, bottomBarHeight, NSMinYEdge);
+    NSDivideRect(rect, &titleBar, &bla, titleBarHeight + controlBarHeight, NSMaxYEdge);
+    NSDivideRect(titleBar, &titleBar, &controlBar, titleBarHeight, NSMaxYEdge);
+    
+    NSDivideRect(titleBar, &titleBarBorder, &titleBar, 1.0, NSMinYEdge);
+    NSDivideRect(controlBar, &controlBarBorder, &controlBar, 1.0, NSMinYEdge);
+    NSDivideRect(bottomBar, &bottomBarBorder, &bottomBar, 1.0, NSMaxYEdge);
+    
+    [SDWindowTitleBackgroundColor setFill];
+    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, titleBar)];
+    
+    [SDWindowBackgroundColor setFill];
+    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, controlBar)];
+    
+    [SDWindowBackgroundColor setFill];
+    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, bottomBar)];
+    
+    [SDWindowInsideBordersColor setFill];
+    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, titleBarBorder)];
+    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, controlBarBorder)];
+    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, bottomBarBorder)];
+}
+
 @end
 
 
@@ -150,7 +188,10 @@
     
     [[self window] setTitle:@"Bahamut"];
     [[self window] setMovableByWindowBackground:YES];
-    [[self window] setBackgroundColor:SDWindowBackgroundColor];
+    [[self window] setBackgroundColor:[NSColor clearColor]];
+//    [[self window] setHasShadow:YES];
+    [[self window] setOpaque:NO];
+//    [[self window] setAlphaValue:0.0];
     
     
     

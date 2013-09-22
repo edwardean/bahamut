@@ -8,6 +8,12 @@
     <item>
       <title>Version 1.1.1</title>
       <sparkle:releaseNotesLink>https://raw.github.com/sdegutis/bahamut/master/change-log.txt</sparkle:releaseNotesLink>
+      <pubDate>Sun Sep 22 15:07:30 CDT 2013</pubDate>
+      <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-1.1.1.app.tar.gz" sparkle:version="1.1.1" sparkle:dsaSignature="MC4CFQChWD2Gjht6ZnNMLSdkT2OIXawY6AIVAKhUq+aouL+v/vwHMMhXWPTgXI74" length="1515427" type="application/octet-stream"/>
+    </item>
+    <item>
+      <title>Version 1.1.1</title>
+      <sparkle:releaseNotesLink>https://raw.github.com/sdegutis/bahamut/master/change-log.txt</sparkle:releaseNotesLink>
       <pubDate>Sun Sep 22 13:36:07 CDT 2013</pubDate>
       <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-1.1.1.app.tar.gz" sparkle:version="1.1.1" sparkle:dsaSignature="MCwCFFpxgrRbUFtGrkPXBEiiQ/lCGVSxAhQV1eat6goFcF6b29Z3X3vwy2nsvw==" length="1515192" type="application/octet-stream"/>
     </item>

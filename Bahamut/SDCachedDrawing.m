@@ -262,6 +262,13 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
         [([self isHighlighted] ? checkmarkColorPressed : checkmarkColor) setStroke];
         [checkPath stroke];
     }
+    else {
+        [SDDarkBlue setStroke];
+        frame = NSInsetRect(frame, 0.5, 0.5);
+//        r = 3.0;
+        backgroundPath = [NSBezierPath bezierPathWithRoundedRect:frame xRadius:r yRadius:r];
+        [backgroundPath stroke];
+    }
 }
 
 @end

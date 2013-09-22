@@ -47,7 +47,7 @@
     aRect.origin.y += 1.0;
     aRect.size.height -= 1.0;
     
-    aRect = NSInsetRect(aRect, 2.0, 2.0);
+    aRect = NSInsetRect(aRect, 1.5, 1.5);
     
     CGFloat outerRadius = 2.0;
     [SDTrackBackgroundColor setFill];
