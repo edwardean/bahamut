@@ -9,7 +9,6 @@
             <connections>
                 <outlet property="currentSongInfoField" destination="646" id="649"/>
                 <outlet property="nextButton" destination="260" id="278"/>
-                <outlet property="nowPlayingControlsView" destination="275" id="276"/>
                 <outlet property="playButton" destination="256" id="267"/>
                 <outlet property="playlistTableDelegate" destination="330" id="334"/>
                 <outlet property="prevButton" destination="258" id="277"/>
@@ -307,45 +306,12 @@
                                     <outlet property="delegate" destination="-2" id="81"/>
                                 </connections>
                             </splitView>
-                            <button focusRingType="none" id="256">
-                                <rect key="frame" x="556" y="389" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="257" customClass="SDPlayButtonCell">
-                                    <behavior key="behavior" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="playPause:" target="-1" id="288"/>
-                                </connections>
-                            </button>
-                            <button focusRingType="none" id="258">
-                                <rect key="frame" x="518" y="389" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="259" customClass="SDPrevButtonCell">
-                                    <behavior key="behavior" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="prevSong:" target="-1" id="287"/>
-                                </connections>
-                            </button>
-                            <button focusRingType="none" id="260">
-                                <rect key="frame" x="594" y="389" width="30" height="30"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
-                                <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="261" customClass="SDNextButtonCell">
-                                    <behavior key="behavior" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="nextSong:" target="-1" id="289"/>
-                                </connections>
-                            </button>
-                            <customView id="275">
-                                <rect key="frame" x="8" y="391" width="502" height="28"/>
+                            <customView id="275" customClass="SDBox">
+                                <rect key="frame" x="0.0" y="381" width="635" height="47"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
                                 <subviews>
                                     <textField verticalHuggingPriority="750" id="279">
-                                        <rect key="frame" x="3" y="6" width="38" height="14"/>
+                                        <rect key="frame" x="11" y="17" width="38" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" alignment="right" title="Label" id="280">
                                             <font key="font" metaFont="smallSystem"/>
@@ -354,7 +320,7 @@
                                         </textFieldCell>
                                     </textField>
                                     <textField verticalHuggingPriority="750" id="281">
-                                        <rect key="frame" x="458" y="6" width="38" height="14"/>
+                                        <rect key="frame" x="466" y="17" width="38" height="14"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <textFieldCell key="cell" controlSize="small" scrollable="YES" lineBreakMode="clipping" sendsActionOnEndEditing="YES" title="Label" id="282">
                                             <font key="font" metaFont="smallSystem"/>
@@ -363,14 +329,50 @@
                                         </textFieldCell>
                                     </textField>
                                     <slider verticalHuggingPriority="750" id="458">
-                                        <rect key="frame" x="46" y="4" width="407" height="21"/>
+                                        <rect key="frame" x="54" y="14" width="407" height="21"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" tickMarkPosition="above" sliderType="linear" id="459" customClass="SDTrackSliderCell"/>
                                         <connections>
                                             <action selector="trackPositionMovedTo:" target="-2" id="461"/>
                                         </connections>
                                     </slider>
+                                    <button focusRingType="none" id="256">
+                                        <rect key="frame" x="556" y="8" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="257" customClass="SDPlayButtonCell">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="playPause:" target="-1" id="288"/>
+                                        </connections>
+                                    </button>
+                                    <button focusRingType="none" id="258">
+                                        <rect key="frame" x="518" y="8" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="259" customClass="SDPrevButtonCell">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="prevSong:" target="-1" id="287"/>
+                                        </connections>
+                                    </button>
+                                    <button focusRingType="none" id="260">
+                                        <rect key="frame" x="594" y="8" width="30" height="30"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMinY="YES"/>
+                                        <buttonCell key="cell" type="squareTextured" bezelStyle="texturedSquare" imagePosition="overlaps" alignment="center" state="on" focusRingType="none" imageScaling="proportionallyDown" inset="2" id="261" customClass="SDNextButtonCell">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="nextSong:" target="-1" id="289"/>
+                                        </connections>
+                                    </button>
                                 </subviews>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="borderBottom" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </customView>
                             <customView id="Wkc-h6-D1L" customClass="SDBox">
                                 <rect key="frame" x="0.0" y="428" width="635" height="34"/>
@@ -424,56 +426,66 @@
                                         <sliderCell key="cell" continuous="YES" state="on" alignment="left" maxValue="1" tickMarkPosition="above" sliderType="linear" id="0aw-mt-98P" customClass="SDVolumeSliderCell"/>
                                     </slider>
                                 </subviews>
+                                <userDefinedRuntimeAttributes>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="borderBottom" value="YES"/>
+                                    <userDefinedRuntimeAttribute type="boolean" keyPath="drawsBackground" value="YES"/>
+                                </userDefinedRuntimeAttributes>
                             </customView>
-                            <button id="291">
-                                <rect key="frame" x="0.0" y="0.0" width="116" height="37"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="squareTextured" title="+ Create Playlist" bezelStyle="texturedSquare" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="303" customClass="SDCreatePlaylistButtonCell">
-                                    <behavior key="behavior" lightByContents="YES"/>
-                                    <font key="font" metaFont="smallSystem"/>
-                                </buttonCell>
-                                <connections>
-                                    <action selector="makeNewPlaylist:" target="330" id="366"/>
-                                </connections>
-                            </button>
-                            <button id="311">
-                                <rect key="frame" x="457" y="9" width="72" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="check" title="Shuffles" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="312" customClass="SDCheckboxCell">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="337" name="value" keyPath="selection.shuffles" id="370"/>
-                                </connections>
-                            </button>
-                            <button id="310">
-                                <rect key="frame" x="545" y="9" width="72" height="18"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
-                                <buttonCell key="cell" type="check" title="Repeats" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="313" customClass="SDCheckboxCell">
-                                    <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
-                                    <font key="font" metaFont="system"/>
-                                </buttonCell>
-                                <connections>
-                                    <binding destination="337" name="value" keyPath="selection.repeats" id="371"/>
-                                </connections>
-                            </button>
-                            <textField verticalHuggingPriority="750" id="437">
-                                <rect key="frame" x="129" y="12" width="313" height="14"/>
+                            <customView id="LoM-p6-Mk3" customClass="SDBox">
+                                <rect key="frame" x="0.0" y="0.0" width="635" height="37"/>
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                                <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="# Bahamut" id="438">
-                                    <font key="font" metaFont="smallSystem"/>
-                                    <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
-                                    <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
-                                </textFieldCell>
-                                <connections>
-                                    <binding destination="339" name="displayPatternValue1" keyPath="arrangedObjects.@count" id="443">
-                                        <dictionary key="options">
-                                            <string key="NSDisplayPattern">%{value1}@ songs</string>
-                                        </dictionary>
-                                    </binding>
-                                </connections>
-                            </textField>
+                                <subviews>
+                                    <button id="291">
+                                        <rect key="frame" x="0.0" y="0.0" width="116" height="37"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                        <buttonCell key="cell" type="squareTextured" title="+ Create Playlist" bezelStyle="texturedSquare" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="303" customClass="SDCreatePlaylistButtonCell">
+                                            <behavior key="behavior" lightByContents="YES"/>
+                                            <font key="font" metaFont="smallSystem"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <action selector="makeNewPlaylist:" target="330" id="366"/>
+                                        </connections>
+                                    </button>
+                                    <button id="311">
+                                        <rect key="frame" x="457" y="9" width="72" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <buttonCell key="cell" type="check" title="Shuffles" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="312" customClass="SDCheckboxCell">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="337" name="value" keyPath="selection.shuffles" id="370"/>
+                                        </connections>
+                                    </button>
+                                    <button id="310">
+                                        <rect key="frame" x="545" y="9" width="72" height="18"/>
+                                        <autoresizingMask key="autoresizingMask" flexibleMinX="YES" flexibleMaxY="YES"/>
+                                        <buttonCell key="cell" type="check" title="Repeats" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="313" customClass="SDCheckboxCell">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="337" name="value" keyPath="selection.repeats" id="371"/>
+                                        </connections>
+                                    </button>
+                                    <textField verticalHuggingPriority="750" id="437">
+                                        <rect key="frame" x="129" y="12" width="313" height="14"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                        <textFieldCell key="cell" controlSize="small" lineBreakMode="truncatingTail" sendsActionOnEndEditing="YES" alignment="right" title="# Bahamut" id="438">
+                                            <font key="font" metaFont="smallSystem"/>
+                                            <color key="textColor" name="controlTextColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="controlColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                        <connections>
+                                            <binding destination="339" name="displayPatternValue1" keyPath="arrangedObjects.@count" id="443">
+                                                <dictionary key="options">
+                                                    <string key="NSDisplayPattern">%{value1}@ songs</string>
+                                                </dictionary>
+                                            </binding>
+                                        </connections>
+                                    </textField>
+                                </subviews>
+                            </customView>
                         </subviews>
                     </customView>
                 </subviews>

@@ -25,6 +25,9 @@
 
 @property CALayer* borderLayer;
 
+@property BOOL borderBottom;
+@property BOOL drawsBackground;
+
 @end
 @implementation SDBox
 
@@ -32,12 +35,14 @@
 - (void) awakeFromNib {
     [self setWantsLayer:YES];
     
+//    NSLog(@"%d", self.borderBottom);
+    
     self.borderLayer = [[CALayer alloc] init];
     self.borderLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
     self.borderLayer.backgroundColor = [NSColor colorWithCalibratedWhite:0.845 alpha:1.0].CGColor;
     
-    CGRect r = self.layer.bounds;
-    r.size.height = 1.0;
+    CGRect r = self.layer.bounds, bla;
+    CGRectDivide(r, &r, &bla, 1.0, self.borderBottom ? NSMinYEdge : NSMaxYEdge);
     self.borderLayer.frame = r;
     
     [self.layer addSublayer:self.borderLayer];
@@ -50,11 +55,13 @@
 }
 
 - (void) didBecomeKeyWindow:(NSNotification*)note {
-    self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.967 alpha:1.0].CGColor;
+    if (self.drawsBackground)
+        self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.967 alpha:1.0].CGColor;
 }
 
 - (void) didResignKeyWindow:(NSNotification*)note {
-    self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.98 alpha:1.0].CGColor;
+    if (self.drawsBackground)
+        self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.98 alpha:1.0].CGColor;
 }
 
 - (void) dealloc {
@@ -89,7 +96,6 @@
 @property IBOutlet SDPlaylistTableDelegate* playlistTableDelegate;
 @property IBOutlet SDSongTableDelegate* songTableDelegate;
 
-@property (weak) IBOutlet NSView* nowPlayingControlsView;
 @property (weak) IBOutlet NSSlider* songPositionSlider;
 @property (weak) IBOutlet NSButton* playButton;
 @property (weak) IBOutlet NSButton* prevButton;
@@ -126,15 +132,6 @@
     [[self window] setTitle:@"Bahamut"];
     [[self window] setMovableByWindowBackground:YES];
     [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.9999 alpha:1.0]];
-//    [[self window] setBackgroundColor:[NSColor clearColor]];
-//    [[self window] setOpaque:NO];
-//    [[self window] setHasShadow:YES];
-    
-//    NSView* sv = [[[[self window] contentView] subviews] lastObject];
-//    [sv setWantsLayer:YES];
-//    sv.layer.backgroundColor = [NSColor yellowColor].CGColor;
-//    sv.layer.cornerRadius = 4.0;
-//    sv.layer.masksToBounds = YES;
     
     
     

@@ -8,13 +8,21 @@
 
 #import "SDCreatePlaylistButtonCell.h"
 
+#import "SDColors.h"
+
 @implementation SDCreatePlaylistButtonCell
 
 - (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+    NSMutableAttributedString* attrTitle = [[self attributedTitle] mutableCopy];
+    
     if ([self isHighlighted]) {
-        [[NSColor colorWithCalibratedWhite:0.84 alpha:1.0] setFill];
-        [NSBezierPath fillRect:cellFrame];
+        [attrTitle addAttribute:NSForegroundColorAttributeName value:SDDarkBlue range:NSMakeRange(0, [attrTitle length])];
     }
+    else {
+        [attrTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0, [attrTitle length])];
+    }
+    
+    [self setAttributedTitle:attrTitle];
     
     [super drawWithFrame:cellFrame inView:controlView];
 }
