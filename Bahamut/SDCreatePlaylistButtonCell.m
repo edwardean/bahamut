@@ -19,7 +19,7 @@
         [attrTitle addAttribute:NSForegroundColorAttributeName value:SDDarkBlue range:NSMakeRange(0, [attrTitle length])];
     }
     else {
-        [attrTitle addAttribute:NSForegroundColorAttributeName value:[NSColor blackColor] range:NSMakeRange(0, [attrTitle length])];
+        [attrTitle addAttribute:NSForegroundColorAttributeName value:SDVeryDarkBlue range:NSMakeRange(0, [attrTitle length])];
     }
     
     [self setAttributedTitle:attrTitle];

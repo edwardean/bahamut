@@ -14,4 +14,13 @@
     return nil;
 }
 
+//- (void) drawWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+//    [self setTextColor:[NSColor blackColor]];
+//    [super drawWithFrame:cellFrame inView:controlView];
+//}
+
+//- (void)drawInteriorWithFrame:(NSRect)cellFrame inView:(NSView *)controlView {
+//    [super drawInteriorWithFrame:cellFrame inView:controlView];
+//}
+
 @end

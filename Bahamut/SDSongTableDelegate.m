@@ -124,6 +124,16 @@
 
 
 
+- (void)tableView:(NSTableView *)aTableView willDisplayCell:(NSTextFieldCell*)aCell forTableColumn:(NSTableColumn *)aTableColumn row:(NSInteger)rowIndex {
+    [aCell setBackgroundStyle:NSBackgroundStyleLight];
+    if ([aCell isKindOfClass:[NSTextFieldCell self]]) {
+        aCell.textColor = [NSColor colorWithCalibratedWhite:0.01 alpha:1.0];
+    }
+}
+
+
+
+
 
 
 #pragma mark - Deleting stuff

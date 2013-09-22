@@ -20,7 +20,7 @@
     
 //    b.origin.x += 3.0;
     
-    b = NSInsetRect(b, 0.5, 0.5);
+//    b = NSInsetRect(b, 0.5, 0.5);
     
     NSBezierPath* path = [NSBezierPath bezierPathWithRect:b];
 //    [path setLineWidth:2.0];
@@ -39,8 +39,10 @@
 //        [path fill];
 //    }
     
-    [color setStroke];
-    [path stroke];
+//    [color setStroke];
+//    [path stroke];
+    [color setFill];
+    [path fill];
 }
 
 - (NSBackgroundStyle) interiorBackgroundStyle {

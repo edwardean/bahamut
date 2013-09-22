@@ -37,7 +37,7 @@
     knobRect = NSIntegralRect(knobRect);
     
     CGFloat innerRadius = 1.0;
-    [SDDarkBlue setFill];
+    [SDMediumBlue setFill];
     [[NSBezierPath bezierPathWithRoundedRect:knobRect xRadius:innerRadius yRadius:innerRadius] fill];
 }
 
@@ -51,7 +51,7 @@
     
     CGFloat outerRadius = 2.0;
     [SDTrackBackgroundColor setFill];
-    [SDDarkBlue setStroke];
+    [SDMediumBlue setStroke];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] fill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] stroke];
 }

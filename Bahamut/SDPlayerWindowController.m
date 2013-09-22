@@ -21,6 +21,17 @@
 
 
 
+
+#define SDWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.95 alpha:1.0]
+#define SDUnfocusedWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.98 alpha:1.0]
+
+#define SDWindowBackgroundColor [NSColor colorWithCalibratedWhite:0.98 alpha:1.0]
+
+#define SDWindowInsideBordersColor [NSColor colorWithCalibratedWhite:0.77 alpha:1.0]
+
+
+
+
 @interface SDBox : NSView
 
 @property CALayer* borderLayer;
@@ -39,7 +50,7 @@
     
     self.borderLayer = [[CALayer alloc] init];
     self.borderLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
-    self.borderLayer.backgroundColor = [NSColor colorWithCalibratedWhite:0.845 alpha:1.0].CGColor;
+    self.borderLayer.backgroundColor = SDWindowInsideBordersColor.CGColor;
     
     CGRect r = self.layer.bounds, bla;
     CGRectDivide(r, &r, &bla, 1.0, self.borderBottom ? NSMinYEdge : NSMaxYEdge);
@@ -56,12 +67,12 @@
 
 - (void) didBecomeKeyWindow:(NSNotification*)note {
     if (self.drawsBackground)
-        self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.967 alpha:1.0].CGColor;
+        self.layer.backgroundColor = SDWindowTitleBackgroundColor.CGColor;
 }
 
 - (void) didResignKeyWindow:(NSNotification*)note {
     if (self.drawsBackground)
-        self.layer.backgroundColor = [NSColor colorWithCalibratedWhite:0.98 alpha:1.0].CGColor;
+        self.layer.backgroundColor = SDUnfocusedWindowTitleBackgroundColor.CGColor;
 }
 
 - (void) dealloc {
@@ -131,7 +142,7 @@
     
     [[self window] setTitle:@"Bahamut"];
     [[self window] setMovableByWindowBackground:YES];
-    [[self window] setBackgroundColor:[NSColor colorWithCalibratedWhite:0.9999 alpha:1.0]];
+    [[self window] setBackgroundColor:SDWindowBackgroundColor];
     
     
     
