@@ -63,7 +63,8 @@
 
 
 - (NSTableRowView *)tableView:(NSTableView *)tableView rowViewForRow:(NSInteger)row {
-    return [[SDTableRowView alloc] init];
+    SDTableRowView* view = [[SDTableRowView alloc] init];
+    return view;
 }
 
 

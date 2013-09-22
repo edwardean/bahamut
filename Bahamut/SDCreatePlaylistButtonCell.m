@@ -27,9 +27,9 @@
     [super drawWithFrame:cellFrame inView:controlView];
 }
 
-- (NSRect) drawTitle:(NSAttributedString *)title withFrame:(NSRect)frame inView:(NSView *)controlView {
-    frame.origin.x -= 3.0;
-    return [super drawTitle:title withFrame:frame inView:controlView];
-}
+//- (NSRect) drawTitle:(NSAttributedString *)title withFrame:(NSRect)frame inView:(NSView *)controlView {
+//    frame.origin.x -= 3.0;
+//    return [super drawTitle:title withFrame:frame inView:controlView];
+//}
 
 @end

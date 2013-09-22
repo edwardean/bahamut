@@ -72,7 +72,7 @@
                                                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                                                     <subviews>
                                                                         <textField verticalHuggingPriority="750" horizontalCompressionResistancePriority="250" id="300">
-                                                                            <rect key="frame" x="19" y="4" width="103" height="17"/>
+                                                                            <rect key="frame" x="19" y="1" width="103" height="20"/>
                                                                             <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES" flexibleMaxY="YES"/>
                                                                             <textFieldCell key="cell" lineBreakMode="truncatingTail" selectable="YES" editable="YES" title="Table View Cell" id="301">
                                                                                 <font key="font" metaFont="system"/>
@@ -436,7 +436,7 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <subviews>
                                     <button id="291">
-                                        <rect key="frame" x="0.0" y="0.0" width="116" height="37"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="110" height="37"/>
                                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                         <buttonCell key="cell" type="squareTextured" title="+ Create Playlist" bezelStyle="texturedSquare" alignment="center" controlSize="small" imageScaling="proportionallyDown" inset="2" id="303" customClass="SDCreatePlaylistButtonCell">
                                             <behavior key="behavior" lightByContents="YES"/>
