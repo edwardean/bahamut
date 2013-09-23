@@ -17,8 +17,8 @@
 }
 
 - (void) drawDividerInRect:(NSRect)rect {
-    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRect:rect] fill];
+//    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
+//    [[NSBezierPath bezierPathWithRect:rect] fill];
 }
 
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex {

@@ -22,23 +22,22 @@
 
 
 
-#define SDWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.91 alpha:1.0]
-#define SDUnfocusedWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.96 alpha:1.0]
-
-#define SDWindowBackgroundColor [NSColor colorWithCalibratedWhite:0.96 alpha:1.0]
-
+#define SDWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.87 alpha:1.0]
+#define SDWindowBackgroundColor [NSColor colorWithCalibratedWhite:0.94 alpha:1.0]
 #define SDWindowInsideBordersColor [NSColor colorWithCalibratedWhite:0.70 alpha:1.0]
 
+#define SDUnfocusedAmount (.40)
 
 
 
 @interface SDClipView : NSView
+@property BOOL isFocused;
 @end
 @implementation SDClipView
 
 - (void)drawRect:(NSRect)dirtyRect {
     NSRect rect = [self bounds];
-    CGFloat r = 4.0;
+    CGFloat r = 5.0;
     NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:r yRadius:r];
     [path addClip];
     
@@ -58,51 +57,34 @@
     NSDivideRect(controlBar, &controlBarBorder, &controlBar, 1.0, NSMinYEdge);
     NSDivideRect(bottomBar, &bottomBarBorder, &bottomBar, 1.0, NSMaxYEdge);
     
-    [SDWindowTitleBackgroundColor setFill];
+    NSColor* titleBarColor = SDWindowTitleBackgroundColor;
+    NSColor* controlBarColor = SDWindowBackgroundColor;
+    NSColor* bottomBarColor = SDWindowBackgroundColor;
+    NSColor* bordersColor = SDWindowInsideBordersColor;
+    
+    if (!self.isFocused) {
+        titleBarColor = [titleBarColor blendedColorWithFraction:SDUnfocusedAmount ofColor:[NSColor whiteColor]];
+        controlBarColor = [controlBarColor blendedColorWithFraction:SDUnfocusedAmount ofColor:[NSColor whiteColor]];
+        bottomBarColor = [bottomBarColor blendedColorWithFraction:SDUnfocusedAmount ofColor:[NSColor whiteColor]];
+        bordersColor = [bordersColor blendedColorWithFraction:SDUnfocusedAmount ofColor:[NSColor whiteColor]];
+    }
+    
+    [bordersColor setFill];
+    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, [self bounds])];
+    
+    [titleBarColor setFill];
     [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, titleBar)];
     
-    [SDWindowBackgroundColor setFill];
+    [controlBarColor setFill];
     [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, controlBar)];
     
-    [SDWindowBackgroundColor setFill];
+    [bottomBarColor setFill];
     [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, bottomBar)];
     
-    [SDWindowInsideBordersColor setFill];
+    [bordersColor setFill];
     [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, titleBarBorder)];
     [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, controlBarBorder)];
     [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, bottomBarBorder)];
-}
-
-@end
-
-
-
-
-@interface SDBox : NSView
-
-@property CALayer* borderLayer;
-
-@property BOOL borderBottom;
-@property BOOL drawsBackground;
-
-@end
-@implementation SDBox
-
-
-- (void) awakeFromNib {
-    [self setWantsLayer:YES];
-    
-//    NSLog(@"%d", self.borderBottom);
-    
-    self.borderLayer = [[CALayer alloc] init];
-    self.borderLayer.autoresizingMask = kCALayerWidthSizable | kCALayerHeightSizable;
-    self.borderLayer.backgroundColor = SDWindowInsideBordersColor.CGColor;
-    
-    CGRect r = self.layer.bounds, bla;
-    CGRectDivide(r, &r, &bla, 1.0, self.borderBottom ? NSMinYEdge : NSMaxYEdge);
-    self.borderLayer.frame = r;
-    
-    [self.layer addSublayer:self.borderLayer];
 }
 
 - (void) viewDidMoveToWindow {
@@ -112,13 +94,13 @@
 }
 
 - (void) didBecomeKeyWindow:(NSNotification*)note {
-    if (self.drawsBackground)
-        self.layer.backgroundColor = SDWindowTitleBackgroundColor.CGColor;
+    self.isFocused = YES;
+    [self setNeedsDisplay:YES];
 }
 
 - (void) didResignKeyWindow:(NSNotification*)note {
-    if (self.drawsBackground)
-        self.layer.backgroundColor = SDUnfocusedWindowTitleBackgroundColor.CGColor;
+    self.isFocused = NO;
+    [self setNeedsDisplay:YES];
 }
 
 - (void) dealloc {
@@ -126,6 +108,7 @@
 }
 
 @end
+
 
 
 

@@ -28,11 +28,11 @@
             <rect key="contentRect" x="947" y="627" width="635" height="462"/>
             <rect key="screenRect" x="0.0" y="0.0" width="1920" height="1178"/>
             <value key="minSize" type="size" width="400" height="300"/>
-            <view key="contentView" id="7" customClass="SDClipView">
+            <view key="contentView" id="7">
                 <rect key="frame" x="0.0" y="0.0" width="635" height="462"/>
                 <autoresizingMask key="autoresizingMask"/>
                 <subviews>
-                    <customView id="XTf-G8-d56">
+                    <customView id="XTf-G8-d56" customClass="SDClipView">
                         <rect key="frame" x="0.0" y="0.0" width="635" height="462"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
