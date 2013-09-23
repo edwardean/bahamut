@@ -35,6 +35,16 @@
 @end
 @implementation SDClipView
 
+//- (void) awakeFromNib {
+//    self.layer = [CALayer layer];
+//    self.wantsLayer = YES;
+//    
+////    NSLog(@"%@", self.window);
+//    [[self window] display];
+//    [[self window] setHasShadow:NO];
+//    [[self window] setHasShadow:YES];
+//}
+
 - (void)drawRect:(NSRect)dirtyRect {
     NSRect rect = [self bounds];
     CGFloat r = 5.0;

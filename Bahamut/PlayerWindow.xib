@@ -120,7 +120,7 @@
                                             <color key="backgroundColor" name="controlBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </clipView>
                                         <scroller key="horizontalScroller" hidden="YES" verticalHuggingPriority="750" id="294" customClass="SDScroller">
-                                            <rect key="frame" x="0.0" y="329" width="0.0" height="15"/>
+                                            <rect key="frame" x="0.0" y="286" width="120.5" height="15"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                         </scroller>
                                         <scroller key="verticalScroller" hidden="YES" verticalHuggingPriority="750" id="295" customClass="SDScroller">

@@ -11,11 +11,12 @@
 
 
 
+#define SDBlueHue (210.0)
 
-#define SDVeryDarkBlue [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.97 brightness:0.52 alpha:1.0]
-#define SDDarkBlue [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.67 brightness:0.92 alpha:1.0]
-#define SDMediumBlue [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.47 brightness:0.92 alpha:1.0]
-#define SDLightBlue [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.16 brightness:0.92 alpha:1.0]
+#define SDVeryDarkBlue [NSColor colorWithCalibratedHue:SDBlueHue/360.0 saturation:0.97 brightness:0.52 alpha:1.0]
+#define SDDarkBlue [NSColor colorWithCalibratedHue:SDBlueHue/360.0 saturation:0.67 brightness:0.92 alpha:1.0]
+#define SDMediumBlue [NSColor colorWithCalibratedHue:SDBlueHue/360.0 saturation:0.47 brightness:0.92 alpha:1.0]
+#define SDLightBlue [NSColor colorWithCalibratedHue:SDBlueHue/360.0 saturation:0.36 brightness:0.92 alpha:1.0]
 
 
 
