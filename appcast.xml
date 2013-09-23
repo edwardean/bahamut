@@ -6,34 +6,10 @@
     <description>Most recent changes with links to updates.</description>
     <language>en</language>
     <item>
-      <title>Version 1.1.1</title>
-      <sparkle:releaseNotesLink>https://raw.github.com/sdegutis/bahamut/master/change-log.txt</sparkle:releaseNotesLink>
-      <pubDate>Sun Sep 22 15:07:30 CDT 2013</pubDate>
-      <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-1.1.1.app.tar.gz" sparkle:version="1.1.1" sparkle:dsaSignature="MC4CFQChWD2Gjht6ZnNMLSdkT2OIXawY6AIVAKhUq+aouL+v/vwHMMhXWPTgXI74" length="1515427" type="application/octet-stream"/>
-    </item>
-    <item>
-      <title>Version 1.1.1</title>
-      <sparkle:releaseNotesLink>https://raw.github.com/sdegutis/bahamut/master/change-log.txt</sparkle:releaseNotesLink>
-      <pubDate>Sun Sep 22 13:36:07 CDT 2013</pubDate>
-      <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-1.1.1.app.tar.gz" sparkle:version="1.1.1" sparkle:dsaSignature="MCwCFFpxgrRbUFtGrkPXBEiiQ/lCGVSxAhQV1eat6goFcF6b29Z3X3vwy2nsvw==" length="1515192" type="application/octet-stream"/>
-    </item>
-    <item>
-      <title>Version 1.1</title>
-      <sparkle:releaseNotesLink>https://raw.github.com/sdegutis/bahamut/master/change-log.txt</sparkle:releaseNotesLink>
-      <pubDate>Fri Sep 20 02:33:56 CDT 2013</pubDate>
-      <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-1.1.app.tar.gz" sparkle:version="1.1" sparkle:dsaSignature="MCwCFA6qUgPappDSk+TquDEAO4jL4ZgaAhR3KMyKsMm4HnsBAeXscpb8CLZsoQ==" length="1515115" type="application/octet-stream"/>
-    </item>
-    <item>
       <title>Version 1.0</title>
       <sparkle:releaseNotesLink>https://raw.github.com/sdegutis/bahamut/master/change-log.txt</sparkle:releaseNotesLink>
-      <pubDate>Thu Sep 19 10:38:02 CDT 2013</pubDate>
-      <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-1.0.app.tar.gz" sparkle:version="1.0" sparkle:dsaSignature="MC0CFQCwThtme2Gp70CDroQSVq8F3Ul0OAIUboXrpbNdZIV/AZqlTtNjhbeyin8=" length="1511953" type="application/octet-stream"/>
-    </item>
-    <item>
-      <title>Version 0.9</title>
-      <sparkle:releaseNotesLink>https://raw.github.com/sdegutis/bahamut/master/change-log.txt</sparkle:releaseNotesLink>
-      <pubDate>Tue Aug 27 01:25:03 CDT 2013</pubDate>
-      <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-0.9.app.tar.gz" sparkle:version="0.9" sparkle:dsaSignature="MCwCFC0JfA51kr9aMlYNGGopA/MU95F/AhRwkAESRki7pTv3QmONm9jvrNyF1Q==" length="833355" type="application/octet-stream"/>
+      <pubDate>Sun Sep 22 20:57:52 CDT 2013</pubDate>
+      <enclosure url="https://raw.github.com/sdegutis/bahamut/master/Builds/Bahamut-1.0.app.tar.gz" sparkle:version="1.0" sparkle:dsaSignature="MC0CFCHoDpkB5/iDD10VUaMvYK20bgEIAhUAlE2K+Dclwk1bW3CesBYjWz9MDts=" length="1514893" type="application/octet-stream"/>
     </item>
   </channel>
 </rss>
