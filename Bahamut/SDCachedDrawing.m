@@ -216,7 +216,7 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
     self.wantsLayer = YES;
     
     CALayer* lineLayer = [CALayer layer];
-    lineLayer.backgroundColor = [NSColor colorWithCalibratedWhite:0.70 alpha:1.0].CGColor;
+    lineLayer.backgroundColor = [NSColor colorWithCalibratedWhite:0.65 alpha:1.0].CGColor;
     lineLayer.autoresizingMask = kCALayerHeightSizable | kCALayerWidthSizable;
     NSRect r = self.layer.bounds;
     r.size.height = 1.0;
@@ -309,11 +309,11 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
     NSColor* strokeColor = [[initialColor
                              blendedColorWithFraction:0.50
                              ofColor:[NSColor blackColor]]
-                            blendedColorWithFraction:0.50
+                            blendedColorWithFraction:0.35
                             ofColor:[NSColor whiteColor]];
     
     if (isHighlighted)
-        strokeColor = [strokeColor blendedColorWithFraction:0.25 ofColor:[NSColor blackColor]];
+        strokeColor = [strokeColor blendedColorWithFraction:0.50 ofColor:[NSColor blackColor]];
     
     return  strokeColor;
 }

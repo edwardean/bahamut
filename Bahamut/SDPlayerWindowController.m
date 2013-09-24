@@ -22,9 +22,9 @@
 
 
 
-#define SDWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.87 alpha:1.0]
+#define SDWindowTitleBackgroundColor [NSColor colorWithCalibratedWhite:0.80 alpha:1.0]
 #define SDWindowBackgroundColor [NSColor colorWithCalibratedWhite:0.94 alpha:1.0]
-#define SDWindowInsideBordersColor [NSColor colorWithCalibratedWhite:0.70 alpha:1.0]
+#define SDWindowInsideBordersColor [NSColor colorWithCalibratedWhite:0.50 alpha:1.0]
 
 #define SDUnfocusedAmount (.40)
 
@@ -106,13 +106,16 @@ static void sd_swizzle(Class kls, NSString* selName, IMP imp) {
     
     [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
     
-    [[self window] setBackgroundColor:SDWindowTitleBackgroundColor];
+    [self window].styleMask ^= NSTexturedBackgroundWindowMask;
+//    [[self window] setBackgroundColor:SDWindowTitleBackgroundColor];
     [[self window] setTitle:@"Bahamut"];
+    
+    [[self.currentSongInfoField cell] setBackgroundStyle:NSBackgroundStyleRaised];
     
     [self punchAppleInTheFace];
     
     NSRect realContentViewFrame = [[[self window] contentView] bounds];
-    realContentViewFrame.size.height -= 11.0;
+    realContentViewFrame.size.height -= 12.0;
     [self.realContentView setFrame:realContentViewFrame];
     [[[[self window] contentView] superview] addSubview:self.realTitleView];
     
@@ -150,6 +153,7 @@ static void sd_swizzle(Class kls, NSString* selName, IMP imp) {
         sd_swizzle(c, @"class", imp_implementationWithBlock(^{ return NSClassFromString(@"NSThemeFrame"); }));
         sd_swizzle(c, @"className", imp_implementationWithBlock(^{ return @"NSThemeFrame"; }));
         sd_swizzle(c, @"_titlebarTitleRect", imp_implementationWithBlock(^{ return NSZeroRect; }));
+        sd_swizzle(c, @"_titlebarHeight", imp_implementationWithBlock(^{ return 34.0; }));
         objc_registerClassPair(c);
     }
     object_setClass(themeView, c);
