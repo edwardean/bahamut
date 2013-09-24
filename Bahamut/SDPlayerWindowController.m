@@ -30,96 +30,25 @@
 
 
 
-@interface SDClipView : NSView
-@property BOOL isFocused;
-@end
-@implementation SDClipView
-
-//- (void) awakeFromNib {
-//    self.layer = [CALayer layer];
-//    self.wantsLayer = YES;
-//    
-////    NSLog(@"%@", self.window);
-//    [[self window] display];
-//    [[self window] setHasShadow:NO];
-//    [[self window] setHasShadow:YES];
+//- (void) viewDidMoveToWindow {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:[self window]];
+//    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didResignKeyWindow:) name:NSWindowDidResignKeyNotification object:[self window]];
 //}
-
-- (void)drawRect:(NSRect)dirtyRect {
-    return;
-    
-    NSRect rect = [self bounds];
-    CGFloat r = 5.0;
-    NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:r yRadius:r];
-    [path addClip];
-    
-    CGFloat titleBarHeight = 34.0;
-    CGFloat controlBarHeight = 66.0;
-    CGFloat bottomBarHeight = 37.0;
-    
-    NSRect titleBar, controlBar, bottomBar;
-    NSRect titleBarBorder, controlBarBorder, bottomBarBorder;
-    NSRect bla;
-    
-    NSDivideRect(rect, &bottomBar, &bla, bottomBarHeight, NSMinYEdge);
-    NSDivideRect(rect, &titleBar, &bla, titleBarHeight + controlBarHeight, NSMaxYEdge);
-    NSDivideRect(titleBar, &titleBar, &controlBar, titleBarHeight, NSMaxYEdge);
-    
-    NSDivideRect(titleBar, &titleBarBorder, &titleBar, 1.0, NSMinYEdge);
-    NSDivideRect(controlBar, &controlBarBorder, &controlBar, 1.0, NSMinYEdge);
-    NSDivideRect(bottomBar, &bottomBarBorder, &bottomBar, 1.0, NSMaxYEdge);
-    
-    NSColor* titleBarColor = SDWindowTitleBackgroundColor;
-    NSColor* controlBarColor = SDWindowBackgroundColor;
-    NSColor* bottomBarColor = SDWindowBackgroundColor;
-    NSColor* bordersColor = SDWindowInsideBordersColor;
-    
-    if (!self.isFocused) {
-        titleBarColor = [titleBarColor blendedColorWithFraction:SDUnfocusedAmount ofColor:[NSColor whiteColor]];
-        controlBarColor = [controlBarColor blendedColorWithFraction:SDUnfocusedAmount ofColor:[NSColor whiteColor]];
-        bottomBarColor = [bottomBarColor blendedColorWithFraction:SDUnfocusedAmount ofColor:[NSColor whiteColor]];
-        bordersColor = [bordersColor blendedColorWithFraction:SDUnfocusedAmount ofColor:[NSColor whiteColor]];
-    }
-    
-    [bordersColor setFill];
-    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, [self bounds])];
-    
-    [titleBarColor setFill];
-    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, titleBar)];
-    
-    [controlBarColor setFill];
-    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, controlBar)];
-    
-    [bottomBarColor setFill];
-    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, bottomBar)];
-    
-    [bordersColor setFill];
-    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, titleBarBorder)];
-    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, controlBarBorder)];
-    [NSBezierPath fillRect:NSIntersectionRect(dirtyRect, bottomBarBorder)];
-}
-
-- (void) viewDidMoveToWindow {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didBecomeKeyWindow:) name:NSWindowDidBecomeKeyNotification object:[self window]];
-    [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(didResignKeyWindow:) name:NSWindowDidResignKeyNotification object:[self window]];
-}
-
-- (void) didBecomeKeyWindow:(NSNotification*)note {
-    self.isFocused = YES;
-    [self setNeedsDisplay:YES];
-}
-
-- (void) didResignKeyWindow:(NSNotification*)note {
-    self.isFocused = NO;
-    [self setNeedsDisplay:YES];
-}
-
-- (void) dealloc {
-    [[NSNotificationCenter defaultCenter] removeObserver:self];
-}
-
-@end
+//
+//- (void) didBecomeKeyWindow:(NSNotification*)note {
+//    self.isFocused = YES;
+//    [self setNeedsDisplay:YES];
+//}
+//
+//- (void) didResignKeyWindow:(NSNotification*)note {
+//    self.isFocused = NO;
+//    [self setNeedsDisplay:YES];
+//}
+//
+//- (void) dealloc {
+//    [[NSNotificationCenter defaultCenter] removeObserver:self];
+//}
 
 
 

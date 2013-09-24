@@ -206,6 +206,36 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 
 
 
+@interface SDLine : NSBox
+@end
+
+@implementation SDLine
+
+- (void) awakeFromNib {
+    self.layer = [CALayer layer];
+    self.wantsLayer = YES;
+    
+    CALayer* lineLayer = [CALayer layer];
+    lineLayer.backgroundColor = [NSColor colorWithCalibratedWhite:0.70 alpha:1.0].CGColor;
+    lineLayer.autoresizingMask = kCALayerHeightSizable | kCALayerWidthSizable;
+    NSRect r = self.layer.bounds;
+    r.size.height = 1.0;
+    r.origin.y += 2.0;
+    lineLayer.frame = r;
+    [self.layer addSublayer:lineLayer];
+}
+
+- (void) drawRect:(NSRect)dirtyRect {
+}
+
+@end
+
+
+
+
+
+
+
 
 
 @interface SDCheckboxCell : NSButtonCell
