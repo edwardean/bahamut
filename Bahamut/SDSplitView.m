@@ -16,11 +16,6 @@
     [self setPosition:[[[self subviews] objectAtIndex:0] frame].size.width ofDividerAtIndex:0];
 }
 
-- (void) drawDividerInRect:(NSRect)rect {
-//    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
-//    [[NSBezierPath bezierPathWithRect:rect] fill];
-}
-
 - (CGFloat)splitView:(NSSplitView *)splitView constrainMinCoordinate:(CGFloat)proposedMin ofSubviewAt:(NSInteger)dividerIndex {
     return MAX(proposedMin, 125.0);
 }

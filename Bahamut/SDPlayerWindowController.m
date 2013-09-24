@@ -46,6 +46,8 @@
 //}
 
 - (void)drawRect:(NSRect)dirtyRect {
+    return;
+    
     NSRect rect = [self bounds];
     CGFloat r = 5.0;
     NSBezierPath *path = [NSBezierPath bezierPathWithRoundedRect:rect xRadius:r yRadius:r];
@@ -122,22 +124,16 @@
 
 
 
-@interface SDPlayerWindow : NSWindow
-@end
-
-@implementation SDPlayerWindow
-
-- (BOOL) canBecomeKeyWindow { return YES; }
-- (BOOL) canBecomeMainWindow { return YES; }
-
-- (BOOL) respondsToSelector:(SEL)aSelector {
-    if (aSelector == @selector(performClose:) || aSelector == @selector(performZoom:) || aSelector == @selector(performMiniaturize:))
-        return NO;
-    else
-        return [super respondsToSelector:aSelector];
+static void sd_swizzle(Class kls, NSString* selName, IMP imp) {
+    SEL sel = NSSelectorFromString(selName);
+    Method meth = class_getInstanceMethod(kls, sel);
+    const char* enc = method_getTypeEncoding(meth);
+    class_addMethod(kls, sel, imp, enc);
 }
 
-@end
+
+
+
 
 
 
@@ -155,6 +151,9 @@
 @property (weak) IBOutlet NSTextField* timeRemainingField;
 @property (weak) IBOutlet NSSlider* volumeSlider;
 @property (weak) IBOutlet NSSlider* rateSlider;
+
+@property (weak) IBOutlet NSView* realContentView;
+@property (weak) IBOutlet NSView* realTitleView;
 
 @property NSBox* dragIndicatorBox;
 
@@ -176,19 +175,21 @@
     [self setNextResponder: self.playlistTableDelegate];
     [self.playlistTableDelegate setNextResponder: self.songTableDelegate];
     
-    
     [[self window] registerForDraggedTypes:@[NSFilenamesPboardType]];
     
+    [[self window] setBackgroundColor:SDWindowTitleBackgroundColor];
     [[self window] setTitle:@"Bahamut"];
-    [[self window] setMovableByWindowBackground:YES];
-    [[self window] setBackgroundColor:[NSColor clearColor]];
-//    [[self window] setHasShadow:YES];
-    [[self window] setOpaque:NO];
-//    [[self window] setAlphaValue:0.0];
     
+    [self punchAppleInTheFace];
     
+    NSRect realContentViewFrame = [[[self window] contentView] bounds];
+    realContentViewFrame.size.height -= 11.0;
+    [self.realContentView setFrame:realContentViewFrame];
+    [[[[self window] contentView] superview] addSubview:self.realTitleView];
     
-    
+    NSRect titleViewFrame = [self.realTitleView frame];
+    titleViewFrame.origin.y += 22.0;
+    [self.realTitleView setFrame:titleViewFrame];
     
     [self bindViews];
     
@@ -205,6 +206,24 @@
             });
         });
     }
+}
+
+- (void) punchAppleInTheFace {
+    [[self.window standardWindowButton:NSWindowCloseButton] setHidden:YES];
+    [[self.window standardWindowButton:NSWindowMiniaturizeButton] setHidden:YES];
+    [[self.window standardWindowButton:NSWindowZoomButton] setHidden:YES];
+    
+    NSView* themeView = [self.window.contentView superview];
+    NSString* className = [@"SD" stringByAppendingString: [themeView className]];
+    Class c = NSClassFromString(className);
+    if (c == nil) {
+        c = objc_allocateClassPair([themeView class], [className UTF8String], 0);
+        sd_swizzle(c, @"class", imp_implementationWithBlock(^{ return NSClassFromString(@"NSThemeFrame"); }));
+        sd_swizzle(c, @"className", imp_implementationWithBlock(^{ return @"NSThemeFrame"; }));
+        sd_swizzle(c, @"_titlebarTitleRect", imp_implementationWithBlock(^{ return NSZeroRect; }));
+        objc_registerClassPair(c);
+    }
+    object_setClass(themeView, c);
 }
 
 - (void) windowWillClose:(NSNotification *)notification {
