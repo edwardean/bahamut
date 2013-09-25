@@ -13,7 +13,7 @@
 @implementation SDVolumeSliderCell
 
 - (void)drawBarInside:(NSRect)aRect flipped:(BOOL)flipped {
-    aRect = NSInsetRect(aRect, 0.5, 4.5);
+    aRect = NSInsetRect(aRect, 0.0, 4.0);
     
     CGFloat r = 2.0;
     

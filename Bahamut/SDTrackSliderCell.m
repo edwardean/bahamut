@@ -24,8 +24,8 @@
     knobRect = [[self controlView] bounds];
     knobRect = NSInsetRect(knobRect, 4.5, 4.0);
     
-    knobRect.origin.y += 1.0;
-    knobRect.size.height -= 1.0;
+//    knobRect.origin.y += 1.0;
+//    knobRect.size.height -= 1.0;
     
     CGFloat knobWidth = 8.0;
     
@@ -43,7 +43,7 @@
     
 //    NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:[NSColor colorWithCalibratedWhite:0.70 alpha:1.0]
 //                                                         endingColor:[NSColor colorWithCalibratedWhite:0.65 alpha:1.0]];
-    NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:SDLightBlue
+    NSGradient* gradient = [[NSGradient alloc] initWithStartingColor:SDMediumBlue
                                                          endingColor:SDMediumBlue];
     
     NSBezierPath* path = [NSBezierPath bezierPathWithRoundedRect:knobRect xRadius:innerRadius yRadius:innerRadius];
@@ -54,21 +54,21 @@
 - (void) drawBarInside:(NSRect)aRect flipped:(BOOL)flipped {
     aRect = NSIntegralRect(aRect);
     
-    aRect.origin.y += 1.0;
-    aRect.size.height -= 1.0;
+//    aRect.origin.y += 1.0;
+//    aRect.size.height -= 1.0;
     
-    aRect = NSInsetRect(aRect, 1.5, 1.5);
+    aRect = NSInsetRect(aRect, 1.0, 1.0);
     
     CGFloat outerRadius = 3.0;
     
     aRect.origin.y++;
     
-    [[NSColor colorWithCalibratedWhite:0.98 alpha:1.0] setFill];
+    [[NSColor colorWithCalibratedWhite:0.99 alpha:1.0] setFill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] fill];
     
     aRect.origin.y--;
     
-    [[NSColor colorWithCalibratedWhite:0.75 alpha:1.0] setFill];
+    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] fill];
     
     aRect = NSInsetRect(aRect, 1.0, 1.0);
