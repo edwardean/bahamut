@@ -18,14 +18,14 @@
     CGFloat r = 2.0;
     
     [SDVolumeSliderBackColor setFill];
-    [SDVolumeSliderForeColor setStroke];
+    [SDDarkBlue setStroke];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] stroke];
 }
 
 - (void)drawKnob:(NSRect)knobRect {
     knobRect = NSInsetRect(knobRect, 0.5, 4.5);
-    knobRect = NSInsetRect(knobRect, 2.0, 2.0);
+    knobRect = NSInsetRect(knobRect, 2.5, 2.5);
     
     CGFloat r = 1.0;
     
