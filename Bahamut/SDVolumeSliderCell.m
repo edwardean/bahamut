@@ -17,10 +17,21 @@
     
     CGFloat r = 2.0;
     
-    [SDVolumeSliderBackColor setFill];
-    [SDDarkBlue setStroke];
+    aRect.origin.y++;
+    
+    [[NSColor colorWithCalibratedWhite:0.83 alpha:1.0] setFill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
-    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] stroke];
+    
+    aRect.origin.y--;
+    
+    [[NSColor colorWithCalibratedWhite:0.58 alpha:1.0] setFill];
+    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
+    
+    aRect = NSInsetRect(aRect, 1.0, 1.0);
+    r--;
+    
+    [[NSColor colorWithCalibratedWhite:0.94 alpha:1.0] setFill];
+    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
 }
 
 - (void)drawKnob:(NSRect)knobRect {
