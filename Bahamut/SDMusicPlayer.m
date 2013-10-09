@@ -192,7 +192,10 @@ NSString* SDGetTimeForSeconds(CGFloat seconds) {
 }
 
 - (void) previousSong {
-    [self moveToSongInDirection: -1];
+    if (self.isPlaying && self.currentTime > 3.0)
+        [self startPlayingCurrentSong];
+    else
+        [self moveToSongInDirection: -1];
 }
 
 
