@@ -78,7 +78,9 @@ static void SDSetupTitlebarButtonLine(NSBezierPath* path) {
 
 static NSRect SDButtonInset(NSRect cellFrame) {
     NSRect r = NSInsetRect(cellFrame, 9.0, 6.0);
-    SDTitlebarFixCellFrame(&r);
+    r = NSIntegralRect(r);
+    r.origin.x += 0.5;
+    r.origin.y += 0.5;
     return r;
 }
 
