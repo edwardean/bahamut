@@ -71,7 +71,7 @@ static void SDSetupButtonLine(NSBezierPath* path) {
 }
 
 static void SDSetupTitlebarButtonLine(NSBezierPath* path) {
-    [path setLineWidth:3.0];
+    [path setLineWidth:2.0];
     [path setLineCapStyle:NSSquareLineCapStyle];
     [path setLineJoinStyle:NSMiterLineJoinStyle];
 }
@@ -312,8 +312,10 @@ static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlight
                             blendedColorWithFraction:0.35
                             ofColor:[NSColor whiteColor]];
     
+    strokeColor = [NSColor colorWithCalibratedWhite:0.70 alpha:1.0];
+    
     if (isHighlighted)
-        strokeColor = [strokeColor blendedColorWithFraction:0.50 ofColor:[NSColor blackColor]];
+        strokeColor = [NSColor colorWithCalibratedWhite:0.40 alpha:1.0];
     
     return  strokeColor;
 }

@@ -17,20 +17,20 @@
     
     CGFloat r = 2.0;
     
-    aRect.origin.y++;
+//    aRect.origin.y++;
+//    
+//    [[NSColor colorWithCalibratedWhite:0.83 alpha:1.0] setFill];
+//    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
+//    
+//    aRect.origin.y--;
     
-    [[NSColor colorWithCalibratedWhite:0.83 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
-    
-    aRect.origin.y--;
-    
-    [[NSColor colorWithCalibratedWhite:0.58 alpha:1.0] setFill];
+    [SDMediumBlue setFill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
     
     aRect = NSInsetRect(aRect, 1.0, 1.0);
     r--;
     
-    [[NSColor colorWithCalibratedWhite:0.94 alpha:1.0] setFill];
+    [[NSColor colorWithCalibratedWhite:1.00 alpha:1.0] setFill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
 }
 

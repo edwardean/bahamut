@@ -61,14 +61,14 @@
     
     CGFloat outerRadius = 3.0;
     
-    aRect.origin.y++;
+//    aRect.origin.y++;
+//    
+//    [[NSColor colorWithCalibratedWhite:0.99 alpha:1.0] setFill];
+//    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] fill];
+//    
+//    aRect.origin.y--;
     
-    [[NSColor colorWithCalibratedWhite:0.99 alpha:1.0] setFill];
-    [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] fill];
-    
-    aRect.origin.y--;
-    
-    [[NSColor colorWithCalibratedWhite:0.70 alpha:1.0] setFill];
+    [SDMediumBlue setFill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:outerRadius yRadius:outerRadius] fill];
     
     aRect = NSInsetRect(aRect, 1.0, 1.0);
