@@ -59,8 +59,8 @@
 
 static void SDTitlebarFixCellFrame(NSRect* f) {
     *f = NSIntegralRect(*f);
-    f->origin.x += 0.5;
-    f->origin.y += 0.5;
+//    f->origin.x += 0.5;
+//    f->origin.y += 0.5;
 }
 
 
@@ -306,16 +306,16 @@ static void SDDrawNavButton(NSRect cellFrame, BOOL isPressed, BOOL isEnabled, BO
 
 
 static NSColor* SDTitlebarButtonColorFor(NSColor* initialColor, BOOL isHighlighted) {
-    NSColor* strokeColor = [[initialColor
-                             blendedColorWithFraction:0.50
-                             ofColor:[NSColor blackColor]]
-                            blendedColorWithFraction:0.35
-                            ofColor:[NSColor whiteColor]];
+//    NSColor* strokeColor = [[initialColor
+//                             blendedColorWithFraction:0.50
+//                             ofColor:[NSColor blackColor]]
+//                            blendedColorWithFraction:0.35
+//                            ofColor:[NSColor whiteColor]];
     
-    strokeColor = [NSColor colorWithCalibratedWhite:0.70 alpha:1.0];
+    NSColor* strokeColor = [NSColor colorWithCalibratedWhite:0.50 alpha:1.0];
     
     if (isHighlighted)
-        strokeColor = [NSColor colorWithCalibratedWhite:0.40 alpha:1.0];
+        strokeColor = [NSColor colorWithCalibratedWhite:0.10 alpha:1.0];
     
     return  strokeColor;
 }
