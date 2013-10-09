@@ -24,7 +24,7 @@
 //    
 //    aRect.origin.y--;
     
-    [SDMediumBlue setFill];
+    [SDLightBlue setFill];
     [[NSBezierPath bezierPathWithRoundedRect:aRect xRadius:r yRadius:r] fill];
     
     aRect = NSInsetRect(aRect, 1.0, 1.0);

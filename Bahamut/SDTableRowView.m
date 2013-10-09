@@ -45,8 +45,8 @@
     [path fill];
 }
 
-- (NSBackgroundStyle) interiorBackgroundStyle {
-    return NSBackgroundStyleLight;
-}
+//- (NSBackgroundStyle) interiorBackgroundStyle {
+//    return NSBackgroundStyleLight;
+//}
 
 @end

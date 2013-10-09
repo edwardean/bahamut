@@ -28,8 +28,8 @@
 
 
 
-#define SDTableRowSelectionColor [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.26 brightness:0.97 alpha:1.0]
-#define SDTableRowSelectionUnfocusedColor [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.08 brightness:0.99 alpha:1.0]
+#define SDTableRowSelectionColor [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.66 brightness:0.87 alpha:1.0]
+#define SDTableRowSelectionUnfocusedColor [NSColor colorWithCalibratedHue:206.0/360.0 saturation:0.18 brightness:0.94 alpha:1.0]
 
 
 
