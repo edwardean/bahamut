@@ -16,10 +16,10 @@
     NSMutableAttributedString* attrTitle = [[self attributedTitle] mutableCopy];
     
     if ([self isHighlighted]) {
-        [attrTitle addAttribute:NSForegroundColorAttributeName value:SDDarkBlue range:NSMakeRange(0, [attrTitle length])];
+        [attrTitle addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithCalibratedWhite:0.20 alpha:1.0] range:NSMakeRange(0, [attrTitle length])];
     }
     else {
-        [attrTitle addAttribute:NSForegroundColorAttributeName value:SDVeryDarkBlue range:NSMakeRange(0, [attrTitle length])];
+        [attrTitle addAttribute:NSForegroundColorAttributeName value:[NSColor colorWithCalibratedWhite:0.50 alpha:1.0] range:NSMakeRange(0, [attrTitle length])];
     }
     
     [self setAttributedTitle:attrTitle];

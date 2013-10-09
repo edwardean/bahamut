@@ -81,6 +81,8 @@ static void sd_swizzle(Class kls, NSString* selName, IMP imp) {
 @property (weak) IBOutlet NSSlider* volumeSlider;
 @property (weak) IBOutlet NSSlider* rateSlider;
 
+@property (weak) IBOutlet NSSplitView* mainSplitView;
+
 @property (weak) IBOutlet NSView* realContentView;
 @property (weak) IBOutlet NSView* realTitleView;
 
@@ -119,6 +121,24 @@ static void sd_swizzle(Class kls, NSString* selName, IMP imp) {
     realContentViewFrame.size.height -= 12.0;
     [self.realContentView setFrame:realContentViewFrame];
     [[[[self window] contentView] superview] addSubview:self.realTitleView];
+    
+    {
+        NSBox* splitViewContainer = [[NSBox alloc] initWithFrame: NSZeroRect];
+        splitViewContainer.autoresizingMask = NSViewWidthSizable | NSViewHeightSizable;
+        splitViewContainer.boxType = NSBoxCustom;
+        splitViewContainer.borderWidth = 1.0;
+        splitViewContainer.borderColor = [NSColor colorWithCalibratedWhite:0.65 alpha:1.0];
+        splitViewContainer.borderType = NSLineBorder;
+        splitViewContainer.fillColor = [NSColor clearColor];
+        splitViewContainer.titlePosition = NSNoTitle;
+        splitViewContainer.contentViewMargins = NSZeroSize;
+        
+        splitViewContainer.frame = NSInsetRect(self.mainSplitView.frame, -1.0, 0.0);
+        self.mainSplitView.frame = splitViewContainer.bounds;
+        
+        [self.mainSplitView.superview addSubview:splitViewContainer];
+        splitViewContainer.contentView = self.mainSplitView;
+    }
     
     NSRect titleViewFrame = [self.realTitleView frame];
     titleViewFrame.origin.y += 22.0;
